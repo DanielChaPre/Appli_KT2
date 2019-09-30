@@ -24,7 +24,7 @@
                 <ListView.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
 
-                        <x:String >Universidad Tecnologica de Leonjn</x:String>
+                        <x:String >Universidad Tecnonklogica de Leonjn</x:String>
                         <x:String>Instituto Tecnologico de Leon</x:String>
                         <x:String>Universidad de la Salle</x:String>
                         <x:String>Universidad Iberoamericana</x:String>
