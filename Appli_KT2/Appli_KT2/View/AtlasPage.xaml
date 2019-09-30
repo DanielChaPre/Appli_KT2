@@ -28,7 +28,7 @@
                         <x:String>Instituto Tecnologico de Leon</x:String>
                         <x:String>Universidad de la Salle</x:String>
                         <x:String>Universidad Iberoamericana</x:String>
-                        <x:String>Universidad Nacional Autonoma Mexicana</x:String>
+                        <x:String>Universidad Nacional Autonoma Mexicana </x:String>
                     </x:Array>
                 </ListView.ItemsSource>
             </ListView>
