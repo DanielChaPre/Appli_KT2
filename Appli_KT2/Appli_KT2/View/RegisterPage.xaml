@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appli_KT2.View.RegisterPage"
+             Title="Registro"
+             BackgroundColor="White"
+             >
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker Title="Perfil" x:Name="pckPerfiles"/>
+            
+            <ScrollView>
+                <Frame>
+                    <StackLayout>
+                        <Label
+                        TextColor="Black"
+                        Text="Nombre(s)"/>
+                        <Entry Placeholder="Ingrese su Nombre(s)"/>
+                        <Label 
+                        TextColor="Black"
+                        Text="Apellidos"/>
+                        <Entry Placeholder="Ingrese su apellido(s)"/>
+                        <Label 
+                        TextColor="Black"
+                        Text="CURP"/>
+                        <Entry Placeholder="Ingrese su CURP"/>
+                        <Label 
+                        TextColor="Black"
+                        Text="Correo Electrónico"/>
+                        <Entry Placeholder="Ingrese su correo electrónico"/>
+                        <Label 
+                        TextColor="Black"
+                        Text="Celular"/>
+                        <Entry Placeholder="Ingrese su número de celular"/>
+                        <Label 
+                        TextColor="Black"
+                        Text="Contraseña"/>
+                        <Entry Placeholder="Ingrese una Contraseña"/>
+
+                        <Button 
+                            BackgroundColor="Navy"
+                            BorderRadius="15"
+                            Text="Guardar"
+                            TextColor="White"
+                        />
+                    </StackLayout>
+                </Frame>
+            </ScrollView>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

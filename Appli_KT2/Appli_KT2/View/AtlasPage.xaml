@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appli_KT2.View.AtlasPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New"  
+                     Icon="filter_outline.png"  
+                     Priority="0"  
+                     Order="Primary"  />
+        <ToolbarItem Text="New"  
+                     Icon="share.png"  
+                     Priority="0"  
+                     Order="Primary"  />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView
+                x:Name="personaList"
+                 IsPullToRefreshEnabled="true"
+                 SeparatorVisibility="Default"
+                SeparatorColor="Red"
+                
+                >
+                <ListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+
+                        <x:String >Universidad Tecnologica de Leon</x:String>
+                        <x:String>Instituto Tecnologico de Leon</x:String>
+                        <x:String>Universidad de la Salle</x:String>
+                        <x:String>Universidad Iberoamericana</x:String>
+                    </x:Array>
+                </ListView.ItemsSource>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
