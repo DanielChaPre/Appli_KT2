@@ -11,9 +11,9 @@ namespace Appli_KT2
         public App()
         {
             InitializeComponent();
-            this.MainPage = new NavigationPage(new LoginPage())
+            this.MainPage = new NavigationPage(new MainTabbedPage())
             {
-                BarBackgroundColor = Color.Navy,
+                BarBackgroundColor =Color.FromHex( "#000F9F"),
                 BarTextColor = Color.White,
             };
             

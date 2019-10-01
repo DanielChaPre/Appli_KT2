@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Appli_KT2.View.AtlasPage">
+             x:Class="Appli_KT2.View.AtlasPage"
+             Title="">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="New"  
                      Icon="filter_outline.png"  
@@ -14,18 +15,18 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
+            <SearchBar />
             <ListView
                 x:Name="personaList"
                  IsPullToRefreshEnabled="true"
                  SeparatorVisibility="Default"
-                SeparatorColor="Red"
-                
+                 SeparatorColor="#32AA00"
                 >
                 <ListView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
+                    <x:Array Type="{x:Type x:String}" >
 
-                        <x:String >Universidad Tecnocdcnklogica de Leonjn</x:String>
-                        <x:String>Instituto Tecnologico d,ljhle Leon</x:String>
+                        <x:String >Universidad Tecnologica de Leonjn</x:String>
+                        <x:String>Instituto Tecnologico Leon</x:String>
                         <x:String>Universidad de la Salle</x:String>
                         <x:String>Universidad Iberoamericana</x:String>
                         <x:String>Universidad Nacional Autonoma Mexicana </x:String>

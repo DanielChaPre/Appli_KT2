@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Appli_KT2</AssemblyName>
+    <RootNamespace>Appli_KT2</RootNamespace>
+    <ApplicationIcon>sices.ico</ApplicationIcon>
+    <Win32Resource></Win32Resource>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -18,9 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\MainPageMenuItem.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="View\SuredsuPage.xaml.cs">
       <DependentUpon>SuredsuPage.xaml</DependentUpon>
     </Compile>
@@ -30,19 +31,16 @@
     <EmbeddedResource Update="View\AtlasPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="View\CreateAccountPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\HistorialPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\MainPageDetail.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\MainPageMaster.xaml">
+    <EmbeddedResource Update="View\MainTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\NotificacionesPage.xaml">

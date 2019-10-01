@@ -3,116 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.LoginPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             BackgroundColor="White"
-             Title="Login">
+             BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Login}"
-            Padding="10,20"
-            HeightRequest="75"
-           >
-            <Image
-                Source="sices"
-                VerticalOptions="Start"
-                WidthRequest="150"
-                />
-            <Grid
-                Margin="0,5"
-                Padding="0,20">
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Label 
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        TextColor="Black"
-                        Text="Usuario:"
-                        VerticalOptions="Center"
-                />
-                <Entry 
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="{Binding usuario, Mode=TwoWay}"
-                        Placeholder="Ingrese su usuario..."
-                        PlaceholderColor="Black"
-                    x:Name="txtUsuario"
-                    
-                />
-                <Label 
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="Contraseña:"
-                        TextColor="Black" 
-                     VerticalOptions="Center"
-                />
-                <Entry 
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        IsPassword="True" 
-                        Text="{Binding password, Mode=TwoWay}"
-                        Placeholder="Ingrese su contraseña..."
-                        PlaceholderColor="Black"
-                        x:Name="txtPassword"
-                />
-            </Grid>
-        <!--    <ActivityIndicator IsRunning="{Binding IsRunning, Mode=TwoWay}"
-                               VerticalOptions="CenterAndExpand"/> -->
+            Padding="10,1">
+            <Image 
+                HeightRequest="120"
+                Source="ic_sices.png"
+                WidthRequest="130"/>
             <StackLayout
-                HorizontalOptions="Center"
-                VerticalOptions= "Center"
-                Orientation="Horizontal"
+                Orientation="Vertical"
                 >
-                <Label
-                    Text="Recuperar contraseña"
-                    TextColor="Navy"
-                    />
-                <!--   <Label 
-                    HorizontalOptions="StartAndExpand"
-                    Text="Recordar sesion"
-                    TextColor="Black"
-                    VerticalOptions="Center"
-                />
-                <Switch 
-                    IsToggled="{Binding IsRemember, Mode=TwoWay}"
-                    HeightRequest="50"
-                    HorizontalOptions="End"
-                    OnColor="Navy"
-                />-->
-            </StackLayout> 
-            
-            <StackLayout
-                Margin="40,0"
-                Orientation="Horizontal"
-                VerticalOptions="End"
-                >
-                
-                <Button
+                <Button 
                     BackgroundColor="Navy"
-                    BorderRadius="25"
-                    Command="{Binding loginCommand}"
-                    HeightRequest="46"
-                    HorizontalOptions="FillAndExpand"
-                    IsEnabled="{Binding IsEnable, Mode=TwoWay}"
-                    Text="Login"
-                    TextColor="White" 
-                    x:Name="btnLogin"
-                />
-                
-                <Button
-                    BackgroundColor="Orange"
-                    BorderRadius="25"
-                    Command="{Binding registrarCommand}"
-                    HeightRequest="46"
-                     HorizontalOptions="FillAndExpand"
-                     IsEnabled="{Binding IsEnable, Mode=TwoWay}"
-                    Text="Registrar"
+                    BorderRadius="8"
+                    Margin="10,4"
+                    Text="Continuar con Facebook"
                     TextColor="White"
-                    x:Name="btnRegistrar"
-                />
-                
+                    />
+                <Button 
+                    BackgroundColor="WhiteSmoke"
+                      BorderRadius="8"
+                    Margin="10,4"
+                    Text="Continuar con Google"
+                    TextColor="Black"/>
+                <Button 
+                    BackgroundColor="Blue"
+                      BorderRadius="8"
+                    Margin="10,4"
+                    Text="iniciar con Email"
+                    TextColor="White"/>
+                <Label
+                    HorizontalOptions="Center"
+                    Margin="10,5"
+                    Text="--O--"
+                    TextColor="Black"
+                    />
+                <Button 
+                    BackgroundColor="#FF8200"
+                    BorderRadius="8"
+                    Margin="10,4"
+                    Text="Crear tu cuenta"
+                    TextColor="White"
+                    x:Name="btnCrearCuenta"/>
             </StackLayout>
+            <Label Text="Al crear o iniciar sesión estaría aceptando los terminos y condiciones"
+                   VerticalOptions="End"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

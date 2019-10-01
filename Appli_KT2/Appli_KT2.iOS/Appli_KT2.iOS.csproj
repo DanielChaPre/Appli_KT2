@@ -89,6 +89,9 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>sices.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -170,5 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\filter_outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ic_sices.ico" />
+    <Content Include="sices.ico" />
   </ItemGroup>
 </Project>
