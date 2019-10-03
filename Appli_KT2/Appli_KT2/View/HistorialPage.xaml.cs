@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace Appli_KT2.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HistorialPage : ContentPage
+	public partial class HistorialPage : TabbedPage
 	{
 		public HistorialPage ()
 		{

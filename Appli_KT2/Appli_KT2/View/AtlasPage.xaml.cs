@@ -15,6 +15,12 @@ namespace Appli_KT2.View
 		public AtlasPage ()
 		{
 			InitializeComponent ();
+            btnBuscar.Clicked += buscarAtlas;
 		}
-	}
+
+        private async void buscarAtlas(object sender, EventArgs e)
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
+        }
+    }
 }

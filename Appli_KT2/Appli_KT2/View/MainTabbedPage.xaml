@@ -6,13 +6,28 @@
             Title="Appli-KT"
             BarBackgroundColor="White"
             BarTextColor="#000F9F"
-            Style="Nova"
             >
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem
+                     Icon="ic_notifications.png"  
+                     Priority="0"  
+                     Order="Default" 
+                     x:Name="icNotificacion"
+                     />
+        <ToolbarItem  
+                     Text="Compartir"
+                     Priority="1"  
+                     Order="Secondary" 
+            x:Name="icShare"/>
+    </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
-        <tabs:HistorialPage Title="Historial" Icon="ic_history.png" Style="Nova"/>
-        <tabs:SuredsuPage Title="Suredsu" Style="Nova"/>
-        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png" Style="Nova"/>
-        <tabs:LoginPage Title="Perfil" Icon="ic_person.png" Style="Nova"/>
-        <tabs:NotificacionesPage Title="Notificiones" Style="Nova"/>
+        <!--     <tabs:HistorialPage Title="Historial" Icon="ic_history.png" Style="Nova" />-->
+       
+        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png"  />
+        <tabs:SuredsuPage Title="Suredsu"  Icon="ic_suredsu.png"/>
+        <tabs:LoginPage Title="Perfil" Icon="ic_person.png"/>
+        <tabs:MorePage Title="Más" Icon="ic_more.png"/>
+        <!--   <tabs:NotificacionesPage Title="Notificiones"  Icon="ic_notificacion.png" Style="Nova"/>-->
     </TabbedPage.Children>
 </TabbedPage>
+    

@@ -2,37 +2,68 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.AtlasPage"
-             Title="">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New"  
-                     Icon="filter_outline.png"  
-                     Priority="0"  
-                     Order="Primary"  />
-        <ToolbarItem Text="New"  
-                     Icon="share.png"  
-                     Priority="0"  
-                     Order="Primary"  />
-    </ContentPage.ToolbarItems>
+             BackgroundColor="WhiteSmoke"
+             Padding="5,0"
+             >
     <ContentPage.Content>
-        <StackLayout>
-            <SearchBar />
-            <ListView
-                x:Name="personaList"
-                 IsPullToRefreshEnabled="true"
-                 SeparatorVisibility="Default"
-                 SeparatorColor="#32AA00"
+        <Frame 
+            HasShadow="true" 
+            BorderColor="Silver"
+            VerticalOptions="Center">
+            <StackLayout
+                Padding="2,3"
                 >
-                <ListView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}" >
+                <Label 
+                    FontSize="Large"
+                    Text="Buscar"
+                    TextColor="Black"/>
+                <Label
+                    FontSize="Medium"
+                    Text="Carreras, municipios e instituciones"
+                    TextColor="Gray"
+                    />
+                <StackLayout
+                    BackgroundColor="#000F9F"
+                    Margin="2,0"
+                    Padding="3,3"
+                    >
+                    <Button 
+                         BackgroundColor="White"
+                        ImageSource="ic_search.png"
+                        HeightRequest="40"
+                        Margin="1,1"
+                        Padding="10,0,170,0"
+                        Text="Carrera"
+                        TextColor="#000F9F"
+                    />
+                    <Button 
+                         BackgroundColor="White"
+                        ImageSource="ic_municipio.png"
+                         HeightRequest="40"
+                        Margin="1,1"
+                        Padding="10,0,150,0"
+                        Text="Municipio"
+                        TextColor="#000F9F"
+                    />
+                    <Button 
+                         BackgroundColor="White"
+                        ImageSource="ic_instituto"
+                         HeightRequest="40"
+                        Margin="1,1"
+                        Padding="10,0,100,0"
+                        Text="Instituto Edu. Sup."
+                        TextColor="#000F9F"
+                    />
 
-                        <x:String >Universidad Tecnologica de Leonjn</x:String>
-                        <x:String>Instituto Tecnologico Leon</x:String>
-                        <x:String>Universidad de la Salle</x:String>
-                        <x:String>Universidad Iberoamericana</x:String>
-                        <x:String>Universidad Nacional Autonoma Mexicana </x:String>
-                    </x:Array>
-                </ListView.ItemsSource>
-            </ListView>
-        </StackLayout>
+                    <Button 
+                        Margin="1,1"
+                        BackgroundColor="#FF8200"
+                        Text="Buscar"
+                        TextColor="White"
+                        x:Name="btnBuscar"
+                      />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
 </ContentPage>

@@ -15,7 +15,6 @@ namespace Appli_KT2.View
         public NotificacionesPage()
         {
             InitializeComponent();
-
         }
 	}
 }

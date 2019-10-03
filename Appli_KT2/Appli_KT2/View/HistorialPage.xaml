@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Appli_KT2.View.HistorialPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+             x:Class="Appli_KT2.View.HistorialPage"
+            xmlns:tabs="clr-namespace:Appli_KT2.View"
+            Title="Appli-KT"
+            BarBackgroundColor="White"
+            BarTextColor="#000F9F">
+
+    <TabbedPage.Children>
+        <tabs:EventoPage Title="Eventos" Icon="ic_event.png" />
+        <tabs:CalificacionesPage Title="Karnet" Icon="ic_cali.png" />
+        <tabs:DocumentosPage Title="Documentos" Icon="ic_files.png" />
+    </TabbedPage.Children>
+
+</TabbedPage>

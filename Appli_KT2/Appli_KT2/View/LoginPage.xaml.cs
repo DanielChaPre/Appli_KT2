@@ -18,7 +18,13 @@ namespace Appli_KT2.View
             // btnRegistrar.Clicked += onclick;
             // btnLogin.Clicked += OnClickLogin;
             btnCrearCuenta.Clicked += onclick;
+            btnLogin.Clicked += LogIn;
 		}
+
+        private async void LogIn(object sender, EventArgs e)
+        {
+            await Application.Current.MainPage.Navigation.PushAsync(new IniciarUsuarioPage());
+        }
 
         private async void OnClickLogin(object sender, EventArgs e)
         {

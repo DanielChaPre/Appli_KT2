@@ -8,46 +8,55 @@
         <StackLayout
             Padding="10,1">
             <Image 
-                HeightRequest="120"
+                HeightRequest="180"
                 Source="ic_sices.png"
-                WidthRequest="130"/>
+                WidthRequest="200"/>
             <StackLayout
                 Orientation="Vertical"
                 >
                 <Button 
-                    BackgroundColor="Navy"
-                    BorderRadius="8"
-                    Margin="10,4"
-                    Text="Continuar con Facebook"
+                    BackgroundColor="#3B5998"
+                    Image="ic_facebook.png"
+                    HeightRequest="40"
+                    Margin="10,2"
+                    Padding="8,0,0,0"
+                    Text="Iniciar con Facebook"
                     TextColor="White"
                     />
                 <Button 
                     BackgroundColor="WhiteSmoke"
-                      BorderRadius="8"
-                    Margin="10,4"
-                    Text="Continuar con Google"
+                    Image="ic_google.png"
+                    HeightRequest="40"
+                    Margin="10,2"
+                    Padding="1,0,0,0"
+                    Text="Iniciar con Google"
                     TextColor="Black"/>
                 <Button 
                     BackgroundColor="Blue"
-                      BorderRadius="8"
-                    Margin="10,4"
-                    Text="iniciar con Email"
-                    TextColor="White"/>
+                    Image="ic_cuenta.png"
+                    HeightRequest="40"
+                    Margin="10,2"
+                    Padding="12,0,0,0"
+                    Text="Iniciar sesión"
+                    TextColor="White"
+                    x:Name="btnLogin"/>
                 <Label
                     HorizontalOptions="Center"
-                    Margin="10,5"
+                    Margin="10,2"
                     Text="--O--"
                     TextColor="Black"
                     />
                 <Button 
                     BackgroundColor="#FF8200"
-                    BorderRadius="8"
-                    Margin="10,4"
-                    Text="Crear tu cuenta"
+                    Image="ic_person_add.png"
+                    HeightRequest="40"
+                    Margin="10,2"
+                    Padding="3,0,0,0"
+                    Text="Crear cuenta"
                     TextColor="White"
                     x:Name="btnCrearCuenta"/>
             </StackLayout>
-            <Label Text="Al crear o iniciar sesión estaría aceptando los terminos y condiciones"
+            <Label Text="Al crear o iniciar sesión estaría aceptando los terminos y condiciones y el recibir notificaciones"
                    VerticalOptions="End"/>
         </StackLayout>
     </ContentPage.Content>

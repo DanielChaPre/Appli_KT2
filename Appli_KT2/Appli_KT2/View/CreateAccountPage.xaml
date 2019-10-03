@@ -2,41 +2,93 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.CreateAccountPage"
+             BackgroundColor="#D9D6D6"
              Title="Crear cuenta"
-             Padding="10,0">
+             Padding="5,0">
     <ContentPage.Content>
-        <StackLayout
-            BackgroundColor="#0066FF"
-            Orientation="Vertical" 
-            Padding="10,10"
-            VerticalOptions="Center"
+        <Frame
+            HasShadow="true" 
+            BorderColor="Silver"
+            Margin="5,10,5,-10" 
+            VerticalOptions="Center">
+            <StackLayout
+                BackgroundColor="White"
+                Orientation="Vertical" 
+                Padding="10,10"
+                VerticalOptions="Center"
             >
-            <Label 
-                FontSize="Large"
-                Margin="0,5"
-                Text="Crear cuenta"
-                TextColor="White"
+                <Label 
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Margin="0,5"
+                    Text="Crear cuenta"
+                    TextColor="Black"
+                    
                 />
-            <Label 
-                Text="Curp"
-                TextColor="White"
+                <Label 
+                    Text="Correo/CURP/Clave Escuela"
+                    TextColor="#000F9F"
+                    x:Name="lblUsuario"
                 />
-            <Entry TextColor="White"/>
-            <Label 
+                <Entry 
+                    
+                    TextColor="#000F9F"
+                    x:Name="txtUsuario"/>
+                <Label 
                 
-                Text="Contraseña"
-                TextColor="White"
+                    Text="Contraseña"
+                    TextColor="#000F9F"
+                    x:Name="lblContraseña"
                 />
-            <Entry 
-                IsPassword="True"
-                TextColor="White"/>
+                <Entry 
+                    IsPassword="True"
+                    TextColor="#000F9F"
+                    x:Name="txtContraseña"/>
 
-            <Button 
-                BackgroundColor="#FF8200"
-                BorderRadius="7"
-                Text="Crear cuenta"
-                TextColor="White"
+
+                <Grid
+                Margin="0,5"
+                Padding="0,20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                        />
+                    <Label 
+                        FontSize="13"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalOptions="Start"
+                        Text="Estoy de acuerdo con los terminos y condiciones"
+                        VerticalOptions="Center"/>
+
+                    <CheckBox
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalOptions="Start"
+                        />
+                    <Label 
+                        FontSize="15"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        HorizontalOptions="StartAndExpand"
+                        Text="¿Deseo recibir notificaciones?"
+                        VerticalOptions="Center"/>
+                </Grid>
+                
+                <Button 
+                    BackgroundColor="#FF8200"
+                    BorderRadius="7"
+                    Text="Crear cuenta"
+                    TextColor="White"
                 />
-        </StackLayout>
+            </StackLayout>
+        </Frame>
+        
     </ContentPage.Content>
 </ContentPage>
