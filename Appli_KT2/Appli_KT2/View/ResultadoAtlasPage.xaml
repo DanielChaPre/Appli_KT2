@@ -2,25 +2,90 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:local="clr-namespace:ResultadoAtlasPage"
-             x:Class="Appli_KT2.View.ResultadoAtlasPage">
+             x:Class="Appli_KT2.View.ResultadoAtlasPage"
+             BackgroundColor="WhiteSmoke"
+             Padding="5,0">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New"  
+                     Icon="filter_outline.png"  
+                     Priority="0"  
+                     Order="Primary"
+                     x:Name="icFilter"/>
+        
+        <ToolbarItem Text="New"  
+                     Icon="share.png"  
+                     Priority="0"  
+                     Order="Primary" 
+                     x:Name="icShare"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView x:Name="listViewEjemplo1" CachingStrategy="RecycleElement" HasUnevenRows="True" >
+        <ListView 
+            x:Name="listViewEjemplo1" 
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell Height="60" >
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Column="0" HorizontalOptions="Start" Source="{Binding icon}" Margin="5"></Image>
-                            <Label x:Name="idLabel" Grid.Column="1" Text="{Binding Opcion}" VerticalTextAlignment="Center" Margin="5"/>
-                           <!-- <Image Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Source="ic_flecha_derecha.png" /> -->
-                        </Grid>
+                    <ViewCell Height="150" >
+                        <Frame
+                             Margin="0,3"
+                             HasShadow="true" 
+                             BorderColor="Silver"
+                             Padding="0">
+                            <Grid
+                                Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="150"/>
+                                </Grid.RowDefinitions>
+                                <Image 
+                                Grid.Column="0"
+                                Source="{Binding icon}"
+                                    HorizontalOptions="Center"
+                                WidthRequest="50"/>
+                                <Grid 
+                                    Padding="0,10"
+                                    HorizontalOptions="Start"
+                                    Grid.Column="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label 
+                                        FontSize="20"
+                                        x:Name="idLabel" 
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        Text="{Binding Opcion}" 
+                                        TextColor="Black" 
+                                        Margin="1"
+                                        VerticalOptions="StartAndExpand"/>
+                                    <Label 
+                                        FontSize="10"
+                                        x:Name="lblDireccion" 
+                                        Grid.Column="0"
+                                        Grid.Row="1"
+                                        Text="{Binding Direccion}" 
+                                        TextColor="Gray"
+                                        Margin="1"
+                                        VerticalOptions="CenterAndExpand"/>
+                                    <Label 
+                                        FontSize="10"
+                                        x:Name="lblWeb" 
+                                        Grid.Column="0"
+                                        Grid.Row="2"
+                                        Text="{Binding Web}" 
+                                        TextColor="Gray"
+                                        Margin="1"
+                                        VerticalOptions="EndAndExpand"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

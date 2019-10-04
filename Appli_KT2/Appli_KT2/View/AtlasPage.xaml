@@ -5,6 +5,7 @@
              BackgroundColor="WhiteSmoke"
              Padding="5,0"
              >
+  
     <ContentPage.Content>
         <Frame 
             HasShadow="true" 

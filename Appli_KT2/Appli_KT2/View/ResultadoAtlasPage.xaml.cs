@@ -36,6 +36,7 @@ namespace Appli_KT2.View
 
         private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
         {
+            listViewEjemplo1.SelectedItem = null;
             if (banderaClick)
             {
                 var item = e.SelectedItem as MenuEjemplo1;
@@ -46,13 +47,13 @@ namespace Appli_KT2.View
                     switch (oSeleccionado)
                     {
                         case 1:
-                            await Navigation.PushAsync(new ResultadoAtlasPage());
+                          //  await Navigation.PushAsync(new ResultadoAtlasPage());
                             break;
                         case 2:
+
                             break;
                         case 3:
-                            break;
-                        case 4:
+
                             break;
                     }
                     await Task.Run(async () =>
@@ -60,9 +61,8 @@ namespace Appli_KT2.View
                         await Task.Delay(500);
                         banderaClick = true;
                     });
-
                 }
-            } // fin banderaCLick
+            } 
         }
     }
 }

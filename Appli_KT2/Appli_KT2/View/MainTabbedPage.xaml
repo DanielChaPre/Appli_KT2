@@ -19,14 +19,19 @@
                      Priority="1"  
                      Order="Secondary" 
             x:Name="icShare"/>
+        <ToolbarItem  
+                     Text="Iniciar Sesión"
+                     Priority="1"  
+                     Order="Secondary" 
+            x:Name="icLogin"/>
     </TabbedPage.ToolbarItems>
     <TabbedPage.Children>
         <!--     <tabs:HistorialPage Title="Historial" Icon="ic_history.png" Style="Nova" />-->
        
-        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png"  />
-        <tabs:SuredsuPage Title="Suredsu"  Icon="ic_suredsu.png"/>
-        <tabs:LoginPage Title="Perfil" Icon="ic_person.png"/>
-        <tabs:MorePage Title="Más" Icon="ic_more.png"/>
+        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png"  HeightRequest="100"/>
+        <tabs:SuredsuPage Title="Suredsu"  Icon="ic_cali.png"/>
+        <tabs:HistorialPage Title="Historial" Icon="ic_history.png"/>
+        <tabs:RegisterPage Title="Perfil" Icon="ic_person.png"/>
         <!--   <tabs:NotificacionesPage Title="Notificiones"  Icon="ic_notificacion.png" Style="Nova"/>-->
     </TabbedPage.Children>
 </TabbedPage>

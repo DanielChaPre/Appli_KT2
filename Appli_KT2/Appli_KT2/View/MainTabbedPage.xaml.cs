@@ -19,7 +19,13 @@
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             icNotificacion.Clicked += onClickIc;
             icShare.Clicked += OnClickShare;
+            icLogin.Clicked += OnCLickLogin;
 		}
+
+        private async void OnCLickLogin(object sender, EventArgs e)
+        {
+            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+        }
 
         private async void OnClickShare(object sender, EventArgs e)
         {
