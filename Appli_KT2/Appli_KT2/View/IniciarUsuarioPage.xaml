@@ -21,13 +21,13 @@
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Margin="0,5"
-                    Text="Iniciar sesion"
+                   Text="Iniciar sesión"
                     TextColor="Black"
                     
                 />
                 <Label 
                     Text="Usuario"
-                    TextColor="#000F9F"
+                    TextColor="Gray"
                     x:Name="lblUsuario"
                 />
                 <Entry 
@@ -36,7 +36,6 @@
 
                 <Button 
                     BackgroundColor="#FF8200"
-                    BorderRadius="7"
                     Text="Siguiente"
                     TextColor="White"
                     x:Name="btnNext"

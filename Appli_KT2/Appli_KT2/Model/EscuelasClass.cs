@@ -17,7 +17,7 @@ namespace Appli_KT2.Model
 
             oMenuPrincipal.Add(new MenuEjemplo1
             {
-                Opcion = "Universidad Tecnologíca de León",
+                Opcion = "Universidad Tecnológica de León",
                 Habilitado = true,
                 idOpcion = 1,
                 icon = "utl.png",
@@ -27,7 +27,7 @@ namespace Appli_KT2.Model
             });
             oMenuPrincipal.Add(new MenuEjemplo1
             {
-                Opcion = "Instituto Tecnologíco de León",
+                Opcion = "Instituto Tecnológico de León",
                 Habilitado = true,
                 idOpcion = 2,
                 icon = "itleon.png",

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Appli_KT2.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,57 @@ namespace Appli_KT2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class NotificacionesPage : ContentPage
 	{
+         private static bool banderaClick;
         public NotificacionesPage()
         {
             InitializeComponent();
+            Title = "Atlas";
+            banderaClick = true;
         }
-	}
+
+        protected override async void OnAppearing()
+        {
+            LlenarMenu();
+            await Task.Yield();
+        }
+
+        public async void LlenarMenu()
+        {
+            NootificacionesClass oEjemploListView1Model = new NootificacionesClass();
+            listViewEjemplo1.ItemsSource = null;
+            listViewEjemplo1.ItemsSource = oEjemploListView1Model.ObtenerMenuEjemplo1();
+            listViewEjemplo1.ItemSelected += OnClickOpcionSeleccionada;
+        }
+
+        private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
+        {
+            listViewEjemplo1.SelectedItem = null;
+            if (banderaClick)
+            {
+                var item = e.SelectedItem as NotificacionesMClass;
+                if ((item != null) && (item.Habilitado))
+                {
+                    var oSeleccionado = item.idOpcion;
+                    banderaClick = false;
+                    switch (oSeleccionado)
+                    {
+                        case 1:
+                            //  await Navigation.PushAsync(new ResultadoAtlasPage());
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                    }
+                    await Task.Run(async () =>
+                    {
+                        await Task.Delay(500);
+                        banderaClick = true;
+                    });
+                }
+            }
+        }
+    }
 }

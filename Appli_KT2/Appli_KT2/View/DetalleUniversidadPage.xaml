@@ -1,12 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Appli_KT2.View.DetalleUniversidadPage">
+             x:Class="Appli_KT2.View.DetalleUniversidadPage"
+             >
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout 
+                BackgroundColor="White"
+                >
+                <!--Aqui ira las imagenes y el nombre de la universidad-->
+                <Frame
+                    
+                    BackgroundColor="White"
+                     HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center"
+                    >
+                    <StackLayout>
+                        <!--Agregar el carrusel-->
+                        <Label
+                            Text="Nombre de la escuela"
+                            TextColor="Black"
+                            />
+                    </StackLayout>
+                </Frame>
+                <!--Carreras de la universidad-->
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout>
+                        
+                    </StackLayout>
+                </Frame>
+             <!--Costos-->
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout>
+
+                    </StackLayout>
+                </Frame>
+                <!--Requisitos-->
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout>
+
+                    </StackLayout>
+                </Frame>
+                <!--Fechas-->
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout>
+
+                    </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

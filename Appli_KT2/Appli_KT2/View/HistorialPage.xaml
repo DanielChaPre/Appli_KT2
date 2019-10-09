@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tabs="clr-namespace:Appli_KT2.View"
              x:Class="Appli_KT2.View.HistorialPage"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Top"
+            android:TabbedPage.BarSelectedItemColor="#000F9F"
+            android:TabbedPage.BarItemColor="Gray"
             BarBackgroundColor="White"
-            BarTextColor="#000F9F"
             >
 
     <TabbedPage.Children>
-        <tabs:EventoPage Title="Eventos" Icon="ic_event.png" />
-        <tabs:CalificacionesPage Title="Karnet" Icon="ic_cali.png" />
+        <tabs:EventoPage Title="SUREDSU" Icon="ic_cali.png" />
+        <tabs:CalificacionesPage Title="InternaZ" Icon="ic_history.png" />
         <tabs:DocumentosPage Title="Documentos" Icon="ic_files.png" />
     </TabbedPage.Children>
 

@@ -22,12 +22,12 @@ namespace Appli_KT2.ViewModel
             });
         }
 
-        public async Task ShareUri(string uri)
+        public async Task ShareUri(string uri, string title)
         {
             await Share.RequestAsync(new ShareTextRequest
             {
                 Uri = uri,
-                Title = "Share Link Dowloand Appli-KT"
+                Title = title
             });
         }
     }

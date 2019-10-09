@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Appli_KT2.Model;
+using Appli_KT2.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,71 @@ namespace Appli_KT2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CalificacionesPage : ContentPage
 	{
-		public CalificacionesPage ()
+        private static bool banderaClick;
+        public CalificacionesPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            
+            Title = "Atlas";
+            banderaClick = true;
+        }
+        protected override async void OnAppearing()
+        {
+            LlenarMenu();
+            await Task.Yield();
+        }
+
+        public async void LlenarMenu()
+        {
+            CalificacionesClass oEjemploListView1Model = new CalificacionesClass();
+            listViewEjemplo1.ItemsSource = null;
+            listViewEjemplo1.ItemsSource = oEjemploListView1Model.ObtenerMenuEjemplo1();
+            listViewEjemplo1.ItemSelected += OnClickOpcionSeleccionada;
+        }
+
+        private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
+        {
+            listViewEjemplo1.SelectedItem = null;
+            if (banderaClick)
+            {
+                var item = e.SelectedItem as MCalificacionesClass;
+                if ((item != null) && (item.Habilitado))
+                {
+                    var oSeleccionado = item.idOpcion;
+                    banderaClick = false;
+                    switch (oSeleccionado)
+                    {
+                        case 1:
+                            //  await Navigation.PushAsync(new ResultadoAtlasPage());
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+
+                            break;
+                    }
+                    await Task.Run(async () =>
+                    {
+                        await Task.Delay(500);
+                        banderaClick = true;
+                    });
+                }
+            }
+        }
+
+        private async void BtnShare_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                ShareDialogClass share = new ShareDialogClass();
+                await share.ShareUri("WWW.HolaMundo.com", "Compartir documento");
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+    }
 }

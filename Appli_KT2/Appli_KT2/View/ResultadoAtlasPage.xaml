@@ -79,8 +79,9 @@
                                         x:Name="lblWeb" 
                                         Grid.Column="0"
                                         Grid.Row="2"
+                                        TextDecorations="Underline"
                                         Text="{Binding Web}" 
-                                        TextColor="Gray"
+                                        TextColor="Blue"
                                         Margin="1"
                                         VerticalOptions="EndAndExpand"/>
                                 </Grid>

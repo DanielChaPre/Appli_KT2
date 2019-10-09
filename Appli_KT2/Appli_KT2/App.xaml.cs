@@ -11,17 +11,19 @@ namespace Appli_KT2
         public App()
         {
             InitializeComponent();
-            this.MainPage = new NavigationPage(new MainTabbedPage())
-            {
-                BarBackgroundColor =Color.FromHex( "#000F9F"),
-                BarTextColor = Color.White,
-            };
+           
             
         }
+
 
         protected override void OnStart()
         {
             // Handle when your app starts
+            this.MainPage = new NavigationPage(new SplashPage())
+            {
+                BarBackgroundColor = Color.FromHex("#000F9F"),
+                BarTextColor = Color.White,
+            };
         }
 
         protected override void OnSleep()

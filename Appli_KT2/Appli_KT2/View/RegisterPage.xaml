@@ -13,33 +13,38 @@
                 <Frame>
                     <StackLayout>
                         <Label
-                        TextColor="Black"
+                        FontSize="Subtitle"
+                        TextColor="Gray"
                         Text="Nombre(s)"/>
-                        <Entry Placeholder="Ingrese su Nombre(s)"/>
+                        <Entry Placeholder="Ingrese su Nombre(s)"  FontSize="Small"/>
                         <Label 
-                        TextColor="Black"
+                            FontSize="Subtitle"
+                        TextColor="Gray"
                         Text="Apellidos"/>
-                        <Entry Placeholder="Ingrese su apellido(s)"/>
+                        <Entry Placeholder="Ingrese su apellido(s)" FontSize="Small"/>
                         <Label 
-                        TextColor="Black"
+                         FontSize="Subtitle"
+                        TextColor="Gray"
                         Text="CURP"/>
-                        <Entry Placeholder="Ingrese su CURP"/>
+                        <Entry Placeholder="Ingrese su CURP" FontSize="Small"/>
                         <Label 
-                        TextColor="Black"
+                        FontSize="Subtitle"
+                        TextColor="Gray"
                         Text="Correo Electrónico"/>
-                        <Entry Placeholder="Ingrese su correo electrónico"/>
+                        <Entry Placeholder="Ingrese su correo electrónico" FontSize="Small"/>
                         <Label 
-                        TextColor="Black"
+                        FontSize="Subtitle"
+                        TextColor="Gray"
                         Text="Celular"/>
-                        <Entry Placeholder="Ingrese su número de celular"/>
+                        <Entry Placeholder="Ingrese su número de celular" FontSize="Small"/>
                         <Label 
-                        TextColor="Black"
+                         FontSize="Subtitle"
+                        TextColor="Gray"
                         Text="Contraseña"/>
-                        <Entry Placeholder="Ingrese una Contraseña"/>
+                        <Entry Placeholder="Ingrese una Contraseña" FontSize="Small"/>
 
                         <Button 
                             BackgroundColor="Navy"
-                            BorderRadius="15"
                             Text="Guardar"
                             TextColor="White"
                         />

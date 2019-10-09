@@ -13,7 +13,7 @@
 	public partial class MainTabbedPage : Xamarin.Forms.TabbedPage
     {
 
-		public MainTabbedPage ()
+		public MainTabbedPage()
 		{
 			InitializeComponent ();
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
@@ -32,7 +32,7 @@
             try
             {
                 ShareDialogClass share = new ShareDialogClass();
-                await share.ShareUri("WWW.HolaMundo.com");
+                await share.ShareUri("WWW.HolaMundo.com", "Compartir Aplicación");
             }
             catch (Exception)
             {

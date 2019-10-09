@@ -1,12 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Appli_KT2.View.MorePage">
+             x:Class="Appli_KT2.View.MorePage"
+             BackgroundColor="White" >
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout
+            Padding="5"
+            >
+            <Button 
+                Margin="0" 
+                BackgroundColor="White" 
+                Text="Seguimiento a Egresados" 
+                ImageSource=""/>
+            <Button 
+                 Margin="0" 
+                BackgroundColor="White" 
+                Text="Aula Virtual SICES" 
+                ImageSource=""/>
+            <Button 
+                 Margin="0" 
+                BackgroundColor="White" 
+                Text="Tablero de indicadores" 
+                ImageSource=""/>
+            <Button 
+                 Margin="0" 
+                BackgroundColor="White" 
+                Text="Dictaminación de programas educativos"
+                ImageSource=""/>
+            <Button 
+                 Margin="0" 
+                BackgroundColor="White" 
+                Text="Internacionalización" 
+                ImageSource=""/>
+            <Button 
+                 Margin="0" 
+                BackgroundColor="White" 
+                Text="Mercado laboral SIDES" 
+                    ImageSource=""/>
+            <Button
+                 Margin="0" 
+                BackgroundColor="White" 
+                Text="Becas -créditos EDUCAFIN" 
+                    ImageSource=""/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

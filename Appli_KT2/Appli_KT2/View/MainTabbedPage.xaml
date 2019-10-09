@@ -15,7 +15,7 @@
                      x:Name="icNotificacion"
                      />
         <ToolbarItem  
-                     Text="Compartir"
+                     Text="Compartir Aplicación"
                      Priority="1"  
                      Order="Secondary" 
             x:Name="icShare"/>
@@ -29,9 +29,10 @@
         <!--     <tabs:HistorialPage Title="Historial" Icon="ic_history.png" Style="Nova" />-->
        
         <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png"  HeightRequest="100"/>
-        <tabs:SuredsuPage Title="Suredsu"  Icon="ic_cali.png"/>
+        <tabs:SuredsuPage Title="SUREDSU"  Icon="ic_cali.png"/>
         <tabs:HistorialPage Title="Historial" Icon="ic_history.png"/>
         <tabs:RegisterPage Title="Perfil" Icon="ic_person.png"/>
+        <tabs:MorePage Title="Más" Icon="ic_more.png"/>
         <!--   <tabs:NotificacionesPage Title="Notificiones"  Icon="ic_notificacion.png" Style="Nova"/>-->
     </TabbedPage.Children>
 </TabbedPage>

@@ -17,7 +17,7 @@ namespace Appli_KT2.View
         public ResultadoAtlasPage ()
 		{
 			InitializeComponent ();
-            Title = "Resultado de la busqueda";
+            Title = "Atlas";
             banderaClick = true;
         }
         protected override async void OnAppearing()

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.LoginPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             Title="Iniciar Sesión">
     <ContentPage.Content>
         <StackLayout
             Padding="10,1">
@@ -56,8 +57,25 @@
                     TextColor="White"
                     x:Name="btnCrearCuenta"/>
             </StackLayout>
-            <Label Text="Al crear o iniciar sesión estaría aceptando los terminos y condiciones y el recibir notificaciones"
-                   VerticalOptions="End"/>
+            <StackLayout 
+                HorizontalOptions="CenterAndExpand"
+                Padding="10,0,6,0"
+                VerticalOptions="EndAndExpand">
+                <Label 
+                FontSize="12"
+                Text="Al crear una cuenta o iniciar sesión estaria aceptado los"
+                TextColor="Gray"/>
+                <Label LineBreakMode="CharacterWrap">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Términos y condiciones" TextColor="Blue" TextDecorations="Underline" FontSize="12"/>
+                            <Span Text=" y nuestra " TextColor="Gray" FontSize="12" />
+                            <Span Text=" Política de privacidad " TextColor="Blue" TextDecorations="Underline" FontSize="12"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="al igual aceptas recibir notificaciones"  TextColor="Gray" FontSize="12"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

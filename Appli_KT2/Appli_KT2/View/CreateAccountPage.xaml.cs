@@ -32,7 +32,7 @@ namespace Appli_KT2.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            txtUsuario.Focus();
+           // txtUsuario.Focus();
         }
         public void animacionUsu(object sender, FocusEventArgs e)
         {

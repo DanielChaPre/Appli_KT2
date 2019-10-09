@@ -18,7 +18,7 @@
                 VerticalOptions="Center"
             >
                 <Label 
-                    FontSize="Large"
+                    FontSize="Title"
                     HorizontalOptions="Center"
                     Margin="0,5"
                     Text="Crear cuenta"
@@ -27,7 +27,7 @@
                 />
                 <Label 
                     Text="Correo/CURP/Clave Escuela"
-                    TextColor="#000F9F"
+                    TextColor="Gray"
                     x:Name="lblUsuario"
                 />
                 <Entry 
@@ -37,7 +37,7 @@
                 <Label 
                 
                     Text="Contraseña"
-                    TextColor="#000F9F"
+                    TextColor="Gray"
                     x:Name="lblContraseña"
                 />
                 <Entry 
@@ -83,7 +83,6 @@
                 
                 <Button 
                     BackgroundColor="#FF8200"
-                    BorderRadius="7"
                     Text="Crear cuenta"
                     TextColor="White"
                 />

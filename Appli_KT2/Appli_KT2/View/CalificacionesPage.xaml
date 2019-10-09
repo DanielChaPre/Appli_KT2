@@ -3,7 +3,50 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.CalificacionesPage">
     <ContentPage.Content>
-        <StackLayout>
-        </StackLayout>
+        <ListView 
+            x:Name="listViewEjemplo1" 
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Height="70" >
+                        <Frame
+                             Margin="0,3"
+                             HasShadow="true" 
+                             BorderColor="Silver"
+                             Padding="0">
+                            <Grid
+                                Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label 
+                                        FontSize="20"
+                                        x:Name="idLabel" 
+                                        Grid.Column="0"
+                                        Grid.Row="0"
+                                        Text="{Binding Titulo}" 
+                                        TextColor="Black" 
+                                        Margin="1"
+                                        VerticalOptions="CenterAndExpand"/>
+                                <Button
+                                    BackgroundColor="Transparent"
+                                    Clicked="BtnShare_Clicked"
+                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    ImageSource="ic_share"
+                                    x:Name="btnShare"
+                                    />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
