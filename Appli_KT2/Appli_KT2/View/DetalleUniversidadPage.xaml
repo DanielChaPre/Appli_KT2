@@ -1,71 +1,314 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+    
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:local="clr-namespace:Appli_KT2.ViewModel"
              x:Class="Appli_KT2.View.DetalleUniversidadPage"
-             >
+             xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             Title="Universidad Tecnológi..."
+             Padding="5,2">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New"  
+                     Icon="share.png"  
+                     Priority="0"  
+                     Order="Primary" 
+                     x:Name="icShare"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <ScrollView>
             <StackLayout 
-                BackgroundColor="White"
+                BackgroundColor="WhiteSmoke"
                 >
                 <!--Aqui ira las imagenes y el nombre de la universidad-->
                 <Frame
-                    
                     BackgroundColor="White"
-                     HasShadow="true" 
+                    HasShadow="true" 
+                    HeightRequest="250"
                     BorderColor="Silver"
                     VerticalOptions="Center"
                     >
-                    <StackLayout>
-                        <!--Agregar el carrusel-->
-                        <Label
-                            Text="Nombre de la escuela"
+                    <AbsoluteLayout>
+                        <StackLayout
+                            AbsoluteLayout.LayoutBounds="0,0,1,0.9"
+                            AbsoluteLayout.LayoutFlags="All"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                             x:Name="logoLayout"
+                            >
+                            <control:CarouselView 
+                                HeightRequest="200"
+                                ItemsSource="{Binding MyDataSource}" 
+                                AbsoluteLayout.LayoutBounds="0, 0.7, 1, 0.1" 
+                              AbsoluteLayout.LayoutFlags="All"
+                                Position="{Binding Position, Mode=TwoWay}"
+                                                  VerticalOptions="FillAndExpand">
+                                <control:CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout  
+                                            HeightRequest="300"
+                                            HorizontalOptions="CenterAndExpand"
+                                            VerticalOptions="EndAndExpand">
+                                            <Image 
+                                                Source="{Binding imagen}" 
+                                                HeightRequest="100"
+                                                HorizontalOptions="CenterAndExpand" 
+                                                VerticalOptions="CenterAndExpand"
+                                                WidthRequest="100"/>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </control:CarouselView.ItemTemplate>
+                            </control:CarouselView>
+                            <local:Carouselndicator IndicatorHeight="12" IndicatorWidth="12" 
+                                     UnselectedIndicator="ic_unselected_circle.png" 
+                                     SelectedIndicator="ic_selected_circle.png" 
+                                     Position="{Binding Position}" 
+                                     ItemsSource="{Binding MyDataSource}"
+			                         AbsoluteLayout.LayoutBounds="0, 0.9, 1, 0.1" 
+                                     AbsoluteLayout.LayoutFlags="All"/>
+                            <!--Agregar el carrusel-->
+
+                            <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                            Text="Universidad Tecnológica de León"
                             TextColor="Black"
+                             VerticalOptions="EndAndExpand"
                             />
-                    </StackLayout>
+                        </StackLayout>
+                    </AbsoluteLayout>
                 </Frame>
-                <!--Carreras de la universidad-->
+               
+                <!--Dirección-->
+                <Label 
+                    Margin="0,5,0,0"
+                    Text="Dirección" HorizontalTextAlignment="Center"/>
                 <Frame
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
                     VerticalOptions="Center">
                     <StackLayout>
-                        
-                    </StackLayout>
-                </Frame>
-             <!--Costos-->
-                <Frame
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    BorderColor="Silver"
-                    VerticalOptions="Center">
-                    <StackLayout>
-
-                    </StackLayout>
-                </Frame>
-                <!--Requisitos-->
-                <Frame
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    BorderColor="Silver"
-                    VerticalOptions="Center">
-                    <StackLayout>
-
+                        <Label 
+                            Text="Blvd. Universidad Tecnológica 225, Universidad Tecnologica, San Carlos la Roncha, 37670 León, Gto."
+                            TextColor="Gray"
+                            />
+                        <maps:Map x:Name="MyMap"
+                              WidthRequest="320"
+                              HeightRequest="200"                  
+                              IsShowingUser="true"
+                              
+                              MoveToLastRegionOnLayoutChange="false"
+                              MapType="Street" />
                     </StackLayout>
                 </Frame>
                 <!--Fechas-->
+                <Label 
+                    Text="Fechas"
+                    HorizontalTextAlignment="Center"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalOptions="Center"
+                        Text="Pre-Registro"
+                          VerticalOptions="Center"
+                        />
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalOptions="Center"
+                        Text="Curso de inducción"
+                          VerticalOptions="Center"
+                        />
+                    <Frame
+                        BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        >
+                        <Label 
+                            HorizontalOptions="Center"
+                            Text="28 de enero 2019"/>
+                    </Frame>
+                    <Frame
+                        BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        >
+                        <Label 
+                            HorizontalOptions="Center"
+                            Text="26 de agosto 2019"/>
+                    </Frame>
+                </Grid>
+                <!--Carreras de la universidad-->
+                <Label Text="Carreras" HorizontalTextAlignment="Center"/>
+                <Label Text="TSU (Técnico Superior Univesitario)"
+                       Margin="0,5,0,0"
+                       />
                 <Frame
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
                     VerticalOptions="Center">
                     <StackLayout>
-
+                        <Button BackgroundColor="Gray" Text="TI área Entornos Virtuales y Negocios Digitales" TextColor="White"/>
+                        <Button BackgroundColor="Gray" Text="TI área Desarrollo de Software Multiplataforma" TextColor="White"/>
+                        <Button BackgroundColor="Gray" Text="TI área Infraestructura de Redes Digitales" TextColor="White"/>
                     </StackLayout>
                 </Frame>
+                <Label Text="Ingeniería/Licenciatura (Continuidad para egresados de TSU)"/>
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout>
+                        <Button BackgroundColor="Gray" Text="Ingeniería en Tecnologías de la información" TextColor="White"/>
+                        <Button BackgroundColor="Gray" Text="Licenciatura en Gestión del Capital Humano" TextColor="White"/>
+                        <Button BackgroundColor="Gray" Text="Ingeniería en Tecnología Ambiental" TextColor="White"/>
+                    </StackLayout>
+                </Frame>
+                <!--Costos-->
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Costos"
+                    />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        HorizontalOptions="Center"
+                        Text="Ficha"
+                          VerticalOptions="Center"
+                        />
+                    <Label
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        HorizontalOptions="Center"
+                        Text="Cuota cuatrimestre"
+                          VerticalOptions="Center"
+                        />
+                    <Frame
+                        BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        >
+                        <Label 
+                            HorizontalOptions="Center"
+                            Text="$320"/>
+                    </Frame>
+                    <Frame
+                        BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        >
+                        <Label 
+                            HorizontalOptions="Center"
+                            Text="$1,750"/>
+                    </Frame>
 
+                </Grid>
+                <!--Requisitos-->
+                <Label Text="Requisitos o Documentos a presentar"/>
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout 
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                HeightRequest="10"
+                                BackgroundColor="#000F9F"
+                                Margin="0,5,0,0"
+                                VerticalOptions="StartAndExpand"/>
+                            <StackLayout 
+                                 Grid.Column="0"
+                                Grid.Row="1"
+                                HeightRequest="10"
+                                BackgroundColor="#000F9F"
+                                 Margin="0,5,0,0"
+                                VerticalOptions="StartAndExpand"/>
+                            <StackLayout 
+                                 Grid.Column="0"
+                                Grid.Row="2"
+                                HeightRequest="10"
+                                BackgroundColor="#000F9F"
+                                 Margin="0,5,0,0"
+                                VerticalOptions="StartAndExpand"/>
+                            <StackLayout 
+                                 Grid.Column="0"
+                                Grid.Row="3"
+                                HeightRequest="10"
+                                BackgroundColor="#000F9F"
+                                 Margin="0,5,0,0"
+                                VerticalOptions="StartAndExpand"/>
+
+                            <Label 
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                Text="CURP"
+                                VerticalOptions="StartAndExpand"/>
+                            <Label 
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                Text="Certificado de Bachillerato original, Constancia de estudios original que especifique el grado que cursas actualmente con promedio general de los semestres o cuatrimestres cursados, historial o ultima boleta de calificaciones de los semestres o cuatrimestres cursados con promedio general"
+                                  VerticalOptions="StartAndExpand"/>
+                            <Label 
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                Text="1 Fotografía tamaño infantil (color, fondo blanco y RECIENTE)"
+                                  VerticalOptions="StartAndExpand"/>
+                            <Label 
+                                Grid.Column="1"
+                                Grid.Row="3"
+                                Text="Comprobante de pago original de ficha de admisión"
+                                  VerticalOptions="StartAndExpand"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
+    
 </ContentPage>

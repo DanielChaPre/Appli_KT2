@@ -47,7 +47,7 @@ namespace Appli_KT2.View
                     switch (oSeleccionado)
                     {
                         case 1:
-                          //  await Navigation.PushAsync(new ResultadoAtlasPage());
+                            await Navigation.PushAsync(new DetalleUniversidadPage());
                             break;
                         case 2:
 
