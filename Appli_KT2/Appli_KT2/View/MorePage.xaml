@@ -13,35 +13,35 @@
                 Text="Seguimiento a Egresados" 
                 ImageSource=""/>
             <Button 
-                 Margin="0" 
+                Margin="0" 
                 BackgroundColor="White" 
                 Text="Aula Virtual SICES" 
                 ImageSource=""/>
             <Button 
-                 Margin="0" 
+                Margin="0" 
                 BackgroundColor="White" 
                 Text="Tablero de indicadores" 
                 ImageSource=""/>
             <Button 
-                 Margin="0" 
+                Margin="0" 
                 BackgroundColor="White" 
                 Text="Dictaminación de programas educativos"
                 ImageSource=""/>
             <Button 
-                 Margin="0" 
+                Margin="0" 
                 BackgroundColor="White" 
                 Text="Internacionalización" 
                 ImageSource=""/>
             <Button 
-                 Margin="0" 
+                Margin="0" 
                 BackgroundColor="White" 
                 Text="Mercado laboral SIDES" 
-                    ImageSource=""/>
+                ImageSource=""/>
             <Button
-                 Margin="0" 
+                Margin="0" 
                 BackgroundColor="White" 
                 Text="Becas -créditos EDUCAFIN" 
-                    ImageSource=""/>
+                ImageSource=""/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

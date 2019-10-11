@@ -13,36 +13,75 @@
                 <Frame>
                     <StackLayout>
                         <Label
-                        FontSize="Subtitle"
-                        TextColor="Gray"
-                        Text="Nombre(s)"/>
-                        <Entry Placeholder="Ingrese su Nombre(s)"  FontSize="Small"/>
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nombre(s)"/>
+                        <Entry
+                            Placeholder="Ingrese su Nombre(s)" 
+                            FontSize="Small"/>
                         <Label 
                             FontSize="Subtitle"
-                        TextColor="Gray"
-                        Text="Apellidos"/>
-                        <Entry Placeholder="Ingrese su apellido(s)" FontSize="Small"/>
+                            TextColor="Gray"
+                            Text="Apellidos"/>
+                        <Entry 
+                            Placeholder="Ingrese su apellido(s)"
+                            FontSize="Small"/>
                         <Label 
-                         FontSize="Subtitle"
-                        TextColor="Gray"
-                        Text="CURP"/>
-                        <Entry Placeholder="Ingrese su CURP" FontSize="Small"/>
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP"/>
+                        <Entry
+                            Placeholder="Ingrese su CURP" 
+                            FontSize="Small"/>
                         <Label 
-                        FontSize="Subtitle"
-                        TextColor="Gray"
-                        Text="Correo Electrónico"/>
-                        <Entry Placeholder="Ingrese su correo electrónico" FontSize="Small"/>
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Correo Electrónico"/>
+                        <Entry
+                            Placeholder="Ingrese su correo electrónico"
+                            FontSize="Small"/>
                         <Label 
-                        FontSize="Subtitle"
-                        TextColor="Gray"
-                        Text="Celular"/>
-                        <Entry Placeholder="Ingrese su número de celular" FontSize="Small"/>
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Celular"/>
+                        <Entry 
+                            Placeholder="Ingrese su número de celular"
+                            FontSize="Small"/>
                         <Label 
-                         FontSize="Subtitle"
-                        TextColor="Gray"
-                        Text="Contraseña"/>
-                        <Entry Placeholder="Ingrese una Contraseña" FontSize="Small"/>
-
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CCT_Escuela"/>
+                        <Entry 
+                            Placeholder="Ingrese el CCT de la escuela"
+                            FontSize="Small"/>
+                        <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Procedencia_EMS"/>
+                        <Entry 
+                            Placeholder="Ingrese su procedencia EMS"
+                            FontSize="Small"/>
+                        <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Folio SUREMS"/>
+                        <Entry 
+                            Placeholder="Ingrese su folio SUREMS"
+                            FontSize="Small"/>
+                        <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Folio SUREDSU"/>
+                        <Entry 
+                            Placeholder="Ingrese su folio SUREDSU"
+                            FontSize="Small"/>
+                        <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Contraseña"/>
+                        <Entry 
+                            Placeholder="Ingrese una Contraseña" 
+                            FontSize="Small"/>
                         <Button 
                             BackgroundColor="Navy"
                             Text="Guardar"

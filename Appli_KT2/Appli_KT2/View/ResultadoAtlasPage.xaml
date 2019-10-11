@@ -6,17 +6,19 @@
              BackgroundColor="WhiteSmoke"
              Padding="5,0">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New"  
-                     Icon="filter_outline.png"  
-                     Priority="0"  
-                     Order="Primary"
-                     x:Name="icFilter"/>
+        <ToolbarItem
+            Text="New"  
+            Icon="filter_outline.png"  
+            Priority="0"  
+            Order="Primary"
+            x:Name="icFilter"/>
         
-        <ToolbarItem Text="New"  
-                     Icon="share.png"  
-                     Priority="0"  
-                     Order="Primary" 
-                     x:Name="icShare"/>
+        <ToolbarItem 
+            Text="New"  
+            Icon="share.png"  
+            Priority="0"  
+            Order="Primary" 
+            x:Name="icShare"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView 
@@ -26,7 +28,8 @@
                   >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell Height="150" >
+                    <ViewCell 
+                        Height="150" >
                         <Frame
                              Margin="0,3"
                              HasShadow="true" 
@@ -42,10 +45,10 @@
                                     <RowDefinition Height="150"/>
                                 </Grid.RowDefinitions>
                                 <Image 
-                                Grid.Column="0"
-                                Source="{Binding icon}"
+                                    Grid.Column="0"
+                                    Source="{Binding icon}"
                                     HorizontalOptions="Center"
-                                WidthRequest="50"/>
+                                    WidthRequest="50"/>
                                 <Grid 
                                     Padding="0,10"
                                     HorizontalOptions="Start"

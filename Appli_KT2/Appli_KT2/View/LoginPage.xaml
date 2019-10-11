@@ -24,6 +24,7 @@
                     Text="Iniciar con Facebook"
                     TextColor="White"
                     />
+                
                 <Button 
                     BackgroundColor="WhiteSmoke"
                     Image="ic_google.png"
@@ -62,9 +63,9 @@
                 Padding="10,0,6,0"
                 VerticalOptions="EndAndExpand">
                 <Label 
-                FontSize="12"
-                Text="Al crear una cuenta o iniciar sesión estaria aceptado los"
-                TextColor="Gray"/>
+                    FontSize="12"
+                    Text="Al crear una cuenta o iniciar sesión estaria aceptado los"
+                    TextColor="Gray"/>
                 <Label LineBreakMode="CharacterWrap">
                     <Label.FormattedText>
                         <FormattedString>
@@ -74,7 +75,10 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label Text="al igual aceptas recibir notificaciones"  TextColor="Gray" FontSize="12"/>
+                <Label 
+                    Text="al igual aceptas recibir notificaciones"  
+                    TextColor="Gray" 
+                    FontSize="12"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

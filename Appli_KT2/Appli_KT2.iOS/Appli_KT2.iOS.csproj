@@ -90,7 +90,8 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>sices.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -195,7 +196,6 @@
     <BundleResource Include="Resources\filter_outline.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ic_sices.ico" />
     <BundleResource Include="Resources\ic_atlas.png" />
     <BundleResource Include="Resources\ic_history.png" />
     <BundleResource Include="Resources\ic_more.png" />
@@ -206,6 +206,5 @@
     <BundleResource Include="Resources\ic_cali.png" />
     <BundleResource Include="Resources\ic_event.png" />
     <BundleResource Include="Resources\ic_files.png" />
-    <Content Include="sices.ico" />
   </ItemGroup>
 </Project>

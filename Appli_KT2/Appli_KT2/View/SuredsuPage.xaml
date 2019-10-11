@@ -8,8 +8,7 @@
             <WebView 
                 WidthRequest="900" 
                 HeightRequest="900"
-                Source="http://suredsu.guanajuato.gob.mx/"
-                >
+                Source="http://suredsu.guanajuato.gob.mx/">
             </WebView>
         </StackLayout>
        

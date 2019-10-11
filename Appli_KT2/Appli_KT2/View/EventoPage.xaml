@@ -6,8 +6,7 @@
         <ListView 
             x:Name="listViewEjemplo1" 
             CachingStrategy="RecycleElement"
-            HasUnevenRows="True"
-                  >
+            HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="100" >
@@ -26,10 +25,10 @@
                                     <RowDefinition Height="100"/>
                                 </Grid.RowDefinitions>
                                 <Image 
-                                Grid.Column="0"
-                                Source="{Binding icon}"
-                                HorizontalOptions="Center"
-                                WidthRequest="50"/>
+                                    Grid.Column="0"
+                                    Source="{Binding icon}"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="50"/>
                                 <Grid 
                                     Padding="0,10"
                                     HorizontalOptions="Start"

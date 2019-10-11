@@ -11,6 +11,7 @@ namespace Appli_KT2.Model
         {
            
         }
+
         public ObservableCollection<MenuEjemplo1> ObtenerMenuEjemplo1()
             {
             ObservableCollection<MenuEjemplo1> oMenuPrincipal = new ObservableCollection<MenuEjemplo1>();

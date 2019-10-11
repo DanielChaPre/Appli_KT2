@@ -3,37 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:tabs="clr-namespace:Appli_KT2.View"
             x:Class="Appli_KT2.View.MainTabbedPage"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarSelectedItemColor="#000F9F"
+            android:TabbedPage.BarItemColor="Gray"
             Title="Appli-KT"
-            BarBackgroundColor="White"
-            BarTextColor="#000F9F"
-            >
+            BarBackgroundColor="White">
+    
     <TabbedPage.ToolbarItems>
         <ToolbarItem
-                     Icon="ic_notifications.png"  
-                     Priority="0"  
-                     Order="Default" 
-                     x:Name="icNotificacion"
-                     />
-        <ToolbarItem  
-                     Text="Compartir Aplicación"
-                     Priority="1"  
-                     Order="Secondary" 
+           Icon="ic_notifications.png"  
+           Priority="0"  
+           Order="Default" 
+           x:Name="icNotificacion"/>
+        <ToolbarItem
+            Text="Compartir Aplicación"
+            Priority="1"  
+            Order="Secondary" 
             x:Name="icShare"/>
-        <ToolbarItem  
-                     Text="Iniciar Sesión"
-                     Priority="1"  
-                     Order="Secondary" 
+        <ToolbarItem
+            Text="Iniciar Sesión"
+            Priority="1"  
+            Order="Secondary" 
             x:Name="icLogin"/>
     </TabbedPage.ToolbarItems>
+
     <TabbedPage.Children>
-        <!--     <tabs:HistorialPage Title="Historial" Icon="ic_history.png" Style="Nova" />-->
-       
         <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png"  HeightRequest="100"/>
         <tabs:SuredsuPage Title="SUREDSU"  Icon="ic_cali.png"/>
         <tabs:HistorialPage Title="Historial" Icon="ic_history.png"/>
         <tabs:RegisterPage Title="Perfil" Icon="ic_person.png"/>
         <tabs:MorePage Title="Más" Icon="ic_more.png"/>
-        <!--   <tabs:NotificacionesPage Title="Notificiones"  Icon="ic_notificacion.png" Style="Nova"/>-->
     </TabbedPage.Children>
+    
 </TabbedPage>
     

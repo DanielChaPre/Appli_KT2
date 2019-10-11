@@ -13,12 +13,8 @@ namespace Appli_KT2.Infrastructure
             get;
             set;
         }
-        /*public LoginViewModel Login
-        {
-            get;
-            set;
-        }*/
         #endregion
+
         #region constructor
         public InstanceLocator()
         {

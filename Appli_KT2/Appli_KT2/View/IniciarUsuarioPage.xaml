@@ -11,25 +11,25 @@
             BorderColor="Silver"
             Margin="10,10,10,-10" 
             VerticalOptions="Center">
+            
             <StackLayout
                 BackgroundColor="White"
                 Orientation="Vertical" 
                 Padding="10,10"
-                VerticalOptions="Center"
-            >
+                VerticalOptions="Center">
+                
                 <Label 
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Margin="0,5"
                    Text="Iniciar sesión"
-                    TextColor="Black"
-                    
-                />
+                    TextColor="Black"/>
+                
                 <Label 
                     Text="Usuario"
                     TextColor="Gray"
-                    x:Name="lblUsuario"
-                />
+                    x:Name="lblUsuario"/>
+                
                 <Entry 
                     TextColor="#000F9F"
                     x:Name="txtUsuario"/>
@@ -38,8 +38,7 @@
                     BackgroundColor="#FF8200"
                     Text="Siguiente"
                     TextColor="White"
-                    x:Name="btnNext"
-                />
+                    x:Name="btnNext"/>
             </StackLayout>
         </Frame>
     </ContentPage.Content>

@@ -16,7 +16,7 @@
 		public MainTabbedPage()
 		{
 			InitializeComponent ();
-            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+         //   On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             icNotificacion.Clicked += onClickIc;
             icShare.Clicked += OnClickShare;
             icLogin.Clicked += OnCLickLogin;

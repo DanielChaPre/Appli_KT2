@@ -3,62 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.AtlasPage"
              BackgroundColor="WhiteSmoke"
-             Padding="5,0"
-             >
+             Padding="5,0">
   
     <ContentPage.Content>
+        
         <Frame 
             HasShadow="true" 
             BorderColor="Silver"
             VerticalOptions="Center">
+            
             <StackLayout
-                Padding="2,3"
-                >
+                Padding="2,3">
+                
                 <Label 
                     FontSize="Large"
                     Text="Buscar"
                     TextColor="Black"/>
+                
                 <Label
                     FontSize="Medium"
                     Text="Carreras, municipios e instituciones"
-                    TextColor="Gray"
-                    />
+                    TextColor="Gray"/>
+                
                 <StackLayout
                     BackgroundColor="#000F9F"
                     Margin="2,0"
-                    Padding="5,5"
-                    >
+                    Padding="5,5">
+                                                    
                     <Button 
-                         BackgroundColor="White"
+                        BackgroundColor="White"
                         ImageSource="ic_search.png"
                         HeightRequest="40"
                         Padding="10,0,170,0"
                         Text="Carrera"
-                        TextColor="#000F9F"
-                    />
+                        TextColor="#000F9F"/>
+                    
                     <Button 
-                         BackgroundColor="White"
+                        BackgroundColor="White"
                         ImageSource="ic_municipio.png"
-                         HeightRequest="40"
+                        HeightRequest="40"
                         Padding="10,0,150,0"
                         Text="Municipio"
-                        TextColor="#000F9F"
-                    />
+                        TextColor="#000F9F"/>
+                                                            
                     <Button 
-                         BackgroundColor="White"
+                        BackgroundColor="White"
                         ImageSource="ic_instituto"
-                         HeightRequest="40"
+                        HeightRequest="40"
                         Padding="10,0,100,0"
                         Text="Instituto Edu. Sup."
-                        TextColor="#000F9F"
-                    />
-
+                        TextColor="#000F9F"/>
+                     
                     <Button 
                         BackgroundColor="#FF8200"
                         Text="Buscar"
                         TextColor="White"
-                        x:Name="btnBuscar"
-                      />
+                        x:Name="btnBuscar"/>
+                     
                 </StackLayout>
             </StackLayout>
         </Frame>

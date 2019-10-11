@@ -25,15 +25,15 @@
                                 <Grid.RowDefinitions >
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Label 
-                                        FontSize="20"
-                                        x:Name="idLabel" 
-                                        Grid.Column="0"
-                                        Grid.Row="0"
-                                        Text="{Binding Titulo}" 
-                                        TextColor="Black" 
-                                        Margin="1"
-                                        VerticalOptions="CenterAndExpand"/>
+                                <Label
+                                    FontSize="20"
+                                    x:Name="idLabel" 
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    Text="{Binding Titulo}" 
+                                    TextColor="Black" 
+                                    Margin="1"
+                                    VerticalOptions="CenterAndExpand"/>
                                 <Button
                                     BackgroundColor="Transparent"
                                     Clicked="BtnShare_Clicked"

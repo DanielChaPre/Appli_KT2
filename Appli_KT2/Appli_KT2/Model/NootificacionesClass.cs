@@ -23,6 +23,7 @@ namespace Appli_KT2.Model
                 Habilitado = true,
                 idOpcion = 1
             });
+
             oMenuPrincipal.Add(new NotificacionesMClass
             {
                 Categoria = "SUREDSU",
@@ -31,6 +32,7 @@ namespace Appli_KT2.Model
                 Habilitado = true,
                 idOpcion = 2
             });
+
             oMenuPrincipal.Add(new NotificacionesMClass
             {
                 Categoria = "EDUCAFIN",
@@ -39,6 +41,7 @@ namespace Appli_KT2.Model
                 Habilitado = true,
                 idOpcion = 3
             });
+
             oMenuPrincipal.Add(new NotificacionesMClass
             {
                 Categoria = "SDES",
@@ -47,6 +50,7 @@ namespace Appli_KT2.Model
                 Habilitado = true,
                 idOpcion = 4
             });
+
             oMenuPrincipal.Add(new NotificacionesMClass
             {
                 Categoria = "Aula Virtual",
@@ -55,6 +59,7 @@ namespace Appli_KT2.Model
                 Habilitado = true,
                 idOpcion = 5
             });
+
             oMenuPrincipal.Add(new NotificacionesMClass
             {
                 Categoria = "Internacionalización",
@@ -63,6 +68,7 @@ namespace Appli_KT2.Model
                 Habilitado = true,
                 idOpcion = 6
             });
+
             oMenuPrincipal.Add(new NotificacionesMClass
             {
                 Categoria = "Otros eventos",
@@ -71,6 +77,7 @@ namespace Appli_KT2.Model
                 Habilitado = true,
                 idOpcion = 7
             });
+
             return oMenuPrincipal;
         }
     }

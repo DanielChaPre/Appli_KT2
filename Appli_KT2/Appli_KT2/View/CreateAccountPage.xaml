@@ -15,41 +15,31 @@
                 BackgroundColor="White"
                 Orientation="Vertical" 
                 Padding="10,10"
-                VerticalOptions="Center"
-            >
+                VerticalOptions="Center">
                 <Label 
                     FontSize="Title"
                     HorizontalOptions="Center"
                     Margin="0,5"
                     Text="Crear cuenta"
-                    TextColor="Black"
-                    
-                />
+                    TextColor="Black"/>
                 <Label 
                     Text="Correo/CURP/Clave Escuela"
                     TextColor="Gray"
-                    x:Name="lblUsuario"
-                />
+                    x:Name="lblUsuario"/>
                 <Entry 
-                    
                     TextColor="#000F9F"
                     x:Name="txtUsuario"/>
                 <Label 
-                
                     Text="Contraseña"
                     TextColor="Gray"
-                    x:Name="lblContraseña"
-                />
+                    x:Name="lblContraseña"/>
                 <Entry 
                     IsPassword="True"
                     TextColor="#000F9F"
                     x:Name="txtContraseña"/>
-
-
                 <Grid
-                Margin="0,5"
-                Padding="0,20">
-
+                    Margin="0,5"
+                    Padding="0,20">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="3*"/>
@@ -57,8 +47,8 @@
                     <CheckBox
                         Grid.Row="0"
                         Grid.Column="0"
-                        HorizontalOptions="Start"
-                        />
+                        HorizontalOptions="Start"/>
+                    
                     <Label 
                         FontSize="13"
                         Grid.Row="0"
@@ -70,8 +60,8 @@
                     <CheckBox
                         Grid.Row="1"
                         Grid.Column="0"
-                        HorizontalOptions="Start"
-                        />
+                        HorizontalOptions="Start"/>
+                    
                     <Label 
                         FontSize="15"
                         Grid.Row="1"

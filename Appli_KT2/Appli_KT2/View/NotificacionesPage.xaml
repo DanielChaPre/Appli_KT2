@@ -6,17 +6,17 @@
              BackgroundColor="WhiteSmoke"
              Padding="5,0">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="New"  
-                     Icon="trash_can_outline.png"  
-                     Priority="0"  
-                     Order="Primary"  />
+        <ToolbarItem 
+            Text="New"  
+            Icon="trash_can_outline.png"  
+            Priority="0"  
+            Order="Primary"  />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ListView 
             x:Name="listViewEjemplo1" 
             CachingStrategy="RecycleElement"
-            HasUnevenRows="True"
-                  >
+            HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="100" >
@@ -35,10 +35,10 @@
                                     <RowDefinition Height="100"/>
                                 </Grid.RowDefinitions>
                                 <Image 
-                                Grid.Column="0"
-                                Source="{Binding icon}"
-                                HorizontalOptions="Center"
-                                WidthRequest="50"/>
+                                    Grid.Column="0"
+                                    Source="{Binding icon}"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="50"/>
                                 <Grid 
                                     Padding="0,10"
                                     HorizontalOptions="Start"

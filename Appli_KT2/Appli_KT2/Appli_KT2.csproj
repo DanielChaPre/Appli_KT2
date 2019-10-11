@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Appli_KT2</AssemblyName>
     <RootNamespace>Appli_KT2</RootNamespace>
-    <ApplicationIcon>sices.ico</ApplicationIcon>
+    <ApplicationIcon></ApplicationIcon>
     <Win32Resource></Win32Resource>
   </PropertyGroup>
 

@@ -5,17 +5,21 @@
               BackgroundColor="#D9D6D6"
              Title="Iniciar sesión"
              Padding="10,0">
+    
     <ContentPage.Content>
+        
         <Frame
             HasShadow="true" 
             BorderColor="Silver"
             Margin="10,10,10,-10" 
             VerticalOptions="Center">
+            
             <StackLayout
                 BackgroundColor="White"
                 Orientation="Vertical" 
                 Padding="10,10"
                 VerticalOptions="Center">
+                
                 <Label 
                     FontSize="Large"
                     HorizontalOptions="Center"
@@ -23,11 +27,13 @@
                     Text="Iniciar sesión"
                     TextColor="Black"
                 />
+                
                 <Label 
                     Text="Contraseña"
                     TextColor="Gray"
                     x:Name="lblUsuario"
                 />
+                
                 <Entry 
                     TextColor="#000F9F"
                     x:Name="txtContrasenia"/>
@@ -38,6 +44,13 @@
                     TextColor="White"
                     x:Name="btnIniciar"
                 />
+
+                <Label 
+                    Text="Recuperar contraseña" 
+                    TextColor="#000F9F" 
+                    TextDecorations="Underline"
+                    VerticalOptions="EndAndExpand"
+                    />
             </StackLayout>
         </Frame>
     </ContentPage.Content>

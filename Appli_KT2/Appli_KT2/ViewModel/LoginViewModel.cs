@@ -1,4 +1,5 @@
 ﻿//using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -7,7 +8,6 @@ namespace Appli_KT2.ViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
-
         #region atributos
         private string usuario;
         private string password;
@@ -17,12 +17,14 @@ namespace Appli_KT2.ViewModel
 
         #region propiedades
         public string Usuario {
-            get { return this.usuario; }
+            get { return this.usuario;}
+
             set
             {
                 SetValue(ref this.usuario, value); 
             }
         }
+
         public string Password {
             get { return this.password; }
             set
@@ -30,6 +32,7 @@ namespace Appli_KT2.ViewModel
                 SetValue(ref this.password, value);
             }
         }
+
         public bool IsRunning
         {
             get { return this.isRunning; }
@@ -38,7 +41,9 @@ namespace Appli_KT2.ViewModel
                 SetValue(ref this.isRunning, value);
             }
         }
+
         public bool IsRemember { get; set; }
+
         public bool IsEnable
         {
             get { return this.isEnable; }
@@ -54,23 +59,17 @@ namespace Appli_KT2.ViewModel
         {
             this.IsRemember = true;
             this.IsEnable = true;
-            this.Usuario = "admin";
-            this.Password = "admin";
         }
         #endregion
 
         #region comandos
-        /*public ICommand loginCommand
+        public ICommand loginCommand
         {
             get
             {
-                //return new RelayCommand(Login);
-                return;
+                return new RelayCommand(Login);
             }
-            
-        }*/
-
-      
+        }
 
         private async void Login()
         {
@@ -88,7 +87,6 @@ namespace Appli_KT2.ViewModel
             this.IsRunning = true;
             this.IsEnable = false;
 
-
             if (this.usuario != "admin" && this.password != "admin")
             {
                 this.IsRunning = false;
@@ -97,11 +95,11 @@ namespace Appli_KT2.ViewModel
                 this.password = string.Empty;
                 return;
             }
+
             this.IsRunning = false;
             this.IsEnable = true;
 
             await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
-
         }
 
         public ICommand registrarCommand { get; set; }
