@@ -21,7 +21,7 @@ namespace Appli_KT2.Model
                 Opcion = "Universidad Tecnológica de León",
                 Habilitado = true,
                 idOpcion = 1,
-                icon = "utl.png",
+                icon = "utl_.jpg",
                 Direccion = "Blvd. Universidad Tecnológica 225, Universidad Tecnologica, San Carlos la Roncha, 37670 León, Gto.",
                 Web = "http://www.utleon.edu.mx/"
 
@@ -31,7 +31,7 @@ namespace Appli_KT2.Model
                 Opcion = "Instituto Tecnológico de León",
                 Habilitado = true,
                 idOpcion = 2,
-                icon = "itleon.png",
+                icon = "itl_.jpg",
                 Direccion = "Montadores S/n, Industrial Julian de Obregon, 37290 León, Gto.",
                 Web = "https://www.itleon.edu.mx/"
             });
@@ -40,7 +40,7 @@ namespace Appli_KT2.Model
                 Opcion = "Universidad de Guanajuato",
                 Habilitado = true,
                 idOpcion = 3,
-                icon = "ug.png",
+                icon = "ug_.jpg",
                 Direccion = "Lascurain de Retana No. 5; Ciudad de Guanajuato, Guanajuato, México",
                 Web = "http://www.ugto.mx/",
             });

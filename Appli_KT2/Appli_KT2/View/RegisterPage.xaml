@@ -82,11 +82,23 @@
                         <Entry 
                             Placeholder="Ingrese una Contraseña" 
                             FontSize="Small"/>
-                        <Button 
-                            BackgroundColor="Navy"
-                            Text="Guardar"
-                            TextColor="White"
-                        />
+                        <StackLayout
+                            Padding="10,0"
+                            Orientation="Horizontal"
+                            >
+                            <Button 
+                                BackgroundColor="Navy"
+                                Text="Modificar"
+                                TextColor="White"
+                                WidthRequest="150"/>
+                            <Button 
+                                BackgroundColor="Navy"
+                                Text="Eliminar"
+                                TextColor="White"
+                                WidthRequest="150"
+                            />
+                        </StackLayout>
+                        
                     </StackLayout>
                 </Frame>
             </ScrollView>

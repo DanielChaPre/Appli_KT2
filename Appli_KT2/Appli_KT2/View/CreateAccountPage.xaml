@@ -54,7 +54,7 @@
                         Grid.Row="0"
                         Grid.Column="1"
                         HorizontalOptions="Start"
-                        Text="Estoy de acuerdo con los terminos y condiciones"
+                        Text="Estoy de acuerdo con los términos y condiciones de esta aplicación móvil"
                         VerticalOptions="Center"/>
 
                     <CheckBox

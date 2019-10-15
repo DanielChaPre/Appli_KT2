@@ -11,10 +11,15 @@ namespace Appli_KT2
         public App()
         {
             InitializeComponent();
-           
+            pruebaShared();
             
         }
 
+        public void pruebaShared()
+        {
+            Xamarin.Forms.Application.Current.Properties["prueba"] = "Prueba de uso de shared preference";
+
+        }
 
         protected override void OnStart()
         {

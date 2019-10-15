@@ -16,23 +16,38 @@
 		public MainTabbedPage()
 		{
 			InitializeComponent ();
-         //   On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             icNotificacion.Clicked += onClickIc;
             icShare.Clicked += OnClickShare;
             icLogin.Clicked += OnCLickLogin;
+
+            Console.WriteLine("####################" + Xamarin.Forms.Application.Current.Properties["prueba"].ToString());
+            //pruebaShared();
 		}
 
         private async void OnCLickLogin(object sender, EventArgs e)
         {
             await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
         }
+        /*Este método es un ejemplo de como utilizar shared preference y utilizarla en la aplicación*/
+     /*   public void pruebaShared()
+        {
+            Xamarin.Forms.Application.Current.Properties["prueba"] = "Prueba de uso de shared preference";
+            if (Xamarin.Forms.Application.Current.Properties.ContainsKey("prueba"))
+            {
+                Console.WriteLine("P: " + Xamarin.Forms.Application.Current.Properties["prueba"].ToString());
+            }
+
+          
+        }*/
 
         private async void OnClickShare(object sender, EventArgs e)
         {
             try
             {
+                
                 ShareDialogClass share = new ShareDialogClass();
-                await share.ShareUri("WWW.HolaMundo.com", "Compartir Aplicación");
+                await share.ShareUri("WWW.HolaMundo.com", "Compartir link de descarga de Appli-KT");
             }
             catch (Exception)
             {

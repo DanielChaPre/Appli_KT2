@@ -71,6 +71,53 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+
+        private async void validarUsuario()
+        {
+            if (string.IsNullOrEmpty(this.usuario))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Ingresa el usuario", "Accept");
+                return;
+            }
+            this.IsRunning = true;
+            this.IsEnable = false;
+            if (this.usuario != "admin")
+            {
+                this.IsRunning = false;
+                this.IsEnable = true;
+                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                this.password = string.Empty;
+                return;
+            }
+            this.IsRunning = false;
+            this.IsEnable = true;
+
+            await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
+        }
+
+        private async void validarContrasenia()
+        {
+            if (string.IsNullOrEmpty(this.password))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Ingresa la contraseña", "Accept");
+                return;
+            }
+            this.IsRunning = true;
+            this.IsEnable = false;
+            if (this.password != "admin")
+            {
+                this.IsRunning = false;
+                this.IsEnable = true;
+                await Application.Current.MainPage.DisplayAlert("Error", "contraseña incorrecto", "Accept");
+                this.password = string.Empty;
+                return;
+            }
+            this.IsRunning = false;
+            this.IsEnable = true;
+
+            await Application.Current.MainPage.DisplayAlert("Ok", "Inicio de Sesión exitosa", "Accept");
+        }
+
         private async void Login()
         {
             if (string.IsNullOrEmpty(this.usuario))

@@ -15,8 +15,6 @@ namespace Appli_KT2.View
 		public LoginPage ()
 		{
 			InitializeComponent ();
-            // btnRegistrar.Clicked += onclick;
-            // btnLogin.Clicked += OnClickLogin;
             btnCrearCuenta.Clicked += onclick;
             btnLogin.Clicked += LogIn;
 		}
@@ -26,24 +24,9 @@ namespace Appli_KT2.View
             await Application.Current.MainPage.Navigation.PushAsync(new IniciarUsuarioPage());
         }
 
-        private async void OnClickLogin(object sender, EventArgs e)
+        private async void onclick(object sender, EventArgs e)
         {
-            //if (txtUsuario.Text != "admin" && txtPassword.Text != "admin")
-            //{
-            //    await Application.Current.MainPage.DisplayAlert("Error", "usuario o password incorrecto", "Accept");
-            //    return;
-            //}
-
-            await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado Bienvenido", "Accept");
-            //await Navigation.PushAsync(new MainPage());
-
-        }
-
-        private void onclick(object sender, EventArgs e)
-        {
-            // Navigation.PushAsync(new RegisterPage());
-            //throw new NotImplementedException();
-            Navigation.PushAsync(new CreateAccountPage());
+           await Application.Current.MainPage.Navigation.PushAsync(new CreateAccountPage());
         }
     }
 }

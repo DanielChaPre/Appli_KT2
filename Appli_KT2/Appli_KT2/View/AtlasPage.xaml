@@ -6,12 +6,11 @@
              Padding="5,0">
   
     <ContentPage.Content>
-        
+
         <Frame 
             HasShadow="true" 
             BorderColor="Silver"
             VerticalOptions="Center">
-            
             <StackLayout
                 Padding="2,3">
                 
@@ -50,8 +49,8 @@
                         BackgroundColor="White"
                         ImageSource="ic_instituto"
                         HeightRequest="40"
-                        Padding="10,0,100,0"
-                        Text="Instituto Edu. Sup."
+                        Padding="10,0,75,0"
+                        Text="Institución Educ. Sup."
                         TextColor="#000F9F"/>
                      
                     <Button 

@@ -62,23 +62,21 @@
                 HorizontalOptions="CenterAndExpand"
                 Padding="10,0,6,0"
                 VerticalOptions="EndAndExpand">
-                <Label 
-                    FontSize="12"
-                    Text="Al crear una cuenta o iniciar sesión estaria aceptado los"
-                    TextColor="Gray"/>
                 <Label LineBreakMode="CharacterWrap">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Términos y condiciones" TextColor="Blue" TextDecorations="Underline" FontSize="12"/>
+                            <Span  FontSize="12"
+                                    Text="Al crear una cuenta o iniciar sesión estarías aceptado los "
+                                    TextColor="Gray"/>
+                            <Span Text="Términos y Condiciones" TextColor="Blue" TextDecorations="Underline" FontSize="12"/>
                             <Span Text=" y nuestra " TextColor="Gray" FontSize="12" />
                             <Span Text=" Política de privacidad " TextColor="Blue" TextDecorations="Underline" FontSize="12"/>
+                            <Span Text="al igual aceptas recibir notificaciones relacionadas con Gobierno del Estado de Guanajuato"  
+                                    TextColor="Gray" 
+                                    FontSize="12"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label 
-                    Text="al igual aceptas recibir notificaciones"  
-                    TextColor="Gray" 
-                    FontSize="12"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

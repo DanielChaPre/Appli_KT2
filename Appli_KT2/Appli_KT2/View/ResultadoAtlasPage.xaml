@@ -38,17 +38,22 @@
                             <Grid
                                 Padding="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="90"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions >
                                     <RowDefinition Height="150"/>
                                 </Grid.RowDefinitions>
-                                <Image 
-                                    Grid.Column="0"
-                                    Source="{Binding icon}"
-                                    HorizontalOptions="Center"
-                                    WidthRequest="50"/>
+                                <StackLayout
+                                     Grid.Column="0">
+                                    <Image 
+                                        ScaleY="5"
+                                        HeightRequest="200"
+                                        Source="{Binding icon}"
+                                        WidthRequest="90"
+                                        VerticalOptions="CenterAndExpand"/>
+                                </StackLayout>
+                               
                                 <Grid 
                                     Padding="0,10"
                                     HorizontalOptions="Start"

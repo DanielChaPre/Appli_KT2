@@ -31,6 +31,12 @@ namespace Appli_KT2.View
             this.Content = sub;
 		}
 
+        /*Nota...
+         *
+         *Agregar un icono de carga o un activityindicator para que el usuario vea que eta interactuando con la aplicacion 
+         * y que se esta cargando el login y la configuraciones del tema
+         * **/
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -38,7 +44,19 @@ namespace Appli_KT2.View
             await splashImage.ScaleTo(1,2000);
             await splashImage.ScaleTo(0.5,1500, Easing.Linear);
             //await splashImage.ScaleTo(150,1200, Easing.Linear);
+            verificarLogin();
+            verificarConfiguracionTema();
             Application.Current.MainPage = new NavigationPage(new MainTabbedPage());
+
+        }
+
+        public void verificarLogin()
+        {
+
+        }
+
+        public void verificarConfiguracionTema()
+        {
 
         }
 

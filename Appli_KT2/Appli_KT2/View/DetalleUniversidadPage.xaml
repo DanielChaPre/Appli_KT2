@@ -51,6 +51,7 @@
                                    Source="ic_arrow_back.png"
                                    VerticalOptions="CenterAndExpand"/>
                                 <control:CarouselView
+                                    BackgroundColor="Aqua"
                                     Grid.Column="1"
                                     HeightRequest="250"
                                     ItemsSource="{Binding MyDataSource}" 
@@ -63,15 +64,13 @@
                                             <StackLayout  
                                             HeightRequest="250"
                                             HorizontalOptions="CenterAndExpand"
-                                            VerticalOptions="EndAndExpand">
+                                            VerticalOptions="CenterAndExpand">
 
                                                 <Image 
                                                     Grid.Column="1"
-                                                Source="{Binding imagen}" 
-                                                HeightRequest="100"
-                                                HorizontalOptions="CenterAndExpand" 
-                                                VerticalOptions="CenterAndExpand"
-                                                WidthRequest="100"/>
+                                                    Source="{Binding imagen}" 
+                                                    VerticalOptions="CenterAndExpand"
+                                                    ScaleY="1.75"/>
 
                                             </StackLayout>
                                         </DataTemplate>

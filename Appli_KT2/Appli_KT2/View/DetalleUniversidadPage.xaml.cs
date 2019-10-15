@@ -20,9 +20,9 @@ namespace Appli_KT2.View
         public DetalleUniversidadPage ()
 		{
 			InitializeComponent ();
-            MyDataSource = new List<CarouselModel>() { new CarouselModel() { imagen = "utl.png"},
-                                                        new CarouselModel() { imagen="ug.png" },
-                                                        new CarouselModel() { imagen = "itleon.png"}};
+            MyDataSource = new List<CarouselModel>() { new CarouselModel() { imagen = "utl_.jpg"},
+                                                        new CarouselModel() { imagen="utl2.png" },
+                                                        new CarouselModel() { imagen = "utl4.png"}};
 
             BindingContext = this;
             MyMap.MoveToRegion(
