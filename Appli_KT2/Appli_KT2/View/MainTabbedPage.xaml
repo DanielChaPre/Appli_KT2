@@ -27,7 +27,7 @@
     </TabbedPage.ToolbarItems>
 
     <TabbedPage.Children>
-        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png"  HeightRequest="100"/>
+        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png" HeightRequest="100"/>
         <tabs:SuredsuPage Title="SUREDSU"  Icon="ic_cali.png"/>
         <tabs:HistorialPage Title="Historial" Icon="ic_history.png"/>
         <tabs:RegisterPage Title="Perfil" Icon="ic_person.png"/>

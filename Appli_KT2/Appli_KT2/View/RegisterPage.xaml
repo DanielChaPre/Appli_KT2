@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.RegisterPage"
              Title="Registro"
-             BackgroundColor="White"
-             >
+             BackgroundColor="White">
+    
     <ContentPage.Content>
+
         <StackLayout>
             <Picker Title="Perfil" x:Name="pckPerfiles"/>
-            
             <ScrollView>
                 <Frame>
                     <StackLayout>
@@ -16,93 +16,125 @@
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Nombre(s)"/>
+                        
                         <Entry
                             Placeholder="Ingrese su Nombre(s)" 
                             FontSize="Small"/>
+
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Apellidos"/>
+                        
                         <Entry 
                             Placeholder="Ingrese su apellido(s)"
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="CURP"/>
+                        
                         <Entry
                             Placeholder="Ingrese su CURP" 
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Correo Electrónico"/>
+                        
                         <Entry
                             Placeholder="Ingrese su correo electrónico"
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Celular"/>
+                        
                         <Entry 
                             Placeholder="Ingrese su número de celular"
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="CCT_Escuela"/>
+                        
                         <Entry 
                             Placeholder="Ingrese el CCT de la escuela"
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Procedencia_EMS"/>
+                        
                         <Entry 
                             Placeholder="Ingrese su procedencia EMS"
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Folio SUREMS"/>
+                        
                         <Entry 
                             Placeholder="Ingrese su folio SUREMS"
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Folio SUREDSU"/>
+                        
                         <Entry 
                             Placeholder="Ingrese su folio SUREDSU"
                             FontSize="Small"/>
+                        
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Contraseña"/>
+                        
                         <Entry 
                             Placeholder="Ingrese una Contraseña" 
                             FontSize="Small"/>
+                        
                         <StackLayout
                             Padding="10,0"
-                            Orientation="Horizontal"
-                            >
+                            Orientation="Horizontal">
+
+                            <Button 
+                                BackgroundColor="Navy"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Guardar"
+                                TextColor="White"
+                                WidthRequest="300"/>
+                        </StackLayout>
+                        
+                        <StackLayout
+                            IsVisible="False"
+                            Padding="10,0"
+                            Orientation="Horizontal">
+                            
                             <Button 
                                 BackgroundColor="Navy"
                                 Text="Modificar"
                                 TextColor="White"
                                 WidthRequest="150"/>
+                            
                             <Button 
                                 BackgroundColor="Navy"
                                 Text="Eliminar"
                                 TextColor="White"
-                                WidthRequest="150"
-                            />
+                                WidthRequest="150"/>
+                            
                         </StackLayout>
-                        
                     </StackLayout>
                 </Frame>
             </ScrollView>
         </StackLayout>
-        
     </ContentPage.Content>
 </ContentPage>

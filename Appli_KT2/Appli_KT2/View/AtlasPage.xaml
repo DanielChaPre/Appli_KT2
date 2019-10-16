@@ -15,11 +15,13 @@
                 Padding="2,3">
                 
                 <Label 
+                    FontFamily="Proxima Nova"
                     FontSize="Large"
                     Text="Buscar"
                     TextColor="Black"/>
                 
                 <Label
+                    FontFamily="Proxima Nova"
                     FontSize="Medium"
                     Text="Carreras, municipios e instituciones"
                     TextColor="Gray"/>
@@ -31,6 +33,7 @@
                                                     
                     <Button 
                         BackgroundColor="White"
+                        FontFamily="Baloo"
                         ImageSource="ic_search.png"
                         HeightRequest="40"
                         Padding="10,0,170,0"
@@ -39,6 +42,7 @@
                     
                     <Button 
                         BackgroundColor="White"
+                        FontFamily="Baloo"
                         ImageSource="ic_municipio.png"
                         HeightRequest="40"
                         Padding="10,0,150,0"
@@ -47,6 +51,7 @@
                                                             
                     <Button 
                         BackgroundColor="White"
+                        FontFamily="Baloo"
                         ImageSource="ic_instituto"
                         HeightRequest="40"
                         Padding="10,0,75,0"
@@ -55,6 +60,7 @@
                      
                     <Button 
                         BackgroundColor="#FF8200"
+                        FontFamily="Baloo"
                         Text="Buscar"
                         TextColor="White"
                         x:Name="btnBuscar"/>
