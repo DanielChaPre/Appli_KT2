@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using System.Windows.Input;
 using Xamarin.Forms;
-
 namespace Appli_KT2.ViewModel
 {
     public class LoginViewModel : BaseViewModel
@@ -14,18 +13,21 @@ namespace Appli_KT2.ViewModel
         private bool isRunning;
         private bool isEnable;
         #endregion
-
+        ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
         #region propiedades
-        public string Usuario {
-            get { return this.usuario;}
+        public string Usuario
+        {
+            get { return this.usuario; }
 
             set
             {
-                SetValue(ref this.usuario, value); 
+                SetValue(ref this.usuario, value);
             }
         }
 
-        public string Password {
+        public string Password
+        {
+
             get { return this.password; }
             set
             {
@@ -72,7 +74,7 @@ namespace Appli_KT2.ViewModel
         }
 
 
-        private async void validarUsuario()
+        private async void ValidarUsuario()
         {
             if (string.IsNullOrEmpty(this.usuario))
             {
@@ -95,7 +97,7 @@ namespace Appli_KT2.ViewModel
             await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
         }
 
-        private async void validarContrasenia()
+        private async void ValidarContrasenia()
         {
             if (string.IsNullOrEmpty(this.password))
             {

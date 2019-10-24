@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:50681/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:50681/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50681/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WebServiceAppli_KT.Modelo" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_IniciarSesion_InputMessage">
+    <wsdl:part name="parameters" element="tns:IniciarSesion" />
+  </wsdl:message>
+  <wsdl:message name="IService1_IniciarSesion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IniciarSesionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CrearCuenta_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearCuenta" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CrearCuenta_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CrearPerfil_InputMessage">
+    <wsdl:part name="parameters" element="tns:CrearPerfil" />
+  </wsdl:message>
+  <wsdl:message name="IService1_CrearPerfil_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CrearPerfilResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ModificarPerfil_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModificarPerfil" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ModificarPerfil_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModificarPerfilResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EliminarPerfil_InputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarPerfil" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EliminarPerfil_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EliminarPerfilResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ConsultarPerfil_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarPerfil" />
+  </wsdl:message>
+  <wsdl:message name="IService1_ConsultarPerfil_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarPerfilResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_consultar_InputMessage">
+    <wsdl:part name="parameters" element="tns:consultar" />
+  </wsdl:message>
+  <wsdl:message name="IService1_consultar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:consultarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_obtenerPlanteles_InputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerPlanteles" />
+  </wsdl:message>
+  <wsdl:message name="IService1_obtenerPlanteles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerPlantelesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_obtenerCarreras_InputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerCarreras" />
+  </wsdl:message>
+  <wsdl:message name="IService1_obtenerCarreras_OutputMessage">
+    <wsdl:part name="parameters" element="tns:obtenerCarrerasResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="IniciarSesion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/IniciarSesion" message="tns:IService1_IniciarSesion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/IniciarSesionResponse" message="tns:IService1_IniciarSesion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearCuenta">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CrearCuenta" message="tns:IService1_CrearCuenta_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CrearCuentaResponse" message="tns:IService1_CrearCuenta_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearPerfil">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/CrearPerfil" message="tns:IService1_CrearPerfil_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/CrearPerfilResponse" message="tns:IService1_CrearPerfil_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPerfil">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ModificarPerfil" message="tns:IService1_ModificarPerfil_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ModificarPerfilResponse" message="tns:IService1_ModificarPerfil_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPerfil">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/EliminarPerfil" message="tns:IService1_EliminarPerfil_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/EliminarPerfilResponse" message="tns:IService1_EliminarPerfil_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarPerfil">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/ConsultarPerfil" message="tns:IService1_ConsultarPerfil_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/ConsultarPerfilResponse" message="tns:IService1_ConsultarPerfil_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="consultar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/consultar" message="tns:IService1_consultar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/consultarResponse" message="tns:IService1_consultar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPlanteles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/obtenerPlanteles" message="tns:IService1_obtenerPlanteles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/obtenerPlantelesResponse" message="tns:IService1_obtenerPlanteles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCarreras">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/obtenerCarreras" message="tns:IService1_obtenerCarreras_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/obtenerCarrerasResponse" message="tns:IService1_obtenerCarreras_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IniciarSesion">
+      <soap:operation soapAction="http://tempuri.org/IService1/IniciarSesion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearCuenta">
+      <soap:operation soapAction="http://tempuri.org/IService1/CrearCuenta" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearPerfil">
+      <soap:operation soapAction="http://tempuri.org/IService1/CrearPerfil" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPerfil">
+      <soap:operation soapAction="http://tempuri.org/IService1/ModificarPerfil" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EliminarPerfil">
+      <soap:operation soapAction="http://tempuri.org/IService1/EliminarPerfil" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarPerfil">
+      <soap:operation soapAction="http://tempuri.org/IService1/ConsultarPerfil" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultar">
+      <soap:operation soapAction="http://tempuri.org/IService1/consultar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerPlanteles">
+      <soap:operation soapAction="http://tempuri.org/IService1/obtenerPlanteles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCarreras">
+      <soap:operation soapAction="http://tempuri.org/IService1/obtenerCarreras" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://localhost:50681/Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
