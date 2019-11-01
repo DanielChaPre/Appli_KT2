@@ -21,12 +21,6 @@ namespace Appli_KT2.View
         {
             base.OnAppearing();
             txtUsuario.Focus();
-            btnNext.Clicked += Next;
-        }
-
-        private async void Next(object sender, EventArgs e)
-        {
-            await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
         }
     }
 }

@@ -6,6 +6,8 @@
     <RootNamespace>Appli_KT2</RootNamespace>
     <ApplicationIcon></ApplicationIcon>
     <Win32Resource></Win32Resource>
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -106,6 +108,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Connected Services\" />
     <Folder Include="WebReference\" />
   </ItemGroup>
 

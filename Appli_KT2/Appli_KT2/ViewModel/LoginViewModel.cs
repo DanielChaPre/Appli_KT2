@@ -1,6 +1,15 @@
 ﻿//using GalaSoft.MvvmLight.Command;
+using Appli_KT2.Utils;
+using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 namespace Appli_KT2.ViewModel
@@ -13,9 +22,11 @@ namespace Appli_KT2.ViewModel
         private bool isRunning;
         private bool isEnable;
         #endregion
-        ServiceReference1.Service1Client service = new ServiceReference1.Service1Client();
+        ConexionWS conexion;
+        HttpClient _client;
+        private string url;
         #region propiedades
-        public string Usuario
+        public string User
         {
             get { return this.usuario; }
 
@@ -65,91 +76,122 @@ namespace Appli_KT2.ViewModel
         #endregion
 
         #region comandos
-        public ICommand loginCommand
+        public ICommand ValidarUsuarioCommand
         {
             get
             {
-                return new RelayCommand(Login);
+                return new RelayCommand(ValidarUsuario);
             }
         }
 
+        public ICommand ValidarPasswordCommand
+        {
+            get
+            {
+                return new RelayCommand(ValidarContrasenia);
+            }
+        }
 
         private async void ValidarUsuario()
         {
-            if (string.IsNullOrEmpty(this.usuario))
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Ingresa el usuario", "Accept");
-                return;
+                if (string.IsNullOrEmpty(this.User))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Ingresa el usuario", "Accept");
+                    return;
+                }
+                this.IsRunning = true;
+                this.IsEnable = false;
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                url = conexion.URL + "" + conexion.ValidarUsuario + "" + this.usuario;
+                var uri = new Uri(string.Format(@""+ url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    this.IsRunning = false;
+                    this.IsEnable = true;
+                    MainViewModel.GetInstance().Login = new LoginViewModel();
+                    await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                }     
+                else
+                {
+                    this.IsRunning = false;
+                    this.IsEnable = true;
+                    await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                    return;
+                 }
             }
-            this.IsRunning = true;
-            this.IsEnable = false;
-            if (this.usuario != "admin")
+            catch (Exception ex)
             {
-                this.IsRunning = false;
-                this.IsEnable = true;
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                this.password = string.Empty;
-                return;
+                Console.WriteLine("Error: " + ex.Message);
+                throw;
             }
-            this.IsRunning = false;
-            this.IsEnable = true;
-
-            await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
         }
 
         private async void ValidarContrasenia()
         {
-            if (string.IsNullOrEmpty(this.password))
+            if (string.IsNullOrEmpty(this.Password))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Ingresa la contraseña", "Accept");
                 return;
             }
             this.IsRunning = true;
             this.IsEnable = false;
-            if (this.password != "admin")
+            _client = new HttpClient();
+            conexion = new ConexionWS();
+            url = conexion.URL + "" + conexion.ValidarContrasenia + "" + this.password;
+            var uri = new Uri(string.Format(@"" + url, string.Empty));
+            var response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
             {
                 this.IsRunning = false;
                 this.IsEnable = true;
-                await Application.Current.MainPage.DisplayAlert("Error", "contraseña incorrecto", "Accept");
-                this.password = string.Empty;
-                return;
+
+                MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
+                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
             }
-            this.IsRunning = false;
-            this.IsEnable = true;
-
-            await Application.Current.MainPage.DisplayAlert("Ok", "Inicio de Sesión exitosa", "Accept");
-        }
-
-        private async void Login()
-        {
-            if (string.IsNullOrEmpty(this.usuario))
-            {
-                await Application.Current.MainPage.DisplayAlert("Error","Ingresa el usuario","Accept");
-                return;
-            }
-            if (string.IsNullOrEmpty(this.password))
-            {
-                await Application.Current.MainPage.DisplayAlert("Error","Ingresa el password","Accept");
-                return;
-            }
-
-            this.IsRunning = true;
-            this.IsEnable = false;
-
-            if (this.usuario != "admin" && this.password != "admin")
+            else
             {
                 this.IsRunning = false;
                 this.IsEnable = true;
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario o password incorrecto", "Accept");
-                this.password = string.Empty;
+                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
                 return;
             }
-
-            this.IsRunning = false;
-            this.IsEnable = true;
-
-            await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
         }
+
+        /*  private async void Login()
+          {
+              if (string.IsNullOrEmpty(this.usuario))
+              {
+                  await Application.Current.MainPage.DisplayAlert("Error","Ingresa el usuario","Accept");
+                  return;
+              }
+              if (string.IsNullOrEmpty(this.password))
+              {
+                  await Application.Current.MainPage.DisplayAlert("Error","Ingresa el password","Accept");
+                  return;
+              }
+
+              this.IsRunning = true;
+              this.IsEnable = false;
+
+              if (this.usuario != "admin" && this.password != "admin")
+              {
+                  this.IsRunning = false;
+                  this.IsEnable = true;
+                  await Application.Current.MainPage.DisplayAlert("Error", "usuario o password incorrecto", "Accept");
+                  this.password = string.Empty;
+                  return;
+              }
+
+              this.IsRunning = false;
+              this.IsEnable = true;
+
+
+              await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
+          }*/
 
         public ICommand registrarCommand { get; set; }
         #endregion

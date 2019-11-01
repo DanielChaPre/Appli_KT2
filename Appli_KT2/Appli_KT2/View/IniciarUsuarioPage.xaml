@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.IniciarUsuarioPage"
              BackgroundColor="#D9D6D6"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Iniciar sesión"
              Padding="10,0">
     <ContentPage.Content>
         <Frame
+            BindingContext="{Binding Login}"
             HasShadow="true" 
             BorderColor="Silver"
             Margin="10,10,10,-10" 
@@ -31,15 +33,23 @@
                     x:Name="lblUsuario"/>
                 
                 <Entry 
+                    Text="{Binding User, Mode=TwoWay}"
                     TextColor="#000F9F"
                     x:Name="txtUsuario"/>
-
+        
                 <Button 
                     BackgroundColor="#FF8200"
+                    Command="{Binding ValidarUsuarioCommand}"
                     Text="Siguiente"
                     TextColor="White"
                     x:Name="btnNext"/>
             </StackLayout>
+            <!--
+            <ActivityIndicator>
+                IsRunning ="{Binding IsRunning}"
+            VerticalOption = CenterandExpand
+            </>
+            -->
         </Frame>
     </ContentPage.Content>
 </ContentPage>
