@@ -4,7 +4,14 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    class Historial
+    public class Historial
     {
+        public int cve_historial { get; set; }
+
+        public string descripcion { get; set; }
+
+        public string url { get; set; }
+
+        public string cve_categoria { get; set; }
     }
 }
