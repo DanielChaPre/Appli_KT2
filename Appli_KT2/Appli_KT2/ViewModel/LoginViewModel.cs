@@ -149,8 +149,9 @@ namespace Appli_KT2.ViewModel
                 this.IsRunning = false;
                 this.IsEnable = true;
 
-                MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+                 // MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
+                //await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+                await Application.Current.MainPage.Navigation.PopAsync();
             }
             else
             {
@@ -194,8 +195,6 @@ namespace Appli_KT2.ViewModel
 
               await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
           }*/
-
-        public ICommand registrarCommand { get; set; }
         #endregion
     }
 }

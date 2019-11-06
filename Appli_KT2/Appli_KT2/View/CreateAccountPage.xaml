@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.CreateAccountPage"
              BackgroundColor="#D9D6D6"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Crear cuenta"
              Padding="5,0">
     <ContentPage.Content>
         <Frame
+            BindingContext="{Binding CrearCuenta}"
             HasShadow="true" 
             BorderColor="Silver"
             Margin="5,10,5,-10" 
@@ -27,6 +29,7 @@
                     TextColor="Gray"
                     x:Name="lblUsuario"/>
                 <Entry 
+                    Text="{Binding Usuario, Mode=TwoWay}"
                     TextColor="#000F9F"
                     x:Name="txtUsuario"/>
                 <Label 
@@ -35,6 +38,7 @@
                     x:Name="lblContraseña"/>
                 <Entry 
                     IsPassword="True"
+                    Text="{Binding Contrasenia, Mode=TwoWay}"
                     TextColor="#000F9F"
                     x:Name="txtContraseña"/>
                 <Grid
@@ -73,6 +77,7 @@
                 
                 <Button 
                     BackgroundColor="#FF8200"
+                    Command="{Binding CrearCuentaCommand}"
                     Text="Crear cuenta"
                     TextColor="White"
                 />

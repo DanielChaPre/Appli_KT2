@@ -11,7 +11,7 @@ namespace Appli_KT2
         public App()
         {
             InitializeComponent();
-            pruebaShared();
+           // pruebaShared();
             
         }
 
@@ -23,7 +23,6 @@ namespace Appli_KT2
 
         protected override void OnStart()
         {
-            // Handle when your app starts
             this.MainPage = new NavigationPage(new SplashPage())
             {
                 BarBackgroundColor = Color.FromHex("#000F9F"),
