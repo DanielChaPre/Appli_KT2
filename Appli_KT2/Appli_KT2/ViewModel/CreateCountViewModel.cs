@@ -66,6 +66,12 @@ namespace Appli_KT2.ViewModel
                 return;
             }
 
+            if (this.contrasenia.Length < 8)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Accept");
+                return;
+            }
+
             Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
             Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
             MainViewModel.GetInstance().Registrar = new RegistrarViewModel();

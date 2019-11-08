@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+
 namespace Appli_KT2.ViewModel
 {
     public class LoginViewModel : BaseViewModel
@@ -21,10 +22,11 @@ namespace Appli_KT2.ViewModel
         private string password;
         private bool isRunning;
         private bool isEnable;
-        #endregion
+       
         ConexionWS conexion;
         HttpClient _client;
         private string url;
+        #endregion
         #region propiedades
         public string User
         {
@@ -66,7 +68,6 @@ namespace Appli_KT2.ViewModel
             }
         }
         #endregion
-
         #region constructor
         public LoginViewModel()
         {
@@ -74,7 +75,6 @@ namespace Appli_KT2.ViewModel
             this.IsEnable = true;
         }
         #endregion
-
         #region comandos
         public ICommand ValidarUsuarioCommand
         {
@@ -137,6 +137,7 @@ namespace Appli_KT2.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Error", "Ingresa la contraseña", "Accept");
                 return;
             }
+           
             this.IsRunning = true;
             this.IsEnable = false;
             _client = new HttpClient();

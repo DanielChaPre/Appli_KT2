@@ -62,7 +62,6 @@ namespace Appli_KT2.ViewModel
             }
         }
         #endregion
-
         #region Metodos
         private void RegistarPerfil()
         {
