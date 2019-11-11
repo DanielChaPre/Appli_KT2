@@ -15,19 +15,11 @@ namespace Appli_KT2
             
         }
 
-        public void pruebaShared()
-        {
-            Xamarin.Forms.Application.Current.Properties["prueba"] = "Prueba de uso de shared preference";
 
-        }
 
         protected override void OnStart()
         {
-            this.MainPage = new NavigationPage(new SplashPage())
-            {
-                BarBackgroundColor = Color.FromHex("#000F9F"),
-                BarTextColor = Color.White,
-            };
+          this.MainPage = new NavigationPage(new SplashPage()); 
         }
 
         protected override void OnSleep()

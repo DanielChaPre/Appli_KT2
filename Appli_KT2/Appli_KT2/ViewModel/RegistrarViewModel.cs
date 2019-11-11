@@ -1,23 +1,39 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using Appli_KT2.Model;
+using Appli_KT2.Utils;
+using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 
 namespace Appli_KT2.ViewModel
 {
-    public class RegistrarViewModel
+    public class RegistrarViewModel : BaseViewModel
     {
         #region Atributos
-        private string a;
+        private List<GrupoSeguridad> perfiles;
         private string b;
         private string c;
         private string d;
         private string e;
         private string f;
         private string g;
+        private HttpClient _client;
+        private ConexionWS conexion;
+        private string url;
         #endregion
         #region Propiedades
+        public List<GrupoSeguridad> Perfiles
+        {
+            get { return this.perfiles; }
+
+            set
+            {
+                SetValue(ref this.perfiles, value);
+            }
+        }
         public string MyProperty { get; set; }
         public string MyProperty1 { get; set; }
         public string MyProperty2 { get; set; }
@@ -28,7 +44,7 @@ namespace Appli_KT2.ViewModel
         #region Constructor
         public RegistrarViewModel()
         {
-
+            CargarPerfiles();
         }
         #endregion
         #region Comandos
@@ -61,8 +77,40 @@ namespace Appli_KT2.ViewModel
                 return new RelayCommand(ConsultarPerfil);
             }
         }
+
+       
         #endregion
         #region Metodos
+        private async void CargarPerfiles()
+        {
+            try
+            {
+                this.perfiles = new List<GrupoSeguridad>
+                {
+                    new GrupoSeguridad(){nombre = "Estudiantes"},
+                    new GrupoSeguridad(){nombre = "Planteles/Escuela"},
+                    new GrupoSeguridad(){nombre = "Padres de familia"},
+                    
+                };
+                /**Prueba con Web Services
+                 * _client = new HttpClient();
+                conexion = new ConexionWS();
+                url = conexion.URL + "" + conexion.ObtenerGruposSeguridad;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    this.perfiles = JsonConvert.DeserializeObject<List<string>>(content);
+                    return;
+                }**/
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(@"\t ERROR: ", ex.Message);
+                throw;
+            }
+        }
         private void RegistarPerfil()
         {
             throw new NotImplementedException();

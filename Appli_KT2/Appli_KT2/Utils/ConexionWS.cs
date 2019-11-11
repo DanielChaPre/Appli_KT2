@@ -6,7 +6,7 @@ namespace Appli_KT2.Utils
 {
     public class ConexionWS
     {
-        private string url = "http://localhost:88/Service1.svc";
+        private string url = "http://applikt.utleon.edu.mx//Service1.svc";
         private string validarUsuario = "/validarUsuario/";
         private string validarContasenia = "/validarContrasenia/";
         private string crearCuenta = "/crearCuenta";
@@ -17,6 +17,7 @@ namespace Appli_KT2.Utils
         private string consultarNotificaciones = "/notificacion";
         private string obtenerPlanteles = "/planteles";
         private string obtenerCarreras = "/carreras";
+        private string obtenerGruposSeguridad = "/gruposeguridad";
 
         public string URL
         {
@@ -65,5 +66,7 @@ namespace Appli_KT2.Utils
         {
             get {return this.obtenerCarreras ;}
         }
+
+        public string ObtenerGruposSeguridad { get => this.obtenerGruposSeguridad;}
     }
 }

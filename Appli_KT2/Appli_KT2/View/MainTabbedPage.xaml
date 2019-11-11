@@ -3,36 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:tabs="clr-namespace:Appli_KT2.View"
             x:Class="Appli_KT2.View.MainTabbedPage"
+            BindingContext="{Binding Main, Source={StaticResource Locator}}"
+            
             Title="Appli-KT"
             BarBackgroundColor="White">
     
-    <TabbedPage.ToolbarItems>
+    <TabbedPage.ToolbarItems
+        
+        >
         <ToolbarItem
+           
            Icon="ic_notifications.png"  
            Priority="0"  
            Order="Default" 
            x:Name="icNotificacion"/>
         <ToolbarItem
-            IconImageSource="ic_share.png"
             Text="Compartir Aplicación"
             Priority="1"  
             Order="Secondary" 
             x:Name="icShare"/>
         <ToolbarItem
-            IconImageSource=""
+            BindingContext="{Binding MainTabbed}"
+            Command="{Binding  IrLoginCommand}"
             Text="Iniciar Sesión"
             Priority="1"  
             Order="Secondary" 
             x:Name="icLogin"/>
     </TabbedPage.ToolbarItems>
 
-    <TabbedPage.Children>
-        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png" HeightRequest="100"/>
+    <TabbedPage.Children
+        >
+        <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png" HeightRequest="100" />
         <tabs:SuredsuPage Title="SUREDSU"  Icon="ic_cali.png"/>
         <tabs:HistorialPage Title="Historial" Icon="ic_history.png"/>
-        <tabs:RegisterPage Title="Perfil" Icon="ic_person.png"/>
+        <tabs:RegisterPage Title="Perfil" Icon="ic_person.png" />
         <tabs:MorePage Title="Más" Icon="ic_more.png"/>
     </TabbedPage.Children>
-    
 </TabbedPage>
     

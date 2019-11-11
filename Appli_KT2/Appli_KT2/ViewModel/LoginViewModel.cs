@@ -92,6 +92,34 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        public ICommand IrCrearCuentaCommand
+        {
+            get
+            {
+                return new RelayCommand(IrCrearCuenta);
+            }
+        }
+
+        
+
+        public ICommand IniciarFacebookCommand
+        {
+            get
+            {
+                return new RelayCommand(IniciarFacebook);
+            }
+        }
+
+        
+
+        public ICommand IniciarGoogleCommand
+        {
+            get
+            {
+                return new RelayCommand(IniciarGoogle);
+            }
+        }
+
         private async void ValidarUsuario()
         {
             try
@@ -161,6 +189,22 @@ namespace Appli_KT2.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
                 return;
             }
+        }
+
+        private async void IrCrearCuenta()
+        {
+            MainViewModel.GetInstance().CrearCuenta = new CreateCountViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new CreateAccountPage());
+        }
+
+        private void IniciarFacebook()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void IniciarGoogle()
+        {
+            throw new NotImplementedException();
         }
 
         /*  

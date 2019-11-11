@@ -13,17 +13,22 @@
 	public partial class MainTabbedPage : Xamarin.Forms.TabbedPage
     {
 
+        private MainTabbedViewModel mainTabbed;
+
 		public MainTabbedPage()
 		{
-			InitializeComponent ();
+          //  this.mainTabbed = new MainTabbedViewModel();
+           // this.BindingContext = this.mainTabbed;
+            InitializeComponent ();
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             icNotificacion.Clicked += onClickIc;
             icShare.Clicked += OnClickShare;
-            icLogin.Clicked += OnCLickLogin;
+           // icLogin.Clicked += OnCLickLogin;
+           
 
-            Console.WriteLine("####################" + Xamarin.Forms.Application.Current.Properties["prueba"].ToString());
-            //pruebaShared();
-		}
+          //  Console.WriteLine("####################" + Xamarin.Forms.Application.Current.Properties["prueba"].ToString());
+          //pruebaShared();
+        }
 
         private async void OnCLickLogin(object sender, EventArgs e)
         {

@@ -10,14 +10,16 @@ namespace Appli_KT2.ViewModel
         public LoginViewModel Login { get; set; }
         public RegistrarViewModel Registrar { get; set; }
         public CreateCountViewModel CrearCuenta { get; set; }
+        public MainTabbedViewModel MainTabbed { get; set; }
         #endregion
         #region constructores
         public MainViewModel()
         {
             instance = this;
-            this.Login = new LoginViewModel();
-            this.Registrar = new RegistrarViewModel();
-            this.CrearCuenta = new CreateCountViewModel();
+            MainTabbed = new MainTabbedViewModel();
+           // this.Login = new LoginViewModel();
+           // this.Registrar = new RegistrarViewModel();
+           // this.CrearCuenta = new CreateCountViewModel();
         }
         #endregion
 
