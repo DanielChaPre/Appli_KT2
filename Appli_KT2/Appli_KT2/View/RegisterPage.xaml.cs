@@ -19,13 +19,16 @@ namespace Appli_KT2.View
          //  
           //  MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
             InitializeComponent ();
-            this.rvm = new RegistrarViewModel();
+          //  MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
+           this.rvm = new RegistrarViewModel();
+            pckPerfiles.ItemsSource = rvm.Perfiles;
             BindingContext = rvm;
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
+           
          //   this.rvm = new RegistrarViewModel();
         }
     }

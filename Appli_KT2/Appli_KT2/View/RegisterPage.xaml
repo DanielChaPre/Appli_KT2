@@ -14,7 +14,7 @@
             <Picker 
                     Title="Perfil" 
                     x:Name="pckPerfiles">
-                <Picker.ItemsSource>
+               <!-- <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Estudiante</x:String>
                         <x:String>Plantel/Escuela</x:String>
@@ -22,7 +22,7 @@
                         <x:String>Directivo</x:String>
                         <x:String>Padres de Familia</x:String>
                     </x:Array>
-                </Picker.ItemsSource>
+                </Picker.ItemsSource>-->
             </Picker>
             <ScrollView>
                 <Frame>
@@ -34,6 +34,7 @@
                         
                         <Entry
                             Placeholder="Ingrese su Nombre(s)" 
+                            Text="{Binding Usuario.persona.nombre}"
                             FontSize="Small"/>
 
                         <Label 
@@ -149,8 +150,41 @@
                         <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
+                            Text="Estado Civil"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Text="Casado"
+                                />
+                            <CheckBox 
+                                Grid.Column="1"
+                                Grid.Row="0"
+                                IsChecked="True"/>
+                            <Label
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Text="Soltero"
+                                />
+                            <CheckBox 
+                                Grid.Column="1"
+                                Grid.Row="1"
+                                IsChecked="False"/>
+                        </Grid>
+
+                        <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
                             Text="CCT_Escuela"/>
-                        
+
                         <Entry 
                             Placeholder="Ingrese el CCT de la escuela"
                             FontSize="Small"/>
@@ -197,7 +231,7 @@
 
                             <Button 
                                 BackgroundColor="Navy"
-                                 Command="{Binding CommandPerfilCommand}"
+                                 Command="{Binding RegistrarPerfilCommand}"
                                 HorizontalOptions="CenterAndExpand"
                                 Text="Guardar"
                                 TextColor="White"
