@@ -36,7 +36,9 @@ namespace Appli_KT2.ViewModel
                 SetValue(ref this.perfiles, value);
             }
         }
+
         public Usuario Usuario { get; set; }
+
         public string MyProperty1 { get; set; }
         public string MyProperty2 { get; set; }
         public string MyProperty3 { get; set; }
