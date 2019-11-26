@@ -17,7 +17,8 @@ namespace Appli_KT2.View
             var sub = new AbsoluteLayout();
             splashImage = new Image
             {
-                Source = "ic_sices.png",
+                //Source = "ic_sices.png",
+                Source = "appli_kt_logo_som.png",
                 WidthRequest = 300,
                 HeightRequest = 300
             };
@@ -26,11 +27,11 @@ namespace Appli_KT2.View
 
             sub.Children.Add(splashImage);
 
-            // this.BackgroundColor = Color.FromHEx("#");
-            this.BackgroundColor = Color.White;
+             this.BackgroundColor = Color.FromHex("#000F9F");
+          //  this.BackgroundColor = Color.White;
             this.Content = sub;
 		}
-
+        
         /*Nota...
          *
          *Agregar un icono de carga o un activityindicator para que el usuario vea que eta interactuando con la aplicacion 
@@ -44,18 +45,18 @@ namespace Appli_KT2.View
             await splashImage.ScaleTo(1,2000);
             await splashImage.ScaleTo(0.5,1500, Easing.Linear);
             //await splashImage.ScaleTo(150,1200, Easing.Linear);
-            verificarLogin();
-            verificarConfiguracionTema();
+            VerificarLogin();
+            VerificarConfiguracionTema();
             Application.Current.MainPage = new NavigationPage(new MainTabbedPage());
 
         }
 
-        public void verificarLogin()
+        public void VerificarLogin()
         {
 
         }
 
-        public void verificarConfiguracionTema()
+        public void VerificarConfiguracionTema()
         {
 
         }

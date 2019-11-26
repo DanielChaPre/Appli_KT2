@@ -1,11 +1,7 @@
-﻿using Appli_KT2.Model;
-using Appli_KT2.Utils;
+﻿using Appli_KT2.Utils;
 using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -19,9 +15,7 @@ namespace Appli_KT2.ViewModel
         private string usuario;
         private string contrasenia;
         public ConexionWS conexion;
-        HttpClient cliente;
-        string[] validado;
-        string url;
+
         #endregion
 
         #region propiedades
@@ -43,6 +37,7 @@ namespace Appli_KT2.ViewModel
             }
         }
         #endregion
+
         #region Comandos
         public ICommand CrearCuentaCommand
         {
@@ -53,6 +48,7 @@ namespace Appli_KT2.ViewModel
         }
 
         #endregion
+
         #region Métodos
         private async void CrearCuenta()
         {
@@ -70,14 +66,12 @@ namespace Appli_KT2.ViewModel
 
             if (this.usuario.Length == 18)
             {
-                if (!ValidarCurp(this.usuario))
+                if (!ValidarCurp(this.usuario.ToUpper()))
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Si se intento ingresar la curp, esta esta incorrecta", "Accept");
                     return;
                 }else
                     Xamarin.Forms.Application.Current.Properties["usuarioAlumno"] = this.usuario;
-
-
             }
             else
                 Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
@@ -87,48 +81,38 @@ namespace Appli_KT2.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Accept");
                 return;
             }
-
-           
             Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
             MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
         }
 
-        public bool ValidarCurp(string usuario)
+        public bool ValidarCurp(string curp)
         {
             try
             {
-                var re = " ([A - Z][AEIOUX][A - Z]{ 2}\n{ 2} (?: 0[1 - 9] | 1[0 - 2])(?:0[1 - 9] |[12]\n | 3[01])[HM](?:AS | B[CS] | C[CLMSH] | D[FG] | G[TR] | HG | JC | M[CNS] | N[ETL] | OC | PL | Q[TR] | S[PLR] | T[CSL] | VZ | YN | ZS)[B - DF - HJ - NP - TV - Z]{ 3}[A-Z\n])(\n)";
-                //validado = curp.match(re);
-                //MatchCollection match = Regex.Matches(re, usuario);
-                MatchCollection validado = Regex.Matches(re, usuario);
-                if (validado == null)
-                    return false;
-                int digitoVerificador(string curp17)
+                string regex =
+                "^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}" +
+                "(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])" +
+                "[HM]{1}" +
+                "(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)" +
+                "[B-DF-HJ-NP-TV-Z]{3}" +
+                "[0-9A-Z]{1}[0-9]{1}$";
+                if (Regex.IsMatch(curp, @regex))
                 {
-                    var diccionario = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-                    var lngSuma = 0.0;
-                    var  lngDigito = 0.0;
-                    for (int i = 0; i < 17; i++)
-                    {
-                        lngSuma = lngSuma + diccionario.IndexOf(curp17) * (18 - i);
-                    }
-                    lngDigito = 10 - lngSuma % 10;
-                    if (lngDigito == 10)
-                        return 10;
-                    return Convert.ToInt32(lngDigito);
+                    return true;
                 }
-                if (Convert.ToInt16(validado[2]) != digitoVerificador(validado[1].ToString()))
+                else
+                {
                     return false;
-                return true;
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Error: " + ex.Message);
                 return false;
                 throw;
             }
         }
-
         #endregion
     }
 }

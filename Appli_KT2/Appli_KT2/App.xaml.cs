@@ -14,9 +14,6 @@ namespace Appli_KT2
            // pruebaShared();
             
         }
-
-
-
         protected override void OnStart()
         {
           this.MainPage = new NavigationPage(new SplashPage()); 

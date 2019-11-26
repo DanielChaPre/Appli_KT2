@@ -4,8 +4,6 @@
             xmlns:tabs="clr-namespace:Appli_KT2.View"
             x:Class="Appli_KT2.View.MainTabbedPage"
             BindingContext="{Binding Main, Source={StaticResource Locator}}"
-            
-            Title="Appli-KT"
             BarBackgroundColor="White">
     
     <TabbedPage.ToolbarItems
@@ -31,8 +29,7 @@
             x:Name="icLogin"/>
     </TabbedPage.ToolbarItems>
 
-    <TabbedPage.Children
-        >
+    <TabbedPage.Children>
         <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png" HeightRequest="100" />
         <tabs:SuredsuPage Title="SUREDSU"  Icon="ic_cali.png"/>
         <tabs:HistorialPage Title="Historial" Icon="ic_history.png"/>

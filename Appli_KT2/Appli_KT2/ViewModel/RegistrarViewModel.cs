@@ -144,6 +144,7 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", @"\t La persona se guarda satisfactoriamente.", "Accept");
                     return;
                 }
+                
                 else
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", @"\t No se pudo guardar la persona", "Accept");

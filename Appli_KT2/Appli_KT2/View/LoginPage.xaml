@@ -9,6 +9,7 @@
     <ContentPage.Content>
         
         <StackLayout
+            BindingContext="{Binding Login}"
             Padding="10,1">
             
             <Image 
@@ -67,6 +68,7 @@
                     Text="Crear cuenta"
                     TextColor="White"
                     x:Name="btnCrearCuenta"
+                    Command="{Binding IrCrearCuentaCommand}"
                 />
                 
             </StackLayout>
