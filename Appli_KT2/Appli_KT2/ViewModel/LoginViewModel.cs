@@ -120,6 +120,20 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        public ICommand IniciarSesionCommand
+        {
+            get
+            {
+                return new RelayCommand(IniciarSesion);
+            }
+        }
+
+        private async void IniciarSesion()
+        {
+            MainViewModel.GetInstance().Login = new LoginViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new IniciarUsuarioPage());
+        }
+
         private async void ValidarUsuario()
         {
             try

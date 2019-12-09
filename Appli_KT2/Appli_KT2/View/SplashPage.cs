@@ -10,6 +10,7 @@ namespace Appli_KT2.View
 	public class SplashPage : ContentPage
 	{
         Image splashImage;
+        Image secondImage;
 		public SplashPage ()
 		{
             NavigationPage.SetHasNavigationBar(this, false);
@@ -22,12 +23,21 @@ namespace Appli_KT2.View
                 WidthRequest = 300,
                 HeightRequest = 300
             };
+            secondImage = new Image
+            {
+                Source = "sices.png",
+                WidthRequest = 200,
+                HeightRequest = 200
+            };
             AbsoluteLayout.SetLayoutFlags(splashImage, AbsoluteLayoutFlags.PositionProportional);
             AbsoluteLayout.SetLayoutBounds(splashImage, new Rectangle(0.5, 0.5, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+            AbsoluteLayout.SetLayoutFlags(secondImage, AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(secondImage, new Rectangle(0.5, 0.8, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
 
             sub.Children.Add(splashImage);
+            sub.Children.Add(secondImage);
 
-             this.BackgroundColor = Color.FromHex("#000F9F");
+             this.BackgroundColor = Color.FromHex("#110791");
           //  this.BackgroundColor = Color.White;
             this.Content = sub;
 		}
@@ -42,8 +52,8 @@ namespace Appli_KT2.View
         {
             base.OnAppearing();
 
-            await splashImage.ScaleTo(1,2000);
-            await splashImage.ScaleTo(0.5,1500, Easing.Linear);
+            await splashImage.ScaleTo(1, 2000);
+            await splashImage.ScaleTo(0.8, 1200, Easing.Linear);
             //await splashImage.ScaleTo(150,1200, Easing.Linear);
             VerificarLogin();
             VerificarConfiguracionTema();

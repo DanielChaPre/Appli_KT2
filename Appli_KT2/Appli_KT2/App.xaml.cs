@@ -1,18 +1,20 @@
 ﻿using Appli_KT2.View;
 using System;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Appli_KT2
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
         public App()
         {
             InitializeComponent();
-           // pruebaShared();
-            
+            // pruebaShared();
+           
         }
         protected override void OnStart()
         {

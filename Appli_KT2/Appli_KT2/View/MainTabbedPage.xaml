@@ -4,8 +4,14 @@
             xmlns:tabs="clr-namespace:Appli_KT2.View"
             x:Class="Appli_KT2.View.MainTabbedPage"
             BindingContext="{Binding Main, Source={StaticResource Locator}}"
-            BarBackgroundColor="White">
-    
+            BarBackgroundColor="White"
+            BarTextColor="Black"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.BarSelectedItemColor="#000F9F"
+            android:TabbedPage.BarItemColor="Gray"
+            android:TabbedPage.IsSwipePagingEnabled="True"
+           >
     <TabbedPage.ToolbarItems
         
         >

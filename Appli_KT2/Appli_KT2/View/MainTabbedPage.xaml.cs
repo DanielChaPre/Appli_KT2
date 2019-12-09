@@ -8,6 +8,7 @@
     using Xamarin.Forms.Xaml;
     using static Appli_KT2.ViewModel.ShareDialogClass;
     using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+    using Xamarin.Forms.PlatformConfiguration;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainTabbedPage : Xamarin.Forms.TabbedPage
@@ -17,10 +18,14 @@
 
 		public MainTabbedPage()
 		{
-          //  this.mainTabbed = new MainTabbedViewModel();
-           // this.BindingContext = this.mainTabbed;
             InitializeComponent ();
-            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+          // // new Xamarin.Forms.TabbedPage().On<Android>().SetIsSwipePagingEnabled(false);
+          // // new Xamarin.Forms.TabbedPage().On<Android>().IsSwipePagingEnabled();
+          // // new Xamarin.Forms.TabbedPage().On<Android>().EnableSwipePaging();
+          //  new Xamarin.Forms.TabbedPage().On<Android>().DisableSwipePaging();
+
+          //  On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+          ////  On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
             icNotificacion.Clicked += onClickIc;
             icShare.Clicked += OnClickShare;
            // icLogin.Clicked += OnCLickLogin;

@@ -8,6 +8,7 @@
             android:TabbedPage.BarSelectedItemColor="#000F9F"
             android:TabbedPage.BarItemColor="Gray"
             BarBackgroundColor="White"
+            
             >
 
     <TabbedPage.Children>
