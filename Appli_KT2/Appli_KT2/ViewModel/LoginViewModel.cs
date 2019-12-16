@@ -192,9 +192,7 @@ namespace Appli_KT2.ViewModel
                 this.IsRunning = false;
                 this.IsEnable = true;
 
-                 // MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
-                //await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
-                await Application.Current.MainPage.Navigation.PopAsync();
+                Application.Current.MainPage = new NavigationPage(new MainTabbedPage());
             }
             else
             {
@@ -220,40 +218,6 @@ namespace Appli_KT2.ViewModel
         {
             throw new NotImplementedException();
         }
-
-        /*  
-         *  
-         *  private async void Login()
-          {
-              if (string.IsNullOrEmpty(this.usuario))
-              {
-                  await Application.Current.MainPage.DisplayAlert("Error","Ingresa el usuario","Accept");
-                  return;
-              }
-              if (string.IsNullOrEmpty(this.password))
-              {
-                  await Application.Current.MainPage.DisplayAlert("Error","Ingresa el password","Accept");
-                  return;
-              }
-
-              this.IsRunning = true;
-              this.IsEnable = false;
-
-              if (this.usuario != "admin" && this.password != "admin")
-              {
-                  this.IsRunning = false;
-                  this.IsEnable = true;
-                  await Application.Current.MainPage.DisplayAlert("Error", "usuario o password incorrecto", "Accept");
-                  this.password = string.Empty;
-                  return;
-              }
-
-              this.IsRunning = false;
-              this.IsEnable = true;
-
-
-              await Application.Current.MainPage.DisplayAlert("Ok", "Usuario encontrado", "Accept");
-          }*/
         #endregion
     }
 }

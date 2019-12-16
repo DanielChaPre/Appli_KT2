@@ -37,9 +37,11 @@
                 />
                 
                 <Entry 
+                    IsPassword="True"
                     Text="{Binding  Password, Mode=TwoWay}"
                     TextColor="#000F9F"
-                    x:Name="txtContrasenia"/>
+                    x:Name="txtContrasenia"
+                 />
 
                 <Button 
                     BackgroundColor="#FF8200"
@@ -48,13 +50,18 @@
                     TextColor="White"
                     x:Name="btnIniciar"
                 />
+                
+                <ActivityIndicator
+                    IsRunning ="{Binding IsRunning}"
+                    VerticalOptions="CenterAndExpand"
+                />
 
                 <Label 
                     Text="Recuperar contraseña" 
                     TextColor="#000F9F" 
                     TextDecorations="Underline"
                     VerticalOptions="EndAndExpand"
-                    />
+                />
             </StackLayout>
         </Frame>
     </ContentPage.Content>

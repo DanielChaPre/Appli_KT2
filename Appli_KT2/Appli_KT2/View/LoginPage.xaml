@@ -7,16 +7,9 @@
              Title="Iniciar Sesión">
     
     <ContentPage.Content>
-        
+
         <StackLayout
             BindingContext="{Binding Login}">
-            
-          <!--  <Image 
-                HeightRequest="180"
-                Source="ic_sices.png"
-                WidthRequest="200"
-            />-->
-
             <StackLayout
                 Margin="0,150,0,0"
                 VerticalOptions="Center"

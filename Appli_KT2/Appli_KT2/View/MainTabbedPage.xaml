@@ -39,7 +39,7 @@
         <tabs:AtlasPage Title="Atlas" Icon="ic_atlas.png" HeightRequest="100" />
         <tabs:SuredsuPage Title="SUREDSU"  Icon="ic_cali.png"/>
         <tabs:HistorialPage Title="Historial" Icon="ic_history.png"/>
-        <tabs:RegisterPage Title="Perfil" Icon="ic_person.png" />
+        <tabs:RegisterPage Title="Perfil" Icon="ic_person.png" BindingContext="{Binding Resgistrar}"/>
         <tabs:MorePage Title="Más" Icon="ic_more.png"/>
     </TabbedPage.Children>
 </TabbedPage>

@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appli_KT2.View.RegisterPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Title="Registro"
+             BackgroundColor="White">
+
+    <ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Registrar}"
+            >
+            <ScrollView
+                >
+                <StackLayout
+                    >
+                    <Frame
+                         IsVisible="{Binding IsAlumno, Mode=TwoWay}"
+                        >
+                        <StackLayout>
+                            <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nombre(s)"/>
+
+                            <Entry
+                            Placeholder="Ingrese su Nombre(s)" 
+                            Text="{Binding PersonaR.nombre, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Paterno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido paterno"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Materno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido materno"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP"/>
+
+                            <Entry
+                            Placeholder="Ingrese su CURP" 
+                            FontSize="Small"/>
+
+                            <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Sexo"/>
+                            <Picker 
+                                Title="Sexo" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Hombre</x:String>
+                                        <x:String>Mujer</x:String>
+                                        <x:String>No definido</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Calle"/>
+
+                            <Entry
+                            Placeholder="Ingrese su calle"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número Exterior"/>
+
+                            <Entry
+                            Placeholder="Ingrese su número de exterior"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número Interior"/>
+
+                            <Entry
+                            Placeholder="Ingrese su número de interior"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Correo electronico"/>
+
+                            <Entry
+                            Placeholder="Ingrese su correo electronico"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número celular"/>
+
+                            <Entry
+                            Placeholder="Ingrese su número de celular"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número Telefono"/>
+
+                            <Entry
+                            Placeholder="Ingrese su número de telefono"
+                            FontSize="Small"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su folio SUREMS"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Folio SUREDSU"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su folio SUREDSU"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Colonia"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su colonia"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Municipio"/>
+
+                            <Picker
+                                Title="Municipio"
+                                >
+
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Pais"/>
+
+                            <Picker
+                                Title="Pais"
+                                >
+
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CCT_Escuela"/>
+
+                            <Entry 
+                            Placeholder="Ingrese el CCT de la escuela"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Procedencia_EMS"/>
+
+                            <Picker 
+                                Title="Escuela Medio Superior"
+                                >
+
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nacionalidad"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su acionalidad"
+                            FontSize="Small"/>
+
+                            <StackLayout
+                            Padding="10,0"
+                            Orientation="Horizontal">
+
+                                <Button 
+                                BackgroundColor="Navy"
+                                Command="{Binding RegistrarPerfilCommand}"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Guardar"
+                                TextColor="White"
+                                WidthRequest="300"/>
+                            </StackLayout>
+
+                            <StackLayout
+                            IsVisible="False"
+                            Padding="10,0"
+                            Orientation="Horizontal">
+
+                                <Button 
+                                BackgroundColor="Navy"
+                                 Command="{Binding ModificatrPerfilCommand}"
+                                Text="Modificar"
+                                TextColor="White"
+                                WidthRequest="150"/>
+
+                                <Button 
+                                BackgroundColor="Navy"
+                                Command="{Binding EliminarPerfilCommand}"
+                                Text="Eliminar"
+                                TextColor="White"
+                                WidthRequest="150"/>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        IsVisible="{Binding IsPadre, Mode=OneWay}">
+                        
+                        <StackLayout>
+                            <Label Text="Perfil Padre de Familia"/>
+                            <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nombre(s)"/>
+
+                            <Entry
+                            Placeholder="Ingrese su Nombre(s)" 
+                            Text="{Binding Nombre, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Paterno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido paterno"
+                                Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Materno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido materno"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="RFC"/>
+
+                            <Entry
+                            Placeholder="Ingrese su RFC" 
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP"/>
+
+                            <Entry
+                            Placeholder="Ingrese su CURP" 
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP del Hijo"/>
+
+                            <Entry
+                            Placeholder="Ingrese la curp de su hijo"
+                            FontSize="Small"/>
+
+                            <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Sexo"/>
+                            <Picker 
+                                Title="Sexo" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Hombre</x:String>
+                                        <x:String>Mujer</x:String>
+                                        <x:String>No definido</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Fecha Nacimiento"
+                            />
+                            <DatePicker
+                            
+                            />
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número Telefono"/>
+
+                            <Entry
+                            Placeholder="Ingrese su número de telefono"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Estado Civil"/>
+
+                            <Picker 
+                                Title="Estado Civil" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Casado</x:String>
+                                        <x:String>Soltero</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nacionalidad"/>
+
+                            <Entry
+                            Placeholder="Ingrese su nacionalidad"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Estados"/>
+
+                            <Picker
+                                ItemsSource="{Binding ListEstados}"
+                                ItemDisplayBinding="{Binding NombreEstado}"
+                                SelectedItem="{Binding SelectedEstado}"
+                                Title="Estado"
+                                />
+                            
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Municipio"/>
+
+                            <Picker
+                                Title="Municipio"
+                                >
+
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Codigo Postal"/>
+
+                            <Entry
+                                 Placeholder="Ingrese su codigo postal"
+                                Text="{Binding CodigoPostal}"
+                                FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Colonia"/>
+
+                            <Picker
+                                Title="Colonia"
+                                >
+
+                            </Picker>
+
+                         
+                            
+                            
+
+                            <StackLayout
+                            Padding="10,0"
+                            Orientation="Horizontal">
+
+                                <Button 
+                                BackgroundColor="Navy"
+                                Command="{Binding RegistrarPerfilCommand}"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Guardar"
+                                TextColor="White"
+                                WidthRequest="300"/>
+                            </StackLayout>
+
+                            <StackLayout
+                                IsVisible="False"
+                                Padding="10,0"
+                                Orientation="Horizontal">
+
+                                <Button 
+                                BackgroundColor="Navy"
+                                    BindingContext="{Binding Registrar}"
+                                 Command="{Binding ModificatrPerfilCommand}"
+                                Text="Modificar"
+                                TextColor="White"
+                                WidthRequest="150"/>
+
+                                <Button 
+                                BackgroundColor="Navy"
+                                Command="{Binding EliminarPerfilCommand}"
+                                Text="Eliminar"
+                                TextColor="White"
+                                WidthRequest="150"/>
+
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

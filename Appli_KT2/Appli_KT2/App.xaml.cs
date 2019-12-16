@@ -10,6 +10,9 @@ namespace Appli_KT2
 {
     public partial class App : Xamarin.Forms.Application
     {
+
+        public static MasterDetailPage MasterD { get; set; }
+
         public App()
         {
             InitializeComponent();

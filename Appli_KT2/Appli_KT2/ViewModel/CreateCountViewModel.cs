@@ -82,7 +82,7 @@ namespace Appli_KT2.ViewModel
                 return;
             }
             Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
-            MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
+            MainViewModel.GetInstance().Registrar = new PerfilPadreViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
         }
 

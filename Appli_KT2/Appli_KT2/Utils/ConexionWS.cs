@@ -6,7 +6,7 @@ namespace Appli_KT2.Utils
 {
     public class ConexionWS
     {
-        private string url = "http://applikt.utleon.edu.mx/webservicesapplikt/Services1.svc";
+        private string url = "http://applikt.utleon.edu.mx/webservicesapplikt/Service1.svc";
         private string validarUsuario = "/validarUsuario/";
         private string validarContasenia = "/validarContrasenia/";
         private string crearCuenta = "/crearCuenta";
@@ -14,10 +14,32 @@ namespace Appli_KT2.Utils
         private string modificarPerfil = "/perfil";
         private string eliminarPerfil = "/perfil";
         private string consultarPerfil = "/perfil/";
+        private string crearEmpleado = "/empleado";
+        private string modificarEmpleado = "/empleado";
+        private string eliminarEmpleado = "/empleado";
+        private string consultarEmpleado = "/empleado/";
+        private string crearEmpleadoPlantel = "/empleadoplantel";
+        private string modificarEmpleadoPlantel = "/empleadoplantel";
+        private string eliminarEmpleadoPlantel = "/empleadoplantel";
+        private string consultarEmpleadoPlantel = "/empleadoplantel/";
+        private string crearPadreFamilia = "/padrefamilia";
+        private string modificarPadreFamilia = "/padrefamilia";
+        private string eliminarPadreFamilia = "/padrefamilia";
+        private string consultarPadreFamilia = "/padrefamilia/";
+        private string crearAlumno = "/alumno";
+        private string modificarAlumno = "/alumno";
+        private string eliminarAlumno = "/alumno";
+        private string consultarAlumno = "/alumno/";
         private string consultarNotificaciones = "/notificacion";
         private string obtenerPlanteles = "/planteles";
         private string obtenerCarreras = "/carreras";
         private string obtenerGruposSeguridad = "/gruposeguridad";
+        private string obtenerColonia = "/colonia";
+        private string obtenerMunicipio = "/municipios";
+        private string obtenerEstados = "/estados";
+        private string obtenerPaises = "/paises";
+        private string buscarAlumnoCurp = "/alumnocurp/";
+        private string buscarColonua = "/coloniaid/";
 
         public string URL
         {
@@ -70,5 +92,28 @@ namespace Appli_KT2.Utils
         public string ObtenerGruposSeguridad {
             get {return this.obtenerGruposSeguridad;}
         }
+
+        public string CrearEmpleado { get { return this.crearEmpleado; } }
+        public string ModificarEmpleado { get => modificarEmpleado; }
+        public string EliminarEmpleado { get => eliminarEmpleado;}
+        public string ConsultarEmpleado { get => consultarEmpleado;}
+        public string CrearEmpleadoPlantel { get => crearEmpleadoPlantel;}
+        public string ModificarEmpleadoPlantel { get => modificarEmpleadoPlantel; }
+        public string EliminarEmpleadoPlantel { get => eliminarEmpleadoPlantel;}
+        public string ConsultarEmpleadoPlantel { get => consultarEmpleadoPlantel;}
+        public string CrearPadreFamilia { get => crearPadreFamilia; }
+        public string ModificarPadreFamilia { get => modificarPadreFamilia;}
+        public string EliminarPadreFamilia { get => eliminarPadreFamilia;}
+        public string ConsultarPadreFamilia { get => consultarPadreFamilia;}
+        public string CrearAlumno { get => crearAlumno; }
+        public string ModificarAlumno { get => modificarAlumno;}
+        public string EliminarAlumno { get => eliminarAlumno; }
+        public string ConsultarAlumno { get => consultarAlumno;  }
+        public string ObtenerColonia { get => obtenerColonia;  }
+        public string ObtenerMunicipio { get => obtenerMunicipio;}
+        public string ObtenerEstados { get => obtenerEstados;}
+        public string ObtenerPaises { get => obtenerPaises;}
+        public string BuscarAlumnoCurp { get => buscarAlumnoCurp; set => buscarAlumnoCurp = value; }
+        public string BuscarColonia { get => buscarColonua; set => buscarColonua = value; }
     }
 }

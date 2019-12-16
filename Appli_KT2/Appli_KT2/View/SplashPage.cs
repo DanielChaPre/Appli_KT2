@@ -57,7 +57,7 @@ namespace Appli_KT2.View
             //await splashImage.ScaleTo(150,1200, Easing.Linear);
             VerificarLogin();
             VerificarConfiguracionTema();
-            Application.Current.MainPage = new NavigationPage(new MainTabbedPage());
+            Application.Current.MainPage = new NavigationPage(new MainPage());
 
         }
 

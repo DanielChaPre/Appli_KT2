@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appli_KT2.View.MasterPage"
+             Title="Master"
+             BackgroundImageSource="pleca_textura.jpg"
+             BackgroundColor="Aqua"
+           >
+    <ContentPage.Content>
+        <StackLayout
+            Orientation="Vertical"
+            >
+        <Frame 
+                BackgroundColor="Transparent"
+                HeightRequest="160"
+                VerticalOptions="Start"
+                Margin="0,0,0,-10"   
+                   >
+                <Label
+                    Text="Nombre del usuario"
+                    TextColor="White"
+                    />
+            </Frame>
+        <Frame 
+                BackgroundColor="#1b213c"
+                Margin="0"
+                Padding="5"
+                VerticalOptions="StartAndExpand"
+                >
+                <ScrollView
+                    VerticalOptions="FillAndExpand"
+                    VerticalScrollBarVisibility="Default"
+                    >
+                    <StackLayout
+                        HeightRequest="550"
+                        VerticalOptions="FillAndExpand"
+                        >
+                        <Button
+                            BackgroundColor="#0a225a"
+                            ImageSource=""
+                            Text="Perfil"
+                            TextColor="White"
+                            x:Name="btnPerfil"
+                            />
+                        <Button
+                            BackgroundColor="#1b213c"
+                            ImageSource=""
+                            Text="Notificiones"
+                            TextColor="White"
+                            x:Name="btnNotificaciones"
+                            />
+                        <Button
+                            BackgroundColor="#0a225a"
+                            ImageSource=""
+                            Text="Proceso SUREDSU"
+                            TextColor="White"
+                            x:Name="btnSuredsu"
+                            />
+                        <Button
+                            BackgroundColor="#1b213c"
+                            ImageSource=""
+                            Text="Atlas de la Educación Superior"
+                            TextColor="White"
+                            x:Name="btnAtlas"
+                            />
+                        <Button
+                            BackgroundColor="#0a225a"
+                            ImageSource=""
+                            Text="Eventos Históricos"
+                            TextColor="White"
+                            x:Name="btnHistorial"
+                            />
+                    </StackLayout>
+                </ScrollView>
+            </Frame>
+        </StackLayout>
+       
+    </ContentPage.Content>
+</ContentPage>

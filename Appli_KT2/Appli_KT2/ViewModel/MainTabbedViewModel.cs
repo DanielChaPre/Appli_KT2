@@ -11,10 +11,12 @@ namespace Appli_KT2.ViewModel
     public class MainTabbedViewModel:BaseViewModel
     {
 
+        #region Constructor
         public MainTabbedViewModel()
         {
-
-        }
+            MainViewModel.GetInstance().Registrar = new PerfilPadreViewModel();
+        } 
+        #endregion
         #region Comandos
 
         public ICommand IrLoginCommand

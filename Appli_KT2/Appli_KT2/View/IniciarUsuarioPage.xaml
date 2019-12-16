@@ -13,43 +13,41 @@
             BorderColor="Silver"
             Margin="10,10,10,-10" 
             VerticalOptions="Center">
-            
+
             <StackLayout
                 BackgroundColor="White"
                 Orientation="Vertical" 
                 Padding="10,10"
                 VerticalOptions="Center">
-                
+
                 <Label 
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Margin="0,5"
                    Text="Iniciar sesión"
                     TextColor="Black"/>
-                
+
                 <Label 
                     Text="Usuario"
                     TextColor="Gray"
                     x:Name="lblUsuario"/>
-                
+
                 <Entry 
                     Text="{Binding User, Mode=TwoWay}"
                     TextColor="#000F9F"
                     x:Name="txtUsuario"/>
-        
+
                 <Button 
                     BackgroundColor="#FF8200"
                     Command="{Binding ValidarUsuarioCommand}"
                     Text="Siguiente"
                     TextColor="White"
                     x:Name="btnNext"/>
-            </StackLayout>
-            <!--
-            <ActivityIndicator>
+          
+            <ActivityIndicator
                 IsRunning ="{Binding IsRunning}"
-            VerticalOption = CenterandExpand
-            </>
-            -->
+                VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
         </Frame>
     </ContentPage.Content>
 </ContentPage>

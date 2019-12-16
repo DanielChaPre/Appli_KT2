@@ -13,23 +13,18 @@ namespace Appli_KT2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RegisterPage : ContentPage
 	{
-        RegistrarViewModel rvm;
+        PerfilPadreViewModel rvm;
 		public RegisterPage ()
 		{
-         //  
-          //  MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
             InitializeComponent ();
-          //  MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
-           this.rvm = new RegistrarViewModel();
-            pckPerfiles.ItemsSource = rvm.Perfiles;
-            BindingContext = rvm;
+            //MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-           
-         //   this.rvm = new RegistrarViewModel();
+            //MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
+            //Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
         }
     }
 }
