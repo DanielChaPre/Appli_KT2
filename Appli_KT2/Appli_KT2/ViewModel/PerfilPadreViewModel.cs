@@ -2,6 +2,7 @@
 using Appli_KT2.Utils;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -18,20 +20,31 @@ namespace Appli_KT2.ViewModel
     public class PerfilPadreViewModel : PadreFamilia
     {
         #region Atributos
-        private List<Estados> lstEstados = new List<Estados>();
+       
         private ObservableCollection<GrupoSeguridad> perfiles;
         private Persona persona;
         private PadreFamilia padreFamilia;
         private Alumno alumno;
         private bool isalumno;
         private bool ispadre;
+        private bool isrun;
         private HttpClient _client;
         private ConexionWS conexion;
         private string url;
         private string codigoPostal;
-        private string estado;
-        private string estadoSeleccionado;
+        private List<string> lstNombreEstados = new List<string>();
+        private List<Estados> lstEstados = new List<Estados>();
+        private List<Municipios> lstMunicipios = new List<Municipios>();
+        private List<Estados> listEstados;
         private Estados _selectedEstado;
+        private Municipios _selectedMunicipio;
+        private Colonia _selectedColonia;
+        private Estados entEstados;
+
+        #endregion
+
+        #region Propiedades
+
         public Estados SelectedEstado
         {
             get
@@ -40,28 +53,54 @@ namespace Appli_KT2.ViewModel
             }
             set
             {
-                SetValue(ref _selectedEstado, value);
+                _selectedEstado = value;
+                OnPropertyChanged();
                 //put here your code  
-                estadoSeleccionado = "City : " + _selectedEstado.NombreEstado;
+               //estadoSeleccionado = "City : " + _selectedEstado.NombreEstado;
+                Console.WriteLine("Estado recogido:" + _selectedEstado.NombreEstado);
+                ObtenerMunicipios();
             }
         }
-        #endregion
 
-        #region Propiedades
+        public Colonia SelectedColonia
+        {
+            get
+            {
+                return _selectedColonia;
+            }
+            set
+            {
+                _selectedColonia = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public  Estados[] ListEstados
+        public Municipios SelectedMunicipio
+        {
+            get
+            {
+                return _selectedMunicipio;
+            }
+            set
+            {
+                _selectedMunicipio = value;
+                OnPropertyChanged();
+                //put here your code  
+                //estadoSeleccionado = "City : " + _selectedEstado.NombreEstado;
+                Console.WriteLine("Municipio recogido:" + _selectedEstado.NombreEstado);
+            }
+        }
+
+        public List<Estados> ListEstados
         {
             get;
             set;
         }
 
-        public string Estado
+        public List<Municipios> ListMunicipios
         {
-            get { return this.estado; }
-            set
-            {
-                SetValue(ref this.estado, value);
-            }
+            get;
+            set;
         }
 
         public string CodigoPostal
@@ -91,6 +130,15 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        public bool IsRun
+        {
+            get { return this.isrun; }
+            set
+            {
+                SetValue(ref this.isrun, value);
+            }
+        }
+
         public bool IsAlumno
         {
             get { return this.isalumno; }
@@ -113,10 +161,11 @@ namespace Appli_KT2.ViewModel
         #region Constructor
         public  PerfilPadreViewModel()
         {
-            //CargarPerfiles();
-        //    ObtenerEstados();
+            ObtenerEstados();
+            
             this.IsPadre = true;
             this.IsAlumno = false;
+            this.IsRun = false;
         }
         #endregion
 
@@ -210,60 +259,22 @@ namespace Appli_KT2.ViewModel
             
         }
 
-        private async void ObtenerEstados()
+
+        private  void ObtenerEstados()
         {
-            try
-            {
-                _client = new HttpClient();
-                conexion = new ConexionWS();
-                url = conexion.URL + "" + conexion.ObtenerEstados;
-                var request = HttpWebRequest.Create(string.Format(@""+url, string.Empty));
-                request.ContentType = "application/json";
-                request.Method = "GET";
+             MainViewModel.GetInstance().Estados = new EstadosViewModel();
+        }
 
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                {
-                    if (response.StatusCode != HttpStatusCode.OK)
-                        Console.Out.WriteLine("Error fetching data. Server returned status code: {0}", response.StatusCode);
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        var content = reader.ReadToEnd();
-                        if (string.IsNullOrWhiteSpace(content))
-                        {
-                            Console.Out.WriteLine("Response contained empty body...");
-                        }
-                        else
-                        {
-                            Console.Out.WriteLine("Response Body: \r\n {0}", content);
-                        }
-
-                        var estado = JsonConvert.DeserializeObject<Estados>(content);
-                    }
-                }
-
-                //_client = new HttpClient();
-                //conexion = new ConexionWS();
-                //// url = conexion.URL + "" + conexion.ValidarUsuario + "" + this.usuario;
-                //url = conexion.URL + "" + conexion.ObtenerEstados;
-                //var uri = new Uri(string.Format(@"" + url, string.Empty));
-                //var response = await _client.GetAsync(uri);
-
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    var content = await response.Content.ReadAsStringAsync();
-                //    List<Estados> lista = JsonConvert.DeserializeObject<List<Estados>>(content.);
-                //}
-            }
-            catch (JsonSerializationException ex)
-            {
-                throw;
-            }
+        private async void ObtenerMunicipios()
+        {
+            MainViewModel.GetInstance().Municipio = new MunicipioViewModel(this._selectedEstado.NombreEstado);
         }
 
         private ObservableCollection<GrupoSeguridad> CargarPerfiles()
         {
             try
             {
+
               this.perfiles = new ObservableCollection<GrupoSeguridad>
                 {
                     new GrupoSeguridad(){nombre = "Estudiantes"},

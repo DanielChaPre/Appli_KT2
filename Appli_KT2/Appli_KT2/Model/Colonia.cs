@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class Estados : INotifyPropertyChanged
+   public  class Colonia : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -15,43 +15,57 @@ namespace Appli_KT2.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private int idEstado;
-        private string nombreEstado;
-        private int idPais;
+        private int idColonia;
+        private string nombreColonia;
+        private string cp;
+        private int idMunicipio;
 
-        public int IdEstado
+        public int IdColonia
         {
             get
             {
-                return idEstado;
+                return idColonia;
             }
             set
             {
-                idEstado = value;
+                idColonia = value;
                 OnPropertyChanged();
             }
         }
-        public string NombreEstado
+
+        public string NombreColonia
         {
             get
             {
-                return nombreEstado;
+                return nombreColonia;
             }
             set
             {
-                nombreEstado = value;
+                nombreColonia = value;
                 OnPropertyChanged();
             }
         }
-        public int IdPais
+        public string Cp
         {
             get
             {
-                return idPais;
+                return cp;
             }
             set
             {
-                idPais = value;
+                cp = value;
+                OnPropertyChanged();
+            }
+        }
+        public int IdMunicipio
+        {
+            get
+            {
+                return idMunicipio;
+            }
+            set
+            {
+                idMunicipio = value;
                 OnPropertyChanged();
             }
         }

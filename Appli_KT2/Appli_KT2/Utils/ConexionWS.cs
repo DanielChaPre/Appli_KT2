@@ -34,12 +34,13 @@ namespace Appli_KT2.Utils
         private string obtenerPlanteles = "/planteles";
         private string obtenerCarreras = "/carreras";
         private string obtenerGruposSeguridad = "/gruposeguridad";
-        private string obtenerColonia = "/colonia";
+        private string obtenerColonia = "/colonia/";
         private string obtenerMunicipio = "/municipios";
         private string obtenerEstados = "/estados";
         private string obtenerPaises = "/paises";
         private string buscarAlumnoCurp = "/alumnocurp/";
         private string buscarColonua = "/coloniaid/";
+        private string obtenerMunicipiosEstado = "/municipios/";
 
         public string URL
         {
@@ -115,5 +116,6 @@ namespace Appli_KT2.Utils
         public string ObtenerPaises { get => obtenerPaises;}
         public string BuscarAlumnoCurp { get => buscarAlumnoCurp; set => buscarAlumnoCurp = value; }
         public string BuscarColonia { get => buscarColonua; set => buscarColonua = value; }
+        public string ObtenerMunicipiosEstado { get => obtenerMunicipiosEstado; set => obtenerMunicipiosEstado = value; }
     }
 }

@@ -1,8 +1,13 @@
-﻿using Appli_KT2.ViewModel;
+﻿using Appli_KT2.Model;
+using Appli_KT2.Utils;
+using Appli_KT2.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -13,18 +18,88 @@ namespace Appli_KT2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RegisterPage : ContentPage
 	{
-        PerfilPadreViewModel rvm;
-		public RegisterPage ()
+        
+        EstadosViewModel estadosViewModel = new EstadosViewModel();
+        MunicipioViewModel municipiosViewModel;
+        ColoniaViewModel coloniaViewModel;
+        PerfilPadreViewModel perfil = new PerfilPadreViewModel();
+        Estados estadoS;
+        bool cp = true;
+        public RegisterPage ()
 		{
             InitializeComponent ();
-            //MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
+            pEstados.SelectedIndexChanged += OnPickerSelectedIndexChanged;
+        }
+
+        private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            estadoS = (Estados) pEstados.SelectedItem;
+            municipiosViewModel = new MunicipioViewModel(estadoS.NombreEstado);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //MainViewModel.GetInstance().Registrar = new RegistrarViewModel();
-            //Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+            
+           
+
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                while (estadosViewModel.ListEstados.Count != 0)
+                {
+                    pEstados.ItemsSource = estadosViewModel.ListEstados;
+                    pEstados.ItemDisplayBinding = new Binding("NombreEstado");
+                    return false;
+                }
+
+                return true; // True = Repeat again, False = Stop the timer
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds (5), () =>
+            {
+                try
+                {
+                  
+                    if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
+                    {
+                        pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
+                        pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
+                        return false;
+                    }
+                    return true; // True = Repeat again, False = Stop the timer
+                }
+                catch (NullReferenceException ex)
+                {
+                    return true;
+                }
+               
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                try
+                {
+                    if (txtCodigoPostal.Text.Length == 5 && cp)
+                    {
+                        var codPost = txtCodigoPostal.Text;
+                        coloniaViewModel = new ColoniaViewModel(codPost);
+                        cp = false;
+                    }
+
+                    if (coloniaViewModel.ListColonias != null || coloniaViewModel.ListColonias.Count != 0)
+                    {
+                        pColonia.ItemsSource = coloniaViewModel.ListColonias;
+                        pColonia.ItemDisplayBinding = new Binding("NombreColonia");
+                        return false;
+                    }
+                    return true; // True = Repeat again, False = Stop the timer
+                }
+                catch (NullReferenceException ex)
+                {
+                    return true;
+                }
+
+            });
         }
     }
 }

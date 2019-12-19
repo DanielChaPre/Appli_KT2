@@ -11,6 +11,11 @@ namespace Appli_KT2.ViewModel
         public PerfilPadreViewModel Registrar { get; set; }
         public CreateCountViewModel CrearCuenta { get; set; }
         public MainTabbedViewModel MainTabbed { get; set; }
+        public NotificacionesViewModel Notificaciones { get; set; }
+        public AtlasViewModel Atlas { get; set; } 
+        public HistorialViewModel Historial { get; set; }
+        public EstadosViewModel Estados { get; set; }
+        public MunicipioViewModel Municipio { get; set; }
         #endregion
         #region constructores
         public MainViewModel()

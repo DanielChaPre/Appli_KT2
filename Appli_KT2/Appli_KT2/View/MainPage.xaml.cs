@@ -16,6 +16,7 @@ namespace Appli_KT2.View
 		{
 			InitializeComponent ();
             this.Master = new MasterPage();
+           // this.Master = new NavigationPage(new MasterPage());
             this.Detail = new NavigationPage(new AtlasPage());
 
             App.MasterD = this;

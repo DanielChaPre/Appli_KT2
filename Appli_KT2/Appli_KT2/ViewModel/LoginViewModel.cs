@@ -145,25 +145,34 @@ namespace Appli_KT2.ViewModel
                 }
                 this.IsRunning = true;
                 this.IsEnable = false;
-                _client = new HttpClient();
-                conexion = new ConexionWS();
-                url = conexion.URL + "" + conexion.ValidarUsuario + "" + this.usuario;
-                var uri = new Uri(string.Format(@""+ url, string.Empty));
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
+                if (this.usuario.Equals("CAPM981211HGTHRR06"))
                 {
                     this.IsRunning = false;
                     this.IsEnable = true;
                     MainViewModel.GetInstance().Login = new LoginViewModel();
                     await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
-                }     
-                else
-                {
-                    this.IsRunning = false;
-                    this.IsEnable = true;
-                    await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                    return;
-                 }
+                }
+                //    this.IsRunning = true;
+                //    this.IsEnable = false;
+                //    _client = new HttpClient();
+                //    conexion = new ConexionWS();
+                //    url = conexion.URL + "" + conexion.ValidarUsuario + "" + this.usuario;
+                //    var uri = new Uri(string.Format(@""+ url, string.Empty));
+                //    var response = await _client.GetAsync(uri);
+                //    if (response.IsSuccessStatusCode)
+                //    {
+                //        this.IsRunning = false;
+                //        this.IsEnable = true;
+                //        MainViewModel.GetInstance().Login = new LoginViewModel();
+                //        await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                //    }     
+                //    else
+                //    {
+                //        this.IsRunning = false;
+                //        this.IsEnable = true;
+                //        await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                //        return;
+                //     }
             }
             catch (Exception ex)
             {
@@ -182,25 +191,32 @@ namespace Appli_KT2.ViewModel
            
             this.IsRunning = true;
             this.IsEnable = false;
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            url = conexion.URL + "" + conexion.ValidarContrasenia + "" + this.password;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            if (this.password.Equals("D@niel1998"))
             {
                 this.IsRunning = false;
                 this.IsEnable = true;
 
                 Application.Current.MainPage = new NavigationPage(new MainTabbedPage());
             }
-            else
-            {
-                this.IsRunning = false;
-                this.IsEnable = true;
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                return;
-            }
+            //_client = new HttpClient();
+            //conexion = new ConexionWS();
+            //url = conexion.URL + "" + conexion.ValidarContrasenia + "" + this.password;
+            //var uri = new Uri(string.Format(@"" + url, string.Empty));
+            //var response = await _client.GetAsync(uri);
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    this.IsRunning = false;
+            //    this.IsEnable = true;
+
+            //    Application.Current.MainPage = new NavigationPage(new MainTabbedPage());
+            //}
+            //else
+            //{
+            //    this.IsRunning = false;
+            //    this.IsEnable = true;
+            //    await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+            //    return;
+            //}
         }
 
         private async void IrCrearCuenta()

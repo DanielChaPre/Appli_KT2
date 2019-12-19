@@ -15,11 +15,11 @@ namespace Appli_KT2.View
 		public MasterPage ()
 		{
 			InitializeComponent ();
-            btnPerfil.Clicked += irPerfil;
-            btnAtlas.Clicked += irAtlas;
-            btnHistorial.Clicked += irHistorial;
-            btnNotificaciones.Clicked += irNotificaciones;
-            btnSuredsu.Clicked += irSuredsu;
+            //btnPerfil.Clicked += irPerfil;
+            //btnAtlas.Clicked += irAtlas;
+            //btnHistorial.Clicked += irHistorial;
+            //btnNotificaciones.Clicked += irNotificaciones;
+            //btnSuredsu.Clicked += irSuredsu;
         }
 
         private async void irSuredsu(object sender, EventArgs e)

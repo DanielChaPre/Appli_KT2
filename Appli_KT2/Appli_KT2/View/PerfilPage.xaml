@@ -233,7 +233,7 @@
                         </StackLayout>
                     </Frame>
                     <Frame
-                        IsVisible="{Binding IsPadre, Mode=OneWay}">
+                        IsVisible="{Binding IsPadre, Mode=TwoWay}">
                         
                         <StackLayout>
                             <Label Text="Perfil Padre de Familia"/>
@@ -264,6 +264,7 @@
 
                             <Entry 
                             Placeholder="Ingrese su apellido materno"
+                                Text="{Binding Apellido_Materno ,Mode=TwoWay}"
                             FontSize="Small"/>
 
                             <Label 
@@ -273,6 +274,7 @@
 
                             <Entry
                             Placeholder="Ingrese su RFC" 
+                                 Text="{Binding RFC,Mode=TwoWay}"
                             FontSize="Small"/>
 
                             <Label 
@@ -282,6 +284,7 @@
 
                             <Entry
                             Placeholder="Ingrese su CURP" 
+                                 Text="{Binding CURP,Mode=TwoWay}"
                             FontSize="Small"/>
 
                             <Label 
@@ -291,6 +294,7 @@
 
                             <Entry
                             Placeholder="Ingrese la curp de su hijo"
+                                Text=""
                             FontSize="Small"/>
 
                             <Label 
@@ -348,29 +352,28 @@
                             <Entry
                             Placeholder="Ingrese su nacionalidad"
                             FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Estados"/>
-
-                            <Picker
-                                ItemsSource="{Binding ListEstados}"
-                                ItemDisplayBinding="{Binding NombreEstado}"
-                                SelectedItem="{Binding SelectedEstado}"
-                                Title="Estado"
-                                />
                             
-                            <Label 
+                                <Label 
+                                    FontSize="Subtitle"
+                                    TextColor="Gray"
+                                    Text="Estados"/>
+
+                                <Picker
+                                    SelectedItem="{Binding SelectedEstado}"
+                                    Title="Estado"
+                                    x:Name="pEstados"
+                                />
+                                
+                                <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Municipio"/>
 
                             <Picker
+                                SelectedItem="{Binding SelectedMunicipio}"
                                 Title="Municipio"
-                                >
-
-                            </Picker>
+                                x:Name="pMunicipio"
+                                />
 
                             <Label 
                             FontSize="Subtitle"
@@ -378,9 +381,9 @@
                             Text="Codigo Postal"/>
 
                             <Entry
-                                 Placeholder="Ingrese su codigo postal"
-                                Text="{Binding CodigoPostal}"
-                                FontSize="Small"/>
+                                Placeholder="Ingrese su codigo postal"
+                                FontSize="Small"
+                                x:Name="txtCodigoPostal"/>
 
                             <Label 
                             FontSize="Subtitle"
@@ -388,15 +391,13 @@
                             Text="Colonia"/>
 
                             <Picker
+                                SelectedItem="{Binding SelectedColonia}"
                                 Title="Colonia"
+                                x:Name="pColonia"
                                 >
 
                             </Picker>
-
-                         
                             
-                            
-
                             <StackLayout
                             Padding="10,0"
                             Orientation="Horizontal">
@@ -432,6 +433,16 @@
 
                             </StackLayout>
                         </StackLayout>
+                    </Frame>
+                    <Frame
+                        Margin="10,0"
+                        VerticalOptions="Center"
+                        IsVisible="{Binding IsRun}"
+                        >
+                        <ActivityIndicator
+                            IsRunning="{Binding IsRun}"
+                            Color="#fd8204"
+                            />
                     </Frame>
                 </StackLayout>
             </ScrollView>

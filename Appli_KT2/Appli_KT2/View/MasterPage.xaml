@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.MasterPage"
              Title="Master"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
              BackgroundImageSource="pleca_textura.jpg"
              BackgroundColor="Aqua"
            >
     <ContentPage.Content>
         <StackLayout
+            BindingContext="{Binding MainTabbed}"
             Orientation="Vertical"
             >
         <Frame 
@@ -17,8 +19,11 @@
                 Margin="0,0,0,-10"   
                    >
                 <Label
+                    FontSize="Title"
+                    HorizontalOptions="Center"
                     Text="Nombre del usuario"
                     TextColor="White"
+                    VerticalOptions="End"
                     />
             </Frame>
         <Frame 
@@ -37,35 +42,45 @@
                         >
                         <Button
                             BackgroundColor="#0a225a"
-                            ImageSource=""
+                            Command="{Binding IrPerfilCommand}"
+                            ImageSource="ic_cuenta.png"
+                            Padding="25,0,170,0"
                             Text="Perfil"
                             TextColor="White"
                             x:Name="btnPerfil"
                             />
                         <Button
                             BackgroundColor="#1b213c"
-                            ImageSource=""
-                            Text="Notificiones"
+                            Command="{Binding IrNotificacionesCommand}"
+                            ImageSource="ic_notifications.png"
+                             Padding="25,0,115,0"
+                            Text="Notificaciones"
                             TextColor="White"
                             x:Name="btnNotificaciones"
                             />
                         <Button
                             BackgroundColor="#0a225a"
-                            ImageSource=""
+                            Command="{Binding IrSuredsuCommand}"
+                            ImageSource="ic_school_outline.png"
+                             Padding="25,0,88,0"
                             Text="Proceso SUREDSU"
                             TextColor="White"
                             x:Name="btnSuredsu"
                             />
                         <Button
                             BackgroundColor="#1b213c"
-                            ImageSource=""
+                             Command="{Binding IrAtlasCommand}"
+                            ImageSource="ic_action_map.png"
+                             Padding="20,0,20,0"
                             Text="Atlas de la Educación Superior"
                             TextColor="White"
                             x:Name="btnAtlas"
                             />
                         <Button
                             BackgroundColor="#0a225a"
-                            ImageSource=""
+                             Command="{Binding IrHistorialCommand}"
+                            ImageSource="ic_calendar_text_outline.png"
+                             Padding="25,0,80,0"
                             Text="Eventos Históricos"
                             TextColor="White"
                             x:Name="btnHistorial"
