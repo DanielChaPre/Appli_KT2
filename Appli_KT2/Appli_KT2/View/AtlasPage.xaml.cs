@@ -32,7 +32,6 @@ namespace Appli_KT2.View
         {
             try
             {
-   
                 ShareDialogClass share = new ShareDialogClass();
                 await share.ShareUri("WWW.HolaMundo.com", "Compartir link de descarga de Appli-KT");
             }
