@@ -9,7 +9,7 @@ namespace Appli_KT2.Utils
         private string url = "http://applikt.utleon.edu.mx/webservicesapplikt/Service1.svc";
         private string validarUsuario = "/validarUsuario/";
         private string validarContasenia = "/validarContrasenia/";
-        private string crearCuenta = "/crearCuenta";
+        private string crearCuenta = "/crearCuenta/";
         private string crearPerfil = "/perfil";
         private string modificarPerfil = "/perfil";
         private string eliminarPerfil = "/perfil";

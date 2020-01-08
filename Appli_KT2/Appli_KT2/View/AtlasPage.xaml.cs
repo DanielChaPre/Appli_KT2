@@ -16,10 +16,41 @@ namespace Appli_KT2.View
 		public AtlasPage ()
 		{
 			InitializeComponent ();
-            btnBuscar.Clicked += buscarAtlas;
+            VerificarLogin();
+            btnBuscar.Clicked += BuscarAtlas;
             icShare.Clicked += OnClickShare;
-            icLogin.Clicked += OnClickLogin;
+        }
 
+        private void VerificarLogin()
+        {
+            if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
+            {
+                ToolbarItem icLogin = new ToolbarItem
+                {
+                    Text = "Iniciar sesión",
+                    Order = ToolbarItemOrder.Secondary,
+                    Priority = 1
+                };
+                this.ToolbarItems.Add(icLogin);
+                icLogin.Clicked += OnClickLogin;
+            }
+            else
+            {
+                ToolbarItem icClose = new ToolbarItem
+                {
+                    Text = "Cerrar sesión",
+                    Order = ToolbarItemOrder.Secondary,
+                    Priority = 1
+                };
+                this.ToolbarItems.Add(icClose);
+                icClose.Clicked += OnClickCerrar;
+            }
+        }
+
+        private void OnClickCerrar(object sender, EventArgs e)
+        {
+            Xamarin.Forms.Application.Current.Properties["usuario"] = "";
+            Application.Current.MainPage = new NavigationPage(new MainPage());
         }
 
         private void OnClickLogin(object sender, EventArgs e)
@@ -37,12 +68,10 @@ namespace Appli_KT2.View
             }
             catch (Exception)
             {
-
-
             }
         }
 
-        private async void buscarAtlas(object sender, EventArgs e)
+        private async void BuscarAtlas(object sender, EventArgs e)
         {
             await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
         }

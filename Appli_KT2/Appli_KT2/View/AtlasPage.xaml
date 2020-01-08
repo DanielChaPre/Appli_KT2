@@ -10,12 +10,12 @@
             Priority="1"  
             Order="Secondary" 
             x:Name="icShare"/>
-        <ToolbarItem
+       <!-- <ToolbarItem
            
             Text="Iniciar Sesión"
             Priority="1"  
             Order="Secondary" 
-            x:Name="icLogin"/>
+            x:Name="icLogin"/>-->
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
 

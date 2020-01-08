@@ -16,15 +16,13 @@ namespace Appli_KT2.ViewModel
         public HistorialViewModel Historial { get; set; }
         public EstadosViewModel Estados { get; set; }
         public MunicipioViewModel Municipio { get; set; }
+        public RecuperarContrasenaViewModel Recuperar { get; set; }
         #endregion
         #region constructores
         public MainViewModel()
         {
             instance = this;
             MainTabbed = new MainTabbedViewModel();
-           // this.Login = new LoginViewModel();
-           // this.Registrar = new RegistrarViewModel();
-           // this.CrearCuenta = new CreateCountViewModel();
         }
         #endregion
 

@@ -1,72 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Appli_KT2.View.IniciarContraseniaPage"
-              BackgroundColor="#D9D6D6"
-              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Iniciar sesión"
-             Padding="10,0">
-    
+             x:Class="Appli_KT2.View.RecuperarContrasenaPage"
+             BindingContext="{Binding Main, Source={StaticResource Locator}}">
     <ContentPage.Content>
-        
         <Frame
-             BindingContext="{Binding Login}"
+             BindingContext="{Binding Recuperar}"
             HasShadow="true" 
             BorderColor="Silver"
             Margin="10,10,10,-10" 
             VerticalOptions="Center">
-            
+
             <StackLayout
                 BackgroundColor="White"
                 Orientation="Vertical" 
                 Padding="10,10"
                 VerticalOptions="Center">
-                
+
                 <Label 
                     FontSize="Large"
                     HorizontalOptions="Center"
                     Margin="0,5"
-                    Text="Iniciar sesión"
+                    Text="Recuperar Contraseña"
                     TextColor="Black"
                 />
-                
+
                 <Label 
-                    Text="Contraseña"
+                    Text="Contraseña nueva"
                     TextColor="Gray"
                     x:Name="lblUsuario"
                 />
-                
+
                 <Entry 
                     IsPassword="True"
                     Text="{Binding  Password, Mode=TwoWay}"
                     TextColor="#000F9F"
-                    x:Name="txtContrasenia"
+                 />
+
+                <Label 
+                    Text="Confirmar contraseña nueva"
+                    TextColor="Gray"
+                    x:Name="lblUsuario"
+                />
+
+                <Entry 
+                    IsPassword="True"
+                    Text="{Binding  Password, Mode=TwoWay}"
+                    TextColor="#000F9F"
                  />
 
                 <Button 
                     BackgroundColor="#FF8200"
-                    Command="{Binding ValidarPasswordCommand}"
+                    Command="{Binding RecuperarContrasenaCommand}"
                     Text="Iniciar sesión"
                     TextColor="White"
                     x:Name="btnIniciar"
                 />
-                
+
                 <ActivityIndicator
                     IsRunning ="{Binding IsRunning}"
                     VerticalOptions="CenterAndExpand"
                 />
-
-                <Label 
-                    Text="Recuperar contraseña" 
-                    TextColor="#000F9F" 
-                    TextDecorations="Underline"
-                    VerticalOptions="EndAndExpand"
-                    x:Name="txtRecuperar"
-                >
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding RecuperarCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
             </StackLayout>
         </Frame>
     </ContentPage.Content>

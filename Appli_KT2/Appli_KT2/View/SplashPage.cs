@@ -50,20 +50,40 @@ namespace Appli_KT2.View
 
         protected override async void OnAppearing()
         {
-            base.OnAppearing();
+            try
+            {
+                base.OnAppearing();
 
-            await splashImage.ScaleTo(1, 2000);
-            await splashImage.ScaleTo(0.8, 1200, Easing.Linear);
-            //await splashImage.ScaleTo(150,1200, Easing.Linear);
-            VerificarLogin();
-            VerificarConfiguracionTema();
-            Application.Current.MainPage = new NavigationPage(new MainPage());
-
+                await splashImage.ScaleTo(1, 2000);
+                await splashImage.ScaleTo(0.8, 1200, Easing.Linear);
+                //await splashImage.ScaleTo(150,1200, Easing.Linear);
+                VerificarLogin();
+                VerificarConfiguracionTema();
+                Application.Current.MainPage = new NavigationPage(new MainPage());
+            }
+            catch (Exception ex)
+            {
+                
+            }
+           
         }
 
         public void VerificarLogin()
         {
+            try
+            {
+                if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
+                {
+                }
+                else if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["contrasena"].ToString()))
+                {
 
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         public void VerificarConfiguracionTema()
