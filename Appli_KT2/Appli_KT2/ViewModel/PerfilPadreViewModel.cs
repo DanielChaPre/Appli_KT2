@@ -384,9 +384,7 @@ namespace Appli_KT2.ViewModel
                             IdAlumno = 0,
                             Nombre_Usuario = Nombre_Usuario,
                             Contrasena = Contrasena,
-                            Fecha_Registro = Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/")),
                             Estatus = "Activo",
-                        //    Alias_Red = 
                         }
                     },
                 };

@@ -1,7 +1,9 @@
 ﻿using Appli_KT2.Utils;
 using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using System;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,7 +16,9 @@ namespace Appli_KT2.ViewModel
 
         private string usuario;
         private string contrasenia;
+        private HttpClient _client;
         public ConexionWS conexion;
+        private string url;
 
         #endregion
 
@@ -52,7 +56,7 @@ namespace Appli_KT2.ViewModel
         #region Métodos
         private async void CrearCuenta()
         {
-            MainViewModel.GetInstance().CrearCuenta = new CreateCountViewModel();
+            // MainViewModel.GetInstance().CrearCuenta = new CreateCountViewModel();
             if (string.IsNullOrEmpty(this.usuario))
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Ingrese el usuario", "Acceptar");
@@ -68,22 +72,94 @@ namespace Appli_KT2.ViewModel
             {
                 if (!ValidarCurp(this.usuario.ToUpper()))
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Si se intento ingresar la curp, esta esta incorrecta", "Accept");
+                    await Application.Current.MainPage.DisplayAlert("Error", "Si se intento ingresar la curp, esta incorrecta", "Accept");
                     return;
-                }else
-                    Xamarin.Forms.Application.Current.Properties["usuarioAlumno"] = this.usuario;
+                }
+                else
+                {
+                    if (this.contrasenia.Length < 8)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Accept");
+                        return;
+                    }
+                    else
+                        RegistrarAlumno();
+
+                    //Xamarin.Forms.Application.Current.Properties["usuarioAlumno"] = this.usuario;
+                }
             }
             else
-                Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
-
-            if (this.contrasenia.Length < 8)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Accept");
+                if (this.contrasenia.Length < 8)
+                {
+                    RegistrarPerfil();
+                }
+
+            }
+                //Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+            #region comentario
+            /*
+             */
+            #endregion
+        }
+
+        public async void RegistrarAlumno()
+        {
+            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + "0" + "/" + "1";
+            var uri = new Uri(string.Format(@"" + url, string.Empty));
+            var response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<bool>(content);
+                if (result)
+                {
+                    Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                    Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
+                    MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
+                    await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage(1));
+                
+                    //Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Accept");
+                    return;
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Accept");
                 return;
             }
-            Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
-            MainViewModel.GetInstance().Registrar = new PerfilPadreViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+        }
+
+        public async void RegistrarPerfil()
+        {
+            _client = new HttpClient();
+            conexion = new ConexionWS();
+            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + "0" + "/" + "5";
+            var uri = new Uri(string.Format(@"" + url, string.Empty));
+            var response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<bool>(content);
+                if (result)
+                {
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Accept");
+                    return;
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Accept");
+                return;
+            }
         }
 
         public bool ValidarCurp(string curp)

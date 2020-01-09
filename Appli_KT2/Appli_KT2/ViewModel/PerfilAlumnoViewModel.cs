@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Appli_KT2.ViewModel
 {
-    class PerfilAlumnoViewModel
+    public class PerfilAlumnoViewModel
     {
     }
 }

@@ -16,8 +16,8 @@ namespace Appli_KT2.View
         {
             InitializeComponent();
             // lblUsuario.TranslateTo(0, 5, 0);
-            txtUsuario.Focused += animacionUsu;
-            txtContraseña.Focused += animacionPass;
+            //txtUsuario.Focused += animacionUsu;
+            //txtContraseña.Focused += animacionPass;
         }
 
         private void animacionPass(object sender, FocusEventArgs e)

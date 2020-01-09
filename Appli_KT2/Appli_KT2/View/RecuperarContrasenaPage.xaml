@@ -28,7 +28,7 @@
                 <Label 
                     Text="Contraseña nueva"
                     TextColor="Gray"
-                    x:Name="lblUsuario"
+
                 />
 
                 <Entry 
@@ -40,12 +40,11 @@
                 <Label 
                     Text="Confirmar contraseña nueva"
                     TextColor="Gray"
-                    x:Name="lblUsuario"
                 />
 
                 <Entry 
                     IsPassword="True"
-                    Text="{Binding  Password, Mode=TwoWay}"
+                    Text="{Binding  NuevaContrasena, Mode=TwoWay}"
                     TextColor="#000F9F"
                  />
 

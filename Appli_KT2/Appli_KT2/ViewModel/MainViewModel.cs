@@ -8,7 +8,10 @@ namespace Appli_KT2.ViewModel
     {
         #region propiedades
         public LoginViewModel Login { get; set; }
-        public PerfilPadreViewModel Registrar { get; set; }
+        public PerfilAlumnoViewModel RegistrarA { get; set; }
+        public PerfilEmpleadoPlantelViewModel RegistrarEP { get; set; }
+        public PerfilEmpleadoViewModel RegistrarE { get; set; }
+        public PerfilPadreViewModel RegistrarP { get; set; }
         public CreateCountViewModel CrearCuenta { get; set; }
         public MainTabbedViewModel MainTabbed { get; set; }
         public NotificacionesViewModel Notificaciones { get; set; }

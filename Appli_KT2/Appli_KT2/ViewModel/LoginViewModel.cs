@@ -168,8 +168,6 @@ namespace Appli_KT2.ViewModel
                 _client = new HttpClient();
                 conexion = new ConexionWS();
 
-
-
                 url = conexion.URL + "" + conexion.ValidarUsuario + "" + this.usuario;
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);
@@ -184,6 +182,7 @@ namespace Appli_KT2.ViewModel
                         this.IsEnable = true;
                         MainViewModel.GetInstance().Login = new LoginViewModel();
                         await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                        Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                         Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                     }
                     else
@@ -277,7 +276,6 @@ namespace Appli_KT2.ViewModel
                 "[0-9A-Z]{1}[0-9]{1}$";
                 if (Regex.IsMatch(curp, @regex))
                 {
-
                     Thread.Sleep(6000);
                     return true;
                 }
@@ -310,7 +308,7 @@ namespace Appli_KT2.ViewModel
               
                 var user = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
                 var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
-                url = conexion.URL + "" + conexion.CrearCuenta + "" + user + "/" + this.password + "/" + id;
+                url = conexion.URL + "" + conexion.CrearCuenta + "" + user + "/" + this.password + "/" + id +"/" + "1";
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)

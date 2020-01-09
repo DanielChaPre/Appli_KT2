@@ -25,9 +25,11 @@ namespace Appli_KT2.View
         PerfilPadreViewModel perfil = new PerfilPadreViewModel();
         Estados estadoS;
         bool cp = true;
-        public RegisterPage ()
+        private int tipoUsuario;
+        public RegisterPage (int tipoUsuario)
 		{
             InitializeComponent ();
+            this.tipoUsuario = tipoUsuario;
             pEstados.SelectedIndexChanged += OnPickerSelectedIndexChanged;
         }
 
@@ -40,8 +42,23 @@ namespace Appli_KT2.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            
-           
+
+            switch (this.tipoUsuario)
+            {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+            }
+
 
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {

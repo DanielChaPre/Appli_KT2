@@ -41,6 +41,7 @@ namespace Appli_KT2.Utils
         private string buscarAlumnoCurp = "/alumnocurp/";
         private string buscarColonua = "/coloniaid/";
         private string obtenerMunicipiosEstado = "/municipios/";
+        private string recuperarContrasena = "/recuperarContrasena/";
 
         public string URL
         {
@@ -117,5 +118,6 @@ namespace Appli_KT2.Utils
         public string BuscarAlumnoCurp { get => buscarAlumnoCurp; set => buscarAlumnoCurp = value; }
         public string BuscarColonia { get => buscarColonua; set => buscarColonua = value; }
         public string ObtenerMunicipiosEstado { get => obtenerMunicipiosEstado; set => obtenerMunicipiosEstado = value; }
+        public string RecuperarContrasena { get => recuperarContrasena; set => recuperarContrasena = value; }
     }
 }
