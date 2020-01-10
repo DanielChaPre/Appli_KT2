@@ -305,10 +305,30 @@ namespace Appli_KT2.ViewModel
             var encontrado = Convert.ToBoolean(Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"].ToString());
             if (encontrado)
             {
-              
+
+                if (await VerificarRegistroAlumno())
+                {
+                    var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
+                    VerificarContrasena(" ", id.ToString());
+                }
+                else
+                {
+                    CrearCuentaAlumno();
+                }
+            }
+            else
+            {
+                VerificarContrasena(this.usuario, "0");
+            }
+        }
+
+        public async void CrearCuentaAlumno()
+        {
+            try
+            {
                 var user = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
                 var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
-                url = conexion.URL + "" + conexion.CrearCuenta + "" + user + "/" + this.password + "/" + id +"/" + "1";
+                url = conexion.URL + "" + conexion.CrearCuenta + " " + "/" + this.password + "/" + id + "/" + "2";
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
@@ -331,28 +351,27 @@ namespace Appli_KT2.ViewModel
                     return;
                 }
             }
-            else
+            catch (Exception)
             {
-                url = conexion.URL + "" + conexion.ValidarContrasenia + "" + this.password;
-                var uri = new Uri(string.Format(@"" + url, string.Empty));
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
+
+                throw;
+            }
+        }
+
+        public async void VerificarContrasena(string usuario, string idAlumno)
+        {
+            url = conexion.URL + "" + conexion.ValidarContrasenia + this.password+"/"+usuario+"/" +idAlumno;
+            var uri = new Uri(string.Format(@"" + url, string.Empty));
+            var response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<bool>(content);
+                if (result)
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<bool>(content);
-                    if (result)
-                    {
-                        this.IsRunning = false;
-                        this.IsEnable = true;
-                        Application.Current.MainPage = new NavigationPage(new MainPage());
-                    }
-                    else
-                    {
-                        this.IsRunning = false;
-                        this.IsEnable = true;
-                        await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                        return;
-                    }
+                    this.IsRunning = false;
+                    this.IsEnable = true;
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {
@@ -361,6 +380,50 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
                     return;
                 }
+            }
+            else
+            {
+                this.IsRunning = false;
+                this.IsEnable = true;
+                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                return;
+            }
+        }
+
+        public  async Task<bool> VerificarRegistroAlumno()
+        {
+            try
+            {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
+                url = conexion.URL + "" + conexion.VerificarRegistroAlumno +this.password+"/"+id;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<bool>(content);
+                    if (result)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error"+ response.StatusCode, "Accept");
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error" + ex.Message, "Accept");
+                return false;
             }
         }
 

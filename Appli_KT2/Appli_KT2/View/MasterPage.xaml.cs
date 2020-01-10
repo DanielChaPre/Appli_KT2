@@ -48,8 +48,8 @@ namespace Appli_KT2.View
 
         private async void irPerfil(object sender, EventArgs e)
         {
-            App.MasterD.IsPresented = false;
-            await App.MasterD.Detail.Navigation.PushAsync(new RegisterPage());
+            //App.MasterD.IsPresented = false;
+            //await App.MasterD.Detail.Navigation.PushAsync(new RegisterPage());
         }
     }
 }
