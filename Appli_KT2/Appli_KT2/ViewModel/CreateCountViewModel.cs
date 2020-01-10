@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -19,6 +20,7 @@ namespace Appli_KT2.ViewModel
         private HttpClient _client;
         public ConexionWS conexion;
         private string url;
+        private int idAlumno;
 
         #endregion
 
@@ -72,20 +74,30 @@ namespace Appli_KT2.ViewModel
             {
                 if (!ValidarCurp(this.usuario.ToUpper()))
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Si se intento ingresar la curp, esta incorrecta", "Accept");
+                    await Application.Current.MainPage.DisplayAlert("Error", "Si se intento ingresar la curp, esta incorrecta", "Aceptar");
                     return;
                 }
                 else
                 {
                     if (this.contrasenia.Length < 8)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Accept");
+                        await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Aceptar");
                         return;
                     }
                     else
-                        RegistrarAlumno();
-
-                    //Xamarin.Forms.Application.Current.Properties["usuarioAlumno"] = this.usuario;
+                    {
+                        if (await VerificarRegistroAlumno())
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error", "El usuario ya esta registrado", "Aceptar");
+                            return;
+                        }
+                        else
+                        {
+                            if (await BuscarAlumno())
+                                return;
+                            RegistrarAlumno();
+                        }
+                    }
                 }
             }
             else
@@ -103,9 +115,82 @@ namespace Appli_KT2.ViewModel
             #endregion
         }
 
+        private async Task<bool> BuscarAlumno()
+        {
+            _client = new HttpClient();
+            conexion = new ConexionWS();
+
+            url = conexion.URL + "" + conexion.BuscarAlumnoCurp + "" + this.usuario;
+            var uri = new Uri(string.Format(@"" + url, string.Empty));
+            var response = await _client.GetAsync(uri);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                idAlumno = JsonConvert.DeserializeObject<int>(content);
+                if (idAlumno != 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "La curp coincide con una curp existente, inicie sesión de manera normal con una contraseña", "Aceptar");
+                    Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
+                    return true;
+                }
+                await Application.Current.MainPage.DisplayAlert("Error", "La curp no coincide con ningun registro existente ", "Aceptar");
+                Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
+                MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
+                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage(1));
+                return false;
+
+            }
+            else
+            {
+                //await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
+                return false;
+            }
+        }
+
+        public async Task<bool> VerificarRegistroAlumno()
+        {
+            try
+            {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
+                url = conexion.URL + "" + conexion.VerificarRegistroAlumno + this.contrasenia+ "/" + id;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<bool>(content);
+                    if (result)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
+                    return false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error" + ex.Message, "Accept");
+                return false;
+            }
+        }
+
         public async void RegistrarAlumno()
         {
-            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + "0" + "/" + "1";
+            var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
+            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + id + "/" + "2";
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
@@ -138,7 +223,7 @@ namespace Appli_KT2.ViewModel
         {
             _client = new HttpClient();
             conexion = new ConexionWS();
-            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + "0" + "/" + "5";
+            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + "0" + "/" + "1";
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)

@@ -23,7 +23,8 @@ namespace Appli_KT2.View
 
         private void VerificarLogin()
         {
-            if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
+            var usuario = (string)App.Current.Properties["usuario"];
+            if (string.IsNullOrEmpty(usuario) || usuario.Equals("")) 
             {
                 ToolbarItem icLogin = new ToolbarItem
                 {
@@ -49,7 +50,8 @@ namespace Appli_KT2.View
 
         private void OnClickCerrar(object sender, EventArgs e)
         {
-            Xamarin.Forms.Application.Current.Properties["usuario"] = "";
+            App.Current.Properties["usuario"] = string.Empty;
+            App.Current.Properties["contrasena"] = string.Empty;
             Application.Current.MainPage = new NavigationPage(new MainPage());
         }
 

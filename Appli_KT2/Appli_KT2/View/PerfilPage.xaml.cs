@@ -29,6 +29,8 @@ namespace Appli_KT2.View
         public RegisterPage (int tipoUsuario)
 		{
             InitializeComponent ();
+            frameAlumno.IsVisible = false;
+            frameAlumno.IsVisible = false;
             this.tipoUsuario = tipoUsuario;
             pEstados.SelectedIndexChanged += OnPickerSelectedIndexChanged;
         }
@@ -46,8 +48,10 @@ namespace Appli_KT2.View
             switch (this.tipoUsuario)
             {
                 case 1:
+                    frameAlumno.IsVisible = true;
                     break;
                 case 2:
+                    framePadre.IsVisible = true;
                     break;
                 case 3:
                     break;

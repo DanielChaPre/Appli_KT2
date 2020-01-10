@@ -9,13 +9,31 @@
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Registrar}"
-            >
-            <ScrollView
-                >
-                <StackLayout
-                    >
+            Padding="5">
+            <Frame
+                HeightRequest="300">
+                <StackLayout>
+                    <Image
+                        BackgroundColor="Blue"
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,0"
+                        VerticalOptions="Start"
+                        />
+                    <Button
+                        BackgroundColor="Navy"
+                        CornerRadius="150"
+                        HeightRequest="50"
+                        HorizontalOptions="End"
+                        ImageSource="ic_add_image.png"
+                        VerticalOptions="EndAndExpand"
+                        WidthRequest="50"
+                        />
+                </StackLayout>
+            </Frame>
+            <ScrollView>
+                <StackLayout>
                     <Frame
-                         IsVisible="{Binding IsAlumno, Mode=TwoWay}"
+                        x:Name="frameAlumno"
                         >
                         <StackLayout>
                             <Label
@@ -210,31 +228,11 @@
                                 WidthRequest="300"/>
                             </StackLayout>
 
-                            <StackLayout
-                            IsVisible="False"
-                            Padding="10,0"
-                            Orientation="Horizontal">
-
-                                <Button 
-                                BackgroundColor="Navy"
-                                 Command="{Binding ModificatrPerfilCommand}"
-                                Text="Modificar"
-                                TextColor="White"
-                                WidthRequest="150"/>
-
-                                <Button 
-                                BackgroundColor="Navy"
-                                Command="{Binding EliminarPerfilCommand}"
-                                Text="Eliminar"
-                                TextColor="White"
-                                WidthRequest="150"/>
-
-                            </StackLayout>
+                           
                         </StackLayout>
                     </Frame>
                     <Frame
-                        IsVisible="{Binding IsPadre, Mode=TwoWay}">
-                        
+                       x:Name="framePadre">
                         <StackLayout>
                             <Label Text="Perfil Padre de Familia"/>
                             <Label
@@ -393,57 +391,36 @@
                             <Picker
                                 SelectedItem="{Binding SelectedColonia}"
                                 Title="Colonia"
-                                x:Name="pColonia"
-                                >
-
+                                x:Name="pColonia">
                             </Picker>
-                            
-                            <StackLayout
-                            Padding="10,0"
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        >
+                        <StackLayout
                             Orientation="Horizontal">
 
-                                <Button 
+                            <Button 
                                 BackgroundColor="Navy"
-                                Command="{Binding RegistrarPerfilCommand}"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Guardar"
-                                TextColor="White"
-                                WidthRequest="300"/>
-                            </StackLayout>
-
-                            <StackLayout
-                                IsVisible="False"
-                                Padding="10,0"
-                                Orientation="Horizontal">
-
-                                <Button 
-                                BackgroundColor="Navy"
-                                    BindingContext="{Binding Registrar}"
                                  Command="{Binding ModificatrPerfilCommand}"
                                 Text="Modificar"
                                 TextColor="White"
                                 WidthRequest="150"/>
 
-                                <Button 
+                            <Button 
                                 BackgroundColor="Navy"
                                 Command="{Binding EliminarPerfilCommand}"
                                 Text="Eliminar"
                                 TextColor="White"
                                 WidthRequest="150"/>
 
-                            </StackLayout>
                         </StackLayout>
                     </Frame>
-                    <Frame
-                        Margin="10,0"
-                        VerticalOptions="Center"
-                        IsVisible="{Binding IsRun}"
-                        >
-                        <ActivityIndicator
+                    <ActivityIndicator
+                        IsVisible="False"
                             IsRunning="{Binding IsRun}"
                             Color="#fd8204"
                             />
-                    </Frame>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

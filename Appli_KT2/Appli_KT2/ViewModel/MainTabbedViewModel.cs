@@ -74,8 +74,8 @@ namespace Appli_KT2.ViewModel
 
         public async void IrPerfil()
         {
-            //MainViewModel.GetInstance().Registrar = new PerfilPadreViewModel();
-            //await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+            MainViewModel.GetInstance().RegistrarP = new PerfilPadreViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage(2));
         }
 
         public async void IrNotificaciones()
