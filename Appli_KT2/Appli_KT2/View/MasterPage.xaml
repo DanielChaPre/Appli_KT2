@@ -67,7 +67,7 @@
                             TextColor="White"
                             x:Name="btnSuredsu"
                             />
-                        <Button
+                      <!--  <Button
                             BackgroundColor="#1b213c"
                              Command="{Binding IrAtlasCommand}"
                             ImageSource="ic_action_map.png"
@@ -75,7 +75,7 @@
                             Text="Atlas de la Educación Superior"
                             TextColor="White"
                             x:Name="btnAtlas"
-                            />
+                            />-->
                         <Button
                             BackgroundColor="#0a225a"
                              Command="{Binding IrHistorialCommand}"
