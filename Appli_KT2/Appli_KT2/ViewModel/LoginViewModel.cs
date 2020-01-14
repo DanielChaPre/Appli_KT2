@@ -322,6 +322,14 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        /**
+       * Este método solo se utilizara para poder consultar el nomobre del alumno o de la persona 
+       * **/
+        //public async Task<Alumno> ConsultarAlumno(string idAlum)
+        //{
+
+        //}
+
         public async void CrearCuentaAlumno()
         {
             try
@@ -353,22 +361,23 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         public async void VerificarContrasena(string usuario, string idAlumno)
         {
+
             url = conexion.URL + "" + conexion.ValidarContrasenia + this.password+"/"+usuario+"/" +idAlumno;
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<bool>(content);
-                if (result)
+                var result = JsonConvert.DeserializeObject<int>(content);
+                if (result != 0)
                 {
+                    App.Current.Properties["tipo_usuario"] = result;
                     this.IsRunning = false;
                     this.IsEnable = true;
                     Application.Current.MainPage = new NavigationPage(new MainPage());

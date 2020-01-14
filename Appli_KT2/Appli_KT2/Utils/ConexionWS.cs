@@ -43,6 +43,7 @@ namespace Appli_KT2.Utils
         private string obtenerMunicipiosEstado = "/municipios/";
         private string recuperarContrasena = "/recuperarContrasena/";
         private string verificarRegistroAlumno = "/verificarAlumno/";
+        private string consultarUsuarioAlumno = "/usuarioalumno/";
 
         public string URL
         {
@@ -121,5 +122,6 @@ namespace Appli_KT2.Utils
         public string ObtenerMunicipiosEstado { get => obtenerMunicipiosEstado; set => obtenerMunicipiosEstado = value; }
         public string RecuperarContrasena { get => recuperarContrasena; set => recuperarContrasena = value; }
         public string VerificarRegistroAlumno { get => verificarRegistroAlumno; set => verificarRegistroAlumno = value; }
+        public string ConsultarUsuarioAlumno { get => consultarUsuarioAlumno; set => consultarUsuarioAlumno = value; }
     }
 }

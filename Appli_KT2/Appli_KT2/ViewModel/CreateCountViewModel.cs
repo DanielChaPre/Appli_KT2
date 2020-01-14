@@ -138,7 +138,7 @@ namespace Appli_KT2.ViewModel
                 Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                 Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
                 MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage(1));
+                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
                 return false;
 
             }
@@ -202,7 +202,7 @@ namespace Appli_KT2.ViewModel
                     Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                     Xamarin.Forms.Application.Current.Properties["contrasenia"] = this.contrasenia;
                     MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
-                    await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage(1));
+                    await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
                 
                     //Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
@@ -232,6 +232,7 @@ namespace Appli_KT2.ViewModel
                 var result = JsonConvert.DeserializeObject<bool>(content);
                 if (result)
                 {
+                    App.Current.Properties["tipo_usuario"] = 1;
                     Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else

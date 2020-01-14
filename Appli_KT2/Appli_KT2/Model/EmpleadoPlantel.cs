@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class Empleado : Persona, INotifyPropertyChanged
+    public class EmpleadoPlantel: Persona, INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -16,34 +16,37 @@ namespace Appli_KT2.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private int cve_empleado;
-        private string numero_empleado;
-        private string estatus;
+        private int cve_empleado_plantel;
+        private int idPlantelesES;
+        // 1.- directivo, 2.- Profesor
+        private int tipo;
         private DateTime fecha_registro;
-        private Persona personaE;
+        private Persona personaEP;
 
-        public int Cve_empleado
+        public int Cve_empleado_plantel
         {
-            get { return cve_empleado; }
-            set { cve_empleado = value;
+            get { return cve_empleado_plantel; }
+            set
+            {
+                cve_empleado_plantel = value;
                 OnPropertyChanged();
             }
         }
-        public string Numero_empleado
+        public int IdPlantelesES
         {
-            get { return numero_empleado; }
+            get { return idPlantelesES; }
             set
             {
-                numero_empleado = value;
+                idPlantelesES = value;
                 OnPropertyChanged();
             }
         }
-        public string Estatus
+        public int Tipo
         {
-            get { return estatus; }
+            get { return tipo; }
             set
             {
-                estatus = value;
+                tipo = value;
                 OnPropertyChanged();
             }
         }
@@ -56,12 +59,12 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public Persona PersonaE
+        public Persona PersonaEP
         {
-            get { return personaE; }
+            get { return personaEP; }
             set
             {
-                personaE = value;
+                personaEP = value;
                 OnPropertyChanged();
             }
         }

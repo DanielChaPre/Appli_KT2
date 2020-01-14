@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.RegisterPage"
+             BackgroundImageSource="pleca_textura.jpg"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Registro"
              BackgroundColor="White">
@@ -212,7 +213,7 @@
                             Text="Nacionalidad"/>
 
                             <Entry 
-                            Placeholder="Ingrese su acionalidad"
+                            Placeholder="Ingrese su Nacionalidad"
                             FontSize="Small"/>
 
                             <StackLayout
@@ -229,6 +230,40 @@
                             </StackLayout>
 
                            
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        x:Name="framePreguntaPadre"
+                        >
+                        <StackLayout>
+                            <StackLayout
+                                x:Name="lytPadre"
+                                >
+                                <Label 
+                                Text="¿Eres padre de Famlia"
+                                />
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    >
+                                    <Button
+                                    Text="Si"
+                                        x:Name="btnSi"
+                                    />
+                                    <Button
+                                    Text="No"
+                                        x:Name="btnNo"
+                                    />
+                                </StackLayout>
+                              
+                            </StackLayout>
+                            <StackLayout
+                                x:Name="lytCurpHijo"
+                                >
+                                <Label
+                                    Text="Ingresa la curp del su hijo"
+                                    />
+                                <Entry/>
+                            </StackLayout>
                         </StackLayout>
                     </Frame>
                     <Frame
@@ -305,7 +340,7 @@
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Hombre</x:String>
                                         <x:String>Mujer</x:String>
-                                        <x:String>No definido</x:String>
+                                        <x:String>Indistinto</x:String>
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
@@ -338,6 +373,7 @@
                                     <x:Array Type="{x:Type x:String}">
                                         <x:String>Casado</x:String>
                                         <x:String>Soltero</x:String>
+                                        <x:String>Otro</x:String>
                                     </x:Array>
                                 </Picker.ItemsSource>
                             </Picker>
@@ -351,18 +387,50 @@
                             Placeholder="Ingrese su nacionalidad"
                             FontSize="Small"/>
                             
-                                <Label 
+
+                        </StackLayout>
+                    </Frame>
+                    <!--Agregar la parte de los botones a cada frame de perfil para que le
+                    haga referencia al commando de cada perfil-->
+                    <Frame
+                        >
+                        <StackLayout
+                            Orientation="Horizontal">
+
+                            <Button 
+                                BackgroundColor="Navy"
+                                 Command="{Binding ModificatrPerfilCommand}"
+                                Text="Modificar"
+                                TextColor="White"
+                                WidthRequest="150"/>
+
+                            <Button 
+                                BackgroundColor="Navy"
+                                Command="{Binding EliminarPerfilCommand}"
+                                Text="Eliminar"
+                                TextColor="White"
+                                WidthRequest="150"/>
+
+                        </StackLayout>
+                    </Frame>
+                    <!--Realizar un frame en el cual se coloque la parte de la direccion y sea más facil y 
+                    que no se repita la direccion junto con las listas-->
+                    <Frame
+                        x:Name="frameDireccion"
+                        >
+                        <StackLayout>
+                            <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
                                     Text="Estados"/>
 
-                                <Picker
+                            <Picker
                                     SelectedItem="{Binding SelectedEstado}"
                                     Title="Estado"
                                     x:Name="pEstados"
                                 />
-                                
-                                <Label 
+
+                            <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
                             Text="Municipio"/>
@@ -393,27 +461,6 @@
                                 Title="Colonia"
                                 x:Name="pColonia">
                             </Picker>
-                        </StackLayout>
-                    </Frame>
-                    <Frame
-                        >
-                        <StackLayout
-                            Orientation="Horizontal">
-
-                            <Button 
-                                BackgroundColor="Navy"
-                                 Command="{Binding ModificatrPerfilCommand}"
-                                Text="Modificar"
-                                TextColor="White"
-                                WidthRequest="150"/>
-
-                            <Button 
-                                BackgroundColor="Navy"
-                                Command="{Binding EliminarPerfilCommand}"
-                                Text="Eliminar"
-                                TextColor="White"
-                                WidthRequest="150"/>
-
                         </StackLayout>
                     </Frame>
                     <ActivityIndicator
