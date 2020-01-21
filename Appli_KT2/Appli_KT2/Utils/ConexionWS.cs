@@ -7,6 +7,7 @@ namespace Appli_KT2.Utils
     public class ConexionWS
     {
         private string url = "http://applikt.utleon.edu.mx/webservicesapplikt/Service1.svc";
+        private string url2 = "http://localhost:50681/Service1.svc/";
         private string validarUsuario = "/validarUsuario/";
         private string validarContasenia = "/validarContrasenia/";
         private string crearCuenta = "/crearCuenta/";
@@ -48,6 +49,11 @@ namespace Appli_KT2.Utils
         public string URL
         {
             get { return this.url; }
+        }
+
+        public string URL2
+        {
+            get { return this.url2; }
         }
 
         public string ValidarUsuario

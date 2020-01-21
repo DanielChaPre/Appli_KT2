@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class PadreFamilia : Persona , INotifyPropertyChanged
+    public class PadreFamilia : Persona, INotifyPropertyChanged
     {
         public int cve_padre_familia;
         public int idAlumno;

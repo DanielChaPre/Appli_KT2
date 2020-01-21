@@ -1,4 +1,5 @@
 ﻿using Appli_KT2.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,8 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class Persona : Usuario, INotifyPropertyChanged
+    [JsonObject]
+    public class Persona : BaseViewModel ,INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -28,17 +30,21 @@ namespace Appli_KT2.Model
         private string nacionalidad;
         private string municipio;
         private int idColonia;
-        private Usuario usuario;
+        private Usuario usuario = new Usuario();
 
+        //[JsonProperty("Nombre")]
         public string Nombre {
-            get { return nombre; }
+            get {
+                return nombre;
+            }
             set
             {
                 nombre = value;
                 OnPropertyChanged();
             }
         }
-        public int CVE_Persona
+      //[JsonProperty("CVE_Persona")]
+        public int Cve_Persona
         {
             get { return this.cve_persona; }
             set
@@ -47,6 +53,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("Apellido_Paterno")]
         public string Apellido_Paterno
         {
             get { return this.apellido_paterno; }
@@ -56,6 +63,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+       //[JsonProperty("Apellido_Materno")]
         public string Apellido_Materno
         {
             get { return this.apellido_materno; }
@@ -65,6 +73,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("RFC")]
         public string RFC
         {
             get { return this.rfc; }
@@ -74,6 +83,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("CURP")]
         public string CURP
         {
             get { return this.curp; }
@@ -83,6 +93,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("Sexo")]
         public string Sexo
         {
             get { return this.sexo; }
@@ -92,6 +103,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("Fecha_Nacimiento")]
         public DateTime Fecha_Nacimiento
         {
             get { return this.fecha_nacimiento; }
@@ -101,6 +113,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("Numero_Telefono")]
         public string Numero_Telefono
         {
             get { return this.numero_telefono; }
@@ -110,6 +123,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("Estado_Civil")]
         public int Estado_Civil
         {
             get { return this.estado_civil; }
@@ -119,6 +133,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("Nacionalidad")]
         public string Nacionalidad
         {
             get { return this.nacionalidad; }
@@ -128,6 +143,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("Municipio")]
         public string Municipio
         {
             get { return this.municipio; }
@@ -137,6 +153,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        //[JsonProperty("IdColonia")]
         public int IdColonia
         {
             get { return this.idColonia; }
@@ -146,7 +163,8 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public Usuario UsuarioP
+        //[JsonProperty("Usuario")]
+        public Usuario Usuario
         {
             get { return this.usuario; }
             set
@@ -155,5 +173,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+
+
     }
 }

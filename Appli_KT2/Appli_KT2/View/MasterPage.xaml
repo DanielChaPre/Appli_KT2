@@ -19,11 +19,11 @@
                 Margin="0,0,0,-10"   
                    >
                 <Label
-                    FontSize="Title"
+                    FontSize="Subtitle"
                     HorizontalOptions="Center"
-                    Text="Nombre del usuario"
                     TextColor="White"
                     VerticalOptions="End"
+                    x:Name="lblNombreUsuario"
                     />
             </Frame>
         <Frame 
@@ -40,6 +40,15 @@
                         HeightRequest="550"
                         VerticalOptions="FillAndExpand"
                         >
+                        <Button
+                            BackgroundColor="#0a225a"
+                            Command="{Binding IrLoginCommand}"
+                            ImageSource="ic_cuenta.png"
+                            Padding="25,0,20,0"
+                            Text="Inicia sesión o crea una cuenta"
+                            TextColor="White"
+                            x:Name="btnIniciar"
+                            />
                         <Button
                             BackgroundColor="#0a225a"
                             Command="{Binding IrPerfilCommand}"

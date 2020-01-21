@@ -318,7 +318,7 @@ namespace Appli_KT2.ViewModel
             }
             else
             {
-                VerificarContrasena(this.usuario, "0");
+                VerificarContrasena(App.Current.Properties["usuario"].ToString(), "0");
             }
         }
 

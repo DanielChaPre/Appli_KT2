@@ -9,7 +9,6 @@
 
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Registrar}"
             Padding="5">
             <Frame
                 HeightRequest="300">
@@ -33,6 +32,7 @@
             </Frame>
             <ScrollView>
                 <StackLayout>
+                    <!--Alumno-->
                     <Frame
                         x:Name="frameAlumno"
                         >
@@ -232,6 +232,7 @@
                            
                         </StackLayout>
                     </Frame>
+                    <!--Pregunta al Padre de Familia-->
                     <Frame
                         x:Name="framePreguntaPadre"
                         >
@@ -240,17 +241,23 @@
                                 x:Name="lytPadre"
                                 >
                                 <Label 
-                                Text="¿Eres padre de Famlia"
+                                    HorizontalOptions="Center"
+                                Text="¿Eres padre de familia?"
                                 />
                                 <StackLayout
+                                    HorizontalOptions="Center"
                                     Orientation="Horizontal"
                                     >
                                     <Button
-                                    Text="Si"
+                                        BackgroundColor="Navy"
+                                        Text="Si"
+                                        TextColor="White"
                                         x:Name="btnSi"
                                     />
                                     <Button
-                                    Text="No"
+                                        BackgroundColor="Navy"
+                                         Text="No"
+                                        TextColor="White"
                                         x:Name="btnNo"
                                     />
                                 </StackLayout>
@@ -266,6 +273,7 @@
                             </StackLayout>
                         </StackLayout>
                     </Frame>
+                    <!--Padre Familia-->
                     <Frame
                        x:Name="framePadre">
                         <StackLayout>
@@ -390,31 +398,311 @@
 
                         </StackLayout>
                     </Frame>
-                    <!--Agregar la parte de los botones a cada frame de perfil para que le
-                    haga referencia al commando de cada perfil-->
+                    <!--Empleado-->
                     <Frame
-                        >
-                        <StackLayout
-                            Orientation="Horizontal">
+                       x:Name="frameEmpleado">
+                        <StackLayout>
+                            <Label Text="Perfil Padre de Familia"/>
+                            <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nombre(s)"/>
 
-                            <Button 
-                                BackgroundColor="Navy"
-                                 Command="{Binding ModificatrPerfilCommand}"
-                                Text="Modificar"
-                                TextColor="White"
-                                WidthRequest="150"/>
+                            <Entry
+                            Placeholder="Ingrese su Nombre(s)" 
+                            Text="{Binding Nombre, Mode=TwoWay}"
+                            FontSize="Small"/>
 
-                            <Button 
-                                BackgroundColor="Navy"
-                                Command="{Binding EliminarPerfilCommand}"
-                                Text="Eliminar"
-                                TextColor="White"
-                                WidthRequest="150"/>
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Paterno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido paterno"
+                                Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Materno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido materno"
+                                Text="{Binding Apellido_Materno ,Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="RFC"/>
+
+                            <Entry
+                            Placeholder="Ingrese su RFC" 
+                                 Text="{Binding RFC,Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP"/>
+
+                            <Entry
+                            Placeholder="Ingrese su CURP" 
+                                 Text="{Binding CURP,Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP del Hijo"/>
+
+                            <Entry
+                            Placeholder="Ingrese la curp de su hijo"
+                                Text=""
+                            FontSize="Small"/>
+
+                            <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Sexo"/>
+                            <Picker 
+                                Title="Sexo" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Hombre</x:String>
+                                        <x:String>Mujer</x:String>
+                                        <x:String>Indistinto</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Fecha Nacimiento"
+                            />
+                            <DatePicker
+                            
+                            />
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número Telefono"/>
+
+                            <Entry
+                            Placeholder="Ingrese su número de telefono"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Estado Civil"/>
+
+                            <Picker 
+                                Title="Estado Civil" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Casado</x:String>
+                                        <x:String>Soltero</x:String>
+                                        <x:String>Otro</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nacionalidad"/>
+
+                            <Entry
+                            Placeholder="Ingrese su nacionalidad"
+                            FontSize="Small"/>
+
 
                         </StackLayout>
                     </Frame>
-                    <!--Realizar un frame en el cual se coloque la parte de la direccion y sea más facil y 
-                    que no se repita la direccion junto con las listas-->
+                    <!--Empleado Plantel-->
+                    <Frame
+                       x:Name="frameEmpleadoPlantel">
+                        <StackLayout>
+                            <Label Text="Perfil Padre de Familia"/>
+                            <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nombre(s)"/>
+
+                            <Entry
+                            Placeholder="Ingrese su Nombre(s)" 
+                            Text="{Binding Nombre, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Paterno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido paterno"
+                                Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Materno"/>
+
+                            <Entry 
+                            Placeholder="Ingrese su apellido materno"
+                                Text="{Binding Apellido_Materno ,Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="RFC"/>
+
+                            <Entry
+                            Placeholder="Ingrese su RFC" 
+                                 Text="{Binding RFC,Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP"/>
+
+                            <Entry
+                            Placeholder="Ingrese su CURP" 
+                                 Text="{Binding CURP,Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="CURP del Hijo"/>
+
+                            <Entry
+                            Placeholder="Ingrese la curp de su hijo"
+                                Text=""
+                            FontSize="Small"/>
+
+                            <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Sexo"/>
+                            <Picker 
+                                Title="Sexo" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Hombre</x:String>
+                                        <x:String>Mujer</x:String>
+                                        <x:String>Indistinto</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Fecha Nacimiento"
+                            />
+                            <DatePicker
+                            
+                            />
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número Telefono"/>
+
+                            <Entry
+                            Placeholder="Ingrese su número de telefono"
+                            FontSize="Small"/>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Estado Civil"/>
+
+                            <Picker 
+                                Title="Estado Civil" >
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Casado</x:String>
+                                        <x:String>Soltero</x:String>
+                                        <x:String>Otro</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nacionalidad"/>
+
+                            <Entry
+                            Placeholder="Ingrese su nacionalidad"
+                            FontSize="Small"/>
+
+
+                        </StackLayout>
+                    </Frame>
+                    <!--Usuario General-->
+                    <Frame
+                        x:Name="frameUsuarioGeneral">
+                        <StackLayout>
+                            <ActivityIndicator
+                                Color="Navy"
+                                x:Name="actCargaForm"
+                                />
+                            <StackLayout
+                            x:Name="formularioGeneral"
+                            >
+                                <Label Text="Perfil Usuario General"/>
+                                <Label
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Nombre(s)"/>
+
+                                <Entry
+                            Placeholder="Ingrese su Nombre(s)" 
+                            Text="{Binding Nombre, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                                <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Paterno"/>
+
+                                <Entry 
+                            Placeholder="Ingrese su apellido paterno"
+                                Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                                <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Apellido Materno"/>
+
+                                <Entry 
+                            Placeholder="Ingrese su apellido materno"
+                                Text="{Binding Apellido_Materno ,Mode=TwoWay}"
+                            FontSize="Small"/>
+
+                                <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Número Telefono"/>
+
+                                <Entry
+                                Placeholder="Ingrese su número de telefono"
+                                Text="{Binding Numero_Telefono, Mode=TwoWay}"
+                                FontSize="Small"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <!--Direccion-->
                     <Frame
                         x:Name="frameDireccion"
                         >
@@ -440,7 +728,6 @@
                                 Title="Municipio"
                                 x:Name="pMunicipio"
                                 />
-
                             <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
@@ -463,11 +750,49 @@
                             </Picker>
                         </StackLayout>
                     </Frame>
-                    <ActivityIndicator
-                        IsVisible="False"
-                            IsRunning="{Binding IsRun}"
-                            Color="#fd8204"
-                            />
+                    <!--Botones-->
+                    <Frame
+                        x:Name="frameBotones"
+                        >
+                        <StackLayout>
+                            <ActivityIndicator
+                                IsVisible="False"
+                                IsRunning="{Binding IsRun}"
+                                Color="#fd8204"
+                                />
+                            <StackLayout
+                                  x:Name="slytInsertar"
+                                >
+                                <Button 
+                                    BackgroundColor="Navy"
+                                     Command="{Binding InsertarPerfilCommand}"
+                                    Text="Guardar"
+                                    TextColor="White"
+                                    WidthRequest="150"/>
+                            </StackLayout>
+                            <StackLayout
+                            Orientation="Horizontal"
+                                x:Name="slytAcciones">
+
+                                <Button 
+                                    BackgroundColor="Navy"
+                                     Command="{Binding ActualizarPerfilCommand}"
+                                    Text="Modificar"
+                                    TextColor="White"
+                                    WidthRequest="150"/>
+
+                                <Button 
+                                    BackgroundColor="Navy"
+                                    Command="{Binding DesactivarPerfilCommand}"
+                                    Text="Eliminar"
+                                    TextColor="White"
+                                    WidthRequest="150"/>
+
+                            </StackLayout>
+                        </StackLayout>
+                       
+                    </Frame>
+                   
                 </StackLayout>
             </ScrollView>
         </StackLayout>

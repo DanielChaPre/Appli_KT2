@@ -202,64 +202,10 @@ namespace Appli_KT2.ViewModel
         }
         #endregion
 
-        #region Alumno
-        public ICommand RegistrarAlumnoCommand
-        {
-            get
-            {
-                return new RelayCommand(RegistarAlumno);
-            }
-        }
-
-        public ICommand ModificarAlumnoCommand
-        {
-            get
-            {
-                return new RelayCommand(ModificarAlumno);
-            }
-        }
-
-        public ICommand EliminarAlumnoCommand
-        {
-            get
-            {
-                return new RelayCommand(EliminarAlumno);
-            }
-        }
-
-        public ICommand ConsultarAlumnoCommand
-        {
-            get
-            {
-                return new RelayCommand(ConsultarAlumno);
-            }
-        }
-        #endregion
 
         #endregion
 
         #region Metodos
-        private void RegistarAlumno()
-        {
-            
-        }
-
-        private void ConsultarAlumno()
-        {
-            
-        }
-
-        private void EliminarAlumno()
-        {
-           
-        }
-
-        private void ModificarAlumno()
-        {
-            
-        }
-
-
         private  void ObtenerEstados()
         {
              MainViewModel.GetInstance().Estados = new EstadosViewModel();
@@ -379,11 +325,11 @@ namespace Appli_KT2.ViewModel
                         Nacionalidad = Nacionalidad,
                         Municipio = Municipio,
                          // IdColonia = ,
-                         UsuarioP = new Usuario()
+                         Usuario = new Usuario()
                         {
                             IdAlumno = 0,
-                            Nombre_Usuario = Nombre_Usuario,
-                            Contrasena = Contrasena,
+                            Nombre_Usuario = Usuario.Nombre_Usuario,
+                            Contrasena = Usuario.Contrasena,
                             Estatus = "Activo",
                         }
                     },

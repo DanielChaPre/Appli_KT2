@@ -19,13 +19,6 @@
 		public MainTabbedPage()
 		{
             InitializeComponent ();
-          // // new Xamarin.Forms.TabbedPage().On<Android>().SetIsSwipePagingEnabled(false);
-          // // new Xamarin.Forms.TabbedPage().On<Android>().IsSwipePagingEnabled();
-          // // new Xamarin.Forms.TabbedPage().On<Android>().EnableSwipePaging();
-          //  new Xamarin.Forms.TabbedPage().On<Android>().DisableSwipePaging();
-
-          //  On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
-          ////  On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
             icNotificacion.Clicked += onClickIc;
             icShare.Clicked += OnClickShare;
            // icLogin.Clicked += OnCLickLogin;

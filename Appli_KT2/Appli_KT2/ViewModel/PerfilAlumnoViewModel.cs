@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Appli_KT2.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Appli_KT2.ViewModel
 {
-    public class PerfilAlumnoViewModel
+    public class PerfilAlumnoViewModel : Alumno
     {
+
     }
 }

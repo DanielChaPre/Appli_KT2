@@ -12,44 +12,76 @@ namespace Appli_KT2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MasterPage : ContentPage
 	{
+        private int tipo_usuario;
 		public MasterPage ()
 		{
 			InitializeComponent ();
-            //btnPerfil.Clicked += irPerfil;
-            //btnAtlas.Clicked += irAtlas;
-            //btnHistorial.Clicked += irHistorial;
-            //btnNotificaciones.Clicked += irNotificaciones;
-            //btnSuredsu.Clicked += irSuredsu;
+            this.tipo_usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString());
+            AccesoUsuario();
+            lblNombreUsuario.Text = App.Current.Properties["nombreUsuario"].ToString();
         }
 
-        private async void irSuredsu(object sender, EventArgs e)
+        public void AccesoUsuario()
         {
-            App.MasterD.IsPresented = false;
-            await App.MasterD.Detail.Navigation.PushAsync(new SuredsuPage());
+            switch (this.tipo_usuario)
+            {
+                case 0:
+                    btnIniciar.IsVisible = true;
+                    btnPerfil.IsVisible = false;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+                case 1:
+                    btnIniciar.IsVisible = false;
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true; 
+                    btnSuredsu.IsVisible = true;
+                    break;
+                case 2:
+                    btnIniciar.IsVisible = true;
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+                case 3:
+                    btnIniciar.IsVisible = true;
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+                case 4:
+                    btnIniciar.IsVisible = true;
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+                case 5:
+                    btnIniciar.IsVisible = true;
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+                case 6:
+                    btnIniciar.IsVisible = true;
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+                default:
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+            }
         }
-
-        private async void irNotificaciones(object sender, EventArgs e)
-        {
-            App.MasterD.IsPresented = false;
-            await App.MasterD.Detail.Navigation.PushAsync(new NotificacionesPage());
-        }
-
-        private async void irHistorial(object sender, EventArgs e)
-        {
-            App.MasterD.IsPresented = false;
-            await App.MasterD.Detail.Navigation.PushAsync(new HistorialPage());
-        }
-
-        private async void irAtlas(object sender, EventArgs e)
-        {
-            App.MasterD.IsPresented = false;
-            await App.MasterD.Detail.Navigation.PushAsync(new AtlasPage());
-        }
-
-        private async void irPerfil(object sender, EventArgs e)
-        {
-            App.MasterD.IsPresented = false;
-            await App.MasterD.Detail.Navigation.PushAsync(new RegisterPage());
-        }
+        
     }
 }

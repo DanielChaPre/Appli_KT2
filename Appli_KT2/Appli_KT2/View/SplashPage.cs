@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
 using Xamarin.Forms;
 
 namespace Appli_KT2.View
@@ -11,6 +11,8 @@ namespace Appli_KT2.View
 	{
         Image splashImage;
         Image secondImage;
+        ActivityIndicator activityIndicator;
+        Label lblCarga;
 		public SplashPage ()
 		{
             NavigationPage.SetHasNavigationBar(this, false);
@@ -29,13 +31,35 @@ namespace Appli_KT2.View
                 WidthRequest = 200,
                 HeightRequest = 200
             };
+
+            activityIndicator = new ActivityIndicator
+            {
+                Color = Color.Orange
+            };
+
+            lblCarga = new Label
+            {
+                TextColor = Color.White,
+                FontSize = 25,
+                Text = "Cargando...",
+                IsVisible = false
+                
+            };
+
             AbsoluteLayout.SetLayoutFlags(splashImage, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(splashImage, new Rectangle(0.5, 0.5, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+            AbsoluteLayout.SetLayoutBounds(splashImage, new Rectangle(0.5, 0.3, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
             AbsoluteLayout.SetLayoutFlags(secondImage, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(secondImage, new Rectangle(0.5, 0.8, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+            AbsoluteLayout.SetLayoutBounds(secondImage, new Rectangle(0.5, 0.5, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+            AbsoluteLayout.SetLayoutFlags(lblCarga, AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(lblCarga, new Rectangle(0.5, 0.7, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+            AbsoluteLayout.SetLayoutFlags(activityIndicator, AbsoluteLayoutFlags.PositionProportional);
+            AbsoluteLayout.SetLayoutBounds(activityIndicator, new Rectangle(0.5, 0.8, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
 
             sub.Children.Add(splashImage);
             sub.Children.Add(secondImage);
+          //  sub.Children.Add(progressBar);
+            sub.Children.Add(activityIndicator);
+            sub.Children.Add(lblCarga);
 
              this.BackgroundColor = Color.FromHex("#110791");
           //  this.BackgroundColor = Color.White;
@@ -48,24 +72,43 @@ namespace Appli_KT2.View
          * y que se esta cargando el login y la configuraciones del tema
          * **/
 
+            /*
+             * Crear un metodo junto con un label indicando que esta cargando tanto el inicio de sesion
+             * commo la configuracion esto para darle versatibilidad y elegancion en la presentacion
+             * 
+             */
+
         protected override async void OnAppearing()
         {
             try
             {
                 base.OnAppearing();
-
+                lblCarga.IsVisible = true;
+                activityIndicator.IsRunning = true;
                 await splashImage.ScaleTo(1, 2000);
                 await splashImage.ScaleTo(0.8, 1200, Easing.Linear);
-                //await splashImage.ScaleTo(150,1200, Easing.Linear);
-                VerificarLogin();
-                VerificarConfiguracionTema();
+                lblCarga.IsVisible = false;
+                activityIndicator.IsRunning = false;
+                SesionPrueba();
+              //  VerificarLogin();
+                //VerificarConfiguracionTema();
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
             catch (Exception ex)
             {
                 
             }
-           
+        }
+
+        public void SesionPrueba()
+        {
+            //App.Current.Properties["usuario"] = "fer.hdez.sierra9647@gmail.com";
+            //App.Current.Properties["contrasena"] = "Q1*queen";
+            App.Current.Properties["usuario"] = "danchavez197@gmail.com";
+            App.Current.Properties["contrasena"] = "D@niel1998";
+            App.Current.Properties["tipo_usuario"] = 1;
+            App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
+            return;
         }
 
         public void VerificarLogin()
@@ -74,10 +117,13 @@ namespace Appli_KT2.View
             {
                 if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
                 {
+                    App.Current.Properties["tipo_usuario"] = 1;
+                    return;
                 }
                 else if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["contrasena"].ToString()))
                 {
-
+                    App.Current.Properties["tipo_usuario"] = 1;
+                    return;
                 }
             }
             catch (Exception ex)
