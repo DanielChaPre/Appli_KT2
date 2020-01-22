@@ -2,6 +2,7 @@
 using Appli_KT2.Utils;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -19,11 +20,13 @@ namespace Appli_KT2.ViewModel
         private ConexionWS conexion;
         [JsonProperty("persona")]
         private Persona entpersona;
-        private entpersona objeto;
+        private RootObject rootObject;
+        private Entpersona objeto;
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
         private Colonia _selectedColonia;
         private Estados entEstados;
+        MetodosHTTP metodosHTTP;
         private bool isrun;
 
         public bool IsRun
@@ -92,7 +95,8 @@ namespace Appli_KT2.ViewModel
         {
             get
             {
-                return new RelayCommand(InsertarPerfil);
+               // return new RelayCommand(InsertarPerfil);
+                return new RelayCommand(InsertarPersona);
             }
         }
 
@@ -112,48 +116,25 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        private async void InsertarPerfil2()
+        public async void InsertarPersona()
         {
-            try
-            {
-             
-                  conexion = new ConexionWS();
-                  var client = new HttpClient();
-                    client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
-                  var content = new StringContent(
-                      JsonConvert.SerializeObject(new { Nombre = Nombre, Apellido_Paterno = Apellido_Paterno, Apellido_Materno = Apellido_Materno, Numero_Telefono = Numero_Telefono }));
-                  client.Timeout = TimeSpan.FromMilliseconds(2000);
-                  var result = await client.PostAsync(conexion.URL + conexion.CrearPerfil, content).ConfigureAwait(false);
-                  if (result.IsSuccessStatusCode)
-                  {
-                      var tokenJson = await result.Content.ReadAsStringAsync();
-                  }
-                  else
-                  {
-                      //   response.Content;
-                      Console.WriteLine("Error: " + result.ReasonPhrase);
-                      Console.WriteLine("Error: " + result.Content);
-
-                      await Application.Current.MainPage.DisplayAlert("Error", @"\t No se pudo guardar la persona " + result.Content.ToString(), "Accept");
-                      return;
-                  }
-            }
-            catch (HttpRequestException ex)
-            {
-
-                throw;
-            }
-         
+            metodosHTTP = new MetodosHTTP();
+            conexion = new ConexionWS();
+            LlenarDatos();
+            string json = JsonConvert.SerializeObject(rootObject);
+            dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearPerfil,json);
+            await ConsultarUsuarioGeneral();
+            return;
         }
 
-        private async void InsertarPerfil()
+      /*  private async void InsertarPerfil()
         {
             try
             {
                 LlenarDatos();
 
-                //if (this.objeto == null)
-                if (this.entpersona == null)
+               if (this.rootObject == null)
+              //  if (this.entpersona == null)
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Ingrese información", "Aceptar");
                     return;
@@ -162,10 +143,10 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 _client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json; charset=utf-8");
                 var uri = new Uri(string.Format(@"" + conexion.URL + conexion.CrearPerfil, string.Empty));
-              //  var json = JsonConvert.SerializeObject(this.objeto);
-                var json = JsonConvert.SerializeObject(entpersona);
+                var json = JsonConvert.SerializeObject(this.rootObject);
+               // var json = JsonConvert.SerializeObject(entpersona);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await _client.PostAsync(uri, content);
+                var response = await _client.PostAsync(uri, content).ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -173,7 +154,6 @@ namespace Appli_KT2.ViewModel
                     var result = JsonConvert.DeserializeObject<List<int>>(cont);
                     if (result.Count != 0 || result != null)
                     {
-
                         await Application.Current.MainPage.DisplayAlert("Error", @"\t El usuario se actualizo satisfactoriamente.", "Aceptar");
                         App.Current.Properties["cveUsuario"] = result[0].ToString();
                         App.Current.Properties["cvePersona"] = result[1].ToString();
@@ -200,56 +180,38 @@ namespace Appli_KT2.ViewModel
 
                 throw;
             }
-        }
+        }*/
 
-        private void DesactivarPerfil()
+        private async void DesactivarPerfil()
         {
+            try
+            {
+                metodosHTTP = new MetodosHTTP();
+                conexion = new ConexionWS();
+                LlenarDatos();
+                string json = JsonConvert.SerializeObject(rootObject);
+                dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.CrearPerfil, json);
+                await ConsultarUsuarioGeneral();
+                return;
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
+                return;
+            }
         }
 
         private async void ActualizarPerfil()
         {
             try
             {
-                LlenarDatos();
-                if (this.entpersona == null)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Ingrese información", "Aceptar");
-                    return;
-                }
-                _client = new HttpClient();
+                metodosHTTP = new MetodosHTTP();
                 conexion = new ConexionWS();
-                var  url = conexion.URL + "" + conexion.ModificarPerfil;
-                var uri = new Uri(string.Format(@"" + url, string.Empty));
-                var json = JsonConvert.SerializeObject(this.entpersona);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = null;
-                response = await _client.PutAsync(uri, content);
-                if (response.IsSuccessStatusCode)
-                {
-                    var cont = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<bool>(cont);
-                    if (result)
-                    {
-                        Console.WriteLine(@"\t .");
-                        await Application.Current.MainPage.DisplayAlert("Error", @"\t El usuario se actualizo satisfactoriamente.", "Aceptar");
-                        await ConsultarUsuarioGeneral();
-                        return;
-                    }
-                    else
-                    {
-                        Console.WriteLine(@"\t Cliente successfully saved.");
-                        await Application.Current.MainPage.DisplayAlert("Error", @"\t El usuario no se actualizo de manera satisfactoria.", "Aceptar");
-                        return;
-                    }
-                    // Debug.WriteLine(@"\tTodoItem successfully saved.");
-                    
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", @"\t No se pudo guardar la persona "+response.StatusCode, "Accept");
-                    return;
-                }
-
+                LlenarDatos();
+                string json = JsonConvert.SerializeObject(rootObject);
+                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.CrearPerfil, json);
+                await ConsultarUsuarioGeneral();
+                return;
             }
             catch (Exception ex)
             {
@@ -262,7 +224,38 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-                //objeto = new entpersona()
+                rootObject = new RootObject()
+                {
+                    entpersona = new Entpersona()
+                    {
+                        Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
+                        Nombre = Nombre,
+                        Apellido_Paterno = Apellido_Paterno,
+                        Apellido_Materno = Apellido_Materno,
+                        RFC = "N/A",
+                        CURP = "N/A",
+                        Sexo = "Sin especificar",
+                        Fecha_Nacimiento = "01/01/0001",
+                        Numero_Telefono = Numero_Telefono,
+                        Estado_Civil = 0,
+                        Nacionalidad = "N/A",
+                        Municipio = "N/A",
+                        IdColonia = 0,
+                        Usuario = new Usuario()
+                        {
+                            Cve_Usuario = Convert.ToInt32(App.Current.Properties["cveUsuario"].ToString()),
+                            IdAlumno = 0,
+                            Nombre_Usuario = App.Current.Properties["usuario"].ToString(),
+                            Contrasena = App.Current.Properties["contrasena"].ToString(),
+                            Estatus = "Activo",
+                            Alias_Red = "N/A",
+                            Fecha_Registro = "01/01/0001",
+                            Tipo_Usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString()),
+                            Ruta_Imagen = "N/A"
+                        }
+                    }
+                };
+                //objeto = new Entpersona()
                 //{
                 //    persona = new Persona()
                 //    {
@@ -286,36 +279,38 @@ namespace Appli_KT2.ViewModel
                 //            Nombre_Usuario = App.Current.Properties["usuario"].ToString(),
                 //            Contrasena = App.Current.Properties["contrasena"].ToString(),
                 //            Estatus = "Activo",
-                //            Alias_Red = "N/A"
+                //            Alias_Red = "N/A",
+                //            Tipo_Usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString()),
+                //            Ruta_Imagen ="N/A"
                 //        }
                 //    }
                 //};
-                entpersona = new Persona()
-                {
-                    Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
-                    Nombre = Nombre,
-                    Apellido_Paterno = Apellido_Paterno,
-                    Apellido_Materno = Apellido_Materno,
-                    RFC = "N/A",
-                    CURP = "N/A",
-                    Sexo = "Sin especificar",
-                    Fecha_Nacimiento = Fecha_Nacimiento,
-                    Numero_Telefono = Numero_Telefono,
-                    Estado_Civil = 0,
-                    Nacionalidad = "N/A",
-                    Municipio = "N/A",
-                    IdColonia = 0,
-                    Usuario = new Usuario()
-                    {
-                        Cve_Usuario = Convert.ToInt32(App.Current.Properties["cveUsuario"].ToString()),
-                        IdAlumno = 0,
-                        Nombre_Usuario = App.Current.Properties["usuario"].ToString(),
-                        Contrasena = App.Current.Properties["contrasena"].ToString(),
-                        Estatus = "Activo",
-                        Alias_Red = "N/A"
-                    }
+                //entpersona = new Persona()
+                //{
+                //    Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
+                //    Nombre = Nombre,
+                //    Apellido_Paterno = Apellido_Paterno,
+                //    Apellido_Materno = Apellido_Materno,
+                //    RFC = "N/A",
+                //    CURP = "N/A",
+                //    Sexo = "Sin especificar",
+                //    Fecha_Nacimiento = Fecha_Nacimiento,
+                //    Numero_Telefono = Numero_Telefono,
+                //    Estado_Civil = 0,
+                //    Nacionalidad = "N/A",
+                //    Municipio = "N/A",
+                //    IdColonia = 0,
+                //    Usuario = new Usuario()
+                //    {
+                //        Cve_Usuario = Convert.ToInt32(App.Current.Properties["cveUsuario"].ToString()),
+                //        IdAlumno = 0,
+                //        Nombre_Usuario = App.Current.Properties["usuario"].ToString(),
+                //        Contrasena = App.Current.Properties["contrasena"].ToString(),
+                //        Estatus = "Activo",
+                //        Alias_Red = "N/A"
+                //    }
 
-                };
+                //};
             }
             catch (Exception ex)
             {
@@ -344,7 +339,7 @@ namespace Appli_KT2.ViewModel
                     if (persona != null)
                     {
                         Cve_Persona = persona.Cve_Persona;
-                        Nombre = persona.Nombre;
+                        Nombre = persona.Nombre; 
                         Apellido_Paterno = persona.Apellido_Paterno;
                         Apellido_Materno = persona.Apellido_Materno;
                         Numero_Telefono = persona.Numero_Telefono;
@@ -379,9 +374,26 @@ namespace Appli_KT2.ViewModel
         #endregion
     }
 
-    public class entpersona
+    public class Entpersona
     {
-       // [JsonProperty("entpersona")]
-        public Persona persona { get; set; }
+        public string Nombre { get; set; }
+        public int Cve_Persona { get; set; }
+        public string Apellido_Paterno { get; set; }
+        public string Apellido_Materno { get; set; }
+        public string RFC { get; set; }
+        public string CURP { get; set; }
+        public string Sexo { get; set; }
+        public string Fecha_Nacimiento { get; set; }
+        public string Numero_Telefono { get; set; }
+        public int Estado_Civil { get; set; }
+        public string Nacionalidad { get; set; }
+        public string Municipio { get; set; }
+        public int IdColonia { get; set; }
+        public Usuario Usuario { get; set; }
+    }
+
+    public class RootObject
+    {
+        public Entpersona entpersona { get; set; }
     }
 }
