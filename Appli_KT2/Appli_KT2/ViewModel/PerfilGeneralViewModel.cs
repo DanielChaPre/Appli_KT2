@@ -339,7 +339,7 @@ namespace Appli_KT2.ViewModel
                     if (persona != null)
                     {
                         Cve_Persona = persona.Cve_Persona;
-                        Nombre = persona.Nombre;
+                        Nombre = persona.Nombre; 
                         Apellido_Paterno = persona.Apellido_Paterno;
                         Apellido_Materno = persona.Apellido_Materno;
                         Numero_Telefono = persona.Numero_Telefono;
