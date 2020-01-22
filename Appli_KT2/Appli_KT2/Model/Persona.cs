@@ -24,7 +24,7 @@ namespace Appli_KT2.Model
         private string rfc;
         private string curp;
         private string sexo;
-        private DateTime fecha_nacimiento;
+        private string fecha_nacimiento;
         private string numero_telefono;
         private int estado_civil;
         private string nacionalidad;
@@ -104,7 +104,7 @@ namespace Appli_KT2.Model
             }
         }
         //[JsonProperty("Fecha_Nacimiento")]
-        public DateTime Fecha_Nacimiento
+        public String Fecha_Nacimiento
         {
             get { return this.fecha_nacimiento; }
             set
@@ -176,4 +176,6 @@ namespace Appli_KT2.Model
 
 
     }
+
+
 }
