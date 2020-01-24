@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Appli_KT2.ViewModel
 {
@@ -14,9 +15,8 @@ namespace Appli_KT2.ViewModel
 
         private string estado;
         private List<Municipios> lstMunicipios = new List<Municipios>();
-        public MunicipioViewModel(string estado)
+        public MunicipioViewModel()
         {
-            this.estado = estado;
             ObtenerMunicipios();
         }
 
@@ -26,12 +26,13 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        private async void ObtenerMunicipios()
+        public async void ObtenerMunicipios()
         {
             try
             {
                 var _client = new HttpClient();
                 var conexion = new ConexionWS();
+                this.estado = App.Current.Properties["NombreEstado"].ToString();
                 var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerMunicipiosEstado + estado, string.Empty));
                 HttpResponseMessage response = await _client.GetAsync(uri);
 
@@ -43,8 +44,6 @@ namespace Appli_KT2.ViewModel
                     {
                         var entMunicipios = new Municipios()
                         {
-                            
-
                             IdMunicipio = listaMunicipios[i].IdMunicipio,
                             NombreMunicipio = listaMunicipios[i].NombreMunicipio,
                             IdEstado = listaMunicipios[i].IdEstado
@@ -53,6 +52,7 @@ namespace Appli_KT2.ViewModel
                     }
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListMunicipios = this.lstMunicipios;
+                  //  return true;
                 }
             }
             catch (Exception ex)

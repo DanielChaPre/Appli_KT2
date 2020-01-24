@@ -16,6 +16,6 @@ namespace Appli_KT2.Model
         public string Municipio { get; set; }
         public string Turno { get; set; }
         public string subsistemaSices { get; set; }
-        public int Activo { get; set; }
+        public bool Activo { get; set; }
     }
 }

@@ -104,9 +104,10 @@ namespace Appli_KT2.View
         {
             //App.Current.Properties["usuario"] = "fer.hdez.sierra9647@gmail.com";
             //App.Current.Properties["contrasena"] = "Q1*queen";
-            App.Current.Properties["usuario"] = "danchavez197@gmail.com";
-            App.Current.Properties["contrasena"] = "D@niel19";
-            App.Current.Properties["tipo_usuario"] = 1;
+            App.Current.Properties["usuario"] = "";
+            App.Current.Properties["contrasena"] = "D@niel1998";
+            App.Current.Properties["idAlumno"] = "53408";
+            App.Current.Properties["tipo_usuario"] = 2;
             App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
             return;
         }
@@ -117,12 +118,12 @@ namespace Appli_KT2.View
             {
                 if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
                 {
-                    App.Current.Properties["tipo_usuario"] = 1;
+                    App.Current.Properties["tipo_usuario"] = 0;
                     return;
                 }
                 else if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["contrasena"].ToString()))
                 {
-                    App.Current.Properties["tipo_usuario"] = 1;
+                    App.Current.Properties["tipo_usuario"] = 0;
                     return;
                 }
             }

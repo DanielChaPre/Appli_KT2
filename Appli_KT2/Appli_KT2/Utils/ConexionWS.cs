@@ -33,6 +33,7 @@ namespace Appli_KT2.Utils
         private string consultarAlumno = "/alumno/";
         private string consultarNotificaciones = "/notificacion";
         private string obtenerPlanteles = "/planteles";
+        private string obtenerPlantelEMS = "/buscarplantelEMS/";
         private string obtenerCarreras = "/carreras";
         private string obtenerGruposSeguridad = "/gruposeguridad";
         private string obtenerColonia = "/colonia/";
@@ -129,5 +130,6 @@ namespace Appli_KT2.Utils
         public string RecuperarContrasena { get => recuperarContrasena; set => recuperarContrasena = value; }
         public string VerificarRegistroAlumno { get => verificarRegistroAlumno; set => verificarRegistroAlumno = value; }
         public string ConsultarUsuarioAlumno { get => consultarUsuarioAlumno; set => consultarUsuarioAlumno = value; }
+        public string ObtenerPlantelEMS { get => obtenerPlantelEMS; set => obtenerPlantelEMS = value; }
     }
 }

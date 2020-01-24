@@ -48,7 +48,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public Persona PersonaP
+        public Persona Persona
         {
             get { return persona; }
             set

@@ -1,15 +1,13 @@
 ﻿using Newtonsoft.Json;
 using RestSharp;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 using System.Web;
 
 namespace Appli_KT2.Utils
 {
-    public class MetodosHTTP
+    class MetodoHTTP
     {
         public dynamic Post(string url, string json, string autorizacion = null)
         {
@@ -109,7 +107,6 @@ namespace Appli_KT2.Utils
                 dynamic data = JsonConvert.DeserializeObject(datos);
 
                 return data;
-
             }
             catch (Exception ex)
             {

@@ -23,52 +23,69 @@ namespace Appli_KT2.View
 
         public void AccesoUsuario()
         {
+            /*
+             * 1: Usuario general
+             * 2: Estudiante
+             * 3: empleado
+             * 4: plantel
+             * 5: Docente
+             * 6: Directivo
+             * 7: Padre Familia
+             * **/
+
             switch (this.tipo_usuario)
             {
                 case 0:
                     btnIniciar.IsVisible = true;
                     btnPerfil.IsVisible = false;
-                    btnHistorial.IsVisible = true;
-                    btnNotificaciones.IsVisible = true;
+                    btnHistorial.IsVisible = false;
+                    btnNotificaciones.IsVisible = false;
                     btnSuredsu.IsVisible = true;
                     break;
                 case 1:
                     btnIniciar.IsVisible = false;
                     btnPerfil.IsVisible = true;
-                    btnHistorial.IsVisible = true;
-                    btnNotificaciones.IsVisible = true; 
+                    btnHistorial.IsVisible = false;
+                    btnNotificaciones.IsVisible = false;
                     btnSuredsu.IsVisible = true;
                     break;
                 case 2:
-                    btnIniciar.IsVisible = true;
+                    btnIniciar.IsVisible = false;
                     btnPerfil.IsVisible = true;
                     btnHistorial.IsVisible = true;
                     btnNotificaciones.IsVisible = true;
                     btnSuredsu.IsVisible = true;
                     break;
                 case 3:
-                    btnIniciar.IsVisible = true;
+                    btnIniciar.IsVisible = false;
                     btnPerfil.IsVisible = true;
                     btnHistorial.IsVisible = true;
                     btnNotificaciones.IsVisible = true;
                     btnSuredsu.IsVisible = true;
                     break;
                 case 4:
-                    btnIniciar.IsVisible = true;
+                    btnIniciar.IsVisible = false;
                     btnPerfil.IsVisible = true;
                     btnHistorial.IsVisible = true;
                     btnNotificaciones.IsVisible = true;
                     btnSuredsu.IsVisible = true;
                     break;
                 case 5:
-                    btnIniciar.IsVisible = true;
+                    btnIniciar.IsVisible = false;
                     btnPerfil.IsVisible = true;
                     btnHistorial.IsVisible = true;
                     btnNotificaciones.IsVisible = true;
                     btnSuredsu.IsVisible = true;
                     break;
                 case 6:
-                    btnIniciar.IsVisible = true;
+                    btnIniciar.IsVisible = false;
+                    btnPerfil.IsVisible = true;
+                    btnHistorial.IsVisible = true;
+                    btnNotificaciones.IsVisible = true;
+                    btnSuredsu.IsVisible = true;
+                    break;
+                case 7:
+                    btnIniciar.IsVisible = false;
                     btnPerfil.IsVisible = true;
                     btnHistorial.IsVisible = true;
                     btnNotificaciones.IsVisible = true;

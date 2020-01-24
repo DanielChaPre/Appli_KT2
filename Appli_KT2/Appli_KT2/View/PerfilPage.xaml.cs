@@ -11,10 +11,14 @@ using Xamarin.Forms.Xaml;
 
 namespace Appli_KT2.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RegisterPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class RegisterPage : ContentPage
+    {
         PerfilGeneralViewModel perfilGeneral;
+        PerfilAlumnoViewModel perfilAlumno;
+        PerfilEmpleadoPlantelViewModel perfilEmpleadoPlantel;
+        PerfilEmpleadoViewModel perfilEmpleado;
+        PerfilPadreViewModel perfilPadre;
         EstadosViewModel estadosViewModel = new EstadosViewModel();
         MunicipioViewModel municipiosViewModel;
         ColoniaViewModel coloniaViewModel;
@@ -39,65 +43,65 @@ namespace Appli_KT2.View
             OcultarPerfiles();
         }
 
-        private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
-        {
-            estadoS = (Estados) pEstados.SelectedItem;
-            municipiosViewModel = new MunicipioViewModel(estadoS.NombreEstado);
-        }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             FiltrarPerfil();
-           
+            LlenarListasDireccion();
         }
 
         public void FiltrarPerfil()
         {
-            /*
-             * 1: usuario general
-             * 2: Alumno
-             * 3: Empleado
-             * 4: 
-             * 5: 
-             * 6: 
-             * 
-             * **/
+             /*
+              * 1: Usuario general
+              * 2: Estudiante
+              * 3: empleado
+              * 4: plantel
+              * 5: Docente
+              * 6: Directivo
+              * 7: Padre Familia
+              * **/
             switch (this.tipoUsuario)
             {
                 case 1:
+                    //Usuario General
                     framePreguntaPadre.IsVisible = true;
                     lytPadre.IsVisible = true;
                     lytCurpHijo.IsVisible = false;
                     btnSi.Clicked += BtnSi_Clicked;
                     btnNo.Clicked += BtnNo_Clicked;
                     break;
-                case 2:
-                    frameAlumno.IsVisible = true;
-                    frameDireccion.BindingContext = new PerfilAlumnoViewModel();
-                    LlenarListasDireccion();
+                case 2://Alumno
+                    OcultarPerfiles();
+                    CargarPerfilAlumno();
                     break;
-                case 3:
-                    ConsultarEmpleado();
-                    frameDireccion.BindingContext = new PerfilEmpleadoViewModel();
-                    LlenarListasDireccion();
+                case 3://Empleado
+                    //ConsultarEmpleado();
+                    //frameDireccion.BindingContext = new PerfilEmpleadoViewModel();
+                    //LlenarListasDireccion();
+                    //OcultarPerfiles();
                     break;
-                case 4:
-                    LlenarListasDireccion();
-                    frameDireccion.BindingContext = new PerfilEmpleadoPlantelViewModel();
+                case 4://Plantel
+                    //LlenarListasDireccion();
+                    //frameDireccion.BindingContext = new PerfilEmpleadoPlantelViewModel();
                     break;
-                case 5:
-                    frameDireccion.BindingContext = new PerfilPadreViewModel();
-                    LlenarListasDireccion();
+                case 5://Docente
+                    //frameDireccion.BindingContext = new PerfilPadreViewModel();
+                    //LlenarListasDireccion();
                     break;
-                case 6:
+                case 6://Direcivo
+
+                    break;
+                case 7://Padre Familia
+                    CargarPerfilPadre();
                     break;
                 default:
-                    lytPadre.IsVisible = false;
-                    lytCurpHijo.IsVisible = true;
-                    //ConsultarPadreFamilia();
-                    framePreguntaPadre.IsVisible = false;
-                    framePadre.IsVisible = true;
+                    //lytPadre.IsVisible = false;
+                    //lytCurpHijo.IsVisible = true;
+                    ////ConsultarPadreFamilia();
+                    //framePreguntaPadre.IsVisible = false;
+                    //framePadre.IsVisible = true;
                     break;
             }
         }
@@ -107,6 +111,9 @@ namespace Appli_KT2.View
 
         public void OcultarPerfiles()
         {
+            framePreguntaPadre.IsVisible = true;
+            lytPadre.IsVisible = false;
+            lytCurpHijo.IsVisible = false;
             frameAlumno.IsVisible = false;
             frameBotones.IsVisible = false;
             frameDireccion.IsVisible = false;
@@ -128,7 +135,32 @@ namespace Appli_KT2.View
             
             //frameDireccion.BindingContext = new PerfilGeneralViewModel();
         }
-        #endregion
+
+        public async void CargarPerfilAlumno()
+        {
+            perfilAlumno = new PerfilAlumnoViewModel();
+            frameAlumno.BindingContext = perfilAlumno;
+            frameBotones.BindingContext = perfilAlumno;
+            frameDireccion.BindingContext = perfilAlumno;
+            frameAlumno.IsVisible = true;
+            frameBotones.IsVisible = true;
+            frameDireccion.IsVisible = true;
+           await perfilAlumno.ConsultarAlumno();
+            LlenarListasDireccion();
+        }
+
+        public async void CargarPerfilPadre()
+        {
+            perfilPadre = new PerfilPadreViewModel();
+            framePadre.BindingContext = perfilPadre;
+            frameBotones.BindingContext = perfilPadre;
+            framePadre.IsVisible = true;
+            frameBotones.IsVisible = true;
+            lytPadre.IsVisible = false;
+            lytCurpHijo.IsVisible = true;
+            await perfilPadre.ConsultarPadreFamilia();
+        }
+            #endregion
 
         private async void ConsultarUsuarioGeneral()
         {
@@ -148,7 +180,6 @@ namespace Appli_KT2.View
                 slytInsertar.IsVisible = true;
                 slytAcciones.IsVisible = false;
             }
-
         }
 
         public void LlenarListasDireccion()
@@ -169,14 +200,23 @@ namespace Appli_KT2.View
             {
                 try
                 {
-
-                    if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
+                    if (municipiosViewModel == null)
                     {
-                        pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
-                        pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
-                        return false;
+                        municipiosViewModel = new MunicipioViewModel();
                     }
-                    return true; // True = Repeat again, False = Stop the timer
+                    else
+                    {
+                        municipiosViewModel.ObtenerMunicipios();
+                        if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
+                        {
+                            pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
+                            pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
+                            return true;
+                        }
+                        return true; // True = Repeat again, False = Stop the timer
+                    }
+                    return true;
+                  
                 }
                 catch (NullReferenceException ex)
                 {
@@ -219,113 +259,10 @@ namespace Appli_KT2.View
 
         private void BtnSi_Clicked(object sender, EventArgs e)
         {
-            lytPadre.IsVisible = false;
-            lytCurpHijo.IsVisible = true;
-            //ConsultarPadreFamilia();
-            //framePreguntaPadre.IsVisible = false;
-            //framePadre.IsVisible = true;
+            CargarPerfilPadre();
         }
 
         #region Consultas Perfiles
-        public async void ConsultarAlumno()
-        {
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            var idAlumno = App.Current.Properties["idAlumno"];
-            var url = conexion.URL + "" + conexion.ConsultarAlumno + idAlumno;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var alumno = JsonConvert.DeserializeObject<Alumno>(content);
-                var entAlumno = GetEntAlumno(alumno);
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                return;
-            }
-        }
-
-        private static Alumno GetEntAlumno(Alumno alumno)
-        {
-            return new Alumno()
-            {
-                IdAlumno = alumno.IdAlumno,
-                Nombre1 = alumno.Nombre1,
-                ApellidoPaterno1 = alumno.ApellidoPaterno1,
-                ApellidoMaterno1 = alumno.ApellidoMaterno1,
-                CURP1 = alumno.CURP1,
-                Sexo1 = alumno.Sexo1,
-                Calle1 = alumno.Calle1,
-                NumeroExterior1 = alumno.NumeroExterior1,
-                NumeroInterior1 = alumno.NumeroInterior1,
-                Email1 = alumno.Email1,
-                Celular1 = alumno.Celular1,
-                Telefono1 = alumno.Telefono1,
-                FOLIOSUREDSU1 = alumno.FOLIOSUREDSU1,
-                FolioSUREMS1 = alumno.FolioSUREMS1,
-                IdColonia = alumno.IdColonia,
-                IdMunicipio = alumno.IdMunicipio,
-                IdPais = alumno.IdPais,
-                ClavePlantelESEC1 = alumno.ClavePlantelESEC1,
-                IdPlantelEMS = alumno.IdPlantelEMS,
-                Nacionalidad1 = alumno.Nacionalidad1
-            };
-        }
-
-        public async void ConsultarPadreFamilia()
-        {
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            var usuario = App.Current.Properties["usuario"];
-            var contrasena = App.Current.Properties["contrasenia"];
-            var url = conexion.URL + "" + conexion.ConsultarPadreFamilia + usuario + "/" + contrasena;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var padreFamilia = JsonConvert.DeserializeObject<PadreFamilia>(content);
-                var entPadreFamilia = new PadreFamilia()
-                {
-                    CVE_Padre_Familia = padreFamilia.CVE_Padre_Familia,
-                    IdAlumno = padreFamilia.IdAlumno,
-                    Fecha_Registro = padreFamilia.Fecha_Registro,
-                    PersonaP = new Persona()
-                    {
-                        Cve_Persona = padreFamilia.PersonaP.Cve_Persona,
-                        Nombre = padreFamilia.PersonaP.Nombre,
-                        Apellido_Paterno = padreFamilia.PersonaP.Apellido_Paterno,
-                        Apellido_Materno = padreFamilia.PersonaP.Apellido_Materno,
-                        RFC = padreFamilia.PersonaP.RFC,
-                        CURP = padreFamilia.PersonaP.CURP,
-                        Sexo = padreFamilia.PersonaP.Sexo,
-                        Fecha_Nacimiento = padreFamilia.PersonaP.Fecha_Nacimiento,
-                        Numero_Telefono = padreFamilia.PersonaP.Numero_Telefono,
-                        Estado_Civil = padreFamilia.PersonaP.Estado_Civil,
-                        Nacionalidad = padreFamilia.PersonaP.Nacionalidad,
-                        IdColonia = padreFamilia.PersonaP.IdColonia,
-                        Usuario = new Usuario()
-                        {
-                            Cve_Usuario = padreFamilia.PersonaP.Usuario.Cve_Usuario,
-                            IdAlumno = padreFamilia.PersonaP.Usuario.IdAlumno,
-                            Nombre_Usuario = padreFamilia.PersonaP.Usuario.Nombre_Usuario,
-                            Contrasena = padreFamilia.PersonaP.Usuario.Contrasena,
-                            Fecha_Registro = padreFamilia.PersonaP.Usuario.Fecha_Registro,
-                            Estatus = padreFamilia.PersonaP.Usuario.Estatus,
-                            Alias_Red = padreFamilia.PersonaP.Usuario.Alias_Red
-                        }
-                    }
-                };
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                return;
-            }
-        }
 
         public async void ConsultarEmpleado()
         {
@@ -340,6 +277,10 @@ namespace Appli_KT2.View
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var empleado = JsonConvert.DeserializeObject<Empleado>(content);
+                if (empleado != null)
+                {
+
+                }
                 var entEmpleado = new Empleado()
                 {
                     Cve_empleado = empleado.Cve_empleado,
@@ -432,45 +373,6 @@ namespace Appli_KT2.View
                 return;
             }
         }
-
-       
-
-        public async void ConsultarUsuarioAlumno()
-        {
-            try
-            {
-                _client = new HttpClient();
-                conexion = new ConexionWS();
-                var idAlumno = App.Current.Properties["idAlumno"];
-                var url = conexion.URL + "" + conexion.ConsultarUsuarioAlumno + idAlumno;
-                var uri = new Uri(string.Format(@"" + url, string.Empty));
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var usuario = JsonConvert.DeserializeObject<Usuario>(content);
-                    var usuarioAlumno = new Usuario()
-                    {
-                        Cve_Usuario = usuario.Cve_Usuario,
-                        IdAlumno = usuario.IdAlumno,
-                        Nombre_Usuario = usuario.Nombre_Usuario,
-                        Contrasena = usuario.Contrasena,
-                        Fecha_Registro = usuario.Fecha_Registro,
-                        Alias_Red = usuario.Alias_Red,
-                        Estatus = usuario.Estatus
-                    };
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error: " + response.StatusCode + ", existe un error en la petición", "Accept");
-                }
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error: " + ex.Message, "Accept");
-                throw;
-            }
-        } 
         #endregion
     }
 }

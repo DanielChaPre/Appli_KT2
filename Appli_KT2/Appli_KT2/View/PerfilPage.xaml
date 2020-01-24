@@ -37,199 +37,184 @@
                         x:Name="frameAlumno"
                         >
                         <StackLayout>
-                            <Label
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Nombre(s)"/>
-
-                            <Entry
-                            Placeholder="Ingrese su Nombre(s)" 
-                            Text="{Binding PersonaR.nombre, Mode=TwoWay}"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Apellido Paterno"/>
-
-                            <Entry 
-                            Placeholder="Ingrese su apellido paterno"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Apellido Materno"/>
-
-                            <Entry 
-                            Placeholder="Ingrese su apellido materno"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="CURP"/>
-
-                            <Entry
-                            Placeholder="Ingrese su CURP" 
-                            FontSize="Small"/>
-
-                            <Label 
+                            <ActivityIndicator
+                                Color="Navy"
+                                IsRunning="{Binding IsRun}"
+                                IsVisible="{Binding IsRun}"
+                                x:Name="actCargaFormAlumno"
+                                />
+                            <StackLayout
+                                IsVisible="{Binding IsVisible}"
+                                x:Name="formularioAlumno"
+                                >
+                                <Label
                                 FontSize="Subtitle"
                                 TextColor="Gray"
-                                Text="Sexo"/>
-                            <Picker 
-                                Title="Sexo" >
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Hombre</x:String>
-                                        <x:String>Mujer</x:String>
-                                        <x:String>No definido</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
+                                Text="Nombre(s)"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Calle"/>
+                                <Entry
+                                Placeholder="Ingrese su Nombre(s)" 
+                                Text="{Binding Nombre1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry
-                            Placeholder="Ingrese su calle"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Apellido Paterno"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Número Exterior"/>
+                                <Entry 
+                                Placeholder="Ingrese su apellido paterno"
+                                     Text="{Binding ApellidoPaterno1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry
-                            Placeholder="Ingrese su número de exterior"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Apellido Materno"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Número Interior"/>
+                                <Entry 
+                                     Placeholder="Ingrese su apellido materno"
+                                     Text="{Binding ApellidoMaterno1, Mode=TwoWay}"
+                                     FontSize="Small"/>
 
-                            <Entry
-                            Placeholder="Ingrese su número de interior"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="CURP"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Correo electronico"/>
+                                <Entry
+                                Placeholder="Ingrese su CURP" 
+                                     Text="{Binding CURP1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry
-                            Placeholder="Ingrese su correo electronico"
-                            FontSize="Small"/>
+                                <Label 
+                                    FontSize="Subtitle"
+                                    TextColor="Gray"
+                                    Text="Sexo"/>
+                                
+                                <Picker 
+                                    SelectedItem="{Binding Sexo}"
+                                    Title="Sexo" >
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Hombre</x:String>
+                                            <x:String>Mujer</x:String>
+                                            <x:String>Indistinto</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Número celular"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Correo electronico"/>
 
-                            <Entry
-                            Placeholder="Ingrese su número de celular"
-                            FontSize="Small"/>
+                                <Entry
+                                Placeholder="Ingrese su correo electronico"
+                                     Text="{Binding Email1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Número Telefono"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Número celular"/>
 
-                            <Entry
-                            Placeholder="Ingrese su número de telefono"
-                            FontSize="Small"/>
+                                <Entry
+                                Placeholder="Ingrese su número de celular"
+                                     Text="{Binding Celular1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry 
-                            Placeholder="Ingrese su folio SUREMS"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Número Telefono"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Folio SUREDSU"/>
+                                <Entry
+                                Placeholder="Ingrese su número de telefono"
+                                     Text="{Binding Telefono1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry 
-                            Placeholder="Ingrese su folio SUREDSU"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Folio SUREMS"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Colonia"/>
+                                <Entry 
+                                Placeholder="Ingrese su folio SUREMS"
+                                     Text="{Binding FolioSUREMS1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry 
-                            Placeholder="Ingrese su colonia"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Folio SUREDSU"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Municipio"/>
+                                <Entry 
+                                Placeholder="Ingrese su folio SUREDSU"
+                                     Text="{Binding FOLIOSUREDSU1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Picker
-                                Title="Municipio"
-                                >
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="CCT_Escuela"/>
 
-                            </Picker>
+                                <Entry 
+                                Placeholder="Ingrese el CCT de la escuela"
+                                     Text="{Binding ClavePlantelESEC1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Pais"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Procedencia_EMS"/>
 
-                            <Picker
-                                Title="Pais"
-                                >
+                                <Picker 
+                                   SelectedItem="{Binding PlantelEMS}"
+                                    Title="Escuela Medio Superior"
+                                    >
+                                </Picker>
 
-                            </Picker>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Nacionalidad"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="CCT_Escuela"/>
+                                <Entry 
+                                Placeholder="Ingrese su Nacionalidad"
+                                     Text="{Binding Nacionalidad1, Mode=TwoWay}"
+                                FontSize="Small"/>
+                                
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Número Exterior"/>
 
-                            <Entry 
-                            Placeholder="Ingrese el CCT de la escuela"
-                            FontSize="Small"/>
+                                <Entry
+                                Placeholder="Ingrese su número de exterior"
+                                     Text="{Binding NumeroExterior1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Procedencia_EMS"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Número Interior"/>
 
-                            <Picker 
-                                Title="Escuela Medio Superior"
-                                >
+                                <Entry
+                                Placeholder="Ingrese su número de interior"
+                                     Text="{Binding NumeroInterior1, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            </Picker>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Calle"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Nacionalidad"/>
-
-                            <Entry 
-                            Placeholder="Ingrese su Nacionalidad"
-                            FontSize="Small"/>
-
-                            <StackLayout
-                            Padding="10,0"
-                            Orientation="Horizontal">
-
-                                <Button 
-                                BackgroundColor="Navy"
-                                Command="{Binding RegistrarPerfilCommand}"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Guardar"
-                                TextColor="White"
-                                WidthRequest="300"/>
+                                <Entry
+                                Placeholder="Ingrese su calle"
+                                     Text="{Binding Calle1, Mode=TwoWay}"
+                                FontSize="Small"/>
                             </StackLayout>
-
-                           
                         </StackLayout>
                     </Frame>
                     <!--Pregunta al Padre de Familia-->
@@ -261,7 +246,7 @@
                                         x:Name="btnNo"
                                     />
                                 </StackLayout>
-                              
+
                             </StackLayout>
                             <StackLayout
                                 x:Name="lytCurpHijo"
@@ -394,7 +379,7 @@
                             <Entry
                             Placeholder="Ingrese su nacionalidad"
                             FontSize="Small"/>
-                            
+
 
                         </StackLayout>
                     </Frame>
@@ -761,6 +746,7 @@
                                 Color="#fd8204"
                                 />
                             <StackLayout
+                                IsVisible="{Binding IsInsertar}"
                                   x:Name="slytInsertar"
                                 >
                                 <Button 
@@ -771,7 +757,8 @@
                                     WidthRequest="150"/>
                             </StackLayout>
                             <StackLayout
-                            Orientation="Horizontal"
+                                  IsVisible="{Binding IsAcciones}"
+                                 Orientation="Horizontal"
                                 x:Name="slytAcciones">
 
                                 <Button 
@@ -790,9 +777,9 @@
 
                             </StackLayout>
                         </StackLayout>
-                       
+
                     </Frame>
-                   
+
                 </StackLayout>
             </ScrollView>
         </StackLayout>

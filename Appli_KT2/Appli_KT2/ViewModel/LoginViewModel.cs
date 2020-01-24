@@ -336,6 +336,7 @@ namespace Appli_KT2.ViewModel
             {
                 var user = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
                 var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
+                App.Current.Properties["tipo_usuario"] = 2;
                 url = conexion.URL + "" + conexion.CrearCuenta + " " + "/" + this.password + "/" + id + "/" + "2";
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);

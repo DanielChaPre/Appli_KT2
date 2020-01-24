@@ -24,6 +24,7 @@ namespace Appli_KT2.View
         private void VerificarLogin()
         {
             var usuario = (string)App.Current.Properties["usuario"];
+
             if (string.IsNullOrEmpty(usuario) || usuario.Equals("")) 
             {
                 ToolbarItem icLogin = new ToolbarItem
@@ -52,6 +53,7 @@ namespace Appli_KT2.View
         {
             App.Current.Properties["usuario"] = string.Empty;
             App.Current.Properties["contrasena"] = string.Empty;
+            App.Current.Properties["tipo_usuario"] = 0;
             Application.Current.MainPage = new NavigationPage(new MainPage());
         }
 

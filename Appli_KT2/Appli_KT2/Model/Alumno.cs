@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Appli_KT2.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class Alumno
+    public class Alumno : BaseViewModel
     {
         private int idAlumno;
         private string Nombre;
@@ -50,48 +51,349 @@ namespace Appli_KT2.Model
         private string FechaRegistro;
         private string EmailValido;
 
-        public int IdAlumno { get => idAlumno; set => idAlumno = value; }
-        public string Nombre1 { get => Nombre; set => Nombre = value; }
-        public string ApellidoPaterno1 { get => ApellidoPaterno; set => ApellidoPaterno = value; }
-        public string ApellidoMaterno1 { get => ApellidoMaterno; set => ApellidoMaterno = value; }
-        public string CURP1 { get => CURP; set => CURP = value; }
-        public string Sexo1 { get => Sexo; set => Sexo = value; }
-        public string Calle1 { get => Calle; set => Calle = value; }
-        public string NumeroExterior1 { get => NumeroExterior; set => NumeroExterior = value; }
-        public string NumeroInterior1 { get => NumeroInterior; set => NumeroInterior = value; }
-        public string Email1 { get => Email; set => Email = value; }
-        public string Celular1 { get => Celular; set => Celular = value; }
-        public string Telefono1 { get => Telefono; set => Telefono = value; }
-        public int OtroCicloEnProceso1 { get => OtroCicloEnProceso; set => OtroCicloEnProceso = value; }
-        public string MotivoNoEstudiar11 { get => MotivoNoEstudiar1; set => MotivoNoEstudiar1 = value; }
-        public string MotivoNoEstudiar21 { get => MotivoNoEstudiar2; set => MotivoNoEstudiar2 = value; }
-        public string MotivoNoEstudiar31 { get => MotivoNoEstudiar3; set => MotivoNoEstudiar3 = value; }
-        public string MeGustariaEstudiar1 { get => MeGustariaEstudiar; set => MeGustariaEstudiar = value; }
-        public string FOLIOSUREDSU1 { get => FOLIOSUREDSU; set => FOLIOSUREDSU = value; }
-        public string FolioSUREMS1 { get => FolioSUREMS; set => FolioSUREMS = value; }
-        public string Password1 { get => Password; set => Password = value; }
-        public int SeguirEstudiando1 { get => SeguirEstudiando; set => SeguirEstudiando = value; }
-        public int IdColonia { get => idColonia; set => idColonia = value; }
-        public int IdPlantelEMS { get => idPlantelEMS; set => idPlantelEMS = value; }
-        public string ClavePlantelESEC1 { get => ClavePlantelESEC; set => ClavePlantelESEC = value; }
-        public int IdCarreraES1 { get => idCarreraES1; set => idCarreraES1 = value; }
-        public int IdCarreraES2 { get => idCarreraES2; set => idCarreraES2 = value; }
-        public int IdCarreraES3 { get => idCarreraES3; set => idCarreraES3 = value; }
-        public string Nacionalidad1 { get => Nacionalidad; set => Nacionalidad = value; }
-        public string TEMP_CP1 { get => TEMP_CP; set => TEMP_CP = value; }
-        public int Paso1 { get => Paso; set => Paso = value; }
-        public string UID_Firebase1 { get => UID_Firebase; set => UID_Firebase = value; }
-        public string Actualizaciones1 { get => Actualizaciones; set => Actualizaciones = value; }
-        public string PregutaActual1 { get => PregutaActual; set => PregutaActual = value; }
-        public int Finalizo1 { get => Finalizo; set => Finalizo = value; }
-        public int TerminosAceptadso1 { get => TerminosAceptadso; set => TerminosAceptadso = value; }
-        public int IdMunicipio { get => idMunicipio; set => idMunicipio = value; }
-        public int IdPais { get => idPais; set => idPais = value; }
-        public string OtraColonia1 { get => OtraColonia; set => OtraColonia = value; }
-        public string IdMunicipioPlantel { get => idMunicipioPlantel; set => idMunicipioPlantel = value; }
-        public string IdPaisPlantel { get => idPaisPlantel; set => idPaisPlantel = value; }
-        public string OtroPlantel1 { get => OtroPlantel; set => OtroPlantel = value; }
-        public string FechaRegistro1 { get => FechaRegistro; set => FechaRegistro = value; }
-        public string EmailValido1 { get => EmailValido; set => EmailValido = value; }
+        public string Actualizaciones1
+        {
+            get { return this.Actualizaciones; }
+            set
+            {
+                SetValue(ref this.Actualizaciones, value);
+            }
+        }
+        public string ApellidoMaterno1
+        {
+            get { return this.ApellidoMaterno; }
+            set
+            {
+                SetValue(ref this.ApellidoMaterno, value);
+            }
+        }
+        public string ApellidoPaterno1
+        {
+            get { return this.ApellidoPaterno; }
+            set
+            {
+                SetValue(ref this.ApellidoPaterno, value);
+            }
+        }
+        public string CURP1
+        {
+            get { return this.CURP; }
+            set
+            {
+                SetValue(ref this.CURP, value);
+            }
+        }
+        public string Calle1
+        {
+            get { return this.Calle; }
+            set
+            {
+                SetValue(ref this.Calle, value);
+            }
+        }
+        public string Celular1
+        {
+            get { return this.Celular; }
+            set
+            {
+                SetValue(ref this.Celular, value);
+            }
+        }
+        public string ClavePlantelESEC1
+        {
+            get { return this.ClavePlantelESEC; }
+            set
+            {
+                SetValue(ref this.ClavePlantelESEC, value);
+            }
+        }
+        public string Email1
+        {
+            get { return this.Email; }
+            set
+            {
+                SetValue(ref this.Email, value);
+            }
+        }
+        public string EmailValido1
+        {
+            get { return this.EmailValido; }
+            set
+            {
+                SetValue(ref this.EmailValido, value);
+            }
+        }
+        public string FOLIOSUREDSU1
+        {
+            get { return this.FOLIOSUREDSU; }
+            set
+            {
+                SetValue(ref this.FOLIOSUREDSU, value);
+            }
+        }
+        public string FechaRegistro1
+        {
+            get { return this.FechaRegistro; }
+            set
+            {
+                SetValue(ref this.FechaRegistro, value);
+            }
+        }
+        public int Finalizo1
+        {
+            get { return this.Finalizo; }
+            set
+            {
+                SetValue(ref this.Finalizo, value);
+            }
+        }
+        public string FolioSUREMS1
+        {
+            get { return this.FolioSUREMS; }
+            set
+            {
+                SetValue(ref this.FolioSUREMS, value);
+            }
+        }
+        public int IdAlumno
+        {
+            get { return this.idAlumno; }
+            set
+            {
+                SetValue(ref this.idAlumno, value);
+            }
+        }
+        public int IdCarreraES1
+        {
+            get { return this.idCarreraES1; }
+            set
+            {
+                SetValue(ref this.idCarreraES1, value);
+            }
+        }
+        public int IdCarreraES2
+        {
+            get { return this.idCarreraES2; }
+            set
+            {
+                SetValue(ref this.idCarreraES2, value);
+            }
+        }
+        public int IdCarreraES3
+        {
+            get { return this.idCarreraES3; }
+            set
+            {
+                SetValue(ref this.idCarreraES3, value);
+            }
+        }
+        public int IdColonia
+        {
+            get { return this.idColonia; }
+            set
+            {
+                SetValue(ref this.idColonia, value);
+            }
+        }
+        public int IdMunicipio
+        {
+            get { return this.idMunicipio; }
+            set
+            {
+                SetValue(ref this.idMunicipio, value);
+            }
+        }
+        public string IdMunicipioPlantel
+        {
+            get { return this.idMunicipioPlantel; }
+            set
+            {
+                SetValue(ref this.idMunicipioPlantel, value);
+            }
+        }
+        public int IdPais
+        {
+            get { return this.idPais; }
+            set
+            {
+                SetValue(ref this.idPais, value);
+            }
+        }
+        public string IdPaisPlantel
+        {
+            get { return this.idPaisPlantel; }
+            set
+            {
+                SetValue(ref this.idPaisPlantel, value);
+            }
+        }
+        public int IdPlantelEMS
+        {
+            get { return this.idPlantelEMS; }
+            set
+            {
+                SetValue(ref this.idPlantelEMS, value);
+            }
+        }
+        public string MeGustariaEstudiar1
+        {
+            get { return this.MeGustariaEstudiar; }
+            set
+            {
+                SetValue(ref this.MeGustariaEstudiar, value);
+            }
+        }
+        public string MotivoNoEstudiar11
+        {
+            get { return this.MotivoNoEstudiar1; }
+            set
+            {
+                SetValue(ref this.MotivoNoEstudiar1, value);
+            }
+        }
+        public string MotivoNoEstudiar21
+        {
+            get { return this.MotivoNoEstudiar2; }
+            set
+            {
+                SetValue(ref this.MotivoNoEstudiar2, value);
+            }
+        }
+        public string MotivoNoEstudiar31
+        {
+            get { return this.MotivoNoEstudiar3; }
+            set
+            {
+                SetValue(ref this.MotivoNoEstudiar3, value);
+            }
+        }
+        public string Nacionalidad1
+        {
+            get { return this.Nacionalidad; }
+            set
+            {
+                SetValue(ref this.Nacionalidad, value);
+            }
+        }
+        public string Nombre1
+        {
+            get { return this.Nombre; }
+            set
+            {
+                SetValue(ref this.Nombre, value);
+            }
+        }
+        public string NumeroExterior1
+        {
+            get { return this.NumeroExterior; }
+            set
+            {
+                SetValue(ref this.NumeroExterior, value);
+            }
+        }
+        public string NumeroInterior1
+        {
+            get { return this.NumeroInterior; }
+            set
+            {
+                SetValue(ref this.NumeroInterior, value);
+            }
+        }
+        public string OtraColonia1
+        {
+            get { return this.OtraColonia; }
+            set
+            {
+                SetValue(ref this.OtraColonia, value);
+            }
+        }
+        public int OtroCicloEnProceso1
+        {
+            get { return this.OtroCicloEnProceso; }
+            set
+            {
+                SetValue(ref this.OtroCicloEnProceso, value);
+            }
+        }
+        public string OtroPlantel1
+        {
+            get { return this.OtroPlantel; }
+            set
+            {
+                SetValue(ref this.OtroPlantel, value);
+            }
+        }
+        public int Paso1
+        {
+            get { return this.Paso; }
+            set
+            {
+                SetValue(ref this.Paso, value);
+            }
+        }
+        public string Password1
+        {
+            get { return this.Password; }
+            set
+            {
+                SetValue(ref this.Password, value);
+            }
+        }
+        public string PregutaActual1
+        {
+            get { return this.PregutaActual; }
+            set
+            {
+                SetValue(ref this.PregutaActual, value);
+            }
+        }
+        public int SeguirEstudiando1
+        {
+            get { return this.SeguirEstudiando; }
+            set
+            {
+                SetValue(ref this.SeguirEstudiando, value);
+            }
+        }
+        public string Sexo1
+        {
+            get { return this.Sexo; }
+            set
+            {
+                SetValue(ref this.Sexo, value);
+            }
+        }
+        public string TEMP_CP1
+        {
+            get { return this.TEMP_CP; }
+            set
+            {
+                SetValue(ref this.TEMP_CP, value);
+            }
+        }
+        public string Telefono1
+        {
+            get { return this.Telefono; }
+            set
+            {
+                SetValue(ref this.Telefono, value);
+            }
+        }
+        public int TerminosAceptadso1
+        {
+            get { return this.TerminosAceptadso; }
+            set
+            {
+                SetValue(ref this.TerminosAceptadso, value);
+            }
+        }
+        public string UID_Firebase1
+        {
+            get { return this.UID_Firebase; }
+            set
+            {
+                SetValue(ref this.UID_Firebase, value);
+            }
+        }
     }
 }

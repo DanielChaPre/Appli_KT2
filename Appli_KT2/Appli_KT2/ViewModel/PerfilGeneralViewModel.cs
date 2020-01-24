@@ -18,7 +18,6 @@ namespace Appli_KT2.ViewModel
     {
         private HttpClient _client;
         private ConexionWS conexion;
-        [JsonProperty("persona")]
         private Persona entpersona;
         private RootObject rootObject;
         private Entpersona objeto;
@@ -26,7 +25,7 @@ namespace Appli_KT2.ViewModel
         private Municipios _selectedMunicipio;
         private Colonia _selectedColonia;
         private Estados entEstados;
-        MetodosHTTP metodosHTTP;
+        MetodoHTTP metodosHTTP;
         private bool isrun;
 
         public bool IsRun
@@ -84,9 +83,9 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        private  void ObtenerMunicipios()
+        private async void ObtenerMunicipios()
         {
-            MainViewModel.GetInstance().Municipio = new MunicipioViewModel(this._selectedEstado.NombreEstado);
+            MainViewModel.GetInstance().Municipio = new MunicipioViewModel();
         }
 
         #region Commandos
@@ -118,7 +117,7 @@ namespace Appli_KT2.ViewModel
 
         public async void InsertarPersona()
         {
-            metodosHTTP = new MetodosHTTP();
+            metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
@@ -186,11 +185,11 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-                metodosHTTP = new MetodosHTTP();
+                metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.CrearPerfil, json);
+                dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.EliminarPerfil, json);
                 await ConsultarUsuarioGeneral();
                 return;
             }
@@ -205,11 +204,11 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-                metodosHTTP = new MetodosHTTP();
+                metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.CrearPerfil, json);
+                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarPerfil, json);
                 await ConsultarUsuarioGeneral();
                 return;
             }
@@ -255,62 +254,6 @@ namespace Appli_KT2.ViewModel
                         }
                     }
                 };
-                //objeto = new Entpersona()
-                //{
-                //    persona = new Persona()
-                //    {
-                //        Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
-                //        Nombre = Nombre,
-                //        Apellido_Paterno = Apellido_Paterno,
-                //        Apellido_Materno = Apellido_Materno,
-                //        RFC = "N/A",
-                //        CURP = "N/A",
-                //        Sexo = "Sin especificar",
-                //        Fecha_Nacimiento = Fecha_Nacimiento,
-                //        Numero_Telefono = Numero_Telefono,
-                //        Estado_Civil = 0,
-                //        Nacionalidad = "N/A",
-                //        Municipio = "N/A",
-                //        IdColonia = 0,
-                //        Usuario = new Usuario()
-                //        {
-                //            Cve_Usuario = Convert.ToInt32(App.Current.Properties["cveUsuario"].ToString()),
-                //            IdAlumno = 0,
-                //            Nombre_Usuario = App.Current.Properties["usuario"].ToString(),
-                //            Contrasena = App.Current.Properties["contrasena"].ToString(),
-                //            Estatus = "Activo",
-                //            Alias_Red = "N/A",
-                //            Tipo_Usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString()),
-                //            Ruta_Imagen ="N/A"
-                //        }
-                //    }
-                //};
-                //entpersona = new Persona()
-                //{
-                //    Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
-                //    Nombre = Nombre,
-                //    Apellido_Paterno = Apellido_Paterno,
-                //    Apellido_Materno = Apellido_Materno,
-                //    RFC = "N/A",
-                //    CURP = "N/A",
-                //    Sexo = "Sin especificar",
-                //    Fecha_Nacimiento = Fecha_Nacimiento,
-                //    Numero_Telefono = Numero_Telefono,
-                //    Estado_Civil = 0,
-                //    Nacionalidad = "N/A",
-                //    Municipio = "N/A",
-                //    IdColonia = 0,
-                //    Usuario = new Usuario()
-                //    {
-                //        Cve_Usuario = Convert.ToInt32(App.Current.Properties["cveUsuario"].ToString()),
-                //        IdAlumno = 0,
-                //        Nombre_Usuario = App.Current.Properties["usuario"].ToString(),
-                //        Contrasena = App.Current.Properties["contrasena"].ToString(),
-                //        Estatus = "Activo",
-                //        Alias_Red = "N/A"
-                //    }
-
-                //};
             }
             catch (Exception ex)
             {
