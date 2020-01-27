@@ -101,7 +101,6 @@ namespace Appli_KT2.View
         {
             framePreguntaPadre.IsVisible = true;
             lytPadre.IsVisible = false;
-            lytCurpHijo.IsVisible = false;
             frameAlumno.IsVisible = false;
             frameBotones.IsVisible = false;
             frameDireccion.IsVisible = false;
@@ -173,18 +172,18 @@ namespace Appli_KT2.View
         private async void ConsultarUsuarioGeneral()
         {
             formularioGeneral.IsVisible = false;
-            actCargaForm.IsRunning = true;
+            actCargaFormUsuario.IsRunning = true;
             if ( await perfilGeneral.ConsultarUsuarioGeneral())
             {
                 formularioGeneral.IsVisible = true;
-                actCargaForm.IsVisible = false;
+                actCargaFormUsuario.IsVisible = false;
                 slytInsertar.IsVisible = false;
                 slytAcciones.IsVisible = true;
             }
             else
             {
                 formularioGeneral.IsVisible = true;
-                actCargaForm.IsVisible = false;
+                actCargaFormUsuario.IsVisible = false;
                 slytInsertar.IsVisible = true;
                 slytAcciones.IsVisible = false;
             }

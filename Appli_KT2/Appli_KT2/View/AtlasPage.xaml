@@ -10,28 +10,31 @@
         <Frame 
             BackgroundColor="Transparent"
             VerticalOptions="CenterAndExpand">
-            
+
             <StackLayout
                 Padding="2,3">
 
                 <Label
                     FontSize="Title"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Margin="0,0,0,35"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
                     Text="Buscar"
                     TextColor="#fd8204"
-                    VerticalOptions="StartAndExpand"
-                    VerticalTextAlignment="Start"/>
+                    VerticalOptions="EndAndExpand"
+                    VerticalTextAlignment="End"
+                />
+
                 <Label
-                    FontSize="Title"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
+                    FontSize="Subtitle"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
                     Margin="0,0,0,35"
-                    Text="Plantesles, carerras y más..."
+                    Text="Planteles, carerras y más..."
                     TextColor="#fd8204"
                     VerticalOptions="StartAndExpand"
-                    VerticalTextAlignment="Start"/>
+                    VerticalTextAlignment="Start"
+                />
+
                 <StackLayout
                     VerticalOptions="CenterAndExpand"
                     >
@@ -76,62 +79,6 @@
                         />
                 </StackLayout>
             </StackLayout>
-            <!--  <StackLayout
-                Padding="2,3">
-                
-                <Label 
-                    FontFamily="Proxima Nova"
-                    FontSize="Large"
-                    Text="Buscar"
-                    TextColor="Black"/>
-                
-                <Label
-                    FontFamily="Proxima Nova"
-                    FontSize="Medium"
-                    Text="Carreras, municipios e instituciones"
-                    TextColor="Gray"/>
-                
-                <StackLayout
-                    BackgroundColor="#000F9F"
-                    Margin="2,0"
-                    Padding="5,5">
-                                                    
-                    <Button 
-                        BackgroundColor="White"
-                        FontFamily="Baloo"
-                        ImageSource="ic_search.png"
-                        HeightRequest="40"
-                        Padding="10,0,170,0"
-                        Text="Carrera"
-                        TextColor="#000F9F"/>
-                    
-                    <Button 
-                        BackgroundColor="White"
-                        FontFamily="Baloo"
-                        ImageSource="ic_municipio.png"
-                        HeightRequest="40"
-                        Padding="10,0,150,0"
-                        Text="Municipio"
-                        TextColor="#000F9F"/>
-                                                            
-                    <Button 
-                        BackgroundColor="White"
-                        FontFamily="Baloo"
-                        ImageSource="ic_instituto"
-                        HeightRequest="40"
-                        Padding="10,0,75,0"
-                        Text="Institución Educ. Sup."
-                        TextColor="#000F9F"/>
-                     
-                    <Button 
-                        BackgroundColor="#FF8200"
-                        FontFamily="Baloo"
-                        Text="Buscar"
-                        TextColor="White"
-                        x:Name="btnBuscar"/>
-                     
-                </StackLayout>
-            </StackLayout> -->
         </Frame>
     </ContentPage.Content>
 </ContentPage>
