@@ -4,19 +4,7 @@
              x:Class="Appli_KT2.View.AtlasPage"
              BackgroundImageSource="pleca_textura.jpg"
              Padding="10,0">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Text="Compartir Aplicación"
-            Priority="1"  
-            Order="Secondary" 
-            x:Name="icShare"/>
-       <!-- <ToolbarItem
-           
-            Text="Iniciar Sesión"
-            Priority="1"  
-            Order="Secondary" 
-            x:Name="icLogin"/>-->
-    </ContentPage.ToolbarItems>
+  
     <ContentPage.Content>
 
         <Frame 
@@ -31,7 +19,16 @@
                     HorizontalOptions="Center"
                     HorizontalTextAlignment="Center"
                     Margin="0,0,0,35"
-                    Text="Búsqueda"
+                    Text="Buscar"
+                    TextColor="#fd8204"
+                    VerticalOptions="StartAndExpand"
+                    VerticalTextAlignment="Start"/>
+                <Label
+                    FontSize="Title"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Margin="0,0,0,35"
+                    Text="Plantesles, carerras y más..."
                     TextColor="#fd8204"
                     VerticalOptions="StartAndExpand"
                     VerticalTextAlignment="Start"/>

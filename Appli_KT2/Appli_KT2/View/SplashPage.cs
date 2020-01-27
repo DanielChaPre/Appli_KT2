@@ -89,8 +89,7 @@ namespace Appli_KT2.View
                 await splashImage.ScaleTo(0.8, 1200, Easing.Linear);
                 lblCarga.IsVisible = false;
                 activityIndicator.IsRunning = false;
-                SesionPrueba();
-              //  VerificarLogin();
+                VerificarLogin();
                 //VerificarConfiguracionTema();
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
@@ -102,8 +101,6 @@ namespace Appli_KT2.View
 
         public void SesionPrueba()
         {
-            //App.Current.Properties["usuario"] = "fer.hdez.sierra9647@gmail.com";
-            //App.Current.Properties["contrasena"] = "Q1*queen";
             App.Current.Properties["usuario"] = "";
             App.Current.Properties["contrasena"] = "D@niel1998";
             App.Current.Properties["idAlumno"] = "53408";
@@ -112,19 +109,31 @@ namespace Appli_KT2.View
             return;
         }
 
+        public void VaciarSesion()
+        {
+            App.Current.Properties["usuario"] = "";
+            App.Current.Properties["contrasena"] = "";
+            App.Current.Properties["idAlumno"] = 0;
+            App.Current.Properties["tipo_usuario"] = 0;
+            App.Current.Properties["nombreUsuario"] = "Nombre Usuario";
+            return;
+        }
+
         public void VerificarLogin()
         {
             try
             {
-                if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
+                if (string.IsNullOrEmpty(App.Current.Properties["tipo_usuario"].ToString()))
                 {
-                    App.Current.Properties["tipo_usuario"] = 0;
-                    return;
+                    VaciarSesion();
+                }
+               else if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
+                {
+                    VaciarSesion();
                 }
                 else if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["contrasena"].ToString()))
                 {
-                    App.Current.Properties["tipo_usuario"] = 0;
-                    return;
+                    VaciarSesion();
                 }
             }
             catch (Exception ex)

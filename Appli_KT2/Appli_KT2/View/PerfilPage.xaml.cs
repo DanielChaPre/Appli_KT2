@@ -77,31 +77,21 @@ namespace Appli_KT2.View
                     CargarPerfilAlumno();
                     break;
                 case 3://Empleado
-                    //ConsultarEmpleado();
-                    //frameDireccion.BindingContext = new PerfilEmpleadoViewModel();
-                    //LlenarListasDireccion();
-                    //OcultarPerfiles();
+                    OcultarPerfiles();
+                    CargarPerfilEmpleado();
                     break;
                 case 4://Plantel
-                    //LlenarListasDireccion();
-                    //frameDireccion.BindingContext = new PerfilEmpleadoPlantelViewModel();
                     break;
                 case 5://Docente
-                    //frameDireccion.BindingContext = new PerfilPadreViewModel();
-                    //LlenarListasDireccion();
+                    CargarPerfilEmpleadoPlantel();
                     break;
                 case 6://Direcivo
-
+                    CargarPerfilEmpleadoPlantel();
                     break;
                 case 7://Padre Familia
                     CargarPerfilPadre();
                     break;
                 default:
-                    //lytPadre.IsVisible = false;
-                    //lytCurpHijo.IsVisible = true;
-                    ////ConsultarPadreFamilia();
-                    //framePreguntaPadre.IsVisible = false;
-                    //framePadre.IsVisible = true;
                     break;
             }
         }
@@ -121,6 +111,7 @@ namespace Appli_KT2.View
             framePadre.IsVisible = false;
             frameUsuarioGeneral.IsVisible = false;
         }
+
         public void CargarPerfilGeneral()
         {
             perfilGeneral = new PerfilGeneralViewModel();
@@ -130,9 +121,6 @@ namespace Appli_KT2.View
             framePreguntaPadre.IsVisible = false;
             frameUsuarioGeneral.IsVisible = true;
             frameBotones.IsVisible = true;
-          
-            
-            //frameDireccion.BindingContext = new PerfilGeneralViewModel();
         }
 
         public async void CargarPerfilAlumno()
@@ -150,6 +138,7 @@ namespace Appli_KT2.View
 
         public async void CargarPerfilPadre()
         {
+            OcultarPerfiles();
             perfilPadre = new PerfilPadreViewModel();
             framePadre.BindingContext = perfilPadre;
             frameBotones.BindingContext = perfilPadre;
@@ -162,7 +151,23 @@ namespace Appli_KT2.View
 
         public async void CargarPerfilEmpleadoPlantel()
         {
+            OcultarPerfiles();
+            perfilEmpleadoPlantel = new PerfilEmpleadoPlantelViewModel();
+            frameEmpleadoPlantel.BindingContext = perfilEmpleadoPlantel;
+            frameBotones.BindingContext = perfilEmpleadoPlantel;
+            frameEmpleadoPlantel.IsVisible = true;
+            frameBotones.IsVisible = true;
+            await perfilEmpleadoPlantel.ConsultarEmpleadoPlantel();
+        }
 
+        public async void CargarPerfilEmpleado()
+        {
+            perfilEmpleado = new PerfilEmpleadoViewModel();
+            frameEmpleado.BindingContext = perfilEmpleado;
+            frameBotones.BindingContext = perfilEmpleado;
+            frameEmpleado.IsVisible = true;
+            frameBotones.IsVisible = true;
+            await perfilEmpleado.ConsultarEmpleado();
         }
 
         #endregion

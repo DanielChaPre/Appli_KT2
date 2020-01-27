@@ -1,9 +1,14 @@
 ﻿using Appli_KT2.Model;
+using Appli_KT2.Utils;
 using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Appli_KT2.ViewModel
 {
@@ -11,8 +16,8 @@ namespace Appli_KT2.ViewModel
     {
         private HttpClient _client;
         private ConexionWS conexion;
-        private RootObjectPadreFamilia rootObject;
-        private PadreFamilia padreFamilia;
+        private RootObjectEmpleadoPlantel rootObject;
+        private EmpleadoPlantel empleadoPlantel;
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
         private Colonia _selectedColonia;
@@ -25,7 +30,7 @@ namespace Appli_KT2.ViewModel
         private string sexo;
         private string plantelEMS;
 
-        public PerfilPadreViewModel()
+        public PerfilEmpleadoPlantelViewModel()
         {
             IsRun = true;
             IsVisible = false;
@@ -166,8 +171,8 @@ namespace Appli_KT2.ViewModel
             conexion = new ConexionWS();
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
-            dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearPadreFamilia, json);
-            await ConsultarPadreFamilia();
+            dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearEmpleadoPlantel, json);
+            await ConsultarEmpleadoPlantel();
             return;
         }
 
@@ -179,8 +184,8 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.EliminarPadreFamilia, json);
-                await ConsultarPadreFamilia();
+                dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.EliminarEmpleadoPlantel, json);
+                await ConsultarEmpleadoPlantel();
                 return;
             }
             catch (Exception ex)
@@ -198,8 +203,8 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarPadreFamilia, json);
-                await ConsultarPadreFamilia();
+                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarEmpleadoPlantel, json);
+                await ConsultarEmpleadoPlantel();
                 return;
             }
             catch (Exception ex)
@@ -213,12 +218,13 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-                rootObject = new RootObjectPadreFamilia()
+                rootObject = new RootObjectEmpleadoPlantel()
                 {
-                    padreFamilia = new PadreFamilia()
+                    empleadoPlantel = new EmpleadoPlantel()
                     {
-                        CVE_Padre_Familia = Convert.ToInt32(App.Current.Properties["cvePadreFamilia"].ToString()),
-                        IdAlumno = IdAlumno,
+                        Cve_Empleado_Plantel = Cve_Empleado_Plantel,
+                        IdPlantelesES = IdPlantelesES,
+                        Tipo = Tipo,
                         Fecha_Registro = Fecha_Registro,
                         Persona = new Persona()
                         {
@@ -258,52 +264,53 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public async Task<bool> ConsultarPadreFamilia()
+        public async Task<bool> ConsultarEmpleadoPlantel()
         {
             _client = new HttpClient();
             conexion = new ConexionWS();
             var usuario = App.Current.Properties["usuario"];
             var contrasena = App.Current.Properties["contrasenia"];
-            var url = conexion.URL + "" + conexion.ConsultarPadreFamilia + usuario + "/" + contrasena;
+            var url = conexion.URL + "" + conexion.ConsultarEmpleadoPlantel + usuario + "/" + contrasena;
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var padreFamilia = JsonConvert.DeserializeObject<PadreFamilia>(content);
-                if (padreFamilia != null)
+                var empleadoPlantel = JsonConvert.DeserializeObject<EmpleadoPlantel>(content);
+                if (empleadoPlantel != null)
                 {
-                    CVE_Padre_Familia = padreFamilia.CVE_Padre_Familia;
-                    IdAlumno = padreFamilia.IdAlumno;
-                    Fecha_Registro = padreFamilia.Fecha_Registro;
+                    Cve_Empleado_Plantel = empleadoPlantel.Cve_Empleado_Plantel;
+                    IdPlantelesES = empleadoPlantel.IdPlantelesES;
+                    Tipo = empleadoPlantel.Tipo;
+                    Fecha_Registro = empleadoPlantel.Fecha_Registro;
                     Persona = new Persona()
                     {
-                        Cve_Persona = padreFamilia.Persona.Cve_Persona,
-                        Nombre = padreFamilia.Persona.Nombre,
-                        Apellido_Paterno = padreFamilia.Persona.Apellido_Paterno,
-                        Apellido_Materno = padreFamilia.Persona.Apellido_Materno,
-                        RFC = padreFamilia.Persona.RFC,
-                        CURP = padreFamilia.Persona.CURP,
-                        Sexo = padreFamilia.Persona.Sexo,
-                        Fecha_Nacimiento = padreFamilia.Persona.Fecha_Nacimiento,
-                        Numero_Telefono = padreFamilia.Persona.Numero_Telefono,
-                        Estado_Civil = padreFamilia.Persona.Estado_Civil,
-                        Nacionalidad = padreFamilia.Persona.Nacionalidad,
-                        IdColonia = padreFamilia.Persona.IdColonia,
+                        Cve_Persona = empleadoPlantel.Persona.Cve_Persona,
+                        Nombre = empleadoPlantel.Persona.Nombre,
+                        Apellido_Paterno = empleadoPlantel.Persona.Apellido_Paterno,
+                        Apellido_Materno = empleadoPlantel.Persona.Apellido_Materno,
+                        RFC = empleadoPlantel.Persona.RFC,
+                        CURP = empleadoPlantel.Persona.CURP,
+                        Sexo = empleadoPlantel.Persona.Sexo,
+                        Fecha_Nacimiento = empleadoPlantel.Persona.Fecha_Nacimiento,
+                        Numero_Telefono = empleadoPlantel.Persona.Numero_Telefono,
+                        Estado_Civil = empleadoPlantel.Persona.Estado_Civil,
+                        Nacionalidad = empleadoPlantel.Persona.Nacionalidad,
+                        IdColonia = empleadoPlantel.Persona.IdColonia,
                         Usuario = new Usuario()
                         {
-                            Cve_Usuario = padreFamilia.Persona.Usuario.Cve_Usuario,
-                            IdAlumno = padreFamilia.Persona.Usuario.IdAlumno,
-                            Nombre_Usuario = padreFamilia.Persona.Usuario.Nombre_Usuario,
-                            Contrasena = padreFamilia.Persona.Usuario.Contrasena,
-                            Fecha_Registro = padreFamilia.Persona.Usuario.Fecha_Registro,
-                            Estatus = padreFamilia.Persona.Usuario.Estatus,
-                            Alias_Red = padreFamilia.Persona.Usuario.Alias_Red
+                            Cve_Usuario = empleadoPlantel.Persona.Usuario.Cve_Usuario,
+                            IdAlumno = empleadoPlantel.Persona.Usuario.IdAlumno,
+                            Nombre_Usuario = empleadoPlantel.Persona.Usuario.Nombre_Usuario,
+                            Contrasena = empleadoPlantel.Persona.Usuario.Contrasena,
+                            Fecha_Registro = empleadoPlantel.Persona.Usuario.Fecha_Registro,
+                            Estatus = empleadoPlantel.Persona.Usuario.Estatus,
+                            Alias_Red = empleadoPlantel.Persona.Usuario.Alias_Red
                         }
                     };
-                    App.Current.Properties["cveUsuario"] = persona.Usuario.Cve_Usuario;
-                    App.Current.Properties["cvePersona"] = persona.Cve_Persona;
-                    App.Current.Properties["nombreUsuario"] = persona.Nombre + " " + persona.Apellido_Paterno;
+                    App.Current.Properties["cveUsuario"] = empleadoPlantel.Persona.Usuario.Cve_Usuario;
+                    App.Current.Properties["cvePersona"] = empleadoPlantel.Persona.Cve_Persona;
+                    App.Current.Properties["nombreUsuario"] = empleadoPlantel.Persona.Nombre+" "+empleadoPlantel.Persona.Apellido_Paterno;
                     return true;
                 }
                 else
@@ -365,6 +372,6 @@ namespace Appli_KT2.ViewModel
 
     public class RootObjectEmpleadoPlantel
     {
-        public PadreFamilia padreFamilia { get; set; }
+        public EmpleadoPlantel empleadoPlantel { get; set; }
     }
 }

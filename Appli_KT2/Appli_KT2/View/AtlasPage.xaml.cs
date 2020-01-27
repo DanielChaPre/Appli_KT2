@@ -16,44 +16,95 @@ namespace Appli_KT2.View
 		public AtlasPage ()
 		{
 			InitializeComponent ();
-            VerificarLogin();
+            VerificarUsuario();
             btnBuscar.Clicked += BuscarAtlas;
+           
+        }
+
+      
+        private void IniciarSesion()
+        {
+            ToolbarItem icLogin = new ToolbarItem
+            {
+                Text = "Iniciar sesión",
+                Order = ToolbarItemOrder.Secondary,
+                Priority = 1
+            };
+            this.ToolbarItems.Add(icLogin);
+            icLogin.Clicked += OnClickLogin;
+        }
+
+        private void CerrarSesion()
+        {
+
+            ToolbarItem icClose = new ToolbarItem
+            {
+                Text = "Cerrar sesión",
+                Order = ToolbarItemOrder.Secondary,
+                Priority = 1
+            };
+            this.ToolbarItems.Add(icClose);
+            icClose.Clicked += OnClickCerrar;
+        }
+
+        private void CompartirAplicaciones()
+        {
+            ToolbarItem icShare = new ToolbarItem
+            {
+                Text = "Conmpartir Aplicación",
+                Order = ToolbarItemOrder.Secondary,
+                Priority = 0
+            };
+            this.ToolbarItems.Add(icShare);
             icShare.Clicked += OnClickShare;
         }
 
-        private void VerificarLogin()
+        private void VerificarUsuario()
         {
-            var usuario = (string)App.Current.Properties["usuario"];
+            var usuario = (int)App.Current.Properties["tipo_usuario"];
 
-            if (string.IsNullOrEmpty(usuario) || usuario.Equals("")) 
+            switch (usuario)
             {
-                ToolbarItem icLogin = new ToolbarItem
-                {
-                    Text = "Iniciar sesión",
-                    Order = ToolbarItemOrder.Secondary,
-                    Priority = 1
-                };
-                this.ToolbarItems.Add(icLogin);
-                icLogin.Clicked += OnClickLogin;
-            }
-            else
-            {
-                ToolbarItem icClose = new ToolbarItem
-                {
-                    Text = "Cerrar sesión",
-                    Order = ToolbarItemOrder.Secondary,
-                    Priority = 1
-                };
-                this.ToolbarItems.Add(icClose);
-                icClose.Clicked += OnClickCerrar;
+                case 0:
+                    IniciarSesion();
+                    break;
+                case 1:
+                    CerrarSesion();
+                    break;
+                case 2:
+                    CompartirAplicaciones();
+                    CerrarSesion();
+                    break;
+                case 3:
+                    CompartirAplicaciones();
+                    CerrarSesion();
+                    break;
+                case 4:
+                    CompartirAplicaciones();
+                    CerrarSesion();
+                    break;
+                case 5:
+                    CompartirAplicaciones();
+                    CerrarSesion();
+                    break;
+                case 6:
+                    CompartirAplicaciones();
+                    CerrarSesion();
+                    break;
+                case 7:
+                    CompartirAplicaciones();
+                    CerrarSesion();
+                    break;
             }
         }
 
         private void OnClickCerrar(object sender, EventArgs e)
         {
-            App.Current.Properties["usuario"] = string.Empty;
-            App.Current.Properties["contrasena"] = string.Empty;
+            App.Current.Properties["usuario"] = "";
+            App.Current.Properties["contrasena"] = "";
+            App.Current.Properties["idAlumno"] = 0;
             App.Current.Properties["tipo_usuario"] = 0;
+            App.Current.Properties["nombreUsuario"] = "Nombre Usuario";
             Application.Current.MainPage = new NavigationPage(new MainPage());
         }
 
@@ -72,6 +123,7 @@ namespace Appli_KT2.View
             }
             catch (Exception)
             {
+
             }
         }
 

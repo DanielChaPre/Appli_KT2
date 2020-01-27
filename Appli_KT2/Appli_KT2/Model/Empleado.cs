@@ -22,14 +22,14 @@ namespace Appli_KT2.Model
         private DateTime fecha_registro;
         private Persona personaE;
 
-        public int Cve_empleado
+        public int Cve_Empleado
         {
             get { return cve_empleado; }
             set { cve_empleado = value;
                 OnPropertyChanged();
             }
         }
-        public string Numero_empleado
+        public string Numero_Empleado
         {
             get { return numero_empleado; }
             set
@@ -47,7 +47,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public DateTime Fecha_registro
+        public DateTime Fecha_Registro
         {
             get { return fecha_registro; }
             set
@@ -56,7 +56,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public Persona PersonaE
+        public Persona Persona
         {
             get { return personaE; }
             set
