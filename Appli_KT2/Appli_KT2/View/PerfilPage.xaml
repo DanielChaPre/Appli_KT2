@@ -32,7 +32,7 @@
             </Frame>
             <ScrollView>
                 <StackLayout>
-                    <!--Alumno-->
+                    <!--Alumno  11-->
                     <Frame
                         x:Name="frameAlumno"
                         >
@@ -248,145 +248,84 @@
                                 </StackLayout>
 
                             </StackLayout>
-                            <StackLayout
-                                x:Name="lytCurpHijo"
-                                >
-                                <Label
-                                    Text="Ingresa la curp del su hijo"
-                                    />
-                                <Entry/>
-                            </StackLayout>
                         </StackLayout>
                     </Frame>
-                    <!--Padre Familia-->
+                    <!--Padre Familia 11-->
                     <Frame
                        x:Name="framePadre">
                         <StackLayout>
-                            <Label Text="Perfil Padre de Familia"/>
-                            <Label
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Nombre(s)"/>
-
-                            <Entry
-                            Placeholder="Ingrese su Nombre(s)" 
-                            Text="{Binding Nombre, Mode=TwoWay}"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Apellido Paterno"/>
-
-                            <Entry 
-                            Placeholder="Ingrese su apellido paterno"
-                                Text="{Binding Apellido_Paterno, Mode=TwoWay}"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Apellido Materno"/>
-
-                            <Entry 
-                            Placeholder="Ingrese su apellido materno"
-                                Text="{Binding Apellido_Materno ,Mode=TwoWay}"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="RFC"/>
-
-                            <Entry
-                            Placeholder="Ingrese su RFC" 
-                                 Text="{Binding RFC,Mode=TwoWay}"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="CURP"/>
-
-                            <Entry
-                            Placeholder="Ingrese su CURP" 
-                                 Text="{Binding CURP,Mode=TwoWay}"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="CURP del Hijo"/>
-
-                            <Entry
-                            Placeholder="Ingrese la curp de su hijo"
-                                Text=""
-                            FontSize="Small"/>
-
-                            <Label 
+                            <ActivityIndicator
+                                Color="Navy"
+                                IsRunning="{Binding IsRun}"
+                                IsVisible="{Binding IsRun}"
+                                x:Name="actCargaFormAlumno"
+                                />
+                            <StackLayout>
+                                <Label Text="Perfil Padre de Familia"/>
+                                <Label
                                 FontSize="Subtitle"
                                 TextColor="Gray"
-                                Text="Sexo"/>
-                            <Picker 
-                                Title="Sexo" >
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Hombre</x:String>
-                                        <x:String>Mujer</x:String>
-                                        <x:String>Indistinto</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
+                                Text="Nombre(s)"/>
 
-                            <Label
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Fecha Nacimiento"
-                            />
-                            <DatePicker
-                            
-                            />
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Número Telefono"/>
+                                <Entry
+                                Placeholder="Ingrese su Nombre(s)" 
+                                Text="{Binding Nombre, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry
-                            Placeholder="Ingrese su número de telefono"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Apellido Paterno"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Estado Civil"/>
+                                <Entry 
+                                Placeholder="Ingrese su apellido paterno"
+                                    Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Picker 
-                                Title="Estado Civil" >
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Casado</x:String>
-                                        <x:String>Soltero</x:String>
-                                        <x:String>Otro</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Apellido Materno"/>
 
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Nacionalidad"/>
+                                <Entry 
+                                Placeholder="Ingrese su apellido materno"
+                                ext="{Binding Apellido_Materno ,Mode=TwoWay}"
+                                FontSize="Small"/>
 
-                            <Entry
-                            Placeholder="Ingrese su nacionalidad"
-                            FontSize="Small"/>
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Número Telefono"/>
 
+                                <Entry
+                                Placeholder="Ingrese su número de telefono"
+                                Text="{Binding Numero_Telefono, Mode=TwoWay}"
+                                FontSize="Small"/>
 
+                                <Label 
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="CURP del Hijo"/>
+
+                                <Entry
+                                Placeholder="Ingrese la curp de su hijo"
+                                Text="{Binding CurpHijo, Mode = TwoWay}"
+                                FontSize="Small"/>
+                            </StackLayout>
                         </StackLayout>
+                       
                     </Frame>
-                    <!--Empleado-->
+                    <!--Empleado -->
                     <Frame
                        x:Name="frameEmpleado">
                         <StackLayout>
+                            <ActivityIndicator
+                                Color="Navy"
+                                IsRunning="{Binding IsRun}"
+                                IsVisible="{Binding IsRun}"
+                                x:Name="actCargaFormAlumno"
+                                />
+                            <StackLayout>
                             <Label Text="Perfil Padre de Familia"/>
                             <Label
                             FontSize="Subtitle"
@@ -506,12 +445,20 @@
                             FontSize="Small"/>
 
 
+                            </StackLayout>
                         </StackLayout>
                     </Frame>
-                    <!--Empleado Plantel-->
+                    <!--Empleado Plantel 11-->
                     <Frame
                        x:Name="frameEmpleadoPlantel">
                         <StackLayout>
+                            <ActivityIndicator
+                                Color="Navy"
+                                IsRunning="{Binding IsRun}"
+                                IsVisible="{Binding IsRun}"
+                                x:Name="actCargaFormAlumno"
+                                />
+                            <StackLayout>
                             <Label Text="Perfil Padre de Familia"/>
                             <Label
                             FontSize="Subtitle"
@@ -546,139 +493,73 @@
                             <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="RFC"/>
-
-                            <Entry
-                            Placeholder="Ingrese su RFC" 
-                                 Text="{Binding RFC,Mode=TwoWay}"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="CURP"/>
+                            Text="Celular"/>
 
                             <Entry
                             Placeholder="Ingrese su CURP" 
-                                 Text="{Binding CURP,Mode=TwoWay}"
+                                 Text="{Binding Numero_Telefono,Mode=TwoWay}"
                             FontSize="Small"/>
 
                             <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="CURP del Hijo"/>
+                            Text="CCT_Escuela"/>
 
                             <Entry
-                            Placeholder="Ingrese la curp de su hijo"
-                                Text=""
+                            Placeholder="Ingrese su CURP" 
+                                 Text="{Binding Numero_Telefono,Mode=TwoWay}"
                             FontSize="Small"/>
-
-                            <Label 
-                                FontSize="Subtitle"
-                                TextColor="Gray"
-                                Text="Sexo"/>
-                            <Picker 
-                                Title="Sexo" >
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Hombre</x:String>
-                                        <x:String>Mujer</x:String>
-                                        <x:String>Indistinto</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-
-                            <Label
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Fecha Nacimiento"
-                            />
-                            <DatePicker
-                            
-                            />
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Número Telefono"/>
-
-                            <Entry
-                            Placeholder="Ingrese su número de telefono"
-                            FontSize="Small"/>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Estado Civil"/>
-
-                            <Picker 
-                                Title="Estado Civil" >
-                                <Picker.ItemsSource>
-                                    <x:Array Type="{x:Type x:String}">
-                                        <x:String>Casado</x:String>
-                                        <x:String>Soltero</x:String>
-                                        <x:String>Otro</x:String>
-                                    </x:Array>
-                                </Picker.ItemsSource>
-                            </Picker>
-
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Nacionalidad"/>
-
-                            <Entry
-                            Placeholder="Ingrese su nacionalidad"
-                            FontSize="Small"/>
-
-
                         </StackLayout>
+                       </StackLayout>
                     </Frame>
-                    <!--Usuario General-->
+                    <!--Usuario General 11-->
                     <Frame
                         x:Name="frameUsuarioGeneral">
                         <StackLayout>
                             <ActivityIndicator
                                 Color="Navy"
-                                x:Name="actCargaForm"
+                                IsRunning="{Binding IsRun}"
+                                IsVisible="{Binding IsRun}"
+                                x:Name="actCargaFormAlumno"
                                 />
                             <StackLayout
                             x:Name="formularioGeneral"
                             >
                                 <Label Text="Perfil Usuario General"/>
-                                <Label
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Nombre(s)"/>
+                             <Label
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Nombre(s)"/>
 
                                 <Entry
-                            Placeholder="Ingrese su Nombre(s)" 
-                            Text="{Binding Nombre, Mode=TwoWay}"
-                            FontSize="Small"/>
+                                Placeholder="Ingrese su Nombre(s)" 
+                                Text="{Binding Nombre, Mode=TwoWay}"
+                                FontSize="Small"/>
 
                                 <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Apellido Paterno"/>
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Apellido Paterno"/>
 
                                 <Entry 
-                            Placeholder="Ingrese su apellido paterno"
-                                Text="{Binding Apellido_Paterno, Mode=TwoWay}"
-                            FontSize="Small"/>
+                                Placeholder="Ingrese su apellido paterno"
+                                    Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                                FontSize="Small"/>
 
                                 <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Apellido Materno"/>
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Apellido Materno"/>
 
                                 <Entry 
-                            Placeholder="Ingrese su apellido materno"
-                                Text="{Binding Apellido_Materno ,Mode=TwoWay}"
-                            FontSize="Small"/>
+                                Placeholder="Ingrese su apellido materno"
+                                    Text="{Binding Apellido_Materno ,Mode=TwoWay}"
+                                FontSize="Small"/>
 
                                 <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Número Telefono"/>
+                                FontSize="Subtitle"
+                                TextColor="Gray"
+                                Text="Número Telefono"/>
 
                                 <Entry
                                 Placeholder="Ingrese su número de telefono"

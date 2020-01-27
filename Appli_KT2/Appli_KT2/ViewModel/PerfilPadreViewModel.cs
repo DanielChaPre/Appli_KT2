@@ -34,6 +34,7 @@ namespace Appli_KT2.ViewModel
         private bool isacciones;
         private string sexo;
         private string plantelEMS;
+        private string curphijo;
 
         public PerfilPadreViewModel()
         {
@@ -41,6 +42,15 @@ namespace Appli_KT2.ViewModel
             IsVisible = false;
             IsInsertar = false;
             IsAcciones = false;
+        }
+
+        public string CurpHijo
+        {
+            get { return this.curphijo; }
+            set
+            {
+                SetValue(ref this.curphijo, value);
+            }
         }
 
         public bool IsRun
@@ -228,7 +238,7 @@ namespace Appli_KT2.ViewModel
                     padreFamilia = new PadreFamilia()
                     {
                        CVE_Padre_Familia = Convert.ToInt32(App.Current.Properties["cvePadreFamilia"].ToString()),
-                       IdAlumno = IdAlumno,
+                       IdAlumno =  (int) App.Current.Properties["idAlumno"],
                        Fecha_Registro = Fecha_Registro,
                        Persona = new Persona()
                        {
@@ -331,28 +341,27 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        private async Task<bool> ConsultarPlantelEMS(int idEMS)
+        public async void BuscarAlumnoCurp()
         {
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            var idAlumno = App.Current.Properties["idAlumno"];
-            var url = conexion.URL + "" + conexion.ObtenerPlantelEMS + idEMS;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var entPlantel = JsonConvert.DeserializeObject<PlantelesEMS>(content);
-                if (entPlantel != null)
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                var url = conexion.URL + "" + conexion.BuscarAlumnoCurp + CurpHijo;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    PlantelEMS = entPlantel.NombrePlantelEMS;
-                    return true;
+                    var content = await response.Content.ReadAsStringAsync();
+                    var idAlumno = JsonConvert.DeserializeObject<int>(content);
+                    App.Current.Properties["idAlumno"] = idAlumno;
                 }
-                else
-                    return false;
             }
-            else
-                return false;
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         private void SeleccionarSexo(string sexo)

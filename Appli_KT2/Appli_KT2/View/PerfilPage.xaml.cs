@@ -48,7 +48,7 @@ namespace Appli_KT2.View
         {
             base.OnAppearing();
             FiltrarPerfil();
-            LlenarListasDireccion();
+         //   LlenarListasDireccion();
         }
 
         public void FiltrarPerfil()
@@ -68,7 +68,6 @@ namespace Appli_KT2.View
                     //Usuario General
                     framePreguntaPadre.IsVisible = true;
                     lytPadre.IsVisible = true;
-                    lytCurpHijo.IsVisible = false;
                     btnSi.Clicked += BtnSi_Clicked;
                     btnNo.Clicked += BtnNo_Clicked;
                     break;
@@ -145,7 +144,6 @@ namespace Appli_KT2.View
             framePadre.IsVisible = true;
             frameBotones.IsVisible = true;
             lytPadre.IsVisible = false;
-            lytCurpHijo.IsVisible = true;
             await perfilPadre.ConsultarPadreFamilia();
         }
 
@@ -272,118 +270,5 @@ namespace Appli_KT2.View
             CargarPerfilPadre();
         }
 
-        #region Consultas Perfiles
-
-        public async void ConsultarEmpleado()
-        {
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            var usuario = App.Current.Properties["usuario"];
-            var contrasena = App.Current.Properties["contrasenia"];
-            var url = conexion.URL + "" + conexion.ConsultarEmpleado + usuario + "/" + contrasena;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var empleado = JsonConvert.DeserializeObject<Empleado>(content);
-                if (empleado != null)
-                {
-
-                }
-                var entEmpleado = new Empleado()
-                {
-                    Cve_empleado = empleado.Cve_empleado,
-                    Numero_empleado = empleado.Numero_empleado,
-                    Estatus = empleado.Estatus,
-                    Fecha_registro = empleado.Fecha_registro,
-                    PersonaE = new Persona()
-                    {
-                        Cve_Persona = empleado.PersonaE.Cve_Persona,
-                        Nombre = empleado.PersonaE.Nombre,
-                        Apellido_Paterno = empleado.PersonaE.Apellido_Paterno,
-                        Apellido_Materno = empleado.PersonaE.Apellido_Materno,
-                        RFC = empleado.PersonaE.RFC,
-                        CURP = empleado.PersonaE.CURP,
-                        Sexo = empleado.PersonaE.Sexo,
-                        Fecha_Nacimiento = empleado.PersonaE.Fecha_Nacimiento,
-                        Numero_Telefono = empleado.PersonaE.Numero_Telefono,
-                        Estado_Civil = empleado.PersonaE.Estado_Civil,
-                        Nacionalidad = empleado.PersonaE.Nacionalidad,
-                        IdColonia = empleado.PersonaE.IdColonia,
-                        Usuario = new Usuario()
-                        {
-                            Cve_Usuario = empleado.PersonaE.Usuario.Cve_Usuario,
-                            IdAlumno = empleado.PersonaE.Usuario.IdAlumno,
-                            Nombre_Usuario = empleado.PersonaE.Usuario.Nombre_Usuario,
-                            Contrasena = empleado.PersonaE.Usuario.Contrasena,
-                            Fecha_Registro = empleado.PersonaE.Usuario.Fecha_Registro,
-                            Estatus = empleado.PersonaE.Usuario.Estatus,
-                            Alias_Red = empleado.PersonaE.Usuario.Alias_Red
-                        }
-                    }
-                };
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                return;
-            }
-        }
-
-        public async void ConsultarEmpleadoPlantel()
-        {
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            var usuario = App.Current.Properties["usuario"];
-            var contrasena = App.Current.Properties["contrasenia"];
-            var url = conexion.URL + "" + conexion.ConsultarEmpleadoPlantel + usuario + "/" + contrasena;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var empleadoPlantel = JsonConvert.DeserializeObject<EmpleadoPlantel>(content);
-                var entEmpleadoPlantel = new EmpleadoPlantel()
-                {
-                    Cve_empleado_plantel = empleadoPlantel.Cve_empleado_plantel,
-                    IdPlantelesES = empleadoPlantel.IdPlantelesES,
-                    Tipo = empleadoPlantel.Tipo,
-                    Fecha_registro = empleadoPlantel.Fecha_registro,
-                    PersonaEP = new Persona()
-                    {
-                        Cve_Persona = empleadoPlantel.PersonaEP.Cve_Persona,
-                        Nombre = empleadoPlantel.PersonaEP.Nombre,
-                        Apellido_Paterno = empleadoPlantel.PersonaEP.Apellido_Paterno,
-                        Apellido_Materno = empleadoPlantel.PersonaEP.Apellido_Materno,
-                        RFC = empleadoPlantel.PersonaEP.RFC,
-                        CURP = empleadoPlantel.PersonaEP.CURP,
-                        Sexo = empleadoPlantel.PersonaEP.Sexo,
-                        Fecha_Nacimiento = empleadoPlantel.PersonaEP.Fecha_Nacimiento,
-                        Numero_Telefono = empleadoPlantel.PersonaEP.Numero_Telefono,
-                        Estado_Civil = empleadoPlantel.PersonaEP.Estado_Civil,
-                        Nacionalidad = empleadoPlantel.PersonaEP.Nacionalidad,
-                        IdColonia = empleadoPlantel.PersonaEP.IdColonia,
-                        Usuario = new Usuario()
-                        {
-                            Cve_Usuario = empleadoPlantel.PersonaEP.Usuario.Cve_Usuario,
-                            IdAlumno = empleadoPlantel.PersonaEP.Usuario.IdAlumno,
-                            Nombre_Usuario = empleadoPlantel.PersonaEP.Usuario.Nombre_Usuario,
-                            Contrasena = empleadoPlantel.PersonaEP.Usuario.Contrasena,
-                            Fecha_Registro = empleadoPlantel.PersonaEP.Usuario.Fecha_Registro,
-                            Estatus = empleadoPlantel.PersonaEP.Usuario.Estatus,
-                            Alias_Red = empleadoPlantel.PersonaEP.Usuario.Alias_Red
-                        }
-                    }
-                };
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                return;
-            }
-        }
-
-        #endregion
     }
 }
