@@ -29,9 +29,10 @@ namespace Appli_KT2.View
         private HttpClient _client;
         private ConexionWS conexion;
 
+
         public RegisterPage ()
 		{
-            InitializeComponent ();
+            InitializeComponent (); 
             try
             {
                 this.tipoUsuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString());
@@ -42,7 +43,6 @@ namespace Appli_KT2.View
             }
             OcultarPerfiles();
         }
-
 
         protected override void OnAppearing()
         {
@@ -106,7 +106,6 @@ namespace Appli_KT2.View
             }
         }
 
-        
         #region Carga de Perfiles
 
         public void OcultarPerfiles()
@@ -160,7 +159,13 @@ namespace Appli_KT2.View
             lytCurpHijo.IsVisible = true;
             await perfilPadre.ConsultarPadreFamilia();
         }
-            #endregion
+
+        public async void CargarPerfilEmpleadoPlantel()
+        {
+
+        }
+
+        #endregion
 
         private async void ConsultarUsuarioGeneral()
         {
@@ -373,6 +378,7 @@ namespace Appli_KT2.View
                 return;
             }
         }
+
         #endregion
     }
 }

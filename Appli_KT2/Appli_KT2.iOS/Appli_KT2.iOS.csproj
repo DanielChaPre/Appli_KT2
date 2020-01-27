@@ -222,4 +222,154 @@
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\appli_kt_icono1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\appli_kt_icono2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\appli_kt_logo_sin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\appli_kt_logo_sin_blc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\appli_kt_logo_som.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\appli_kt_logo_som_blc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_action_map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_add_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_arrow_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_arrow_forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_calendar_text_outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cuenta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_facebook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_google.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_histotial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_instituto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_launcher1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_municipio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_noti_au.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_noti_e.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_noti_i.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_noti_o.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_noti_oe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_noti_s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_notifications.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_person_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_school_outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_selected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_sices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_unselected_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\itl_.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\itleon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pleca_textura.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ug_.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\utl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\utl_.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\utl2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\utl3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\utl4.jpg" />
+  </ItemGroup>
 </Project>

@@ -354,6 +354,7 @@ namespace Appli_KT2.ViewModel
             else
                 return false;
         }
+
         private void SeleccionarSexo(string sexo)
         {
             switch (sexo)
