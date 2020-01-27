@@ -42,30 +42,30 @@
                         FontSize="Subtitle"
                         Text="Carrera"
                         TextColor="White"
-                        />
+                    />
                     <Picker
                         BackgroundColor="White"
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
-                        />
+                    />
                     <Label
                         Text="Municipio"
                         TextColor="White"
-                        />
+                    />
                     <Picker
                         BackgroundColor="White"
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
-                        />
+                    />
                     <Label
                         Text="Institución de Educación Sup."
                         TextColor="White"
-                        />
+                    />
                     <Picker
                         BackgroundColor="White"
                         Margin="0,0,0,15"
                         TextColor="#1b213c"
-                        />
+                    />
 
                     <Button
                         BackgroundColor="#fd8204"
@@ -76,7 +76,7 @@
                         VerticalOptions="EndAndExpand"
                         WidthRequest="150"
                           x:Name="btnBuscar"
-                        />
+                    />
                 </StackLayout>
             </StackLayout>
         </Frame>

@@ -27,6 +27,7 @@
                     <Button 
                         Grid.Column="1"
                         Grid.Row="0"
+                        Command="{Binding IniciarFacebookCommand}"
                         BackgroundColor="#3B5998"
                          CornerRadius="450"
                         Image="ic_facebook.png"
@@ -36,6 +37,7 @@
 
                     <Button 
                         BackgroundColor="WhiteSmoke"
+                        Command="{Binding IniciarGoogleCommand}"
                         CornerRadius="450"
                         Image="ic_google.png"
                         Grid.Column="0"

@@ -3,6 +3,9 @@ using Appli_KT2.Utils;
 using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using Plugin.FacebookClient;
+using Plugin.GoogleClient;
+using Plugin.GoogleClient.Shared;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -26,7 +29,7 @@ namespace Appli_KT2.ViewModel
         private bool isEnable;
         private bool alumnoEncontrado = false;
         private int idAlumno;
-
+      
         ConexionWS conexion;
         HttpClient _client;
         private string url;
@@ -369,7 +372,7 @@ namespace Appli_KT2.ViewModel
         public async void VerificarContrasena(string usuario, string idAlumno)
         {
 
-            url = conexion.URL + "" + conexion.ValidarContrasenia + this.password+"/"+usuario+"/" +idAlumno;
+            url = conexion.URL + "" + conexion.ValidarContrasenia + this.password + "/" + usuario + "/" + idAlumno;
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
             if (response.IsSuccessStatusCode)
@@ -400,14 +403,14 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public  async Task<bool> VerificarRegistroAlumno()
+        public async Task<bool> VerificarRegistroAlumno()
         {
             try
             {
                 _client = new HttpClient();
                 conexion = new ConexionWS();
                 var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
-                url = conexion.URL + "" + conexion.VerificarRegistroAlumno +this.password+"/"+id;
+                url = conexion.URL + "" + conexion.VerificarRegistroAlumno + this.password + "/" + id;
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
@@ -425,7 +428,7 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error"+ response.StatusCode, "Accept");
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
                     return false;
                 }
 
@@ -448,15 +451,165 @@ namespace Appli_KT2.ViewModel
             await Application.Current.MainPage.Navigation.PushAsync(new CreateAccountPage());
         }
 
-        private void IniciarFacebook()
+        private async void IniciarFacebook()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IFacebookClient _facebookService = CrossFacebookClient.Current;
+                if (_facebookService.IsLoggedIn)
+                {
+                    _facebookService.Logout();
+                }
+
+                EventHandler<FBEventArgs<string>> userDataDelegate = null;
+
+                userDataDelegate = async (object sender, FBEventArgs<string> e) =>
+                {
+                    switch (e.Status)
+                    {
+                        case FacebookActionStatus.Completed:
+                            var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
+                            //var socialLoginData = new NetworkAuthData
+                            //{
+                            //    Id = facebookProfile.Id,
+                            //    Logo = authNetwork.Icon,
+                            //    Foreground = authNetwork.Foreground,
+                            //    Background = authNetwork.Background,
+                            //    Picture = facebookProfile.Picture.Data.Url,
+                            //    Name = $"{facebookProfile.FirstName} {facebookProfile.LastName}",
+                            //};
+                            await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                            break;
+                        case FacebookActionStatus.Canceled:
+                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Canceled", "Ok");
+                            break;
+                        case FacebookActionStatus.Error:
+                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Error", "Ok");
+                            break;
+                        case FacebookActionStatus.Unauthorized:
+                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Unauthorized", "Ok");
+                            break;
+                    }
+
+                    _facebookService.OnUserData -= userDataDelegate;
+                };
+
+                _facebookService.OnUserData += userDataDelegate;
+
+                string[] fbRequestFields = { "email", "first_name", "picture", "gender", "last_name" };
+                string[] fbPermisions = { "email" };
+                await _facebookService.RequestUserDataAsync(fbRequestFields, fbPermisions);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
-        private void IniciarGoogle()
+        private async void IniciarGoogle()
         {
-            throw new NotImplementedException();
+           
+            try
+            {
+                CrossGoogleClient.Current.Logout();
+                IGoogleClientManager _googleService = CrossGoogleClient.Current;
+                if (!string.IsNullOrEmpty(_googleService.ActiveToken))
+                {
+                    //Always require user authentication
+                    _googleService.Logout();
+                }
+
+                EventHandler<GoogleClientResultEventArgs<GoogleUser>> userLoginDelegate = null;
+                userLoginDelegate = async (object sender, GoogleClientResultEventArgs<GoogleUser> e) =>
+                {
+                    switch (e.Status)
+                    {
+                        case GoogleActionStatus.Completed:
+                            #if DEBUG
+                            var googleUserString = JsonConvert.SerializeObject(e.Data);
+                            Console.WriteLine($"Google Logged in succesfully: {googleUserString}");
+                            #endif
+
+                            //var socialLoginData = new NetworkAuthData
+                            //{
+                            //    Id = e.Data.Id,
+                            //    Logo = authNetwork.Icon,
+                            //    Foreground = authNetwork.Foreground,
+                            //    Background = authNetwork.Background,
+                            //    Picture = e.Data.Picture.AbsoluteUri,
+                            //    Name = e.Data.Name,
+                            //};
+
+                            await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                            break;
+                        case GoogleActionStatus.Canceled:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Canceled", "Ok");
+                            break;
+                        case GoogleActionStatus.Error:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Error", "Ok");
+                            break;
+                        case GoogleActionStatus.Unauthorized:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Unauthorized", "Ok");
+                            break;
+                    }
+
+                    _googleService.OnLogin -= userLoginDelegate;
+                };
+
+                _googleService.OnLogin += userLoginDelegate;
+
+                await _googleService.LoginAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
+
         #endregion
+
+
+        internal class NetworkAuthData
+        {
+            public string Id { get; set; }
+
+            public string Name { get; set; }
+
+            public string Logo { get; set; }
+
+            public string Picture { get; set; }
+
+            public string Background { get; set; }
+
+            public string Foreground { get; set; }
+        }
+
+        public class Data
+        {
+            [JsonProperty("is_silhouette")]
+            public bool IsSilhouette { get; set; }
+            public int Height { get; set; }
+            public string Url { get; set; }
+            public int Width { get; set; }
+        }
+
+        public class Picture
+        {
+            public Data Data { get; set; }
+        }
+
+        public class FacebookProfile
+        {
+            public string Email { get; set; }
+            public string Id { get; set; }
+            public Picture Picture { get; set; }
+
+            [JsonProperty("last_name")]
+            public string LastName { get; set; }
+            [JsonProperty("first_name")]
+            public string FirstName { get; set; }
+            [JsonProperty("user_id")]
+            public int UserId { get; set; }
+        }
     }
 }
