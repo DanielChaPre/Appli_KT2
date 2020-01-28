@@ -4,6 +4,7 @@ using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using Plugin.FacebookClient;
+using Plugin.FacebookClient.Abstractions;
 using Plugin.GoogleClient;
 using Plugin.GoogleClient.Shared;
 using System;
@@ -308,7 +309,6 @@ namespace Appli_KT2.ViewModel
             var encontrado = Convert.ToBoolean(Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"].ToString());
             if (encontrado)
             {
-
                 if (await VerificarRegistroAlumno())
                 {
                     var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
@@ -328,10 +328,6 @@ namespace Appli_KT2.ViewModel
         /**
        * Este método solo se utilizara para poder consultar el nomobre del alumno o de la persona 
        * **/
-        //public async Task<Alumno> ConsultarAlumno(string idAlum)
-        //{
-
-        //}
 
         public async void CrearCuentaAlumno()
         {
@@ -371,7 +367,6 @@ namespace Appli_KT2.ViewModel
 
         public async void VerificarContrasena(string usuario, string idAlumno)
         {
-
             url = conexion.URL + "" + conexion.ValidarContrasenia + this.password + "/" + usuario + "/" + idAlumno;
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
@@ -431,18 +426,12 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
                     return false;
                 }
-
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Error" + ex.Message, "Accept");
                 return false;
             }
-        }
-
-        public void CrearUsuario()
-        {
-
         }
 
         private async void IrCrearCuenta()
@@ -469,15 +458,6 @@ namespace Appli_KT2.ViewModel
                     {
                         case FacebookActionStatus.Completed:
                             var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
-                            //var socialLoginData = new NetworkAuthData
-                            //{
-                            //    Id = facebookProfile.Id,
-                            //    Logo = authNetwork.Icon,
-                            //    Foreground = authNetwork.Foreground,
-                            //    Background = authNetwork.Background,
-                            //    Picture = facebookProfile.Picture.Data.Url,
-                            //    Name = $"{facebookProfile.FirstName} {facebookProfile.LastName}",
-                            //};
                             await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
                             break;
                         case FacebookActionStatus.Canceled:
@@ -490,10 +470,8 @@ namespace Appli_KT2.ViewModel
                             await App.Current.MainPage.DisplayAlert("Facebook Auth", "Unauthorized", "Ok");
                             break;
                     }
-
                     _facebookService.OnUserData -= userDataDelegate;
                 };
-
                 _facebookService.OnUserData += userDataDelegate;
 
                 string[] fbRequestFields = { "email", "first_name", "picture", "gender", "last_name" };
@@ -510,17 +488,15 @@ namespace Appli_KT2.ViewModel
          * **/
         private async void IniciarGoogle()
         {
-           
             try
             {
-                CrossGoogleClient.Current.Logout();
+            //CrossGoogleClient.Current.Logout();
                 IGoogleClientManager _googleService = CrossGoogleClient.Current;
                 if (!string.IsNullOrEmpty(_googleService.ActiveToken))
                 {
                     //Always require user authentication
                     _googleService.Logout();
                 }
-
                 EventHandler<GoogleClientResultEventArgs<GoogleUser>> userLoginDelegate = null;
                 userLoginDelegate = async (object sender, GoogleClientResultEventArgs<GoogleUser> e) =>
                 {
@@ -531,17 +507,6 @@ namespace Appli_KT2.ViewModel
                             var googleUserString = JsonConvert.SerializeObject(e.Data);
                             Console.WriteLine($"Google Logged in succesfully: {googleUserString}");
                             #endif
-
-                            //var socialLoginData = new NetworkAuthData
-                            //{
-                            //    Id = e.Data.Id,
-                            //    Logo = authNetwork.Icon,
-                            //    Foreground = authNetwork.Foreground,
-                            //    Background = authNetwork.Background,
-                            //    Picture = e.Data.Picture.AbsoluteUri,
-                            //    Name = e.Data.Name,
-                            //};
-
                             await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
                             break;
                         case GoogleActionStatus.Canceled:
@@ -554,12 +519,9 @@ namespace Appli_KT2.ViewModel
                             await App.Current.MainPage.DisplayAlert("Google Auth", "Unauthorized", "Ok");
                             break;
                     }
-
                     _googleService.OnLogin -= userLoginDelegate;
                 };
-
                 _googleService.OnLogin += userLoginDelegate;
-
                 await _googleService.LoginAsync();
             }
             catch (Exception ex)
@@ -567,10 +529,7 @@ namespace Appli_KT2.ViewModel
                 Console.WriteLine(ex.ToString());
             }
         }
-
         #endregion
-
-
         internal class NetworkAuthData
         {
             public string Id { get; set; }
@@ -600,7 +559,6 @@ namespace Appli_KT2.ViewModel
             public string Email { get; set; }
             public string Id { get; set; }
             public Picture Picture { get; set; }
-
             [JsonProperty("last_name")]
             public string LastName { get; set; }
             [JsonProperty("first_name")]

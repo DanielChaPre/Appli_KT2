@@ -126,19 +126,24 @@ namespace Appli_KT2.View
                 if (string.IsNullOrEmpty(App.Current.Properties["tipo_usuario"].ToString()))
                 {
                     VaciarSesion();
+                    return;
                 }
                else if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["usuario"].ToString()))
                 {
                     VaciarSesion();
+                    return;
                 }
                 else if (string.IsNullOrEmpty(Xamarin.Forms.Application.Current.Properties["contrasena"].ToString()))
                 {
                     VaciarSesion();
+                    return;
                 }
             }
             catch (Exception ex)
             {
-
+                VaciarSesion();
+                VerificarLogin();
+                return;
             }
         }
 

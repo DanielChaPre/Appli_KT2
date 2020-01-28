@@ -33,6 +33,7 @@
                         Image="ic_facebook.png"
                         HeightRequest="60"
                         Margin="45,0"
+                        Padding="0,5,0,0"
                     />
 
                     <Button 
