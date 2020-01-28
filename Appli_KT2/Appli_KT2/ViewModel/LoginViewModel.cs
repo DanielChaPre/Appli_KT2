@@ -505,7 +505,9 @@ namespace Appli_KT2.ViewModel
                 Console.WriteLine(ex.ToString());
             }
         }
-
+        /*
+         * Configurar tanto el facebook como el google en android y ios para poder utilizarlos de manera adecuada
+         * **/
         private async void IniciarGoogle()
         {
            
@@ -572,15 +574,10 @@ namespace Appli_KT2.ViewModel
         internal class NetworkAuthData
         {
             public string Id { get; set; }
-
             public string Name { get; set; }
-
             public string Logo { get; set; }
-
             public string Picture { get; set; }
-
             public string Background { get; set; }
-
             public string Foreground { get; set; }
         }
 
@@ -589,7 +586,7 @@ namespace Appli_KT2.ViewModel
             [JsonProperty("is_silhouette")]
             public bool IsSilhouette { get; set; }
             public int Height { get; set; }
-            public string Url { get; set; }
+            public string Url { get; set; }  
             public int Width { get; set; }
         }
 
