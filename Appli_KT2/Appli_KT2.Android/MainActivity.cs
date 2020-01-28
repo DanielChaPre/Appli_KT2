@@ -6,6 +6,10 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Content;
+using Plugin.FacebookClient;
+using Plugin.GoogleClient;
+using Java.Security;
 
 namespace Appli_KT2.Droid
 {
@@ -20,7 +24,51 @@ namespace Appli_KT2.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
+            FacebookClientManager.Initialize(this);
+            GoogleClientManager.Initialize(this);
+         
             LoadApplication(new App());
+            #if DEBUG
+            PrintHashKey(this);
+            #endif
         }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
+        {
+            base.OnActivityResult(requestCode, resultCode, intent);
+            FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
+            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
+        }
+
+        public static void PrintHashKey(Context pContext)
+        {
+            try
+            {
+                PackageInfo info = Android.App.Application.Context.PackageManager.GetPackageInfo(Android.App.Application.Context.PackageName, PackageInfoFlags.Signatures);
+                foreach (var signature in info.Signatures)
+                {
+                    MessageDigest md = MessageDigest.GetInstance("SHA");
+                    md.Update(signature.ToByteArray());
+
+                    System.Diagnostics.Debug.WriteLine(Convert.ToBase64String(md.Digest()));
+                }
+            }
+            catch (NoSuchAlgorithmException e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
+        }
+
     }
 }
