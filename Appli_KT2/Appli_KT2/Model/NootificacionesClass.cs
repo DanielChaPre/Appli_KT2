@@ -7,10 +7,12 @@ namespace Appli_KT2.Model
 {
     public class NootificacionesClass
     {
+
         public NootificacionesClass()
         {
 
         }
+
         public ObservableCollection<NotificacionesMClass> ObtenerMenuEjemplo1()
         {
             ObservableCollection<NotificacionesMClass> oMenuPrincipal = new ObservableCollection<NotificacionesMClass>();

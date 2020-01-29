@@ -36,7 +36,7 @@
                                 </Grid.RowDefinitions>
                                 <Image 
                                     Grid.Column="0"
-                                    Source="{Binding icon}"
+                                    Source="{Binding Icon}"
                                     HorizontalOptions="Center"
                                     WidthRequest="50"/>
                                 <Grid 
@@ -54,17 +54,18 @@
                                         x:Name="idLabel" 
                                         Grid.Column="0"
                                         Grid.Row="0"
-                                        Text="{Binding Categoria}" 
+                                        Text="{Binding Titulo}" 
                                         TextColor="Black" 
-                                        VerticalOptions="StartAndExpand"/>
-                                    <Label 
+                                        VerticalOptions="CenterAndExpand"/>
+                                     <!--<Label 
                                         FontSize="Subtitle"
                                         x:Name="lblDireccion" 
                                         Grid.Column="0"
                                         Grid.Row="1"
-                                        Text="{Binding Titulo}" 
+                                        Text="{Binding Texto}" 
                                         TextColor="Gray"
                                         VerticalOptions="CenterAndExpand"/>
+                                    -->
                                 </Grid>
                             </Grid>
                         </Frame>

@@ -8,6 +8,7 @@ using Plugin.FacebookClient.Abstractions;
 using Plugin.GoogleClient;
 using Plugin.GoogleClient.Shared;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
@@ -36,6 +37,7 @@ namespace Appli_KT2.ViewModel
         private string url;
         #endregion
         #region propiedades
+
         public string User
         {
             get { return this.usuario; }
@@ -75,15 +77,19 @@ namespace Appli_KT2.ViewModel
                 SetValue(ref this.isEnable, value);
             }
         }
+       
         #endregion
         #region constructor
+
         public LoginViewModel()
         {
             this.IsRemember = true;
             this.IsEnable = true;
         }
+      
         #endregion
         #region comandos
+
         public ICommand RecuperarCommand
         {
             get
@@ -116,8 +122,6 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-
-
         public ICommand IniciarFacebookCommand
         {
             get
@@ -125,8 +129,6 @@ namespace Appli_KT2.ViewModel
                 return new RelayCommand(IniciarFacebook);
             }
         }
-
-
 
         public ICommand IniciarGoogleCommand
         {
@@ -373,10 +375,13 @@ namespace Appli_KT2.ViewModel
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<int>(content);
-                if (result != 0)
+                var result = JsonConvert.DeserializeObject<List<int>>(content);
+                if (result.Count != 0)
                 {
-                    App.Current.Properties["tipo_usuario"] = result;
+                    var tipo = result[0];
+                    var cveUsuario = result[1];
+                    App.Current.Properties["tipo_usuario"] = tipo;
+                    App.Current.Properties["cveUsuario"] = cveUsuario;
                     this.IsRunning = false;
                     this.IsEnable = true;
                     Application.Current.MainPage = new NavigationPage(new MainPage());
@@ -445,13 +450,17 @@ namespace Appli_KT2.ViewModel
             try
             {
                 IFacebookClient _facebookService = CrossFacebookClient.Current;
+                _facebookService.Logout();
+                _facebookService.Logout();
+                _facebookService.Logout();
+                _facebookService.Logout();
+
                 if (_facebookService.IsLoggedIn)
                 {
                     _facebookService.Logout();
                 }
 
                 EventHandler<FBEventArgs<string>> userDataDelegate = null;
-
                 userDataDelegate = async (object sender, FBEventArgs<string> e) =>
                 {
                     switch (e.Status)
@@ -529,6 +538,7 @@ namespace Appli_KT2.ViewModel
                 Console.WriteLine(ex.ToString());
             }
         }
+       
         #endregion
         internal class NetworkAuthData
         {

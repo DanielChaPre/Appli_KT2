@@ -1,22 +1,154 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class Notificaciones
+    public class Notificaciones : INotifyPropertyChanged
     {
-        public int cve_notificaciones { get; set; }
-        public string texto { get; set; }
-        public string responsable { get; set; }
-        public string cve_categoria { get; set; }
-        public string titulo { get; set; }
-        public string url { get; set; }
-        public string audiencia { get; set; }
-        public string tipo_notificaciones { get; set; }
-        //public MediosEnvio medio_de_difusion { get; set; }
-        public string fecha_notificacion { get; set; }
-        public string hora_notificacion { get; set; }
-        public int cve_detalle_notificacion { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private string cve_categoria;
+        private int cve_notificacion;
+        private int cve_tipo_notificacion;
+        private string fecha_notificacion;
+        private string hora_notificacion;
+        private string responsable;
+        private string texto;
+        private string titulo;
+        private string url;
+        [JsonIgnore]
+        private string icon;
+
+        public string Cve_categoria
+        {
+            get
+            {
+                return cve_categoria;
+            }
+            set
+            {
+                cve_categoria = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Cve_notificacion
+        {
+            get
+            {
+                return cve_notificacion;
+            }
+            set
+            {
+                cve_notificacion = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Cve_tipo_notificacion
+        {
+            get
+            {
+                return cve_tipo_notificacion;
+            }
+            set
+            {
+                cve_tipo_notificacion = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Fecha_notificacion
+        {
+            get
+            {
+                return fecha_notificacion;
+            }
+            set
+            {
+                fecha_notificacion = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Hora_notificacion
+        {
+            get
+            {
+                return hora_notificacion;
+            }
+            set
+            {
+                hora_notificacion = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Responsable
+        {
+            get
+            {
+                return responsable;
+            }
+            set
+            {
+                responsable = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Texto
+        {
+            get
+            {
+                return texto;
+            }
+            set
+            {
+                texto = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Titulo
+        {
+            get
+            {
+                return titulo;
+            }
+            set
+            {
+                titulo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Url
+        {
+            get
+            {
+                return url;
+            }
+            set
+            {
+                url = value;
+                OnPropertyChanged();
+            }
+        }
+        [JsonIgnore]
+        public string Icon
+        {
+            get
+            {
+                return icon;
+            }
+            set
+            {
+                icon = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

@@ -114,8 +114,9 @@ namespace Appli_KT2.View
             App.Current.Properties["usuario"] = "";
             App.Current.Properties["contrasena"] = "";
             App.Current.Properties["idAlumno"] = 0;
-            App.Current.Properties["tipo_usuario"] = 0;
+            App.Current.Properties["tipo_usuario"] = 2;
             App.Current.Properties["nombreUsuario"] = "Nombre Usuario";
+            App.Current.Properties["cveUsuario"] = 72;
             return;
         }
 

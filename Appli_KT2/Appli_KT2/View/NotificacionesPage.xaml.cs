@@ -1,4 +1,5 @@
 ﻿using Appli_KT2.Model;
+using Appli_KT2.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,24 +15,26 @@ namespace Appli_KT2.View
 	public partial class NotificacionesPage : ContentPage
 	{
          private static bool banderaClick;
+        private NotificacionesViewModel notificacionesViewModel;
         public NotificacionesPage()
         {
             InitializeComponent();
-            Title = "Atlas";
+         //   Title = "Atlas";
             banderaClick = true;
         }
 
         protected override async void OnAppearing()
         {
+            base.OnAppearing();
             LlenarMenu();
             await Task.Yield();
         }
 
         public async void LlenarMenu()
         {
-            NootificacionesClass oEjemploListView1Model = new NootificacionesClass();
+            notificacionesViewModel = new NotificacionesViewModel();
             listViewEjemplo1.ItemsSource = null;
-            listViewEjemplo1.ItemsSource = oEjemploListView1Model.ObtenerMenuEjemplo1();
+            listViewEjemplo1.ItemsSource = notificacionesViewModel.Lst_Notificaciones;
             listViewEjemplo1.ItemSelected += OnClickOpcionSeleccionada;
         }
 
@@ -40,23 +43,11 @@ namespace Appli_KT2.View
             listViewEjemplo1.SelectedItem = null;
             if (banderaClick)
             {
-                var item = e.SelectedItem as NotificacionesMClass;
-                if ((item != null) && (item.Habilitado))
+                var item = e.SelectedItem as Notificaciones;
+                if ((item != null))
                 {
-                    var oSeleccionado = item.idOpcion;
                     banderaClick = false;
-                    switch (oSeleccionado)
-                    {
-                        case 1:
-                            //  await Navigation.PushAsync(new ResultadoAtlasPage());
-                            break;
-                        case 2:
-
-                            break;
-                        case 3:
-
-                            break;
-                    }
+                    await Navigation.PushAsync(new DetalleNotificacion(item));
                     await Task.Run(async () =>
                     {
                         await Task.Delay(500);

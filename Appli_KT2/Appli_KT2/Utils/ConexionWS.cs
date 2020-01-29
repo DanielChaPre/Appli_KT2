@@ -31,7 +31,8 @@ namespace Appli_KT2.Utils
         private string modificarAlumno = "/alumno";
         private string eliminarAlumno = "/alumno";
         private string consultarAlumno = "/alumno/";
-        private string consultarNotificaciones = "/notificacion";
+        private string consultarNotificaciones = "/notificacion/";
+        private string eliminarNotificaciones = "/notificacion/";
         private string obtenerPlanteles = "/planteles";
         private string obtenerPlantelEMS = "/buscarplantelEMS/";
         private string obtenerCarreras = "/carreras";
@@ -46,6 +47,7 @@ namespace Appli_KT2.Utils
         private string recuperarContrasena = "/recuperarContrasena/";
         private string verificarRegistroAlumno = "/verificarAlumno/";
         private string consultarUsuarioAlumno = "/usuarioalumno/";
+        
 
         public string URL
         {
@@ -131,5 +133,6 @@ namespace Appli_KT2.Utils
         public string VerificarRegistroAlumno { get => verificarRegistroAlumno; set => verificarRegistroAlumno = value; }
         public string ConsultarUsuarioAlumno { get => consultarUsuarioAlumno; set => consultarUsuarioAlumno = value; }
         public string ObtenerPlantelEMS { get => obtenerPlantelEMS; set => obtenerPlantelEMS = value; }
+        public string EliminarNotificaciones { get => eliminarNotificaciones; set => eliminarNotificaciones = value; }
     }
 }
