@@ -245,19 +245,11 @@
                                         x:Name="btnNo"
                                     />
                                 </StackLayout>
-                              
-                            </StackLayout>
-                            <StackLayout
-                                x:Name="lytCurpHijo"
-                                >
-                                <Label
-                                    Text="Ingresa la curp del su hijo"
-                                    />
-                                <Entry/>
+
                             </StackLayout>
                         </StackLayout>
                     </Frame>
-                    <!--Padre Familia 1-->
+                    <!--Padre Familia 11-->
                     <Frame
                        x:Name="framePadre">
                         <StackLayout>
@@ -317,7 +309,7 @@
 
                                 <Entry
                                 Placeholder="Ingrese la curp de su hijo"
-                                Text=""
+                                Text="{Binding CurpHijo, Mode=TwoWay}"
                                  FontSize="Small"/>
                             </StackLayout>
                         </StackLayout>

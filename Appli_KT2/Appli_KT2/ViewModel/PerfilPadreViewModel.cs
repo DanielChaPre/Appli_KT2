@@ -233,12 +233,14 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                BuscarAlumnoCurp();
                 rootObject = new RootObjectPadreFamilia()
                 {
                     padreFamilia = new PadreFamilia()
                     {
+                       
                        CVE_Padre_Familia = Convert.ToInt32(App.Current.Properties["cvePadreFamilia"].ToString()),
-                       IdAlumno =  (int) App.Current.Properties["idAlumno"],
+                       IdAlumno =  (int) App.Current.Properties["idAlumnoPadre"],
                        Fecha_Registro = Fecha_Registro,
                        Persona = new Persona()
                        {
@@ -354,7 +356,7 @@ namespace Appli_KT2.ViewModel
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var idAlumno = JsonConvert.DeserializeObject<int>(content);
-                    App.Current.Properties["idAlumno"] = idAlumno;
+                    App.Current.Properties["idAlumnoPadre"] = idAlumno;
                 }
             }
             catch (Exception ex)
