@@ -17,9 +17,34 @@ namespace Appli_KT2.ViewModel
         MetodoHTTP metodoHTTP;
         private string url;
         private List<Notificaciones> lstnotificaciones = new List<Notificaciones>();
+        private bool isvisible;
+        private bool isrun;
+
+        public bool IsRun
+        {
+            get { return this.isrun; }
+            set
+            {
+                isrun = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsVisible
+        {
+            get { return this.isvisible; }
+            set
+            {
+                isvisible = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public NotificacionesViewModel()
         {
+            IsVisible = false;
+            IsRun = false;
             ConsultarNotificaciones();
         }
 
@@ -64,10 +89,12 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public async Task<bool> ConsultarNotificaciones()
+        public async void ConsultarNotificaciones()
         {
             try
             {
+                IsRun = true;
+                IsVisible = false;
                 _client = new HttpClient();
                 conexion = new ConexionWS();
                // var cveUsuario = Xamarin.Forms.Application.Current.Properties["cveUsuario"];
@@ -97,17 +124,23 @@ namespace Appli_KT2.ViewModel
                         lstnotificaciones.Add(entNotificaciones);
                     }
                     this.Lst_Notificaciones = this.lstnotificaciones;
-                    return true;
+                    IsRun = false;
+                    IsVisible = true;
+                    return;
                 }
                 else
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
-                    return false;
+                    IsRun = false;
+                    IsVisible = true;
+                    return;
                 }
             }
             catch (Exception ex)
             {
-                return false;
+                IsRun = false;
+                IsVisible = true;
+                return;
                 throw;
             }
         }

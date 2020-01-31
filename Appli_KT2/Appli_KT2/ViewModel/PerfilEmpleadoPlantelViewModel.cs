@@ -74,15 +74,6 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public string Sexo
-        {
-            get { return this.sexo; }
-            set
-            {
-                SetValue(ref this.sexo, value);
-            }
-        }
-
         public string PlantelEMS
         {
             get { return this.plantelEMS; }
@@ -266,10 +257,12 @@ namespace Appli_KT2.ViewModel
 
         public async Task<bool> ConsultarEmpleadoPlantel()
         {
+            IsRun = true;
+            IsVisible = false;
             _client = new HttpClient();
             conexion = new ConexionWS();
             var usuario = App.Current.Properties["usuario"];
-            var contrasena = App.Current.Properties["contrasenia"];
+            var contrasena = App.Current.Properties["contrasena"];
             var url = conexion.URL + "" + conexion.ConsultarEmpleadoPlantel + usuario + "/" + contrasena;
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
@@ -310,7 +303,12 @@ namespace Appli_KT2.ViewModel
                     };
                     App.Current.Properties["cveUsuario"] = empleadoPlantel.Persona.Usuario.Cve_Usuario;
                     App.Current.Properties["cvePersona"] = empleadoPlantel.Persona.Cve_Persona;
-                    App.Current.Properties["nombreUsuario"] = empleadoPlantel.Persona.Nombre+" "+empleadoPlantel.Persona.Apellido_Paterno;
+                    App.Current.Properties["cveEmpleadoPersona"] = empleadoPlantel.Cve_Empleado_Plantel;
+                    App.Current.Properties["nombreUsuario"] = empleadoPlantel.Persona.Nombre + " " + empleadoPlantel.Persona.Apellido_Paterno;
+                    IsRun = false;
+                    IsVisible = true;
+                    IsAcciones = true;
+                    IsInsertar = false;
                     return true;
                 }
                 else
@@ -318,12 +316,24 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
+                    App.Current.Properties["cveEmpleadoPersona"] = 0;
+                    IsRun = false;
+                    IsVisible = true;
+                    IsAcciones = false;
+                    IsInsertar = true;
                     return false;
                 }
             }
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
+                App.Current.Properties["cveUsuario"] = 0;
+                App.Current.Properties["cvePersona"] = 0;
+                App.Current.Properties["cveEmpleadoPersona"] = 0;
+                IsRun = false;
+                IsVisible = true;
+                IsAcciones = false;
+                IsInsertar = true;
                 return false;
             }
         }

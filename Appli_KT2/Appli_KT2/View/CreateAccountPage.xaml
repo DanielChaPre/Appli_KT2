@@ -5,6 +5,7 @@
              BackgroundColor="#D9D6D6"
               BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Crear cuenta"
+             BackgroundImageSource="pleca_textura.jpg"
              Padding="5,0">
     <ContentPage.Content>
         <Frame

@@ -80,7 +80,7 @@ namespace Appli_KT2.ViewModel
 
         public async void IrNotificaciones()
         {
-            MainViewModel.GetInstance().Notificaciones = new NotificacionesViewModel();
+          //  MainViewModel.GetInstance().Notificaciones = new NotificacionesViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new NotificacionesPage());
         }
 

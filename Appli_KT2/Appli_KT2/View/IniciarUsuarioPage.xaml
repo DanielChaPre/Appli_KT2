@@ -5,6 +5,7 @@
              BackgroundColor="#D9D6D6"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              Title="Iniciar sesión"
+             BackgroundImageSource="pleca_textura.jpg"
              Padding="10,0">
     <ContentPage.Content>
         <Frame

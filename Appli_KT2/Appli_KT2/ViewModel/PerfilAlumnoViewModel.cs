@@ -135,8 +135,17 @@ namespace Appli_KT2.ViewModel
 
         private void ObtenerMunicipios()
         {
-            App.Current.Properties["NombreEstado"] = _selectedEstado.NombreEstado;
-            MainViewModel.GetInstance().Municipio = new MunicipioViewModel();
+            if (string.IsNullOrEmpty(_selectedEstado.NombreEstado))
+            {
+                App.Current.Properties["NombreEstado"] = "";
+                MainViewModel.GetInstance().Municipio = new MunicipioViewModel();
+            }
+            else
+            {
+                App.Current.Properties["NombreEstado"] = _selectedEstado.NombreEstado;
+                MainViewModel.GetInstance().Municipio = new MunicipioViewModel();
+            }
+           
         }
 
         #region Commandos
@@ -167,6 +176,8 @@ namespace Appli_KT2.ViewModel
 
         public async void InsertarPerfil()
         {
+            IsRun = false;
+            IsVisible = true;
             metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
             LlenarDatos();
@@ -182,6 +193,8 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                IsRun = false;
+                IsVisible = true;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();
@@ -201,6 +214,8 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                IsRun = false;
+                IsVisible = true;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();

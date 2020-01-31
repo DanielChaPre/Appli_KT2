@@ -26,6 +26,10 @@ namespace Appli_KT2.View
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            actiCargar.IsRunning = true;
+            actiCargar.IsVisible = true;
+            listViewEjemplo1.IsVisible = false;
+            lblnoti.IsVisible = false;
             LlenarMenu();
             await Task.Yield();
         }
@@ -34,8 +38,29 @@ namespace Appli_KT2.View
         {
             notificacionesViewModel = new NotificacionesViewModel();
             listViewEjemplo1.ItemsSource = null;
-            listViewEjemplo1.ItemsSource = notificacionesViewModel.Lst_Notificaciones;
-            listViewEjemplo1.ItemSelected += OnClickOpcionSeleccionada;
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                while (notificacionesViewModel.Lst_Notificaciones != null || notificacionesViewModel.Lst_Notificaciones.Count != 0)
+                {
+
+                    if (notificacionesViewModel.Lst_Notificaciones.Count == 0)
+                    {
+                        //await Application.Current.MainPage.DisplayAlert("Aviso", "No se encuentran notificaciones existentes para el usuario", "Aceptar")
+                        lblnoti.IsVisible = true;
+                        actiCargar.IsRunning = false;
+                        actiCargar.IsVisible = false;
+                        return false;
+                    }
+                    actiCargar.IsRunning = false;
+                    actiCargar.IsVisible = false;
+                    lblnoti.IsVisible = false;
+                    listViewEjemplo1.IsVisible = true;
+                    listViewEjemplo1.ItemsSource = notificacionesViewModel.Lst_Notificaciones;
+                    listViewEjemplo1.ItemSelected += OnClickOpcionSeleccionada;
+                    return false;
+                }
+                return true; // True = Repeat again, False = Stop the timer
+            });
         }
 
         private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)

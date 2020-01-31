@@ -17,7 +17,7 @@ namespace Appli_KT2.ViewModel
         private List<Municipios> lstMunicipios = new List<Municipios>();
         public MunicipioViewModel()
         {
-            ObtenerMunicipios();
+          //  ObtenerMunicipios();
         }
 
         public List<Municipios> ListMunicipios
@@ -33,6 +33,10 @@ namespace Appli_KT2.ViewModel
                 var _client = new HttpClient();
                 var conexion = new ConexionWS();
                 this.estado = App.Current.Properties["NombreEstado"].ToString();
+                if (string.IsNullOrEmpty(estado))
+                {
+                    return;
+                }
                 var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerMunicipiosEstado + estado, string.Empty));
                 HttpResponseMessage response = await _client.GetAsync(uri);
 

@@ -99,7 +99,7 @@ namespace Appli_KT2.View
 
         public void OcultarPerfiles()
         {
-            framePreguntaPadre.IsVisible = true;
+            framePreguntaPadre.IsVisible = false;
             lytPadre.IsVisible = false;
             frameAlumno.IsVisible = false;
             frameBotones.IsVisible = false;
@@ -127,10 +127,11 @@ namespace Appli_KT2.View
             frameAlumno.BindingContext = perfilAlumno;
             frameBotones.BindingContext = perfilAlumno;
             frameDireccion.BindingContext = perfilAlumno;
+            OcultarPerfiles();
             frameAlumno.IsVisible = true;
+           await perfilAlumno.ConsultarAlumno();
             frameBotones.IsVisible = true;
             frameDireccion.IsVisible = true;
-           await perfilAlumno.ConsultarAlumno();
             LlenarListasDireccion();
         }
 
@@ -148,13 +149,30 @@ namespace Appli_KT2.View
 
         public async void CargarPerfilEmpleadoPlantel()
         {
-            OcultarPerfiles();
+          
             perfilEmpleadoPlantel = new PerfilEmpleadoPlantelViewModel();
             frameEmpleadoPlantel.BindingContext = perfilEmpleadoPlantel;
             frameBotones.BindingContext = perfilEmpleadoPlantel;
+            OcultarPerfiles();
             frameEmpleadoPlantel.IsVisible = true;
             frameBotones.IsVisible = true;
-            await perfilEmpleadoPlantel.ConsultarEmpleadoPlantel();
+           if(await perfilEmpleadoPlantel.ConsultarEmpleadoPlantel())
+            {
+                this.actCargaFormEmpleadoP.IsVisible = perfilEmpleadoPlantel.IsRun;
+                this.actCargaFormEmpleadoP.IsRunning = perfilEmpleadoPlantel.IsRun;
+                this.formularioEmpleadoPlantel.IsVisible = perfilEmpleadoPlantel.IsVisible;
+                this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
+                this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+            }
+            else
+            {
+                this.actCargaFormEmpleadoP.IsVisible = perfilEmpleadoPlantel.IsRun;
+                this.actCargaFormEmpleadoP.IsRunning = perfilEmpleadoPlantel.IsRun;
+                this.formularioEmpleadoPlantel.IsVisible = perfilEmpleadoPlantel.IsVisible;
+                this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
+                this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+            }
+            //slytInsertar.IsVisible = Binding(perfilEmpleadoPlantel.IsInsertar);
         }
 
         public async void CargarPerfilEmpleado()
@@ -210,6 +228,7 @@ namespace Appli_KT2.View
                     if (municipiosViewModel == null)
                     {
                         municipiosViewModel = new MunicipioViewModel();
+                        App.Current.Properties["NombreEstado"] = "";
                     }
                     else
                     {
