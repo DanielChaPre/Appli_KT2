@@ -11,7 +11,7 @@ namespace Appli_KT2.Model
     {
         public int cve_padre_familia;
         public int idAlumno;
-        public DateTime fecha_registro;
+        public string fecha_registro;
         public Persona persona;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -39,7 +39,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public DateTime Fecha_Registro
+        public string Fecha_Registro
         {
             get { return this.fecha_registro; }
             set

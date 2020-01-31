@@ -323,7 +323,7 @@
                                 Color="Navy"
                                 IsRunning="{Binding IsRun}"
                                 IsVisible="{Binding IsRun}"
-                                x:Name="actCargaFormAlumno"
+                                x:Name="actCargaFormEmpleado"
                                 />
                             <StackLayout
                                 IsVisible="{Binding IsVisible}"
@@ -335,7 +335,8 @@
                     </Frame>
                     <!--Empleado Plantel 11-->
                     <Frame
-                       x:Name="frameEmpleadoPlantel">
+                        BindingContext="{Binding RegistrarEP}"
+                        x:Name="frameEmpleadoPlantel">
                         <StackLayout>
                             <ActivityIndicator
                                 Color="Navy"
@@ -354,7 +355,7 @@
 
                                 <Entry
                                     Placeholder="Ingrese su Nombre(s)" 
-                                    Text="{Binding Nombre, Mode=TwoWay}"
+                                    Text="{Binding Nombre, Mode=OneWay}"
                                     FontSize="Small"/>
 
 

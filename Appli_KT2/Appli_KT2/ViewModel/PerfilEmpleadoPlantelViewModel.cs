@@ -158,6 +158,8 @@ namespace Appli_KT2.ViewModel
 
         public async void InsertarPerfil()
         {
+            IsRun = true;
+            IsVisible = false;
             metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
             LlenarDatos();
@@ -171,6 +173,8 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                IsRun = true;
+                IsVisible = false;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();
@@ -190,6 +194,8 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                IsRun = true;
+                IsVisible = false;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();
@@ -215,8 +221,8 @@ namespace Appli_KT2.ViewModel
                     {
                         Cve_Empleado_Plantel = Cve_Empleado_Plantel,
                         IdPlantelesES = IdPlantelesES,
-                        Tipo = Tipo,
-                        Fecha_Registro = Fecha_Registro,
+                        Tipo = 1,
+                        Fecha_Registro = "01/01/0001",
                         Persona = new Persona()
                         {
                             Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
@@ -272,35 +278,12 @@ namespace Appli_KT2.ViewModel
                 var empleadoPlantel = JsonConvert.DeserializeObject<EmpleadoPlantel>(content);
                 if (empleadoPlantel != null)
                 {
-                    Cve_Empleado_Plantel = empleadoPlantel.Cve_Empleado_Plantel;
-                    IdPlantelesES = empleadoPlantel.IdPlantelesES;
                     Tipo = empleadoPlantel.Tipo;
-                    Fecha_Registro = empleadoPlantel.Fecha_Registro;
-                    Persona = new Persona()
-                    {
-                        Cve_Persona = empleadoPlantel.Persona.Cve_Persona,
-                        Nombre = empleadoPlantel.Persona.Nombre,
-                        Apellido_Paterno = empleadoPlantel.Persona.Apellido_Paterno,
-                        Apellido_Materno = empleadoPlantel.Persona.Apellido_Materno,
-                        RFC = empleadoPlantel.Persona.RFC,
-                        CURP = empleadoPlantel.Persona.CURP,
-                        Sexo = empleadoPlantel.Persona.Sexo,
-                        Fecha_Nacimiento = empleadoPlantel.Persona.Fecha_Nacimiento,
-                        Numero_Telefono = empleadoPlantel.Persona.Numero_Telefono,
-                        Estado_Civil = empleadoPlantel.Persona.Estado_Civil,
-                        Nacionalidad = empleadoPlantel.Persona.Nacionalidad,
-                        IdColonia = empleadoPlantel.Persona.IdColonia,
-                        Usuario = new Usuario()
-                        {
-                            Cve_Usuario = empleadoPlantel.Persona.Usuario.Cve_Usuario,
-                            IdAlumno = empleadoPlantel.Persona.Usuario.IdAlumno,
-                            Nombre_Usuario = empleadoPlantel.Persona.Usuario.Nombre_Usuario,
-                            Contrasena = empleadoPlantel.Persona.Usuario.Contrasena,
-                            Fecha_Registro = empleadoPlantel.Persona.Usuario.Fecha_Registro,
-                            Estatus = empleadoPlantel.Persona.Usuario.Estatus,
-                            Alias_Red = empleadoPlantel.Persona.Usuario.Alias_Red
-                        }
-                    };
+                    Nombre = empleadoPlantel.Persona.Nombre;
+                    Apellido_Paterno = empleadoPlantel.Persona.Apellido_Paterno;
+                    Apellido_Materno = empleadoPlantel.Persona.Apellido_Materno;
+                    Numero_Telefono = empleadoPlantel.Persona.Numero_Telefono;
+                    App.Current.Properties["tipoEmpleadoP"] = empleadoPlantel.Tipo;
                     App.Current.Properties["cveUsuario"] = empleadoPlantel.Persona.Usuario.Cve_Usuario;
                     App.Current.Properties["cvePersona"] = empleadoPlantel.Persona.Cve_Persona;
                     App.Current.Properties["cveEmpleadoPersona"] = empleadoPlantel.Cve_Empleado_Plantel;

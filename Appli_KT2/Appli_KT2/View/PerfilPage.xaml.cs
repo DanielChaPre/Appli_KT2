@@ -82,6 +82,7 @@ namespace Appli_KT2.View
                 case 4://Plantel
                     break;
                 case 5://Docente
+                    OcultarPerfiles();
                     CargarPerfilEmpleadoPlantel();
                     break;
                 case 6://Direcivo
@@ -149,13 +150,12 @@ namespace Appli_KT2.View
 
         public async void CargarPerfilEmpleadoPlantel()
         {
-          
-            perfilEmpleadoPlantel = new PerfilEmpleadoPlantelViewModel();
-            frameEmpleadoPlantel.BindingContext = perfilEmpleadoPlantel;
-            frameBotones.BindingContext = perfilEmpleadoPlantel;
             OcultarPerfiles();
+            MainViewModel.GetInstance().RegistrarEP = new PerfilEmpleadoPlantelViewModel();
+            perfilEmpleadoPlantel = new PerfilEmpleadoPlantelViewModel();
+            this.frameEmpleadoPlantel.BindingContext = perfilEmpleadoPlantel;
+            this.frameBotones.BindingContext = perfilEmpleadoPlantel;
             frameEmpleadoPlantel.IsVisible = true;
-            frameBotones.IsVisible = true;
            if(await perfilEmpleadoPlantel.ConsultarEmpleadoPlantel())
             {
                 this.actCargaFormEmpleadoP.IsVisible = perfilEmpleadoPlantel.IsRun;
@@ -172,6 +172,7 @@ namespace Appli_KT2.View
                 this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
                 this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
             }
+            frameBotones.IsVisible = true;
             //slytInsertar.IsVisible = Binding(perfilEmpleadoPlantel.IsInsertar);
         }
 

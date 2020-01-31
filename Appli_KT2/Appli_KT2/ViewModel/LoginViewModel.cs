@@ -4,6 +4,7 @@ using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using Plugin.FacebookClient;
+using Plugin.FacebookClient.Abstractions;
 //ñusing Plugin.FacebookClient.Abstractions;
 using Plugin.GoogleClient;
 using Plugin.GoogleClient.Shared;
