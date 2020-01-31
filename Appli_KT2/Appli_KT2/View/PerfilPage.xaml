@@ -257,7 +257,7 @@
                                 Color="Navy"
                                 IsRunning="{Binding IsRun}"
                                 IsVisible="{Binding IsRun}"
-                                x:Name="actCargaFormAlumno"
+                                x:Name="actCargaFormPadre"
                                 />
                             <StackLayout
                                 IsVisible="{Binding IsVisible}"
