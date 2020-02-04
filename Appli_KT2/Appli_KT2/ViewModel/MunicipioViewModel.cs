@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Appli_KT2.ViewModel
 {
@@ -24,6 +25,39 @@ namespace Appli_KT2.ViewModel
         {
             get;
             set;
+        }
+
+        public async void ObtenerTodosMunicipios()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerMunicipio));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var listaMunicipios = JsonConvert.DeserializeObject<List<Municipios>>(content);
+                    for (int i = 0; i < listaMunicipios.Count; i++)
+                    {
+                        var entMunicipios = new Municipios()
+                        {
+                            IdMunicipio = listaMunicipios[i].IdMunicipio,
+                            NombreMunicipio = listaMunicipios[i].NombreMunicipio,
+                            IdEstado = listaMunicipios[i].IdEstado
+                        };
+                        lstMunicipios.Add(entMunicipios);
+                    }
+                    //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
+                    this.ListMunicipios = this.lstMunicipios;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+                throw;
+            }
         }
 
         public async void ObtenerMunicipios()

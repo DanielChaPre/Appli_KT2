@@ -4,11 +4,8 @@ using System.Text;
 
 namespace Appli_KT2.ViewModel
 {
-    public class AtlasViewModel
+    public class CarreraViewModel
     {
-        public void ConsultarPlanteles()
-        {
 
-        }
     }
 }

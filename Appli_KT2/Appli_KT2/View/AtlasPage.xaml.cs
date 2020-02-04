@@ -13,15 +13,22 @@ namespace Appli_KT2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AtlasPage : ContentPage
 	{
-		public AtlasPage ()
+        MunicipioViewModel municipiosViewModel;
+        PlantelESViewModel plantelESViewModel;
+
+        public AtlasPage ()
 		{
 			InitializeComponent ();
             VerificarUsuario();
-            btnBuscar.Clicked += BuscarAtlas;
-           
+           // btnBuscar.Clicked += BuscarAtlas;
         }
 
-      
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LlenarFiltros();
+        }
+
         private void IniciarSesion()
         {
             ToolbarItem icLogin = new ToolbarItem
@@ -130,6 +137,78 @@ namespace Appli_KT2.View
         private async void BuscarAtlas(object sender, EventArgs e)
         {
             await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
+        }
+
+        private void LlenarFiltros()
+        {
+            LlenarMunicipios();
+            LlenarPlantelesES();
+            //LlenarCarreras();
+        }
+
+        private void LlenarMunicipios()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                try
+                {
+                    if (municipiosViewModel == null)
+                    {
+                        municipiosViewModel = new MunicipioViewModel();
+                    }
+                    else
+                    {
+                        municipiosViewModel.ObtenerTodosMunicipios();
+                        if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
+                        {
+                            pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
+                            pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return true;
+                    throw;
+                }
+            });
+        }
+
+        private void LlenarPlantelesES()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () => 
+            {
+                try
+                {
+                    if (plantelESViewModel == null)
+                    {
+                        plantelESViewModel = new PlantelESViewModel();
+                    }
+                    else
+                    {
+                        plantelESViewModel.ObtenerPlantelES();
+                        if (plantelESViewModel.ListPlantelES != null || plantelESViewModel.ListPlantelES.Count != 0)
+                        {
+                            pPlantelesES.ItemsSource = plantelESViewModel.ListPlantelES;
+                            pPlantelesES.ItemDisplayBinding = new Binding("NombreInstitucionES");
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return true;
+                    throw;
+                }
+            });
+        }
+
+        private void LlenarCarreras()
+        {
+
         }
     }
 }
