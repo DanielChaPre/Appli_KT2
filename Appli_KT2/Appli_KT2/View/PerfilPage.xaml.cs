@@ -151,7 +151,6 @@ namespace Appli_KT2.View
         public async void CargarPerfilEmpleadoPlantel()
         {
             OcultarPerfiles();
-            MainViewModel.GetInstance().RegistrarEP = new PerfilEmpleadoPlantelViewModel();
             perfilEmpleadoPlantel = new PerfilEmpleadoPlantelViewModel();
             this.frameEmpleadoPlantel.BindingContext = perfilEmpleadoPlantel;
             this.frameBotones.BindingContext = perfilEmpleadoPlantel;
@@ -163,6 +162,7 @@ namespace Appli_KT2.View
                 this.formularioEmpleadoPlantel.IsVisible = perfilEmpleadoPlantel.IsVisible;
                 this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
                 this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+                LlenarDatosEmpleadoPlantel();
             }
             else
             {
@@ -175,6 +175,14 @@ namespace Appli_KT2.View
             frameBotones.IsVisible = true;
             //slytInsertar.IsVisible = Binding(perfilEmpleadoPlantel.IsInsertar);
         }
+
+        public void LlenarDatosEmpleadoPlantel() 
+        {
+            entNombre.Text = perfilEmpleadoPlantel.Nombre;
+            entApePat.Text = perfilEmpleadoPlantel.Apellido_Paterno;
+            entApeMat.Text = perfilEmpleadoPlantel.Apellido_Materno;
+            entNumTel.Text = perfilEmpleadoPlantel.Numero_Telefono;
+        } 
 
         public async void CargarPerfilEmpleado()
         {

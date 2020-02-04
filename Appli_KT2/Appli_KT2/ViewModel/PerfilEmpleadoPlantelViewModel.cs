@@ -165,6 +165,7 @@ namespace Appli_KT2.ViewModel
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
             dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearEmpleadoPlantel, json);
+            await Application.Current.MainPage.DisplayAlert("Exito", "Se a guadado la información de manera correcta", "Aceptar");
             await ConsultarEmpleadoPlantel();
             return;
         }
@@ -180,6 +181,7 @@ namespace Appli_KT2.ViewModel
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.EliminarEmpleadoPlantel, json);
+                await Application.Current.MainPage.DisplayAlert("Exito", "Se a eliminado la información de manera correcta", "Aceptar");
                 await ConsultarEmpleadoPlantel();
                 return;
             }
@@ -201,6 +203,7 @@ namespace Appli_KT2.ViewModel
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarEmpleadoPlantel, json);
+                await Application.Current.MainPage.DisplayAlert("Exito", "Se a actualizado la información de manera correcta", "Aceptar");
                 await ConsultarEmpleadoPlantel();
                 return;
             }

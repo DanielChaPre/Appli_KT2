@@ -335,7 +335,6 @@
                     </Frame>
                     <!--Empleado Plantel 11-->
                     <Frame
-                        BindingContext="{Binding RegistrarEP}"
                         x:Name="frameEmpleadoPlantel">
                         <StackLayout>
                             <ActivityIndicator
@@ -355,8 +354,9 @@
 
                                 <Entry
                                     Placeholder="Ingrese su Nombre(s)" 
-                                    Text="{Binding Nombre, Mode=OneWay}"
-                                    FontSize="Small"/>
+                                    Text="{Binding Nombre, Mode = TwoWay}"
+                                    FontSize="Small"
+                                    x:Name="entNombre"/>
 
 
                                 <Label 
@@ -368,7 +368,8 @@
                                 <Entry 
                                     Placeholder="Ingrese su apellido paterno"
                                     Text="{Binding Apellido_Paterno, Mode=TwoWay}"
-                                    FontSize="Small"/>
+                                    FontSize="Small"
+                                    x:Name="entApePat"/>
 
 
                                 <Label 
@@ -380,7 +381,8 @@
                                 <Entry 
                                     Placeholder="Ingrese su apellido materno"
                                     Text="{Binding Apellido_Materno ,Mode=TwoWay}"
-                                    FontSize="Small"/>
+                                    FontSize="Small"
+                                    x:Name="entApeMat"/>
 
 
                                 <Label 
@@ -391,7 +393,8 @@
                                 <Entry
                                   Placeholder="Ingrese su número de telefono" 
                                  Text="{Binding Numero_Telefono,Mode=TwoWay}"
-                                 FontSize="Small"/>
+                                 FontSize="Small"
+                                    x:Name="entNumTel"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>

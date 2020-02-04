@@ -282,10 +282,12 @@ namespace Appli_KT2.ViewModel
 
         public async Task<bool> ConsultarPadreFamilia()
         {
+            IsRun = true;
+            IsVisible = false;
             _client = new HttpClient();
             conexion = new ConexionWS();
             var usuario = App.Current.Properties["usuario"];
-            var contrasena = App.Current.Properties["contrasenia"];
+            var contrasena = App.Current.Properties["contrasena"];
             var url = conexion.URL + "" + conexion.ConsultarPadreFamilia + usuario + "/" + contrasena;
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
@@ -326,6 +328,10 @@ namespace Appli_KT2.ViewModel
                     App.Current.Properties["cveUsuario"] = persona.Usuario.Cve_Usuario;
                     App.Current.Properties["cvePersona"] = persona.Cve_Persona;
                     App.Current.Properties["nombreUsuario"] = persona.Nombre + " " + persona.Apellido_Paterno;
+                    IsRun = false;
+                    IsVisible = true;
+                    IsInsertar = false;
+                    IsAcciones = true;
                     return true;
                 }
                 else
@@ -333,12 +339,22 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
+                    IsRun = false;
+                    IsVisible = true;
+                    IsInsertar = true;
+                    IsAcciones = false;
                     return false;
                 }
             }
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
+                App.Current.Properties["cveUsuario"] = 0;
+                App.Current.Properties["cvePersona"] = 0;
+                IsRun = false;
+                IsVisible = true;
+                IsInsertar = true;
+                IsAcciones = false;
                 return false;
             }
         }
