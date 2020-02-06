@@ -24,6 +24,7 @@ namespace Appli_KT2.ViewModel
         public RecuperarContrasenaViewModel Recuperar { get; set; }
         public ResultadoAtlasViewModel Resultado { get; set; }
 
+
         #endregion
         #region constructores
         public MainViewModel()

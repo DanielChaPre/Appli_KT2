@@ -1,21 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tabs="clr-namespace:Appli_KT2.View"
              x:Class="Appli_KT2.View.HistorialPage"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Top"
-            android:TabbedPage.BarSelectedItemColor="#000F9F"
-            android:TabbedPage.BarItemColor="Gray"
-            BarBackgroundColor="White"
-            BackgroundImageSource="pleca_textura.jpg"
-            
-            >
+               BindingContext="{Binding Main, Source={StaticResource Locator}}"
+            BackgroundImageSource="pleca_textura.jpg">
+    <ContentPage.Content
+        BindingContext="{Binding Historial}"
+        >
+        <ListView 
+            x:Name="listViewHistorial" 
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Height="70" >
+                        <Frame
+                             Margin="0,3"
+                             HasShadow="true" 
+                             BorderColor="Silver"
+                             Padding="0">
+                            <Grid
+                                Padding="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions >
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <Label
+                                    FontSize="20"
+                                    x:Name="idLabel" 
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    Text="{Binding Descripcion}" 
+                                    TextColor="Black" 
+                                    Margin="1"
+                                    VerticalOptions="CenterAndExpand"/>
+                                
+                                <Button
+                                    BackgroundColor="Transparent"
+                                    Clicked="BtnShare_Clicked"
+                                    Grid.Column="1"
+                                    Grid.Row="0"
+                                    ImageSource="ic_share"
+                                    x:Name="btnShare"
+                                    />
+                            </Grid>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
 
-    <TabbedPage.Children>
-        <tabs:EventoPage Title="SUREDSU" Icon="ic_cali.png" />
-        <tabs:CalificacionesPage Title="InternaZ" Icon="ic_history.png" />
-        <tabs:DocumentosPage Title="Documentos" Icon="ic_files.png" />
-    </TabbedPage.Children>
-
-</TabbedPage>
+</ContentPage>
