@@ -36,8 +36,20 @@ namespace Appli_KT2.ViewModel
         ConexionWS conexion;
         HttpClient _client;
         private string url;
+        private string confirmarcontrasena;
+
         #endregion
         #region propiedades
+
+        public string ConfirmarContrasena
+        {
+            get { return this.confirmarcontrasena; }
+
+            set
+            {
+                SetValue(ref this.confirmarcontrasena, value);
+            }
+        }
 
         public string User
         {
@@ -90,6 +102,14 @@ namespace Appli_KT2.ViewModel
       
         #endregion
         #region comandos
+
+        public ICommand CrearCuentaAlumnoCommand
+        {
+            get
+            {
+                return new RelayCommand(CrearCuentaAlumno);
+            }
+        }
 
         public ICommand RecuperarCommand
         {
@@ -235,11 +255,17 @@ namespace Appli_KT2.ViewModel
                 }
                 Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
                 Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
-                Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;
+                alumnoEncontrado = true;
+                Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = alumnoEncontrado;
                 this.IsRunning = false;
                 this.IsEnable = true;
                 MainViewModel.GetInstance().Login = new LoginViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                if (alumnoEncontrado)
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new CrearContrasenaAlumnoPAge());
+                }
+                else
+                    await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
                 return;
             }
             else
@@ -315,7 +341,7 @@ namespace Appli_KT2.ViewModel
                 if (await VerificarRegistroAlumno())
                 {
                     var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
-                    VerificarContrasena(" ", id.ToString());
+                    VerificarContrasenaAlumno(" ", id.ToString());
                 }
                 else
                 {
@@ -381,8 +407,50 @@ namespace Appli_KT2.ViewModel
                 {
                     var tipo = result[0];
                     var cveUsuario = result[1];
+                    var nombre = result[2];
+                    var apePaterno = result[3];
                     App.Current.Properties["tipo_usuario"] = tipo;
                     App.Current.Properties["cveUsuario"] = cveUsuario;
+                    App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
+                    this.IsRunning = false;
+                    this.IsEnable = true;
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
+                else
+                {
+                    this.IsRunning = false;
+                    this.IsEnable = true;
+                    await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                    return;
+                }
+            }
+            else
+            {
+                this.IsRunning = false;
+                this.IsEnable = true;
+                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                return;
+            }
+        }
+
+        public async void VerificarContrasenaAlumno(string usuario, string idAlumno)
+        {
+            url = conexion.URL + "" + conexion.ValidarContrasenaAlumno + this.password + "/" + usuario + "/" + idAlumno;
+            var uri = new Uri(string.Format(@"" + url, string.Empty));
+            var response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<int>>(content);
+                if (result.Count != 0)
+                {
+                    var tipo = result[0];
+                    var cveUsuario = result[1];
+                    var nombre = result[2];
+                    var apePaterno = result[3];
+                    App.Current.Properties["tipo_usuario"] = tipo;
+                    App.Current.Properties["cveUsuario"] = cveUsuario;
+                    App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
                     this.IsRunning = false;
                     this.IsEnable = true;
                     Application.Current.MainPage = new NavigationPage(new MainPage());
@@ -494,7 +562,7 @@ namespace Appli_KT2.ViewModel
             }
         }
         /*
-         * Configurar tanto el facebook como el google en android y ios para poder utilizarlos de manera adecuada
+         * Configurar tanto el facebook como el google en android e ios para poder utilizarlos de manera adecuada
          * **/
         private async void IniciarGoogle()
         {

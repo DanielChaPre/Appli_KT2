@@ -7,6 +7,7 @@ namespace Appli_KT2.ViewModel
     public class MainViewModel
     {
         #region propiedades
+
         public LoginViewModel Login { get; set; }
         public PerfilGeneralViewModel RegistrarUG { get; set; }
         public PerfilAlumnoViewModel RegistrarA { get; set; }
@@ -21,6 +22,8 @@ namespace Appli_KT2.ViewModel
         public EstadosViewModel Estados { get; set; }
         public MunicipioViewModel Municipio { get; set; }
         public RecuperarContrasenaViewModel Recuperar { get; set; }
+        public ResultadoAtlasViewModel Resultado { get; set; }
+
         #endregion
         #region constructores
         public MainViewModel()

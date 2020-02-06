@@ -22,83 +22,94 @@
             x:Name="icShare"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView 
-            x:Name="listViewEjemplo1" 
+        <StackLayout
+            BindingContext="{Binding Resultado}"
+            >
+            <ActivityIndicator
+                VerticalOptions="Center"
+                Margin="0,250,0,0"
+                IsRunning="{Binding IsRunning}"
+                IsVisible="{Binding IsRunning}"
+                x:Name="actiCargarResultado"
+                />
+            <ListView 
+            x:Name="listViewResultAtlas" 
             CachingStrategy="RecycleElement"
             HasUnevenRows="True"
                   >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell 
                         Height="150" >
-                        <Frame
+                            <Frame
                              Margin="0,3"
                              HasShadow="true" 
                              BorderColor="Silver"
                              Padding="0">
-                            <Grid
+                                <Grid
                                 Padding="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="90"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions >
-                                    <RowDefinition Height="150"/>
-                                </Grid.RowDefinitions>
-                                <StackLayout
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="150"/>
+                                    </Grid.RowDefinitions>
+                                    <StackLayout
                                      Grid.Column="0">
-                                    <Image 
+                                        <Image 
                                         ScaleY="5"
                                         HeightRequest="200"
                                         Source="{Binding icon}"
                                         WidthRequest="90"
                                         VerticalOptions="CenterAndExpand"/>
-                                </StackLayout>
-                               
-                                <Grid 
+                                    </StackLayout>
+
+                                    <Grid 
                                     Padding="0,10"
                                     HorizontalOptions="Start"
                                     Grid.Column="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions >
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Label 
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions >
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Label 
                                         FontSize="20"
-                                        x:Name="idLabel" 
+                                        x:Name="lblOpcion" 
                                         Grid.Column="0"
                                         Grid.Row="0"
-                                        Text="{Binding Opcion}" 
+                                        Text="{Binding NombrePlantelES}" 
                                         TextColor="Black" 
                                         Margin="1"
                                         VerticalOptions="StartAndExpand"/>
-                                    <Label 
+                                        <Label 
                                         FontSize="10"
                                         x:Name="lblDireccion" 
                                         Grid.Column="0"
                                         Grid.Row="1"
-                                        Text="{Binding Direccion}" 
+                                        Text="{Binding Subsistema}" 
                                         TextColor="Gray"
                                         Margin="1"
                                         VerticalOptions="CenterAndExpand"/>
-                                    <Label 
+                                        <Label 
                                         FontSize="10"
                                         x:Name="lblWeb" 
                                         Grid.Column="0"
                                         Grid.Row="2"
                                         TextDecorations="Underline"
-                                        Text="{Binding Web}" 
+                                        Text="{Binding Sostenimiento}" 
                                         TextColor="Blue"
                                         Margin="1"
                                         VerticalOptions="EndAndExpand"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

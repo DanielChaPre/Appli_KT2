@@ -22,7 +22,7 @@ namespace Appli_KT2.Model
         private string _subsistema;
         private string _sostenimiento;
         private string _municipio;
-        private int _activo;
+        private string _activo;
         private string _claveInstitucion;
         private string _nombreInstitucionES;
         private string _oPD;
@@ -101,7 +101,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public int Activo
+        public string Activo
         {
             get
             {

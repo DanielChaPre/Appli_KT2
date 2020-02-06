@@ -27,7 +27,7 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        public async void ObtenerTodosMunicipios()
+        public async Task<bool> ObtenerTodosMunicipios()
         {
             try
             {
@@ -48,15 +48,19 @@ namespace Appli_KT2.ViewModel
                             IdEstado = listaMunicipios[i].IdEstado
                         };
                         lstMunicipios.Add(entMunicipios);
+                        
                     }
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListMunicipios = this.lstMunicipios;
+                    return true;
                 }
+
+                return false;
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
-                throw;
+                return false;
             }
         }
 

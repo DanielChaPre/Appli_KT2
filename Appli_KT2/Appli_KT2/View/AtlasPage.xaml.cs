@@ -20,7 +20,7 @@ namespace Appli_KT2.View
 		{
 			InitializeComponent ();
             VerificarUsuario();
-           // btnBuscar.Clicked += BuscarAtlas;
+            btnBuscar.Clicked += BuscarAtlas;
         }
 
         protected override void OnAppearing()
@@ -138,7 +138,7 @@ namespace Appli_KT2.View
         {
             await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
         }
-
+   
         private void LlenarFiltros()
         {
             LlenarMunicipios();
@@ -155,10 +155,11 @@ namespace Appli_KT2.View
                     if (municipiosViewModel == null)
                     {
                         municipiosViewModel = new MunicipioViewModel();
+                        municipiosViewModel.ObtenerTodosMunicipios();
                     }
                     else
                     {
-                        municipiosViewModel.ObtenerTodosMunicipios();
+                       
                         if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
                         {
                             pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
@@ -185,10 +186,10 @@ namespace Appli_KT2.View
                     if (plantelESViewModel == null)
                     {
                         plantelESViewModel = new PlantelESViewModel();
+                        plantelESViewModel.ObtenerPlantelES();
                     }
                     else
                     {
-                        plantelESViewModel.ObtenerPlantelES();
                         if (plantelESViewModel.ListPlantelES != null || plantelESViewModel.ListPlantelES.Count != 0)
                         {
                             pPlantelesES.ItemsSource = plantelESViewModel.ListPlantelES;

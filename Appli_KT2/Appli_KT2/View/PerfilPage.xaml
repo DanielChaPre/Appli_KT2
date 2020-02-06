@@ -521,13 +521,13 @@
                                     WidthRequest="150"/>
                             </StackLayout>
                             <StackLayout
-                            Orientation="Horizontal"
+                            Orientation="Horizontal" 
                                 x:Name="slytAcciones">
 
                                 <Button 
                                     BackgroundColor="Navy"
-                                     Command="{Binding ActualizarPerfilCommand}"
-                                    Text="Modificar"
+                                    Command="{Binding ActualizarPerfilCommand}"
+                                    Text="Guardar"
                                     TextColor="White"
                                     WidthRequest="150"/>
 
@@ -540,9 +540,7 @@
 
                             </StackLayout>
                         </StackLayout>
-                       
                     </Frame>
-                   
                 </StackLayout>
             </ScrollView>
         </StackLayout>

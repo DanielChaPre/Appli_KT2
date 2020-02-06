@@ -17,7 +17,7 @@ namespace Appli_KT2.View
         public List<CarouselModel> MyDataSource { get; set; }
         private int _position;
         public int Position { get { return _position; } set { _position = value; OnPropertyChanged(); } }
-        public DetalleUniversidadPage ()
+        public DetalleUniversidadPage (PlantelesES plantelesES)
 		{
 			InitializeComponent ();
             MyDataSource = new List<CarouselModel>() { new CarouselModel() { imagen = "utl_.jpg"},
