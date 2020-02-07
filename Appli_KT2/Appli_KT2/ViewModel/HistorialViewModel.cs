@@ -14,12 +14,47 @@ namespace Appli_KT2.ViewModel
     {
         private HttpClient _client;
         private ConexionWS conexion;
-        private List<Historial> lstnotificaciones = new List<Historial>();
+        private List<Historial> lsthistorialUsuario = new List<Historial>();
+        private bool isvisible;
+        private bool isrun;
 
-        public async Task<bool> ConsultarHistorial()
+        public bool IsRun
+        {
+            get { return this.isrun; }
+            set
+            {
+                isrun = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsVisible
+        {
+            get { return this.isvisible; }
+            set
+            {
+                isvisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public HistorialViewModel()
+        {
+            ConsultarHistorial();
+        }
+
+        public List<Historial> LstHistorial
+        {
+            get;
+            set;
+        }
+
+        public async void ConsultarHistorial()
         {
             try
             {
+                IsRun = true;
+                IsVisible = false;
                 var cveUsuario = App.Current.Properties["cveUsuario"].ToString();
                 _client = new HttpClient();
                 conexion = new ConexionWS();
@@ -40,19 +75,26 @@ namespace Appli_KT2.ViewModel
                             Url = lstHistorial[i].Url,
                             Descripcion = lstHistorial[i].Descripcion,
                         };
-                        lstnotificaciones.Add(entHistorial);
+                        lsthistorialUsuario.Add(entHistorial);
                     }
-                    return true;
+                    this.LstHistorial = this.lsthistorialUsuario;
+                    IsRun = false;
+                    IsVisible = true;
+                    return;
                 }
                 else
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
-                    return false;
+                    IsRun = false;
+                    IsVisible = true;
+                    return;
                 }
             }
             catch (Exception ex)
             {
-                throw;
+                IsRun = false;
+                IsVisible = true;
+                return;
             }
         }
     }

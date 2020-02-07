@@ -9,29 +9,46 @@
     <ContentPage.Content
         BindingContext="{Binding Historial}"
         >
-        <ListView 
+        <StackLayout>
+            <ActivityIndicator
+                VerticalOptions="Center"
+                Margin="0,250,0,0"
+                IsRunning="{Binding IsRun}"
+                IsVisible="{Binding IsRun}"
+                x:Name="actiCargar"
+            />
+            
+            <Label
+                FontSize="Title"
+                Margin="0,300,0,0"
+                Text="No se encuentran notificaciones"
+                TextColor="Gray"
+                x:Name="lblnoti"
+                />
+
+            <ListView 
             x:Name="listViewHistorial" 
             CachingStrategy="RecycleElement"
             HasUnevenRows="True">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell Height="70" >
-                        <Frame
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="70" >
+                            <Frame
                              Margin="0,3"
                              HasShadow="true" 
                              BorderColor="Silver"
                              Padding="0">
-                            <Grid
+                                <Grid
                                 Padding="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions >
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                
-                                <Label
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label
                                     FontSize="20"
                                     x:Name="idLabel" 
                                     Grid.Column="0"
@@ -40,8 +57,8 @@
                                     TextColor="Black" 
                                     Margin="1"
                                     VerticalOptions="CenterAndExpand"/>
-                                
-                                <Button
+
+                                    <Button
                                     BackgroundColor="Transparent"
                                     Clicked="BtnShare_Clicked"
                                     Grid.Column="1"
@@ -49,12 +66,14 @@
                                     ImageSource="ic_share"
                                     x:Name="btnShare"
                                     />
-                            </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        
     </ContentPage.Content>
 
 </ContentPage>

@@ -1,23 +1,203 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class DetallePlantel
+    public class DetallePlantel : INotifyPropertyChanged
     {
-        public int cve_detalle_plantel { get; set; }
-        public string url_vinculacion { get; set; }
-        public string imiagen_plantel { get; set; }
-        public string logo_plantel { get; set; }
-        public string costos { get; set; }
-        public string requisitos { get; set; }
-        public DateTime fechas { get; set; }
-        public string reseña { get; set; }
-        public string ubicacion { get; set; }
-        public string latitud { get; set; }
-        public string longitud { get; set; }
-        public string nivel_estudio { get; set; }
-        public int cve_imagen_plantel { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private int cve_detalle_plantel;
+        private string url_vinculacion;
+        private string logo_plantel;
+        private string costos;
+        private string requisitos;
+        private string fechas;
+        private string reseña;
+        private string latitud;
+        private string longitud;
+        private string ubicacion;
+        private string nivel_estudio;
+        private string cve_nivel_agrupado;
+        private string cve_nivel_estudio;
+        private PlantelesES plantelesES;
+
+        public int Cve_detalle_plantel
+        {
+            get
+            {
+                return cve_detalle_plantel;
+            }
+            set
+            {
+                cve_detalle_plantel = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Url_vinculacion
+        {
+            get
+            {
+                return url_vinculacion;
+            }
+            set
+            {
+                url_vinculacion = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Logo_plantel
+        {
+            get
+            {
+                return logo_plantel;
+            }
+            set
+            {
+                logo_plantel = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Costos
+        {
+            get
+            {
+                return costos;
+            }
+            set
+            {
+                costos = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Requisitos
+        {
+            get
+            {
+                return requisitos;
+            }
+            set
+            {
+                requisitos = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Fechas
+        {
+            get
+            {
+                return fechas;
+            }
+            set
+            {
+                fechas = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Reseña
+        {
+            get
+            {
+                return reseña;
+            }
+            set
+            {
+                reseña = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Latitud
+        {
+            get
+            {
+                return latitud;
+            }
+            set
+            {
+                latitud = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Longitud
+        {
+            get
+            {
+                return longitud;
+            }
+            set
+            {
+                longitud = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Ubicacion
+        {
+            get
+            {
+                return ubicacion;
+            }
+            set
+            {
+                ubicacion = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Nivel_estudio
+        {
+            get
+            {
+                return nivel_estudio;
+            }
+            set
+            {
+                nivel_estudio = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Cve_nivel_agrupado
+        {
+            get
+            {
+                return cve_nivel_agrupado;
+            }
+            set
+            {
+                cve_nivel_agrupado = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Cve_nivel_estudio
+        {
+            get
+            {
+                return cve_nivel_estudio;
+            }
+            set
+            {
+                cve_nivel_estudio = value;
+                OnPropertyChanged();
+            }
+        }
+        public PlantelesES PlantelesES
+        {
+            get
+            {
+                return plantelesES;
+            }
+            set
+            {
+                plantelesES = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

@@ -21,13 +21,12 @@ namespace Appli_KT2.Model
         private string _nombrePlantelES;
         private string _subsistema;
         private string _sostenimiento;
-        private string _municipio;
+        private int _municipio;
         private string _activo;
         private string _claveInstitucion;
         private string _nombreInstitucionES;
         private string _oPD;
         private string _nivelAgrupado;
-        private string _carreraES;
 
         public int idPlantelesES
         {
@@ -89,7 +88,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public string Municipio
+        public int Municipio
         {
             get
             {
@@ -158,18 +157,6 @@ namespace Appli_KT2.Model
             set
             {
                 _nivelAgrupado = value;
-                OnPropertyChanged();
-            }
-        }
-        public string CarreraES
-        {
-            get
-            {
-                return _carreraES;
-            }
-            set
-            {
-                _carreraES = value;
                 OnPropertyChanged();
             }
         }
