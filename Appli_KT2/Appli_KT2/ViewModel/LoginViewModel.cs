@@ -362,6 +362,8 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
                 var user = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
                 var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
                 App.Current.Properties["tipo_usuario"] = 2;
@@ -388,7 +390,7 @@ namespace Appli_KT2.ViewModel
                     return;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

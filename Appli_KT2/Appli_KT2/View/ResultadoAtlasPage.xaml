@@ -60,7 +60,7 @@
                                         <Image 
                                         ScaleY="5"
                                         HeightRequest="200"
-                                        Source="{Binding icon}"
+                                        Source="{Binding Logo_plantel}"
                                         WidthRequest="90"
                                         VerticalOptions="CenterAndExpand"/>
                                     </StackLayout>
@@ -80,7 +80,7 @@
                                         x:Name="lblOpcion" 
                                         Grid.Column="0"
                                         Grid.Row="0"
-                                        Text="{Binding NombrePlantelES}" 
+                                        Text="{Binding PlantelesES.NombrePlantelES}" 
                                         TextColor="Black" 
                                         Margin="1"
                                         VerticalOptions="StartAndExpand"/>

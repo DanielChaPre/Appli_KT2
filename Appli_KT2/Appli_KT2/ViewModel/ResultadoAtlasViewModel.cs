@@ -42,7 +42,7 @@ namespace Appli_KT2.ViewModel
                            Cve_nivel_estudio = listaPlanteles[i].Cve_nivel_estudio,
                            Fechas = listaPlanteles[i].Fechas,
                            Latitud = listaPlanteles[i].Latitud,
-                           Logo_plantel = listaPlanteles[i].Logo_plantel,
+                          // Logo_plantel = SeleccionarImagen(listaPlanteles[i].PlantelesES.NombrePlantelES),
                            Longitud = listaPlanteles[i].Longitud,
                            Nivel_estudio = listaPlanteles[i].Nivel_estudio,
                            Requisitos = listaPlanteles[i].Requisitos,
@@ -54,7 +54,7 @@ namespace Appli_KT2.ViewModel
                                Activo = listaPlanteles[i].PlantelesES.Activo,
                                ClaveInstitucion = listaPlanteles[i].PlantelesES.ClaveInstitucion,
                                ClavePlantel = listaPlanteles[i].PlantelesES.ClavePlantel,
-                               idPlantelesES = listaPlanteles[i].PlantelesES.idPlantelesES,
+                               idPlantelES = listaPlanteles[i].PlantelesES.idPlantelES,
                                Municipio = listaPlanteles[i].PlantelesES.Municipio,
                                NivelAgrupado = listaPlanteles[i].PlantelesES.NivelAgrupado,
                                NombreInstitucionES = listaPlanteles[i].PlantelesES.NombreInstitucionES,
@@ -74,6 +74,31 @@ namespace Appli_KT2.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
                 throw;
             }
+        }
+
+
+        public string  SeleccionarImagen(string institucion)
+        {
+            var imagen = "";
+            switch (institucion)
+            {
+                case "ICON UNIVERSITY":
+                    imagen = "ICON_01.JPG";
+                    break;
+                case "UPJ - UNIVERSIDAD POLITECNICA DE JUVENTINO ROSAS":
+                    imagen = "";
+                    break;
+                case "INSTITUTO DE EDUCACION SUPERIOR SANTA FE":
+                    imagen = "sata fe_01.jpg";
+                    break;
+                case "UG - CAMPUS LEON, DIVISION DE CIENCIAS DE LA SALUD":
+                    break;
+                case "UTL - UNIVERSIDAD TECNOLOGICA DE LEON":
+                    break;
+                default:
+                    break;
+            }
+            return imagen;
         }
     }
 }

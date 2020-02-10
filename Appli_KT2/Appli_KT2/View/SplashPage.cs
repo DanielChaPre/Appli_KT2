@@ -89,8 +89,8 @@ namespace Appli_KT2.View
                 await splashImage.ScaleTo(0.8, 1200, Easing.Linear);
                 lblCarga.IsVisible = false;
                 activityIndicator.IsRunning = false;
-               // SesionPrueba();
-                VerificarLogin();
+                SesionPrueba();
+               // VerificarLogin();
                 //VerificarConfiguracionTema();
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
@@ -102,22 +102,22 @@ namespace Appli_KT2.View
 
         public void SesionPrueba()
         {
-            /**
-            Alumno
+            
+            //Alumno
             App.Current.Properties["usuario"] = "";
             App.Current.Properties["contrasena"] = "D@niel1998";
             App.Current.Properties["idAlumno"] = "53408";
             App.Current.Properties["tipo_usuario"] = 2;
             App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
-            return;*/
+            return; 
             /**
-            directivo*/
-            App.Current.Properties["usuario"] = "danchavez197@gmail.com";
-            App.Current.Properties["contrasena"] = "D@niel192";
-            App.Current.Properties["idAlumno"] = "0";
-            App.Current.Properties["tipo_usuario"] = 5;
-            App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
-            return;
+            directivo
+            //App.Current.Properties["usuario"] = "danchavez197@gmail.com";
+            //App.Current.Properties["contrasena"] = "D@niel192";
+            //App.Current.Properties["idAlumno"] = "0";
+            //App.Current.Properties["tipo_usuario"] = 5;
+            //App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
+            //return;*/
         }
 
         public void VaciarSesion()

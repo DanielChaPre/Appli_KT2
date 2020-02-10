@@ -226,7 +226,6 @@ namespace Appli_KT2.View
                     pEstados.ItemDisplayBinding = new Binding("NombreEstado");
                     return false;
                 }
-
                 return true; // True = Repeat again, False = Stop the timer
             });
 

@@ -18,9 +18,9 @@ namespace Appli_KT2.View
 		{
 			InitializeComponent ();
             this.tipo_usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString());
-            //AccesoUsuario();
+            AccesoUsuario();
             lblNombreUsuario.Text = App.Current.Properties["nombreUsuario"].ToString();
-            CrearMenuDinamico();
+            //CrearMenuDinamico();
         }
 
         public void AccesoUsuario()

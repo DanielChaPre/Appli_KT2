@@ -21,7 +21,7 @@
             <Label
                 FontSize="Title"
                 Margin="0,300,0,0"
-                Text="No se encuentran notificaciones"
+                Text="No se encuentro un historial"
                 TextColor="Gray"
                 x:Name="lblnoti"
                 />
@@ -60,7 +60,6 @@
 
                                     <Button
                                     BackgroundColor="Transparent"
-                                    Clicked="BtnShare_Clicked"
                                     Grid.Column="1"
                                     Grid.Row="0"
                                     ImageSource="ic_share"

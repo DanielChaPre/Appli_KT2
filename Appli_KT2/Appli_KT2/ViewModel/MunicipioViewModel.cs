@@ -3,6 +3,7 @@ using Appli_KT2.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -48,7 +49,7 @@ namespace Appli_KT2.ViewModel
                             IdEstado = listaMunicipios[i].IdEstado
                         };
                         lstMunicipios.Add(entMunicipios);
-                        
+                       
                     }
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListMunicipios = this.lstMunicipios;
@@ -94,6 +95,7 @@ namespace Appli_KT2.ViewModel
                     }
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListMunicipios = this.lstMunicipios;
+                    
                   //  return true;
                 }
             }

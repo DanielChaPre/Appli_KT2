@@ -28,7 +28,7 @@ namespace Appli_KT2.Model
         private string _oPD;
         private string _nivelAgrupado;
 
-        public int idPlantelesES
+        public int idPlantelES
         {
             get
             {

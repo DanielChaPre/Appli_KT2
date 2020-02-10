@@ -50,7 +50,7 @@
 
                 <Button 
                     BackgroundColor="#FF8200"
-                    Command="{Binding RecuperarContrasenaCommand}"
+                    Command="{Binding CrearCuentaAlumnoCommand}"
                     Text="Iniciar sesión"
                     TextColor="White"
                     x:Name="btnIniciar"

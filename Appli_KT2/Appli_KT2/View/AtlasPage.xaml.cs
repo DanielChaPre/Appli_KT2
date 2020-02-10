@@ -1,4 +1,6 @@
-﻿using Appli_KT2.ViewModel;
+﻿using Appli_KT2.Model;
+using Appli_KT2.ViewModel;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,13 @@ namespace Appli_KT2.View
 	{
         MunicipioViewModel municipiosViewModel;
         PlantelESViewModel plantelESViewModel;
+        CarreraViewModel carreraViewModel;
+        EstadosViewModel estadosViewModel = new EstadosViewModel();
+        Estados estados = new Estados();
+        Municipios municipios = new Municipios();
+        DetallePlantel plantelesES = new DetallePlantel();
+        CarrerasES carrerasES = new CarrerasES();
+
 
         public AtlasPage ()
 		{
@@ -136,19 +145,45 @@ namespace Appli_KT2.View
 
         private async void BuscarAtlas(object sender, EventArgs e)
         {
+            if (municipios.IdMunicipio == 0)
+            {
+                App.Current.Properties["municipios"] = 0;
+
+            }
+            else
+            {
+                App.Current.Properties["municipios"] = municipios.IdMunicipio;
+            }
+             if (plantelesES.PlantelesES == null)
+            {
+                App.Current.Properties["institucion"] = 0;
+            }
+            else
+            {
+                App.Current.Properties["institucion"] = plantelesES.PlantelesES.idPlantelES;
+            }
+            if (carrerasES.IdPlantelesES == 0)
+            {
+                App.Current.Properties["Carrera"] = 0;
+            }
+            else
+            {
+                App.Current.Properties["Carrera"] = carrerasES.IdPlantelesES;
+            }
             await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
         }
    
         private void LlenarFiltros()
         {
+            LlenarEstados();
             LlenarMunicipios();
             LlenarPlantelesES();
-            //LlenarCarreras();
+            LlenarCarreras();
         }
 
         private void LlenarMunicipios()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 try
                 {
@@ -162,8 +197,10 @@ namespace Appli_KT2.View
                        
                         if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
                         {
-                            pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
+                            // pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
+                            FiltrarMunicipio(municipiosViewModel.ListMunicipios);
                             pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
+                            pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
                             return false;
                         }
                     }
@@ -179,7 +216,7 @@ namespace Appli_KT2.View
 
         private void LlenarPlantelesES()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(5), () => 
+            Device.StartTimer(TimeSpan.FromSeconds(1), () => 
             {
                 try
                 {
@@ -192,8 +229,10 @@ namespace Appli_KT2.View
                     {
                         if (plantelESViewModel.ListPlantelES != null || plantelESViewModel.ListPlantelES.Count != 0)
                         {
-                            pPlantelesES.ItemsSource = plantelESViewModel.ListPlantelES;
-                            pPlantelesES.ItemDisplayBinding = new Binding("NombreInstitucionES");
+                            //  pPlantelesES.ItemsSource = plantelESViewModel.ListPlantelES;
+                            FiltrarPlanteles(plantelESViewModel.ListPlantelES);
+                            pPlantelesES.ItemDisplayBinding = new Binding("PlantelesES.NombrePlantelES");
+                            pPlantelesES.SelectedIndexChanged += SeleccionarPlanteles;
                             return false;
                         }
                     }
@@ -209,7 +248,124 @@ namespace Appli_KT2.View
 
         private void LlenarCarreras()
         {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                try
+                {
+                    if (carreraViewModel == null)
+                    {
+                        carreraViewModel = new CarreraViewModel();
+                        //carreraViewModel.ObtenerPlant();
+                    }
+                    else
+                    {
+                        if (carreraViewModel.ListCarreraES != null || carreraViewModel.ListCarreraES.Count != 0)
+                        {
+                            //pCarreras.ItemsSource = carreraViewModel;
+                            FiltrarCarreraras(carreraViewModel.ListCarreraES);
+                            pCarreras.ItemDisplayBinding = new Binding("NombreCarreraES");
+                            pCarreras.SelectedIndexChanged += SeleccionarCarrera;
 
+                            //pPlantelesES.ItemsSource = plantelESViewModel.ListPlantelES;
+                            //pPlantelesES.ItemDisplayBinding = new Binding("NombreInstitucionES");
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return true;
+                    throw;
+                }
+            });
+        }
+
+        private void LlenarEstados()
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                while (estadosViewModel.ListEstados.Count != 0)
+                {
+                    pEstado.ItemsSource = estadosViewModel.ListEstados;
+                    pEstado.ItemDisplayBinding = new Binding("NombreEstado");
+                    pEstado.SelectedIndexChanged += SeleccionarEstado;
+                   
+                    return false;
+                }
+                return true; // True = Repeat again, False = Stop the timer
+            });
+        }
+
+        private void SeleccionarEstado(object sender, EventArgs e)
+        {
+            estados = (Estados)pEstado.SelectedItem;
+            LlenarMunicipios();
+        }
+
+        private void SeleccionarMunicipio(object sender, EventArgs e)
+        {
+            municipios = (Municipios)pMunicipio.SelectedItem;
+            LlenarPlantelesES();
+        }
+
+        private void SeleccionarPlanteles(object sender, EventArgs e)
+        {
+            plantelesES = (DetallePlantel)pPlantelesES.SelectedItem;
+            LlenarCarreras();
+        }
+
+        private void SeleccionarCarrera(object sender, EventArgs e)
+        {
+            carrerasES = (CarrerasES)pCarreras.SelectedItem;
+            //LlenarCarreras();
+        }
+
+        public void FiltrarMunicipio(List<Municipios> municipios)
+        {
+            if (estados.IdEstado == 0)
+            {
+                pMunicipio.ItemsSource = municipios;
+                return;
+            }
+            else
+            {
+                var municipio = from a in municipios where a.IdEstado == estados.IdEstado select a;
+                pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
+                return;
+            }
+        }
+
+        public void FiltrarPlanteles(List<DetallePlantel> plantelesEs)
+        {
+            if (municipios.IdEstado == 0)
+            {
+                pPlantelesES.ItemsSource = plantelesEs;
+                return;
+            }
+            else
+            {
+                //var alumnosC = lstMunicipios.Where(a => a.IdEstado == 43);
+                var planteles = from a in plantelesEs where a.PlantelesES.Municipio == municipios.IdMunicipio select a;
+                pPlantelesES.ItemsSource = planteles.Cast<DetallePlantel>().ToList();
+                return;
+            }
+        }
+
+        public void FiltrarCarreraras(List<CarrerasES> carreras)
+        {
+            if (plantelesES.PlantelesES == null || plantelesES.PlantelesES.idPlantelES == 0)
+            {
+                pCarreras.ItemsSource = carreras;
+                return;
+            }
+            else
+            {
+                //var alumnosC = lstMunicipios.Where(a => a.IdEstado == 43);
+                var carrera = from a in carreras where a.IdPlantelesES == plantelesES.PlantelesES.idPlantelES select a;
+                pCarreras.ItemsSource = carrera.Cast<CarrerasES>().ToList(); ;
+                return;
+            }
         }
     }
 }
