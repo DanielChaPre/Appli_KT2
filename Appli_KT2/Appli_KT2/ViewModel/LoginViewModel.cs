@@ -181,6 +181,20 @@ namespace Appli_KT2.ViewModel
 
         private async void ValidarUsuario()
         {
+            this.IsRunning = true;
+            this.IsEnable = false;
+            if (ValidarAlumno())
+            {
+                BuscarAlumno();
+            }
+            else
+            {
+                ValidarUsuarios();
+            }
+        }
+
+        private async void ValidarUsuarios()
+        {
             try
             {
                 if (string.IsNullOrEmpty(this.User))
@@ -232,6 +246,53 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        private async void ValidarUsuarioAlumno(int idAlumno)
+        {
+            try
+            {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+
+                url = conexion.URL + "" + conexion.ValidarUsuarioAlumno + "" + this.idAlumno;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var login = JsonConvert.DeserializeObject<bool>(content);
+                    if (login)
+                    {
+                        this.IsRunning = false;
+                        this.IsEnable = true;
+                        MainViewModel.GetInstance().Login = new LoginViewModel();
+                        await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                        Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
+                        Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                        Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;
+                        return;
+                    }
+                    else
+                    {
+                        this.IsRunning = false;
+                        this.IsEnable = true;
+                        MainViewModel.GetInstance().Login = new LoginViewModel();
+                        await Application.Current.MainPage.Navigation.PushAsync(new CrearContrasenaAlumnoPAge());
+                        Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
+                        Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                        Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
         private async void BuscarAlumno()
         {
             _client = new HttpClient();
@@ -249,51 +310,52 @@ namespace Appli_KT2.ViewModel
                 {
                     this.IsRunning = false;
                     this.IsEnable = true;
-                    await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                    await Application.Current.MainPage.DisplayAlert("Error", "El alumno no se encontro en la base de datos de SUREDSU", "Aceptar");
                     Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                     return;
                 }
-                Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
-                Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
-                alumnoEncontrado = true;
-                Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = alumnoEncontrado;
-                this.IsRunning = false;
-                this.IsEnable = true;
-                MainViewModel.GetInstance().Login = new LoginViewModel();
-                if (alumnoEncontrado)
-                {
-                    await Application.Current.MainPage.Navigation.PushAsync(new CrearContrasenaAlumnoPAge());
-                }
-                else
-                    await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
-                return;
+               
+                ValidarUsuarioAlumno(idAlumno);
+                //alumnoEncontrado = true;
+                //Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = alumnoEncontrado;
+                //this.IsRunning = false;
+                //this.IsEnable = true;
+                //MainViewModel.GetInstance().Login = new LoginViewModel();
+                //if (alumnoEncontrado)
+                //{
+                //    await Application.Current.MainPage.Navigation.PushAsync(new CrearContrasenaAlumnoPAge());
+                //}
+                //else
+                //    await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                //return;
             }
             else
             {
                 this.IsRunning = false;
                 this.IsEnable = true;
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                await Application.Current.MainPage.DisplayAlert("Error", ""+response.StatusCode, "Aceptar");
                 Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                 return;
             }
         }
 
-        private void ValidarAlumno()
+        private bool ValidarAlumno()
         {
             if (this.usuario.Length == 18)
             {
                 if (!ValidarCurp(this.usuario.ToUpper()))
                 {
-                    return;
+                    return false;
                 }
                 else
                 {
-                    BuscarAlumno();
+                    return true;
+                    //BuscarAlumno();
                 }
                 // return true;
             }
             else
-                return;
+                return false;
         }
 
         public bool ValidarCurp(string curp)
