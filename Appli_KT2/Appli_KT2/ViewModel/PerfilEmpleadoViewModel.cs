@@ -43,7 +43,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isrun; }
             set
             {
-                SetValue(ref this.isrun, value);
+                isrun = value;
+                OnPropertyChanged();
             }
         }
 
@@ -52,7 +53,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isvisible; }
             set
             {
-                SetValue(ref this.isvisible, value);
+                isvisible = value;
+                OnPropertyChanged();
             }
         }
 
@@ -61,7 +63,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isinsertar; }
             set
             {
-                SetValue(ref this.isinsertar, value);
+                isinsertar = value;
+                OnPropertyChanged();
             }
         }
 
@@ -70,7 +73,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isacciones; }
             set
             {
-                SetValue(ref this.isacciones, value);
+                isacciones = value;
+                OnPropertyChanged();
             }
         }
 
@@ -79,7 +83,8 @@ namespace Appli_KT2.ViewModel
             get { return this.sexo; }
             set
             {
-                SetValue(ref this.sexo, value);
+                sexo = value;
+                OnPropertyChanged();
             }
         }
 
@@ -88,7 +93,8 @@ namespace Appli_KT2.ViewModel
             get { return this.plantelEMS; }
             set
             {
-                SetValue(ref this.plantelEMS, value);
+                plantelEMS = value;
+                OnPropertyChanged();
             }
         }
 
@@ -229,14 +235,14 @@ namespace Appli_KT2.ViewModel
                         Persona = new Persona()
                         {
                             Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
-                            Nombre = Nombre,
-                            Apellido_Paterno = Apellido_Paterno,
-                            Apellido_Materno = Apellido_Materno,
+                            Nombre = Persona.Nombre,
+                            Apellido_Paterno = Persona.Apellido_Paterno,
+                            Apellido_Materno = Persona.Apellido_Materno,
                             RFC = "N/A",
                             CURP = "N/A",
                             Sexo = "Sin especificar",
                             Fecha_Nacimiento = "01/01/0001",
-                            Numero_Telefono = Numero_Telefono,
+                            Numero_Telefono = Persona.Numero_Telefono,
                             Estado_Civil = 0,
                             Nacionalidad = "N/A",
                             Municipio = "N/A",
@@ -266,10 +272,12 @@ namespace Appli_KT2.ViewModel
 
         public async Task<bool> ConsultarEmpleado()
         {
+            IsRun = true;
+            IsVisible = false;
             _client = new HttpClient();
             conexion = new ConexionWS();
             var usuario = App.Current.Properties["usuario"];
-            var contrasena = App.Current.Properties["contrasenia"];
+            var contrasena = App.Current.Properties["contrasena"];
             var url = conexion.URL + "" + conexion.ConsultarEmpleado + usuario + "/" + contrasena;
             var uri = new Uri(string.Format(@"" + url, string.Empty));
             var response = await _client.GetAsync(uri);
@@ -311,6 +319,10 @@ namespace Appli_KT2.ViewModel
                     App.Current.Properties["cveUsuario"] = empleado.Persona.Usuario.Cve_Usuario;
                     App.Current.Properties["cvePersona"] = empleado.Persona.Cve_Persona;
                     App.Current.Properties["nombreUsuario"] = empleado.Persona.Nombre + " " + empleado.Persona.Apellido_Paterno;
+                    IsRun = false;
+                    IsVisible = true;
+                    IsInsertar = false;
+                    IsAcciones = true;
                     return true;
                 }
                 else
@@ -318,6 +330,10 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
+                    IsRun = false;
+                    IsVisible = true;
+                    IsInsertar = true;
+                    IsAcciones = false;
                     return false;
                 }
             }

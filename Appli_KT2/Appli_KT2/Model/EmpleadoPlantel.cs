@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class EmpleadoPlantel: Persona, INotifyPropertyChanged
+    public class EmpleadoPlantel: INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -178,20 +178,43 @@ namespace Appli_KT2.View
 
         public void LlenarDatosEmpleadoPlantel() 
         {
-            entNombre.Text = perfilEmpleadoPlantel.Nombre;
-            entApePat.Text = perfilEmpleadoPlantel.Apellido_Paterno;
-            entApeMat.Text = perfilEmpleadoPlantel.Apellido_Materno;
-            entNumTel.Text = perfilEmpleadoPlantel.Numero_Telefono;
+            entNombre.Text = perfilEmpleadoPlantel.Persona.Nombre;
+            entApePat.Text = perfilEmpleadoPlantel.Persona.Apellido_Paterno;
+            entApeMat.Text = perfilEmpleadoPlantel.Persona.Apellido_Materno;
+            entNumTel.Text = perfilEmpleadoPlantel.Persona.Numero_Telefono;
         } 
+
+        public void LlenarDatosEmpleado()
+        {
+            entNombreEmpleado.Text = perfilEmpleado.Persona.Nombre;
+            entApePatEmpleado.Text = perfilEmpleado.Persona.Apellido_Paterno;
+            entApeMatEmpleado.Text = perfilEmpleado.Persona.Apellido_Materno;
+            entNumTelEmpleado.Text = perfilEmpleado.Persona.Numero_Telefono;
+        }
 
         public async void CargarPerfilEmpleado()
         {
+            OcultarPerfiles();
             perfilEmpleado = new PerfilEmpleadoViewModel();
-            frameEmpleado.BindingContext = perfilEmpleado;
-            frameBotones.BindingContext = perfilEmpleado;
+            this.frameEmpleado.BindingContext = perfilEmpleado;
+            this.frameBotones.BindingContext = perfilEmpleado;
             frameEmpleado.IsVisible = true;
+            if (await perfilEmpleado.ConsultarEmpleado())
+            {
+                this.actCargaFormEmpleado.IsVisible = perfilEmpleado.IsRun;
+                this.formularioEmpleado.IsVisible = perfilEmpleado.IsVisible;
+                this.slytAcciones.IsVisible = perfilEmpleado.IsAcciones;
+                this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
+                LlenarDatosEmpleado();
+            }
+            else
+            {
+                this.actCargaFormEmpleado.IsVisible = perfilEmpleado.IsRun;
+                this.formularioEmpleado.IsVisible = perfilEmpleado.IsVisible;
+                this.slytAcciones.IsVisible = perfilEmpleado.IsAcciones;
+                this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
+            }
             frameBotones.IsVisible = true;
-            await perfilEmpleado.ConsultarEmpleado();
         }
 
         #endregion

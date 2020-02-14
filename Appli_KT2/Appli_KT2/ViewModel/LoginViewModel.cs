@@ -404,13 +404,19 @@ namespace Appli_KT2.ViewModel
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<List<int>>(content);
+                var result = JsonConvert.DeserializeObject<List<string>>(content);
                 if (result.Count != 0)
                 {
                     var tipo = result[0];
                     var cveUsuario = result[1];
-                    var nombre = result[2];
-                    var apePaterno = result[3];
+                    string nombre = result[2];
+                    string apePaterno = result[3];
+
+                    //if (nombre.Equals("x") && apePaterno.Equals("x"))
+                    //{
+                    //    nombre = " ";
+
+                    //}
                     App.Current.Properties["tipo_usuario"] = tipo;
                     App.Current.Properties["cveUsuario"] = cveUsuario;
                     App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;

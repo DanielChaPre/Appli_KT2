@@ -77,7 +77,7 @@ namespace Appli_KT2.View
 
         private void VerificarUsuario()
         {
-            var usuario = (int)App.Current.Properties["tipo_usuario"];
+            var usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString());
 
             switch (usuario)
             {
@@ -283,7 +283,7 @@ namespace Appli_KT2.View
 
         private void LlenarEstados()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 while (estadosViewModel.ListEstados.Count != 0)
                 {
