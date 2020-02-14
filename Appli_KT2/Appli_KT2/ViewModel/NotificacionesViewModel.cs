@@ -145,6 +145,26 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        public static NotificacionesDataBase Database
+        {
+            get
+            {
+                NotificacionesDataBase database = null;
+                if (database == null)
+                {
+                    database = new NotificacionesDataBase();
+                }
+                return database;
+            }
+        }
+        
+        public async void prueba()
+        {
+            // var item = (Notificaciones)BindingContext;
+            // hacer referencia a la lista de datos que traen en la lista
+            // await Database.SaveItemAsync();
+        }
+
         public string SeleccionarImagen(int tipo)
         {
             try

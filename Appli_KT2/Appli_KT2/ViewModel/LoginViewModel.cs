@@ -474,11 +474,6 @@ namespace Appli_KT2.ViewModel
                     string nombre = result[2];
                     string apePaterno = result[3];
 
-                    //if (nombre.Equals("x") && apePaterno.Equals("x"))
-                    //{
-                    //    nombre = " ";
-
-                    //}
                     App.Current.Properties["tipo_usuario"] = tipo;
                     App.Current.Properties["cveUsuario"] = cveUsuario;
                     App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
@@ -589,11 +584,6 @@ namespace Appli_KT2.ViewModel
             try
             {
                 IFacebookClient _facebookService = CrossFacebookClient.Current;
-                _facebookService.Logout();
-                _facebookService.Logout();
-                _facebookService.Logout();
-                _facebookService.Logout();
-
                 if (_facebookService.IsLoggedIn)
                 {
                     _facebookService.Logout();
@@ -606,6 +596,7 @@ namespace Appli_KT2.ViewModel
                     {
                         case FacebookActionStatus.Completed:
                             var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
+                            //facebookProfile  es el que tiene los datos de la cuenta de facebook
                             await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
                             break;
                         case FacebookActionStatus.Canceled:

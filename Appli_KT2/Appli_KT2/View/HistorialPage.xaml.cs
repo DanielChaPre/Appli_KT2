@@ -49,8 +49,6 @@ namespace Appli_KT2.View
                      lblnoti.IsVisible = false;
                      listViewHistorial.IsVisible = true;
                      listViewHistorial.ItemsSource = historialViewModel.LstHistorial;
-                     
-                    // listViewHistorial.ItemSelected += OnClickOpcionSeleccionada;
                      return false;
                  }
                  return true;
@@ -71,25 +69,5 @@ namespace Appli_KT2.View
             await share.ShareUri(mi.CommandParameter.ToString(), "Compartir link del documento");
         }
 
-        //private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
-        //{
-        //    listViewHistorial.SelectedItem = null;
-        //    if (banderaClick)
-        //    {
-        //        var item = e.SelectedItem as Historial;
-        //        if ((item != null))
-        //        {
-
-        //            Device.OpenUri(new System.Uri(item.Url));
-        //            banderaClick = false;
-        //            //await Navigation.P
-        //            await Task.Run(async () =>
-        //            {
-        //                await Task.Delay(500);
-        //                banderaClick = true;
-        //            });
-        //        }
-        //    }
-        //}
     }
 }
