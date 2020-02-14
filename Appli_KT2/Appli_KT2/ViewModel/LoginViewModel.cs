@@ -511,7 +511,7 @@ namespace Appli_KT2.ViewModel
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<List<int>>(content);
+                var result = JsonConvert.DeserializeObject<List<string>>(content);
                 if (result.Count != 0)
                 {
                     var tipo = result[0];

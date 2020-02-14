@@ -33,7 +33,7 @@ namespace Appli_KT2.View
         {
             historialViewModel = new HistorialViewModel();
             listViewHistorial.BindingContext = historialViewModel;
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
              {
                  while (historialViewModel.LstHistorial != null || historialViewModel.LstHistorial.Count != 0)
                  {
@@ -49,7 +49,8 @@ namespace Appli_KT2.View
                      lblnoti.IsVisible = false;
                      listViewHistorial.IsVisible = true;
                      listViewHistorial.ItemsSource = historialViewModel.LstHistorial;
-                     listViewHistorial.ItemSelected += OnClickOpcionSeleccionada;
+                     
+                    // listViewHistorial.ItemSelected += OnClickOpcionSeleccionada;
                      return false;
                  }
                  return true;
@@ -57,25 +58,38 @@ namespace Appli_KT2.View
             
         }
 
-        private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
+        private void BtnAbrir_Clicked(object sender, EventArgs e)
         {
-            listViewHistorial.SelectedItem = null;
-            if (banderaClick)
-            {
-                var item = e.SelectedItem as Historial;
-                if ((item != null))
-                {
-
-                    Device.OpenUri(new System.Uri(item.Url));
-                    banderaClick = false;
-                    //await Navigation.P
-                    await Task.Run(async () =>
-                    {
-                        await Task.Delay(500);
-                        banderaClick = true;
-                    });
-                }
-            }
+            var mi = ((MenuItem)sender);
+            Device.OpenUri(new System.Uri(mi.CommandParameter.ToString()));
         }
+
+        private async void BtnCompartir_Clicked(object sender, EventArgs e)
+        {
+            var mi = ((MenuItem)sender);
+            ShareDialogClass share = new ShareDialogClass();
+            await share.ShareUri(mi.CommandParameter.ToString(), "Compartir link del documento");
+        }
+
+        //private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
+        //{
+        //    listViewHistorial.SelectedItem = null;
+        //    if (banderaClick)
+        //    {
+        //        var item = e.SelectedItem as Historial;
+        //        if ((item != null))
+        //        {
+
+        //            Device.OpenUri(new System.Uri(item.Url));
+        //            banderaClick = false;
+        //            //await Navigation.P
+        //            await Task.Run(async () =>
+        //            {
+        //                await Task.Delay(500);
+        //                banderaClick = true;
+        //            });
+        //        }
+        //    }
+        //}
     }
 }

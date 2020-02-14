@@ -29,10 +29,25 @@
             <ListView 
             x:Name="listViewHistorial" 
             CachingStrategy="RecycleElement"
+                SelectionMode="Single"
             HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell Height="70" >
+                            <ViewCell.ContextActions>
+                                <MenuItem
+                                    Clicked="BtnAbrir_Clicked"
+                                    CommandParameter="{Binding Url}"
+                                    Text="Abrir"
+                                    x:Name="btnAbrir"
+                                    />
+                                <MenuItem
+                                    Clicked="BtnCompartir_Clicked"
+                                    CommandParameter="{Binding Url}"
+                                    Text="Compartir"
+                                    x:Name="btnCompartir"
+                                    />
+                            </ViewCell.ContextActions>
                             <Frame
                              Margin="0,3"
                              HasShadow="true" 
@@ -57,14 +72,6 @@
                                     TextColor="Black" 
                                     Margin="1"
                                     VerticalOptions="CenterAndExpand"/>
-
-                                    <Button
-                                    BackgroundColor="Transparent"
-                                    Grid.Column="1"
-                                    Grid.Row="0"
-                                    ImageSource="ic_share"
-                                    x:Name="btnShare"
-                                    />
                                 </Grid>
                             </Frame>
                         </ViewCell>

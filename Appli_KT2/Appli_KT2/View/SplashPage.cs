@@ -104,10 +104,10 @@ namespace Appli_KT2.View
         {
             
             //Alumno
-            App.Current.Properties["usuario"] = "miryam@gmail.com";
-            App.Current.Properties["contrasena"] = "Miryam20";
-            App.Current.Properties["idAlumno"] = "0";
-            App.Current.Properties["tipo_usuario"] = 3;
+            App.Current.Properties["usuario"] = "";
+            App.Current.Properties["contrasena"] = "D@niel1998";
+            App.Current.Properties["idAlumno"] = "53408";
+            App.Current.Properties["tipo_usuario"] = 2;
             App.Current.Properties["nombreUsuario"] = "";
             return; 
             /**
