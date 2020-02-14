@@ -29,6 +29,7 @@ namespace Appli_KT2.ViewModel
         private bool isacciones;
         private string sexo;
         private string plantelEMS;
+        private bool nuevo_registro;
 
         public PerfilAlumnoViewModel()
         {
@@ -220,7 +221,7 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarAlumno, json);
+                dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarAlumno, json, nuevo_registro);
                 await ConsultarAlumno();
                 return;
             }
@@ -351,6 +352,7 @@ namespace Appli_KT2.ViewModel
                     IsVisible = true;
                     IsAcciones = true;
                     IsInsertar = false;
+                    nuevo_registro = false;
                     return true;
                 }
                 else
@@ -362,6 +364,7 @@ namespace Appli_KT2.ViewModel
                     IsVisible = true;
                     IsAcciones = false;
                     IsInsertar = true;
+                    nuevo_registro = true;
                     return false;
                 }
             }

@@ -22,11 +22,9 @@ namespace Appli_KT2.ViewModel
         private HttpClient _client;
         private ConexionWS conexion;
         private RootObjectPadreFamilia rootObject;
-        private PadreFamilia padreFamilia;
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
         private Colonia _selectedColonia;
-        private Estados entEstados;
         MetodoHTTP metodosHTTP;
         private bool isrun;
         private bool isvisible;
@@ -35,6 +33,7 @@ namespace Appli_KT2.ViewModel
         private string sexo;
         private string plantelEMS;
         private string curphijo;
+        private bool nuevo_registro;
 
         public PerfilPadreViewModel()
         {
@@ -86,15 +85,6 @@ namespace Appli_KT2.ViewModel
             set
             {
                 SetValue(ref this.isacciones, value);
-            }
-        }
-
-        public string Sexo
-        {
-            get { return this.sexo; }
-            set
-            {
-                SetValue(ref this.sexo, value);
             }
         }
 
@@ -156,14 +146,6 @@ namespace Appli_KT2.ViewModel
 
         #region Commandos
 
-        public ICommand InsertarPerfilCommand
-        {
-            get
-            {
-                return new RelayCommand(InsertarPerfil);
-            }
-        }
-
         public ICommand ActualizarPerfilCommand
         {
             get
@@ -218,7 +200,7 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarPadreFamilia, json);
+                dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarPadreFamilia, json, nuevo_registro);
                 await ConsultarPadreFamilia();
                 return;
             }
@@ -332,6 +314,7 @@ namespace Appli_KT2.ViewModel
                     IsVisible = true;
                     IsInsertar = false;
                     IsAcciones = true;
+                    nuevo_registro = false;
                     return true;
                 }
                 else
@@ -343,6 +326,7 @@ namespace Appli_KT2.ViewModel
                     IsVisible = true;
                     IsInsertar = true;
                     IsAcciones = false;
+                    nuevo_registro = true;
                     return false;
                 }
             }

@@ -26,6 +26,7 @@ namespace Appli_KT2.ViewModel
         private Colonia _selectedColonia;
         private Estados entEstados;
         MetodoHTTP metodosHTTP;
+        private bool nuevo_registro;
         private bool isrun;
 
         public bool IsRun
@@ -208,7 +209,7 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarPerfil, json);
+                dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarPerfil, json, nuevo_registro);
                 await ConsultarUsuarioGeneral();
                 return;
             }
@@ -289,6 +290,7 @@ namespace Appli_KT2.ViewModel
                         App.Current.Properties["cveUsuario"] = persona.Usuario.Cve_Usuario;
                         App.Current.Properties["cvePersona"] = persona.Cve_Persona;
                         App.Current.Properties["nombreUsuario"] = persona.Nombre + " " + persona.Apellido_Paterno;
+                        nuevo_registro = false;
                         return true;
                     }
                     else
@@ -296,6 +298,7 @@ namespace Appli_KT2.ViewModel
                         await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                         App.Current.Properties["cveUsuario"] = 0;
                         App.Current.Properties["cvePersona"] = 0;
+                        nuevo_registro = true;
                         return false;
                     }
 

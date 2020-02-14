@@ -65,6 +65,8 @@ namespace Appli_KT2.View
                 var item = e.SelectedItem as Historial;
                 if ((item != null))
                 {
+
+                    Device.OpenUri(new System.Uri(item.Url));
                     banderaClick = false;
                     //await Navigation.P
                     await Task.Run(async () =>

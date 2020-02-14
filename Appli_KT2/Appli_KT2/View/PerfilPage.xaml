@@ -336,7 +336,7 @@
 
                                 <Entry
                                     Placeholder="Ingrese su Nombre(s)" 
-                                    Text="{Binding Persona.Nombre, Mode = TwoWay}"
+                                    Text="{Binding Nombre, Mode = TwoWay}"
                                     FontSize="Small"
                                     x:Name="entNombreEmpleado"/>
 
@@ -349,7 +349,7 @@
 
                                 <Entry 
                                     Placeholder="Ingrese su apellido paterno"
-                                    Text="{Binding Persona.Apellido_Paterno, Mode=TwoWay}"
+                                    Text="{Binding Apellido_Paterno, Mode=TwoWay}"
                                     FontSize="Small"
                                     x:Name="entApePatEmpleado"/>
 
@@ -362,7 +362,7 @@
 
                                 <Entry 
                                     Placeholder="Ingrese su apellido materno"
-                                    Text="{Binding Persona.Apellido_Materno ,Mode=TwoWay}"
+                                    Text="{Binding Apellido_Materno ,Mode=TwoWay}"
                                     FontSize="Small"
                                     x:Name="entApeMatEmpleado"/>
 
@@ -374,7 +374,7 @@
 
                                 <Entry
                                   Placeholder="Ingrese su número de telefono" 
-                                 Text="{Binding Persona.Numero_Telefono,Mode=TwoWay}"
+                                 Text="{Binding Numero_Telefono,Mode=TwoWay}"
                                  FontSize="Small"
                                     x:Name="entNumTelEmpleado"/>
 
@@ -553,12 +553,7 @@
                         x:Name="frameBotones"
                         >
                         <StackLayout>
-                            <ActivityIndicator
-                                IsVisible="False"
-                                IsRunning="{Binding IsRun}"
-                                Color="#fd8204"
-                                />
-                            <StackLayout
+                           <!-- <StackLayout
                                   x:Name="slytInsertar"
                                 >
                                 <Button 
@@ -567,7 +562,7 @@
                                     Text="Guardar"
                                     TextColor="White"
                                     WidthRequest="150"/>
-                            </StackLayout>
+                            </StackLayout>-->
                             <StackLayout
                             Orientation="Horizontal" 
                                 x:Name="slytAcciones">
@@ -575,6 +570,7 @@
                                 <Button 
                                     BackgroundColor="Navy"
                                     Command="{Binding ActualizarPerfilCommand}"
+                                    HorizontalOptions="CenterAndExpand"
                                     Text="Guardar"
                                     TextColor="White"
                                     WidthRequest="150"/>
@@ -582,9 +578,11 @@
                                 <Button 
                                     BackgroundColor="Navy"
                                     Command="{Binding DesactivarPerfilCommand}"
+                                    HorizontalOptions="CenterAndExpand"
                                     Text="Eliminar"
                                     TextColor="White"
-                                    WidthRequest="150"/>
+                                    WidthRequest="150"
+                                    x:Name="btnEliminar"/>
 
                             </StackLayout>
                         </StackLayout>

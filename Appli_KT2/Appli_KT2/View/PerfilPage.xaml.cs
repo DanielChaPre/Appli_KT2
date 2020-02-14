@@ -160,8 +160,8 @@ namespace Appli_KT2.View
                 this.actCargaFormEmpleadoP.IsVisible = perfilEmpleadoPlantel.IsRun;
                 this.actCargaFormEmpleadoP.IsRunning = perfilEmpleadoPlantel.IsRun;
                 this.formularioEmpleadoPlantel.IsVisible = perfilEmpleadoPlantel.IsVisible;
-                this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
-                this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+                this.btnEliminar.IsVisible = perfilEmpleadoPlantel.IsAcciones;
+               // this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
                 LlenarDatosEmpleadoPlantel();
             }
             else
@@ -169,8 +169,8 @@ namespace Appli_KT2.View
                 this.actCargaFormEmpleadoP.IsVisible = perfilEmpleadoPlantel.IsRun;
                 this.actCargaFormEmpleadoP.IsRunning = perfilEmpleadoPlantel.IsRun;
                 this.formularioEmpleadoPlantel.IsVisible = perfilEmpleadoPlantel.IsVisible;
-                this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
-                this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+                this.btnEliminar.IsVisible = perfilEmpleadoPlantel.IsAcciones;
+                //this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
             }
             frameBotones.IsVisible = true;
             //slytInsertar.IsVisible = Binding(perfilEmpleadoPlantel.IsInsertar);
@@ -203,16 +203,16 @@ namespace Appli_KT2.View
             {
                 this.actCargaFormEmpleado.IsVisible = perfilEmpleado.IsRun;
                 this.formularioEmpleado.IsVisible = perfilEmpleado.IsVisible;
-                this.slytAcciones.IsVisible = perfilEmpleado.IsAcciones;
-                this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
+                this.btnEliminar.IsVisible = perfilEmpleado.IsAcciones;
+                //this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
                 LlenarDatosEmpleado();
             }
             else
             {
                 this.actCargaFormEmpleado.IsVisible = perfilEmpleado.IsRun;
                 this.formularioEmpleado.IsVisible = perfilEmpleado.IsVisible;
-                this.slytAcciones.IsVisible = perfilEmpleado.IsAcciones;
-                this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
+                this.btnEliminar.IsVisible = perfilEmpleado.IsAcciones;
+               // this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
             }
             frameBotones.IsVisible = true;
         }
@@ -227,15 +227,15 @@ namespace Appli_KT2.View
             {
                 formularioGeneral.IsVisible = true;
                 actCargaFormUsuario.IsVisible = false;
-                slytInsertar.IsVisible = false;
-                slytAcciones.IsVisible = true;
+                // slytInsertar.IsVisible = false;
+                btnEliminar.IsVisible = true;
             }
             else
             {
                 formularioGeneral.IsVisible = true;
                 actCargaFormUsuario.IsVisible = false;
-                slytInsertar.IsVisible = true;
-                slytAcciones.IsVisible = false;
+                // slytInsertar.IsVisible = true;
+                btnEliminar.IsVisible = false;
             }
         }
 

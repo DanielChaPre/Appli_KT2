@@ -29,6 +29,7 @@ namespace Appli_KT2.ViewModel
         private bool isacciones;
         private string sexo;
         private string plantelEMS;
+        private bool nuevo_registro;
 
         public PerfilEmpleadoPlantelViewModel()
         {
@@ -207,7 +208,7 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarEmpleadoPlantel, json);
+                dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarEmpleadoPlantel, json, nuevo_registro);
                 await Application.Current.MainPage.DisplayAlert("Exito", "Se a actualizado la información de manera correcta", "Aceptar");
                 await ConsultarEmpleadoPlantel();
                 return;
@@ -315,6 +316,7 @@ namespace Appli_KT2.ViewModel
                     IsVisible = true;
                     IsAcciones = false;
                     IsInsertar = true;
+                    nuevo_registro = false;
                     return false;
                 }
             }
@@ -328,6 +330,7 @@ namespace Appli_KT2.ViewModel
                 IsVisible = true;
                 IsAcciones = false;
                 IsInsertar = true;
+                nuevo_registro = true;
                 return false;
             }
         }

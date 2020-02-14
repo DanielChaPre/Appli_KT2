@@ -29,6 +29,7 @@ namespace Appli_KT2.ViewModel
         private bool isacciones;
         private string sexo;
         private string plantelEMS;
+        private bool nuevo_registro;
 
         public PerfilEmpleadoViewModel()
         {
@@ -209,7 +210,7 @@ namespace Appli_KT2.ViewModel
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarEmpleado, json);
+                dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarEmpleado, json, nuevo_registro);
                 await ConsultarEmpleado();
                 return;
             }
@@ -224,25 +225,27 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                var nombre = Nombre;
+
                 rootObject = new RootObjectEmpleado()
                 {
                     empleado = new Empleado()
                     {
-                      Cve_Empleado = Cve_Empleado,
-                      Numero_Empleado = Numero_Empleado,
-                      Estatus = Estatus,
-                      Fecha_Registro = Fecha_Registro,
+                      Cve_Empleado = Convert.ToInt32(App.Current.Properties["cveEmpleado"].ToString()),
+                      Numero_Empleado = App.Current.Properties["numeroEmpleado"].ToString(),
+                      Estatus = "Activo",
+                      Fecha_Registro = "01/01/0001",
                         Persona = new Persona()
                         {
                             Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
-                            Nombre = Persona.Nombre,
-                            Apellido_Paterno = Persona.Apellido_Paterno,
-                            Apellido_Materno = Persona.Apellido_Materno,
+                            Nombre = Nombre,
+                            Apellido_Paterno = Apellido_Paterno,
+                            Apellido_Materno = Apellido_Materno,
                             RFC = "N/A",
                             CURP = "N/A",
                             Sexo = "Sin especificar",
                             Fecha_Nacimiento = "01/01/0001",
-                            Numero_Telefono = Persona.Numero_Telefono,
+                            Numero_Telefono = Numero_Telefono,
                             Estado_Civil = 0,
                             Nacionalidad = "N/A",
                             Municipio = "N/A",
@@ -291,6 +294,8 @@ namespace Appli_KT2.ViewModel
                     Numero_Empleado = empleado.Numero_Empleado;
                     Estatus = empleado.Estatus;
                     Fecha_Registro = empleado.Fecha_Registro;
+                    App.Current.Properties["numeroEmpleado"] = empleado.Numero_Empleado;
+                    App.Current.Properties["cveEmpleado"] = empleado.Cve_Empleado;
                     Persona = new Persona()
                     {
                         Cve_Persona = empleado.Persona.Cve_Persona,
@@ -323,6 +328,7 @@ namespace Appli_KT2.ViewModel
                     IsVisible = true;
                     IsInsertar = false;
                     IsAcciones = true;
+                    nuevo_registro = false;
                     return true;
                 }
                 else
@@ -330,10 +336,13 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
+                    App.Current.Properties["numeroEmpleado"] = "";
+                    App.Current.Properties["cveEmpleado"] = 0;
                     IsRun = false;
                     IsVisible = true;
                     IsInsertar = true;
                     IsAcciones = false;
+                    nuevo_registro = true;
                     return false;
                 }
             }
