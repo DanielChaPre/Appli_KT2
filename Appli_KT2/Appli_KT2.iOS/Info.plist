@@ -7,8 +7,6 @@
 		<integer>1</integer>
 		<integer>2</integer>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>{human-readable reason for photo access}</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -57,6 +55,16 @@
 				<string>6369d476c4d79cb278f94986cc39c284</string>
 			</array>
 		</dict>
+  <dict>
+			<key>CFBundleURLName</key>
+			<string>google</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<!--<string>com.googleusercontent.apps.60015114581-8t3d8n4r2s38fvltdqrnf8ip7thqcntu</string>-->
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+		</dict>
 	</array>
 	<key>FacebookAppID</key>
 	<string>857924591318663</string>
@@ -69,76 +77,7 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-=======
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>{human-readable reason for photo access}</string>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSExceptionDomains</key>
-    <dict>
-      <key>facebook.com</key>
-      <dict>
-        <key>NSIncludesSubdomains</key>
-        <true/>
-        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-        <false/>
-      </dict>
-      <key>fbcdn.net</key>
-      <dict>
-        <key>NSIncludesSubdomains</key>
-        <true/>
-        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-        <false/>
-      </dict>
-      <key>akamaihd.net</key>
-      <dict>
-        <key>NSIncludesSubdomains</key>
-        <true/>
-        <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-        <false/>
-      </dict>
-    </dict>
-    <key>NSAllowsArbitraryLoadsInWebContent</key>
-    <true/>
-  </dict>
-  <key>otherExternalDomainYouNeedToCall</key>
-  <dict>
-    <key>NSIncludesSubdomains</key>
-    <true/>
-    <key>NSExceptionAllowsInsecureHTTPLoads</key>
-    <true/>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-  </dict>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleURLName</key>
-      <string>fb</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>6369d476c4d79cb278f94986cc39c284</string>
-      </array>
-    </dict>
-    <dict>
-
-      <key>CFBundleTypeRole</key>
-      <string>Editor</string>
-    </dict>
-  </array>
-  <key>FacebookAppID</key>
-  <string>857924591318663</string>
-  <key>FacebookDisplayName</key>
-  <string>Appli_KT</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>fbapi</string>
-    <string>fb-messenger-api</string>
-    <string>fbauth2</string>
-    <string>fbshareextension</string>
-  </array>
->>>>>>> 93ab0800b8797f124a8d357cc48779a4e94b5566
-	<key>UISupportedInterfaceOrientations</key>
+ <key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
@@ -152,7 +91,7 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>12.1</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Can we use your location at all times?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -173,12 +112,5 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>XSLaunchImageAssets</key>
 	<string>Assets.xcassets/LaunchImages.launchimage</string>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>Tipo de documento 1</string>
-		</dict>
-	</array>
 </dict>
 </plist>
