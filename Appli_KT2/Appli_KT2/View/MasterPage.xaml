@@ -39,6 +39,7 @@
                     <StackLayout
                         HeightRequest="550"
                         VerticalOptions="FillAndExpand"
+                        x:Name="stlMenu"
                         >
                         <Button
                             BackgroundColor="#0a225a"

@@ -82,6 +82,7 @@ namespace Appli_KT2.View
                 case 4://Plantel
                     break;
                 case 5://Docente
+                    OcultarPerfiles();
                     CargarPerfilEmpleadoPlantel();
                     break;
                 case 6://Direcivo
@@ -149,40 +150,71 @@ namespace Appli_KT2.View
 
         public async void CargarPerfilEmpleadoPlantel()
         {
-          
-            perfilEmpleadoPlantel = new PerfilEmpleadoPlantelViewModel();
-            frameEmpleadoPlantel.BindingContext = perfilEmpleadoPlantel;
-            frameBotones.BindingContext = perfilEmpleadoPlantel;
             OcultarPerfiles();
+            perfilEmpleadoPlantel = new PerfilEmpleadoPlantelViewModel();
+            this.frameEmpleadoPlantel.BindingContext = perfilEmpleadoPlantel;
+            this.frameBotones.BindingContext = perfilEmpleadoPlantel;
             frameEmpleadoPlantel.IsVisible = true;
-            frameBotones.IsVisible = true;
            if(await perfilEmpleadoPlantel.ConsultarEmpleadoPlantel())
             {
                 this.actCargaFormEmpleadoP.IsVisible = perfilEmpleadoPlantel.IsRun;
                 this.actCargaFormEmpleadoP.IsRunning = perfilEmpleadoPlantel.IsRun;
                 this.formularioEmpleadoPlantel.IsVisible = perfilEmpleadoPlantel.IsVisible;
-                this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
-                this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+                this.btnEliminar.IsVisible = perfilEmpleadoPlantel.IsAcciones;
+               // this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+                LlenarDatosEmpleadoPlantel();
             }
             else
             {
                 this.actCargaFormEmpleadoP.IsVisible = perfilEmpleadoPlantel.IsRun;
                 this.actCargaFormEmpleadoP.IsRunning = perfilEmpleadoPlantel.IsRun;
                 this.formularioEmpleadoPlantel.IsVisible = perfilEmpleadoPlantel.IsVisible;
-                this.slytAcciones.IsVisible = perfilEmpleadoPlantel.IsAcciones;
-                this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
+                this.btnEliminar.IsVisible = perfilEmpleadoPlantel.IsAcciones;
+                //this.slytInsertar.IsVisible = perfilEmpleadoPlantel.IsInsertar;
             }
+            frameBotones.IsVisible = true;
             //slytInsertar.IsVisible = Binding(perfilEmpleadoPlantel.IsInsertar);
+        }
+
+        public void LlenarDatosEmpleadoPlantel() 
+        {
+            entNombre.Text = perfilEmpleadoPlantel.Persona.Nombre;
+            entApePat.Text = perfilEmpleadoPlantel.Persona.Apellido_Paterno;
+            entApeMat.Text = perfilEmpleadoPlantel.Persona.Apellido_Materno;
+            entNumTel.Text = perfilEmpleadoPlantel.Persona.Numero_Telefono;
+        } 
+
+        public void LlenarDatosEmpleado()
+        {
+            entNombreEmpleado.Text = perfilEmpleado.Persona.Nombre;
+            entApePatEmpleado.Text = perfilEmpleado.Persona.Apellido_Paterno;
+            entApeMatEmpleado.Text = perfilEmpleado.Persona.Apellido_Materno;
+            entNumTelEmpleado.Text = perfilEmpleado.Persona.Numero_Telefono;
         }
 
         public async void CargarPerfilEmpleado()
         {
+            OcultarPerfiles();
             perfilEmpleado = new PerfilEmpleadoViewModel();
-            frameEmpleado.BindingContext = perfilEmpleado;
-            frameBotones.BindingContext = perfilEmpleado;
+            this.frameEmpleado.BindingContext = perfilEmpleado;
+            this.frameBotones.BindingContext = perfilEmpleado;
             frameEmpleado.IsVisible = true;
+            if (await perfilEmpleado.ConsultarEmpleado())
+            {
+                this.actCargaFormEmpleado.IsVisible = perfilEmpleado.IsRun;
+                this.formularioEmpleado.IsVisible = perfilEmpleado.IsVisible;
+                this.btnEliminar.IsVisible = perfilEmpleado.IsAcciones;
+                //this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
+                LlenarDatosEmpleado();
+            }
+            else
+            {
+                this.actCargaFormEmpleado.IsVisible = perfilEmpleado.IsRun;
+                this.formularioEmpleado.IsVisible = perfilEmpleado.IsVisible;
+                this.btnEliminar.IsVisible = perfilEmpleado.IsAcciones;
+               // this.slytInsertar.IsVisible = perfilEmpleado.IsInsertar;
+            }
             frameBotones.IsVisible = true;
-            await perfilEmpleado.ConsultarEmpleado();
         }
 
         #endregion
@@ -195,15 +227,15 @@ namespace Appli_KT2.View
             {
                 formularioGeneral.IsVisible = true;
                 actCargaFormUsuario.IsVisible = false;
-                slytInsertar.IsVisible = false;
-                slytAcciones.IsVisible = true;
+                // slytInsertar.IsVisible = false;
+                btnEliminar.IsVisible = true;
             }
             else
             {
                 formularioGeneral.IsVisible = true;
                 actCargaFormUsuario.IsVisible = false;
-                slytInsertar.IsVisible = true;
-                slytAcciones.IsVisible = false;
+                // slytInsertar.IsVisible = true;
+                btnEliminar.IsVisible = false;
             }
         }
 
@@ -217,7 +249,6 @@ namespace Appli_KT2.View
                     pEstados.ItemDisplayBinding = new Binding("NombreEstado");
                     return false;
                 }
-
                 return true; // True = Repeat again, False = Stop the timer
             });
 

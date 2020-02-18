@@ -1,18 +1,21 @@
 ﻿//using GalaSoft.MvvmLight.Command;
+using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using Plugin.FacebookClient;
+using Plugin.FacebookClient.Abstractions;
 //ñusing Plugin.FacebookClient.Abstractions;
-using Plugin.GoogleClient;
-using Plugin.GoogleClient.Shared;
+//using Plugin.GoogleClient;
+//using Plugin.GoogleClient.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -30,13 +33,39 @@ namespace Appli_KT2.ViewModel
         private bool isRunning;
         private bool isEnable;
         private bool alumnoEncontrado = false;
+       
         private int idAlumno;
-      
+
         ConexionWS conexion;
         HttpClient _client;
         private string url;
+        private string confirmarcontrasena;
+
+        private GoogleProfile _googleProfile;
+        private readonly GoogleService _googleServices;
+
+        public GoogleProfile GoogleProfile
+        {
+            get { return _googleProfile; }
+            set
+            {
+                _googleProfile = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
         #region propiedades
+
+        public string ConfirmarContrasena
+        {
+            get { return this.confirmarcontrasena; }
+
+            set
+            {
+                SetValue(ref this.confirmarcontrasena, value);
+            }
+        }
 
         public string User
         {
@@ -85,10 +114,19 @@ namespace Appli_KT2.ViewModel
         {
             this.IsRemember = true;
             this.IsEnable = true;
+            _googleServices = new GoogleService();
         }
       
         #endregion
         #region comandos
+
+        public ICommand CrearCuentaAlumnoCommand
+        {
+            get
+            {
+                return new RelayCommand(CrearCuentaAlumno);
+            }
+        }
 
         public ICommand RecuperarCommand
         {
@@ -134,7 +172,7 @@ namespace Appli_KT2.ViewModel
         {
             get
             {
-                return new RelayCommand(IniciarGoogle);
+                return new RelayCommand(IniciarGoogle2);
             }
         }
 
@@ -159,6 +197,20 @@ namespace Appli_KT2.ViewModel
         }
 
         private async void ValidarUsuario()
+        {
+            this.IsRunning = true;
+            this.IsEnable = false;
+            if (ValidarAlumno())
+            {
+                BuscarAlumno();
+            }
+            else
+            {
+                ValidarUsuarios();
+            }
+        }
+
+        private async void ValidarUsuarios()
         {
             try
             {
@@ -211,6 +263,53 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        private async void ValidarUsuarioAlumno(int idAlumno)
+        {
+            try
+            {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+
+                url = conexion.URL + "" + conexion.ValidarUsuarioAlumno + "" + this.idAlumno;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var login = JsonConvert.DeserializeObject<bool>(content);
+                    if (login)
+                    {
+                        this.IsRunning = false;
+                        this.IsEnable = true;
+                        MainViewModel.GetInstance().Login = new LoginViewModel();
+                        await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                        Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
+                        Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                        Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;
+                        return;
+                    }
+                    else
+                    {
+                        this.IsRunning = false;
+                        this.IsEnable = true;
+                        MainViewModel.GetInstance().Login = new LoginViewModel();
+                        await Application.Current.MainPage.Navigation.PushAsync(new CrearContrasenaAlumnoPAge());
+                        Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
+                        Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                        Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
         private async void BuscarAlumno()
         {
             _client = new HttpClient();
@@ -228,45 +327,52 @@ namespace Appli_KT2.ViewModel
                 {
                     this.IsRunning = false;
                     this.IsEnable = true;
-                    await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                    await Application.Current.MainPage.DisplayAlert("Error", "El alumno no se encontro en la base de datos de SUREDSU", "Aceptar");
                     Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                     return;
                 }
-                Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
-                Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
-                Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;
-                this.IsRunning = false;
-                this.IsEnable = true;
-                MainViewModel.GetInstance().Login = new LoginViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
-                return;
+               
+                ValidarUsuarioAlumno(idAlumno);
+                //alumnoEncontrado = true;
+                //Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = alumnoEncontrado;
+                //this.IsRunning = false;
+                //this.IsEnable = true;
+                //MainViewModel.GetInstance().Login = new LoginViewModel();
+                //if (alumnoEncontrado)
+                //{
+                //    await Application.Current.MainPage.Navigation.PushAsync(new CrearContrasenaAlumnoPAge());
+                //}
+                //else
+                //    await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                //return;
             }
             else
             {
                 this.IsRunning = false;
                 this.IsEnable = true;
-                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                await Application.Current.MainPage.DisplayAlert("Error", ""+response.StatusCode, "Aceptar");
                 Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                 return;
             }
         }
 
-        private void ValidarAlumno()
+        private bool ValidarAlumno()
         {
             if (this.usuario.Length == 18)
             {
                 if (!ValidarCurp(this.usuario.ToUpper()))
                 {
-                    return;
+                    return false;
                 }
                 else
                 {
-                    BuscarAlumno();
+                    return true;
+                    //BuscarAlumno();
                 }
                 // return true;
             }
             else
-                return;
+                return false;
         }
 
         public bool ValidarCurp(string curp)
@@ -314,7 +420,7 @@ namespace Appli_KT2.ViewModel
                 if (await VerificarRegistroAlumno())
                 {
                     var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
-                    VerificarContrasena(" ", id.ToString());
+                    VerificarContrasenaAlumno(" ", id.ToString());
                 }
                 else
                 {
@@ -335,6 +441,8 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
                 var user = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
                 var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
                 App.Current.Properties["tipo_usuario"] = 2;
@@ -361,7 +469,7 @@ namespace Appli_KT2.ViewModel
                     return;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -375,13 +483,56 @@ namespace Appli_KT2.ViewModel
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<List<int>>(content);
+                var result = JsonConvert.DeserializeObject<List<string>>(content);
                 if (result.Count != 0)
                 {
                     var tipo = result[0];
                     var cveUsuario = result[1];
+                    string nombre = result[2];
+                    string apePaterno = result[3];
+
                     App.Current.Properties["tipo_usuario"] = tipo;
                     App.Current.Properties["cveUsuario"] = cveUsuario;
+                    App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
+                    this.IsRunning = false;
+                    this.IsEnable = true;
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                }
+                else
+                {
+                    this.IsRunning = false;
+                    this.IsEnable = true;
+                    await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                    return;
+                }
+            }
+            else
+            {
+                this.IsRunning = false;
+                this.IsEnable = true;
+                await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                return;
+            }
+        }
+
+        public async void VerificarContrasenaAlumno(string usuario, string idAlumno)
+        {
+            url = conexion.URL + "" + conexion.ValidarContrasenaAlumno + this.password + "/" + usuario + "/" + idAlumno;
+            var uri = new Uri(string.Format(@"" + url, string.Empty));
+            var response = await _client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<string>>(content);
+                if (result.Count != 0)
+                {
+                    var tipo = result[0];
+                    var cveUsuario = result[1];
+                    var nombre = result[2];
+                    var apePaterno = result[3];
+                    App.Current.Properties["tipo_usuario"] = tipo;
+                    App.Current.Properties["cveUsuario"] = cveUsuario;
+                    App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
                     this.IsRunning = false;
                     this.IsEnable = true;
                     Application.Current.MainPage = new NavigationPage(new MainPage());
@@ -450,11 +601,6 @@ namespace Appli_KT2.ViewModel
             try
             {
                 IFacebookClient _facebookService = CrossFacebookClient.Current;
-                _facebookService.Logout();
-                _facebookService.Logout();
-                _facebookService.Logout();
-                _facebookService.Logout();
-
                 if (_facebookService.IsLoggedIn)
                 {
                     _facebookService.Logout();
@@ -467,6 +613,7 @@ namespace Appli_KT2.ViewModel
                     {
                         case FacebookActionStatus.Completed:
                             var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
+                            //facebookProfile  es el que tiene los datos de la cuenta de facebook
                             await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
                             break;
                         case FacebookActionStatus.Canceled:
@@ -493,30 +640,43 @@ namespace Appli_KT2.ViewModel
             }
         }
         /*
-         * Configurar tanto el facebook como el google en android y ios para poder utilizarlos de manera adecuada
-         * **/
+         * Configurar tanto el facebook como el google en android e ios para poder utilizarlos de manera adecuada
+         * *
         private async void IniciarGoogle()
         {
             try
             {
-            //CrossGoogleClient.Current.Logout();
+               await CrossGoogleClient.Current.LoginAsync();
                 IGoogleClientManager _googleService = CrossGoogleClient.Current;
+
                 if (!string.IsNullOrEmpty(_googleService.ActiveToken))
                 {
                     //Always require user authentication
                     _googleService.Logout();
                 }
+
                 EventHandler<GoogleClientResultEventArgs<GoogleUser>> userLoginDelegate = null;
                 userLoginDelegate = async (object sender, GoogleClientResultEventArgs<GoogleUser> e) =>
                 {
                     switch (e.Status)
                     {
                         case GoogleActionStatus.Completed:
-                            #if DEBUG
+                        #if DEBUG
                             var googleUserString = JsonConvert.SerializeObject(e.Data);
                             Console.WriteLine($"Google Logged in succesfully: {googleUserString}");
-                            #endif
-                            await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                       #endif
+
+                            //var socialLoginData = new NetworkAuthData
+                            //{
+                            //    Id = e.Data.Id,
+                            //    Logo = authNetwork.Icon,
+                            //    Foreground = authNetwork.Foreground,
+                            //    Background = authNetwork.Background,
+                            //    Picture = e.Data.Picture.AbsoluteUri,
+                            //    Name = e.Data.Name,
+                            //};
+
+                          //  await App.Current.MainPage.Navigation.PushModalAsync(new HomePage(socialLoginData));
                             break;
                         case GoogleActionStatus.Canceled:
                             await App.Current.MainPage.DisplayAlert("Google Auth", "Canceled", "Ok");
@@ -528,9 +688,12 @@ namespace Appli_KT2.ViewModel
                             await App.Current.MainPage.DisplayAlert("Google Auth", "Unauthorized", "Ok");
                             break;
                     }
+
                     _googleService.OnLogin -= userLoginDelegate;
                 };
+
                 _googleService.OnLogin += userLoginDelegate;
+
                 await _googleService.LoginAsync();
             }
             catch (Exception ex)
@@ -538,7 +701,32 @@ namespace Appli_KT2.ViewModel
                 Console.WriteLine(ex.ToString());
             }
         }
-       
+        */
+        private async void IniciarGoogle2()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new GoogleProfileCsPage());
+        }
+
+        public async Task<string> GetAccessTokenAsync(string code)
+        {
+
+            var accessToken = await _googleServices.GetAccessTokenAsync(code);
+
+            return accessToken;
+        }
+
+        public async Task SetGoogleUserProfileAsync(string accessToken)
+        {
+
+            GoogleProfile = await _googleServices.GetGoogleUserProfileAsync(accessToken);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         #endregion
         internal class NetworkAuthData
         {
@@ -576,5 +764,7 @@ namespace Appli_KT2.ViewModel
             [JsonProperty("user_id")]
             public int UserId { get; set; }
         }
+
+
     }
 }

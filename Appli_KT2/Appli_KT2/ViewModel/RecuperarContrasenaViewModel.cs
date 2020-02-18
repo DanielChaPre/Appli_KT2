@@ -73,14 +73,12 @@ namespace Appli_KT2.ViewModel
                     return;
                 }
                 this.IsRunning = true;
-
                 if (!VerificarNuevaContrasena())
                 {
                     this.IsRunning = false;
                     await Application.Current.MainPage.DisplayAlert("Error", "Las contraseñas no coinciden", "Accept");
                     return;
                 }
-
                 _client = new HttpClient();
                 conexion = new ConexionWS();
                 var usuario = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
@@ -127,7 +125,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

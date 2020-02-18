@@ -38,6 +38,45 @@
                 <StackLayout
                     VerticalOptions="CenterAndExpand"
                     >
+
+                    <Label
+                        FontSize="Subtitle"
+                        Text="Estado"
+                        TextColor="White"
+                    />
+                    <Picker
+                        BackgroundColor="White"
+                        Margin="0,0,0,25"
+                        TextColor="#1b213c"
+                        x:Name="pEstado"
+                        Title="           --Seleccione Estado--"
+                        
+                    />
+                   
+                    <Label
+                        Text="Municipio"
+                        TextColor="White"
+                    />
+                    <Picker
+                        BackgroundColor="White"
+                        Margin="0,0,0,25"
+                        TextColor="#1b213c"
+                        x:Name="pMunicipio"
+                        Title="           --Seleccione Municipio--"
+                    />
+                    
+                    <Label
+                        Text="Institución de Educación Sup."
+                        TextColor="White"
+                    />
+                    <Picker
+                        BackgroundColor="White"
+                        Margin="0,0,0,15"
+                        TextColor="#1b213c"
+                        x:Name="pPlantelesES"
+                        Title="           --Seleccione Plantel--"
+                    />
+                    
                     <Label
                         FontSize="Subtitle"
                         Text="Carrera"
@@ -47,26 +86,10 @@
                         BackgroundColor="White"
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
+                        x:Name="pCarreras"
+                        Title="           --Seleccione Carrera--"
                     />
-                    <Label
-                        Text="Municipio"
-                        TextColor="White"
-                    />
-                    <Picker
-                        BackgroundColor="White"
-                        Margin="0,0,0,25"
-                        TextColor="#1b213c"
-                    />
-                    <Label
-                        Text="Institución de Educación Sup."
-                        TextColor="White"
-                    />
-                    <Picker
-                        BackgroundColor="White"
-                        Margin="0,0,0,15"
-                        TextColor="#1b213c"
-                    />
-
+                    
                     <Button
                         BackgroundColor="#fd8204"
                         HorizontalOptions="Center"
@@ -75,8 +98,7 @@
                         TextColor="White"
                         VerticalOptions="EndAndExpand"
                         WidthRequest="150"
-                          x:Name="btnBuscar"
-                    />
+                        x:Name="btnBuscar"/>
                 </StackLayout>
             </StackLayout>
         </Frame>

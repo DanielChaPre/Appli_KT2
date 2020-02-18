@@ -257,7 +257,7 @@
                                 Color="Navy"
                                 IsRunning="{Binding IsRun}"
                                 IsVisible="{Binding IsRun}"
-                                x:Name="actCargaFormAlumno"
+                                x:Name="actCargaFormPadre"
                                 />
                             <StackLayout
                                 IsVisible="{Binding IsVisible}"
@@ -323,19 +323,67 @@
                                 Color="Navy"
                                 IsRunning="{Binding IsRun}"
                                 IsVisible="{Binding IsRun}"
-                                x:Name="actCargaFormAlumno"
+                                x:Name="actCargaFormEmpleado"
                                 />
                             <StackLayout
                                 IsVisible="{Binding IsVisible}"
+                                  x:Name="formularioEmpleado"
                                 >
+                                <Label
+                                    FontSize="Subtitle"
+                                    TextColor="Gray"
+                                    Text="Nombre(s)"/>
 
+                                <Entry
+                                    Placeholder="Ingrese su Nombre(s)" 
+                                    Text="{Binding Nombre, Mode = TwoWay}"
+                                    FontSize="Small"
+                                    x:Name="entNombreEmpleado"/>
+
+
+                                <Label 
+                                    FontSize="Subtitle"
+                                    TextColor="Gray"
+                                    Text="Apellido Paterno"/>
+
+
+                                <Entry 
+                                    Placeholder="Ingrese su apellido paterno"
+                                    Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                                    FontSize="Small"
+                                    x:Name="entApePatEmpleado"/>
+
+
+                                <Label 
+                                    FontSize="Subtitle"
+                                    TextColor="Gray"
+                                    Text="Apellido Materno"/>
+
+
+                                <Entry 
+                                    Placeholder="Ingrese su apellido materno"
+                                    Text="{Binding Apellido_Materno ,Mode=TwoWay}"
+                                    FontSize="Small"
+                                    x:Name="entApeMatEmpleado"/>
+
+
+                                <Label 
+                                    FontSize="Subtitle"
+                                    TextColor="Gray"
+                                    Text="Celular"/>
+
+                                <Entry
+                                  Placeholder="Ingrese su número de telefono" 
+                                 Text="{Binding Numero_Telefono,Mode=TwoWay}"
+                                 FontSize="Small"
+                                    x:Name="entNumTelEmpleado"/>
 
                             </StackLayout>
                         </StackLayout>
                     </Frame>
                     <!--Empleado Plantel 11-->
                     <Frame
-                       x:Name="frameEmpleadoPlantel">
+                        x:Name="frameEmpleadoPlantel">
                         <StackLayout>
                             <ActivityIndicator
                                 Color="Navy"
@@ -354,8 +402,9 @@
 
                                 <Entry
                                     Placeholder="Ingrese su Nombre(s)" 
-                                    Text="{Binding Nombre, Mode=TwoWay}"
-                                    FontSize="Small"/>
+                                    Text="{Binding Nombre, Mode = TwoWay}"
+                                    FontSize="Small"
+                                    x:Name="entNombre"/>
 
 
                                 <Label 
@@ -367,7 +416,8 @@
                                 <Entry 
                                     Placeholder="Ingrese su apellido paterno"
                                     Text="{Binding Apellido_Paterno, Mode=TwoWay}"
-                                    FontSize="Small"/>
+                                    FontSize="Small"
+                                    x:Name="entApePat"/>
 
 
                                 <Label 
@@ -379,7 +429,8 @@
                                 <Entry 
                                     Placeholder="Ingrese su apellido materno"
                                     Text="{Binding Apellido_Materno ,Mode=TwoWay}"
-                                    FontSize="Small"/>
+                                    FontSize="Small"
+                                    x:Name="entApeMat"/>
 
 
                                 <Label 
@@ -390,7 +441,8 @@
                                 <Entry
                                   Placeholder="Ingrese su número de telefono" 
                                  Text="{Binding Numero_Telefono,Mode=TwoWay}"
-                                 FontSize="Small"/>
+                                 FontSize="Small"
+                                    x:Name="entNumTel"/>
                             </StackLayout>
                         </StackLayout>
                     </Frame>
@@ -473,6 +525,7 @@
                                 Title="Municipio"
                                 x:Name="pMunicipio"
                                 />
+                            
                             <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
@@ -500,12 +553,7 @@
                         x:Name="frameBotones"
                         >
                         <StackLayout>
-                            <ActivityIndicator
-                                IsVisible="False"
-                                IsRunning="{Binding IsRun}"
-                                Color="#fd8204"
-                                />
-                            <StackLayout
+                           <!-- <StackLayout
                                   x:Name="slytInsertar"
                                 >
                                 <Button 
@@ -514,30 +562,31 @@
                                     Text="Guardar"
                                     TextColor="White"
                                     WidthRequest="150"/>
-                            </StackLayout>
+                            </StackLayout>-->
                             <StackLayout
-                            Orientation="Horizontal"
+                            Orientation="Horizontal" 
                                 x:Name="slytAcciones">
 
                                 <Button 
                                     BackgroundColor="Navy"
-                                     Command="{Binding ActualizarPerfilCommand}"
-                                    Text="Modificar"
+                                    Command="{Binding ActualizarPerfilCommand}"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="Guardar"
                                     TextColor="White"
                                     WidthRequest="150"/>
 
                                 <Button 
                                     BackgroundColor="Navy"
                                     Command="{Binding DesactivarPerfilCommand}"
+                                    HorizontalOptions="CenterAndExpand"
                                     Text="Eliminar"
                                     TextColor="White"
-                                    WidthRequest="150"/>
+                                    WidthRequest="150"
+                                    x:Name="btnEliminar"/>
 
                             </StackLayout>
                         </StackLayout>
-                       
                     </Frame>
-                   
                 </StackLayout>
             </ScrollView>
         </StackLayout>

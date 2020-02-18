@@ -9,6 +9,41 @@ namespace Appli_KT2.Utils
 {
     class MetodoHTTP
     {
+
+        public dynamic ActualizarDatos(string url, string json, bool nuevo = true, string autorizacion = null)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                RestRequest request;
+                if (nuevo)
+                {
+                    request = new RestRequest(Method.POST);
+                }
+                else
+                {
+                    request = new RestRequest(Method.PUT);
+                }
+               
+                request.AddHeader("content-type", "application/json");
+                request.AddParameter("application/json", json, ParameterType.RequestBody);
+
+                if (autorizacion != null)
+                {
+                    request.AddHeader("Authorization", autorizacion);
+                }
+
+                IRestResponse response = client.Execute(request);
+                dynamic datos = JsonConvert.DeserializeObject(response.Content);
+                return datos;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public dynamic Post(string url, string json, string autorizacion = null)
         {
             try
@@ -51,8 +86,14 @@ namespace Appli_KT2.Utils
                 }
 
                 IRestResponse response = client.Execute(request);
-                dynamic datos = JsonConvert.DeserializeObject(response.Content);
-                return datos;
+                if (response.IsSuccessful)
+                {
+                    dynamic datos = JsonConvert.DeserializeObject(response.Content);
+                    
+                    return datos;
+                }
+
+                return null;
 
             }
             catch (Exception ex)

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class EmpleadoPlantel: Persona, INotifyPropertyChanged
+    public class EmpleadoPlantel: INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -20,7 +20,7 @@ namespace Appli_KT2.Model
         private int idPlantelesES;
         // 1.- directivo, 2.- Profesor
         private int tipo;
-        private DateTime fecha_registro;
+        private string fecha_registro;
         private Persona personaEP;
 
         public int Cve_Empleado_Plantel
@@ -50,7 +50,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public DateTime Fecha_Registro
+        public string Fecha_Registro
         {
             get { return fecha_registro; }
             set

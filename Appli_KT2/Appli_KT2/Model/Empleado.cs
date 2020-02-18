@@ -19,7 +19,7 @@ namespace Appli_KT2.Model
         private int cve_empleado;
         private string numero_empleado;
         private string estatus;
-        private DateTime fecha_registro;
+        private string fecha_registro;
         private Persona personaE;
 
         public int Cve_Empleado
@@ -47,7 +47,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public DateTime Fecha_Registro
+        public string Fecha_Registro
         {
             get { return fecha_registro; }
             set

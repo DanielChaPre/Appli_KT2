@@ -8,7 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using Plugin.FacebookClient;
-using Plugin.GoogleClient;
+//using Plugin.GoogleClient;
 using Java.Security;
 
 namespace Appli_KT2.Droid
@@ -25,7 +25,7 @@ namespace Appli_KT2.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             FacebookClientManager.Initialize(this);
-            GoogleClientManager.Initialize(this);
+            //GoogleClientManager.Initialize(this);
          
             LoadApplication(new App());
             #if DEBUG
@@ -44,7 +44,7 @@ namespace Appli_KT2.Droid
         {
             base.OnActivityResult(requestCode, resultCode, intent);
             FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
-            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
+         //   GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
         }
 
         public static void PrintHashKey(Context pContext)

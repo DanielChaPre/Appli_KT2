@@ -29,6 +29,7 @@ namespace Appli_KT2.ViewModel
         private bool isacciones;
         private string sexo;
         private string plantelEMS;
+        private bool nuevo_registro;
 
         public PerfilEmpleadoPlantelViewModel()
         {
@@ -43,7 +44,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isrun; }
             set
             {
-                SetValue(ref this.isrun, value);
+                isrun = value;
+                OnPropertyChanged();
             }
         }
 
@@ -52,7 +54,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isvisible; }
             set
             {
-                SetValue(ref this.isvisible, value);
+                isvisible = value;
+                OnPropertyChanged();
             }
         }
 
@@ -61,7 +64,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isinsertar; }
             set
             {
-                SetValue(ref this.isinsertar, value);
+                isinsertar = value;
+                OnPropertyChanged();
             }
         }
 
@@ -70,7 +74,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isacciones; }
             set
             {
-                SetValue(ref this.isacciones, value);
+                isacciones = value;
+                OnPropertyChanged();
             }
         }
 
@@ -79,7 +84,8 @@ namespace Appli_KT2.ViewModel
             get { return this.plantelEMS; }
             set
             {
-                SetValue(ref this.plantelEMS, value);
+                plantelEMS = value;
+                OnPropertyChanged();
             }
         }
 
@@ -158,11 +164,14 @@ namespace Appli_KT2.ViewModel
 
         public async void InsertarPerfil()
         {
+            IsRun = true;
+            IsVisible = false;
             metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
             dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearEmpleadoPlantel, json);
+            await Application.Current.MainPage.DisplayAlert("Exito", "Se a guadado la información de manera correcta", "Aceptar");
             await ConsultarEmpleadoPlantel();
             return;
         }
@@ -171,11 +180,14 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                IsRun = true;
+                IsVisible = false;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.EliminarEmpleadoPlantel, json);
+                await Application.Current.MainPage.DisplayAlert("Exito", "Se a eliminado la información de manera correcta", "Aceptar");
                 await ConsultarEmpleadoPlantel();
                 return;
             }
@@ -190,11 +202,14 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                IsRun = true;
+                IsVisible = false;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
-                dynamic respuesta = metodosHTTP.Put(conexion.URL + conexion.ModificarEmpleadoPlantel, json);
+                dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarEmpleadoPlantel, json, nuevo_registro);
+                await Application.Current.MainPage.DisplayAlert("Exito", "Se a actualizado la información de manera correcta", "Aceptar");
                 await ConsultarEmpleadoPlantel();
                 return;
             }
@@ -215,19 +230,19 @@ namespace Appli_KT2.ViewModel
                     {
                         Cve_Empleado_Plantel = Cve_Empleado_Plantel,
                         IdPlantelesES = IdPlantelesES,
-                        Tipo = Tipo,
-                        Fecha_Registro = Fecha_Registro,
+                        Tipo = 1,
+                        Fecha_Registro = "01/01/0001",
                         Persona = new Persona()
                         {
                             Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
-                            Nombre = Nombre,
-                            Apellido_Paterno = Apellido_Paterno,
-                            Apellido_Materno = Apellido_Materno,
+                            Nombre = Persona.Nombre,
+                            Apellido_Paterno = Persona.Apellido_Paterno,
+                            Apellido_Materno = Persona.Apellido_Materno,
                             RFC = "N/A",
                             CURP = "N/A",
                             Sexo = "Sin especificar",
                             Fecha_Nacimiento = "01/01/0001",
-                            Numero_Telefono = Numero_Telefono,
+                            Numero_Telefono = Persona.Numero_Telefono,
                             Estado_Civil = 0,
                             Nacionalidad = "N/A",
                             Municipio = "N/A",
@@ -272,35 +287,15 @@ namespace Appli_KT2.ViewModel
                 var empleadoPlantel = JsonConvert.DeserializeObject<EmpleadoPlantel>(content);
                 if (empleadoPlantel != null)
                 {
-                    Cve_Empleado_Plantel = empleadoPlantel.Cve_Empleado_Plantel;
-                    IdPlantelesES = empleadoPlantel.IdPlantelesES;
                     Tipo = empleadoPlantel.Tipo;
-                    Fecha_Registro = empleadoPlantel.Fecha_Registro;
-                    Persona = new Persona()
-                    {
-                        Cve_Persona = empleadoPlantel.Persona.Cve_Persona,
+                   
+                    Persona = new Persona() {
                         Nombre = empleadoPlantel.Persona.Nombre,
                         Apellido_Paterno = empleadoPlantel.Persona.Apellido_Paterno,
                         Apellido_Materno = empleadoPlantel.Persona.Apellido_Materno,
-                        RFC = empleadoPlantel.Persona.RFC,
-                        CURP = empleadoPlantel.Persona.CURP,
-                        Sexo = empleadoPlantel.Persona.Sexo,
-                        Fecha_Nacimiento = empleadoPlantel.Persona.Fecha_Nacimiento,
                         Numero_Telefono = empleadoPlantel.Persona.Numero_Telefono,
-                        Estado_Civil = empleadoPlantel.Persona.Estado_Civil,
-                        Nacionalidad = empleadoPlantel.Persona.Nacionalidad,
-                        IdColonia = empleadoPlantel.Persona.IdColonia,
-                        Usuario = new Usuario()
-                        {
-                            Cve_Usuario = empleadoPlantel.Persona.Usuario.Cve_Usuario,
-                            IdAlumno = empleadoPlantel.Persona.Usuario.IdAlumno,
-                            Nombre_Usuario = empleadoPlantel.Persona.Usuario.Nombre_Usuario,
-                            Contrasena = empleadoPlantel.Persona.Usuario.Contrasena,
-                            Fecha_Registro = empleadoPlantel.Persona.Usuario.Fecha_Registro,
-                            Estatus = empleadoPlantel.Persona.Usuario.Estatus,
-                            Alias_Red = empleadoPlantel.Persona.Usuario.Alias_Red
-                        }
-                    };
+                     };
+                     App.Current.Properties["tipoEmpleadoP"] = empleadoPlantel.Tipo;
                     App.Current.Properties["cveUsuario"] = empleadoPlantel.Persona.Usuario.Cve_Usuario;
                     App.Current.Properties["cvePersona"] = empleadoPlantel.Persona.Cve_Persona;
                     App.Current.Properties["cveEmpleadoPersona"] = empleadoPlantel.Cve_Empleado_Plantel;
@@ -321,6 +316,7 @@ namespace Appli_KT2.ViewModel
                     IsVisible = true;
                     IsAcciones = false;
                     IsInsertar = true;
+                    nuevo_registro = false;
                     return false;
                 }
             }
@@ -334,6 +330,7 @@ namespace Appli_KT2.ViewModel
                 IsVisible = true;
                 IsAcciones = false;
                 IsInsertar = true;
+                nuevo_registro = true;
                 return false;
             }
         }
@@ -366,13 +363,13 @@ namespace Appli_KT2.ViewModel
             switch (sexo)
             {
                 case "H":
-                    Sexo = "Hombre";
+                    Persona.Sexo = "Hombre";
                     break;
                 case "M":
-                    Sexo = "Mujer";
+                    Persona.Sexo = "Mujer";
                     break;
                 default:
-                    Sexo = "Indistinto";
+                    Persona.Sexo = "Indistinto";
                     break;
             }
         }

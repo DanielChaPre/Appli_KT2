@@ -9,7 +9,9 @@ namespace Appli_KT2.Utils
         private string url = "http://applikt.utleon.edu.mx/webservicesapplikt/Service1.svc";
         private string url2 = "http://localhost:50681/Service1.svc/";
         private string validarUsuario = "/validarUsuario/";
+        private string validarUsuarioAlumno = "/validarUsuarioAlumno/";
         private string validarContasenia = "/validarContrasenia/";
+        private string validarContrasenaAlumno = "/validarContraseniaAlumno/";
         private string crearCuenta = "/crearCuenta/";
         private string crearPerfil = "/perfil";
         private string modificarPerfil = "/perfil";
@@ -47,6 +49,8 @@ namespace Appli_KT2.Utils
         private string recuperarContrasena = "/recuperarContrasena/";
         private string verificarRegistroAlumno = "/verificarAlumno/";
         private string consultarUsuarioAlumno = "/usuarioalumno/";
+        private string consultarhistorial = "/historial/";
+        private string consultarDetallePlantel = "/buscardetalleplantel/";
         
 
         public string URL
@@ -134,5 +138,9 @@ namespace Appli_KT2.Utils
         public string ConsultarUsuarioAlumno { get => consultarUsuarioAlumno; set => consultarUsuarioAlumno = value; }
         public string ObtenerPlantelEMS { get => obtenerPlantelEMS; set => obtenerPlantelEMS = value; }
         public string EliminarNotificaciones { get => eliminarNotificaciones; set => eliminarNotificaciones = value; }
+        public string ValidarContrasenaAlumno { get => validarContrasenaAlumno; set => validarContrasenaAlumno = value; }
+        public string Consultarhistorial { get => consultarhistorial; set => consultarhistorial = value; }
+        public string ConsultarDetallePlantel { get => consultarDetallePlantel; set => consultarDetallePlantel = value; }
+        public string ValidarUsuarioAlumno { get => validarUsuarioAlumno; set => validarUsuarioAlumno = value; }
     }
 }

@@ -90,7 +90,7 @@ namespace Appli_KT2.View
                 lblCarga.IsVisible = false;
                 activityIndicator.IsRunning = false;
                 SesionPrueba();
-                //VerificarLogin();
+               // VerificarLogin();
                 //VerificarConfiguracionTema();
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
@@ -102,22 +102,22 @@ namespace Appli_KT2.View
 
         public void SesionPrueba()
         {
-            /**
-            Alumno
+            
+            //Alumno
             App.Current.Properties["usuario"] = "";
             App.Current.Properties["contrasena"] = "D@niel1998";
             App.Current.Properties["idAlumno"] = "53408";
             App.Current.Properties["tipo_usuario"] = 2;
-            App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
-            return;*/
+            App.Current.Properties["nombreUsuario"] = "";
+            return; 
             /**
-            directivo*/
-            App.Current.Properties["usuario"] = "danchavez197@gmail.com";
-            App.Current.Properties["contrasena"] = "D@niel192";
-            App.Current.Properties["idAlumno"] = "0";
-            App.Current.Properties["tipo_usuario"] = 5;
-            App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
-            return;
+            directivo
+            //App.Current.Properties["usuario"] = "danchavez197@gmail.com";
+            //App.Current.Properties["contrasena"] = "D@niel192";
+            //App.Current.Properties["idAlumno"] = "0";
+            //App.Current.Properties["tipo_usuario"] = 5;
+            //App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
+            //return;*/
         }
 
         public void VaciarSesion()
@@ -125,9 +125,9 @@ namespace Appli_KT2.View
             App.Current.Properties["usuario"] = "";
             App.Current.Properties["contrasena"] = "";
             App.Current.Properties["idAlumno"] = 0;
-            App.Current.Properties["tipo_usuario"] = 2;
+            App.Current.Properties["tipo_usuario"] = 0;
             App.Current.Properties["nombreUsuario"] = "Nombre Usuario";
-            App.Current.Properties["cveUsuario"] = 72;
+            App.Current.Properties["cveUsuario"] = 0;
             return;
         }
 

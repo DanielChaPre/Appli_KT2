@@ -1,21 +1,85 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tabs="clr-namespace:Appli_KT2.View"
              x:Class="Appli_KT2.View.HistorialPage"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            android:TabbedPage.ToolbarPlacement="Top"
-            android:TabbedPage.BarSelectedItemColor="#000F9F"
-            android:TabbedPage.BarItemColor="Gray"
-            BarBackgroundColor="White"
-            BackgroundImageSource="pleca_textura.jpg"
+               BindingContext="{Binding Main, Source={StaticResource Locator}}"
+            BackgroundImageSource="pleca_textura.jpg">
+    <ContentPage.Content
+        BindingContext="{Binding Historial}"
+        >
+        <StackLayout>
+            <ActivityIndicator
+                VerticalOptions="Center"
+                Margin="0,250,0,0"
+                IsRunning="{Binding IsRun}"
+                IsVisible="{Binding IsRun}"
+                x:Name="actiCargar"
+            />
             
-            >
+            <Label
+                FontSize="Title"
+                Margin="0,300,0,0"
+                Text="No se encuentro un historial"
+                TextColor="Gray"
+                x:Name="lblnoti"
+                />
 
-    <TabbedPage.Children>
-        <tabs:EventoPage Title="SUREDSU" Icon="ic_cali.png" />
-        <tabs:CalificacionesPage Title="InternaZ" Icon="ic_history.png" />
-        <tabs:DocumentosPage Title="Documentos" Icon="ic_files.png" />
-    </TabbedPage.Children>
+            <ListView 
+            x:Name="listViewHistorial" 
+            CachingStrategy="RecycleElement"
+                SelectionMode="Single"
+            HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="70" >
+                            <ViewCell.ContextActions>
+                                <MenuItem
+                                    Clicked="BtnAbrir_Clicked"
+                                    CommandParameter="{Binding Url}"
+                                    Text="Abrir"
+                                    x:Name="btnAbrir"
+                                    />
+                                <MenuItem
+                                    Clicked="BtnCompartir_Clicked"
+                                    CommandParameter="{Binding Url}"
+                                    Text="Compartir"
+                                    x:Name="btnCompartir"
+                                    />
+                            </ViewCell.ContextActions>
+                            <Frame
+                             Margin="0,3"
+                             HasShadow="true" 
+                             BorderColor="Silver"
+                             Padding="0">
+                                <Grid
+                                Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-</TabbedPage>
+                                    <Label
+                                    FontSize="20"
+                                    x:Name="idLabel" 
+                                    Grid.Column="0"
+                                    Grid.Row="0"
+                                    Text="{Binding Descripcion}" 
+                                    TextColor="Black" 
+                                    Margin="1"
+                                    VerticalOptions="CenterAndExpand"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        
+    </ContentPage.Content>
+
+</ContentPage>

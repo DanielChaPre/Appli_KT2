@@ -13,12 +13,14 @@ namespace Appli_KT2.View
 	public partial class MasterPage : ContentPage
 	{
         private int tipo_usuario;
+
 		public MasterPage ()
 		{
 			InitializeComponent ();
             this.tipo_usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString());
             AccesoUsuario();
             lblNombreUsuario.Text = App.Current.Properties["nombreUsuario"].ToString();
+            //CrearMenuDinamico();
         }
 
         public void AccesoUsuario()
@@ -99,6 +101,31 @@ namespace Appli_KT2.View
                     break;
             }
         }
-        
+
+        public void CrearMenuDinamico()
+        {
+            try
+            {
+                for (int i = 1; i < 5; i++)
+                {
+                    Button btnPrueba = new Button();
+                    btnPrueba.Text = "prueba " + i;
+                    btnPrueba.Clicked += BtnCliente_Click;
+                    btnPrueba.BackgroundColor = Color.BlueViolet;
+                    btnPrueba.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnPrueba);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private async  void BtnCliente_Click(object sender, EventArgs e)
+        {
+            await Application.Current.MainPage.DisplayAlert("Prueba", "Prueba del click", "Aceptar");
+        }
     }
 }
