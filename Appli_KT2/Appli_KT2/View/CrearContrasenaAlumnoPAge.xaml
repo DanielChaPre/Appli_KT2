@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appli_KT2.View.CrearContrasenaAlumnoPAge"
+             BackgroundImageSource="pleca_textura.jpg"
+              BindingContext="{Binding Main, Source={StaticResource Locator}}">
+    <ContentPage.Content>
+        <Frame
+            BindingContext="{Binding Login}"
+            HasShadow="true" 
+            BorderColor="Silver"
+            Margin="10,10,10,-10" 
+            VerticalOptions="Center">
+
+            <StackLayout
+                BackgroundColor="White"
+                Orientation="Vertical" 
+                Padding="10,10"
+                VerticalOptions="Center">
+
+                <Label 
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Margin="0,5"
+                    Text="Recuperar Contraseña"
+                    TextColor="Black"
+                />
+
+                <Label 
+                    Text="Contraseña nueva"
+                    TextColor="Gray"
+
+                />
+
+                <Entry 
+                    IsPassword="True"
+                    Text="{Binding  Password, Mode=TwoWay}"
+                    TextColor="#000F9F"
+                 />
+
+                <Label 
+                    Text="Confirmar contraseña nueva"
+                    TextColor="Gray"
+                />
+
+                <Entry 
+                    IsPassword="True"
+                    Text="{Binding  ConfirmarContrasena, Mode=TwoWay}"
+                    TextColor="#000F9F"
+                 />
+
+                <Button 
+                    BackgroundColor="#FF8200"
+                    Command="{Binding CrearCuentaAlumnoCommand}"
+                    Text="Iniciar sesión"
+                    TextColor="White"
+                    x:Name="btnIniciar"
+                />
+
+                <ActivityIndicator
+                    IsRunning ="{Binding IsRunning}"
+                    VerticalOptions="CenterAndExpand"
+                />
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>
