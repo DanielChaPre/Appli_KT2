@@ -31,8 +31,9 @@ namespace Appli_KT2.ViewModel
         private bool isRunning;
         private bool isEnable;
         private bool alumnoEncontrado = false;
+       
         private int idAlumno;
-      
+
         ConexionWS conexion;
         HttpClient _client;
         private string url;
@@ -629,24 +630,37 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-            //CrossGoogleClient.Current.Logout();
+               await CrossGoogleClient.Current.LoginAsync();
                 IGoogleClientManager _googleService = CrossGoogleClient.Current;
+
                 if (!string.IsNullOrEmpty(_googleService.ActiveToken))
                 {
                     //Always require user authentication
                     _googleService.Logout();
                 }
+
                 EventHandler<GoogleClientResultEventArgs<GoogleUser>> userLoginDelegate = null;
                 userLoginDelegate = async (object sender, GoogleClientResultEventArgs<GoogleUser> e) =>
                 {
                     switch (e.Status)
                     {
                         case GoogleActionStatus.Completed:
-                            #if DEBUG
+                        #if DEBUG
                             var googleUserString = JsonConvert.SerializeObject(e.Data);
                             Console.WriteLine($"Google Logged in succesfully: {googleUserString}");
-                            #endif
-                            await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                       #endif
+
+                            //var socialLoginData = new NetworkAuthData
+                            //{
+                            //    Id = e.Data.Id,
+                            //    Logo = authNetwork.Icon,
+                            //    Foreground = authNetwork.Foreground,
+                            //    Background = authNetwork.Background,
+                            //    Picture = e.Data.Picture.AbsoluteUri,
+                            //    Name = e.Data.Name,
+                            //};
+
+                          //  await App.Current.MainPage.Navigation.PushModalAsync(new HomePage(socialLoginData));
                             break;
                         case GoogleActionStatus.Canceled:
                             await App.Current.MainPage.DisplayAlert("Google Auth", "Canceled", "Ok");
@@ -658,9 +672,12 @@ namespace Appli_KT2.ViewModel
                             await App.Current.MainPage.DisplayAlert("Google Auth", "Unauthorized", "Ok");
                             break;
                     }
+
                     _googleService.OnLogin -= userLoginDelegate;
                 };
+
                 _googleService.OnLogin += userLoginDelegate;
+
                 await _googleService.LoginAsync();
             }
             catch (Exception ex)
@@ -668,7 +685,7 @@ namespace Appli_KT2.ViewModel
                 Console.WriteLine(ex.ToString());
             }
         }
-       
+
         #endregion
         internal class NetworkAuthData
         {
@@ -706,5 +723,7 @@ namespace Appli_KT2.ViewModel
             [JsonProperty("user_id")]
             public int UserId { get; set; }
         }
+
+
     }
 }

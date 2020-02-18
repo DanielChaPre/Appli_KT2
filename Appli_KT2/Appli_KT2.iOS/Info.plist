@@ -57,13 +57,13 @@
 		</dict>
   <dict>
 			<key>CFBundleURLName</key>
-			<string>google</string>
+			<string>Applikt</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<!--<string>com.googleusercontent.apps.60015114581-8t3d8n4r2s38fvltdqrnf8ip7thqcntu</string>-->
+				<string>409996360266-adbpu6nb33pnbpmmj46sg6f2o1t0c2fn.apps.googleusercontent.com</string>
 			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<key>CFBundleURLTypes</key>
+			<string>Viewer</string>
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
