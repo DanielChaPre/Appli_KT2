@@ -28,7 +28,7 @@ namespace Appli_KT2.View
             await Task.Yield();
         }
 
-        public async void LlenarMenu()
+        public void LlenarMenu()
         {
             //EscuelasClass oEjemploListView1Model = new EscuelasClass();
             resultadoAtlasViewModel = new ResultadoAtlasViewModel();

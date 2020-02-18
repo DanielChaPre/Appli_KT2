@@ -7,8 +7,8 @@ using Newtonsoft.Json;
 using Plugin.FacebookClient;
 using Plugin.FacebookClient.Abstractions;
 //ñusing Plugin.FacebookClient.Abstractions;
-using Plugin.GoogleClient;
-using Plugin.GoogleClient.Shared;
+//using Plugin.GoogleClient;
+//using Plugin.GoogleClient.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -172,7 +172,7 @@ namespace Appli_KT2.ViewModel
         {
             get
             {
-                return new RelayCommand(IniciarGoogle);
+                return new RelayCommand(IniciarGoogle2);
             }
         }
 
@@ -641,7 +641,7 @@ namespace Appli_KT2.ViewModel
         }
         /*
          * Configurar tanto el facebook como el google en android e ios para poder utilizarlos de manera adecuada
-         * **/
+         * *
         private async void IniciarGoogle()
         {
             try
@@ -701,7 +701,7 @@ namespace Appli_KT2.ViewModel
                 Console.WriteLine(ex.ToString());
             }
         }
-
+        */
         private async void IniciarGoogle2()
         {
             await App.Current.MainPage.Navigation.PushAsync(new GoogleProfileCsPage());
