@@ -1,4 +1,5 @@
 ﻿//using GalaSoft.MvvmLight.Command;
+using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
@@ -14,6 +15,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -38,6 +40,19 @@ namespace Appli_KT2.ViewModel
         HttpClient _client;
         private string url;
         private string confirmarcontrasena;
+
+        private GoogleProfile _googleProfile;
+        private readonly GoogleService _googleServices;
+
+        public GoogleProfile GoogleProfile
+        {
+            get { return _googleProfile; }
+            set
+            {
+                _googleProfile = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
         #region propiedades
@@ -99,6 +114,7 @@ namespace Appli_KT2.ViewModel
         {
             this.IsRemember = true;
             this.IsEnable = true;
+            _googleServices = new GoogleService();
         }
       
         #endregion
@@ -686,6 +702,31 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        private async void IniciarGoogle2()
+        {
+            await App.Current.MainPage.Navigation.PushAsync(new GoogleProfileCsPage());
+        }
+
+        public async Task<string> GetAccessTokenAsync(string code)
+        {
+
+            var accessToken = await _googleServices.GetAccessTokenAsync(code);
+
+            return accessToken;
+        }
+
+        public async Task SetGoogleUserProfileAsync(string accessToken)
+        {
+
+            GoogleProfile = await _googleServices.GetGoogleUserProfileAsync(accessToken);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         #endregion
         internal class NetworkAuthData
         {
