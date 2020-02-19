@@ -42,7 +42,7 @@ namespace Appli_KT2.ViewModel
                            Cve_nivel_estudio = listaPlanteles[i].Cve_nivel_estudio,
                            Fechas = listaPlanteles[i].Fechas,
                            Latitud = listaPlanteles[i].Latitud,
-                          // Logo_plantel = SeleccionarImagen(listaPlanteles[i].PlantelesES.NombrePlantelES),
+                           Logo_plantel = SeleccionarImagen(listaPlanteles[i].PlantelesES.NombrePlantelES),
                            Longitud = listaPlanteles[i].Longitud,
                            Nivel_estudio = listaPlanteles[i].Nivel_estudio,
                            Requisitos = listaPlanteles[i].Requisitos,
@@ -83,19 +83,19 @@ namespace Appli_KT2.ViewModel
             switch (institucion)
             {
                 case "ICON UNIVERSITY":
-                    imagen = "";
+                    imagen = "icon_01.jpg";
                     break;
-                case "UPJ - UNIVERSIDAD POLITECNICA DE JUVENTINO ROSAS":
-                    imagen = "upjr_01";
+                case "UPJR - UNIVERSIDAD POLITECNICA DE JUVENTINO ROSAS":
+                    imagen = "upjr_01.jpg";
                     break;
                 case "INSTITUTO DE EDUCACION SUPERIOR SANTA FE":
-                    imagen = "";
+                    imagen = "satafe_01.jpg";
                     break;
                 case "UG - CAMPUS LEON, DIVISION DE CIENCIAS DE LA SALUD":
-                    imagen = "ug.png";
+                    imagen = "ug_.png";
                     break;
                 case "UTL - UNIVERSIDAD TECNOLOGICA DE LEON":
-                    imagen = "utl.png";
+                    imagen = "utl4.png";
                     break;
                 default:
                     break;

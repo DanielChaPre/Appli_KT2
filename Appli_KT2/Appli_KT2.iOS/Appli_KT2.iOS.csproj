@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -356,5 +356,65 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\utl4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_04.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\salle_01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\salle_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\salle_03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\salle_04.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\salle_05.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\satafe_05.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\satafe_01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\satafe_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\satafe_03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\satafe_04.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ug_01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ug_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ug_03.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\upjr_01.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\upjr_02.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\upjr_03.jpg" />
   </ItemGroup>
 </Project>
