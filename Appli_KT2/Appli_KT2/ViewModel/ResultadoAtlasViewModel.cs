@@ -92,10 +92,10 @@ namespace Appli_KT2.ViewModel
                     imagen = "satafe_01.jpg";
                     break;
                 case "UG - CAMPUS LEON, DIVISION DE CIENCIAS DE LA SALUD":
-                    imagen = "ug_.png";
+                    imagen = "ug_.jpg";
                     break;
                 case "UTL - UNIVERSIDAD TECNOLOGICA DE LEON":
-                    imagen = "utl4.png";
+                    imagen = "utl4.jpg";
                     break;
                 default:
                     break;
