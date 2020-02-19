@@ -9,55 +9,19 @@
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>facebook.com</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<false/>
-			</dict>
-			<key>fbcdn.net</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<false/>
-			</dict>
-			<key>akamaihd.net</key>
-			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-				<false/>
-			</dict>
-		</dict>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
-	</dict>
-	<key>otherExternalDomainYouNeedToCall</key>
-	<dict>
-		<key>NSIncludesSubdomains</key>
-		<true/>
-		<key>NSExceptionAllowsInsecureHTTPLoads</key>
-		<true/>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-	</dict>
-	<key>CFBundleURLTypes</key>
-	<array>
+		<key>NSExceptionDomains</key>
 		<dict>
-			<key>CFBundleURLName</key>
-			<string>fb</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>6369d476c4d79cb278f94986cc39c284</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
+			<key>yourdomain.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
 		</dict>
-	</array>
+	</dict>
 	<key>FacebookAppID</key>
 	<string>857924591318663</string>
 	<key>FacebookDisplayName</key>
@@ -102,5 +66,7 @@
 	<string>Appli_KT2</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
 </dict>
 </plist>

@@ -70,8 +70,11 @@ namespace Appli_KT2.ViewModel
             {
                 var _client = new HttpClient();
                 var conexion = new ConexionWS();
+                
                 var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerEstados, string.Empty));
+                
                 HttpResponseMessage response = await _client.GetAsync(uri);
+
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -94,7 +97,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex.Message);
             }
         }
     }

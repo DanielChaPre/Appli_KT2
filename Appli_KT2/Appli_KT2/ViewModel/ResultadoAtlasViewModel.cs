@@ -83,17 +83,19 @@ namespace Appli_KT2.ViewModel
             switch (institucion)
             {
                 case "ICON UNIVERSITY":
-                    imagen = "ICON_01.JPG";
-                    break;
-                case "UPJ - UNIVERSIDAD POLITECNICA DE JUVENTINO ROSAS":
                     imagen = "";
                     break;
+                case "UPJ - UNIVERSIDAD POLITECNICA DE JUVENTINO ROSAS":
+                    imagen = "upjr_01";
+                    break;
                 case "INSTITUTO DE EDUCACION SUPERIOR SANTA FE":
-                    imagen = "sata fe_01.jpg";
+                    imagen = "";
                     break;
                 case "UG - CAMPUS LEON, DIVISION DE CIENCIAS DE LA SALUD":
+                    imagen = "ug.png";
                     break;
                 case "UTL - UNIVERSIDAD TECNOLOGICA DE LEON":
+                    imagen = "utl.png";
                     break;
                 default:
                     break;
