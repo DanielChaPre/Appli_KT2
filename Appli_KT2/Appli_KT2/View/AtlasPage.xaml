@@ -39,7 +39,7 @@
                     VerticalOptions="CenterAndExpand"
                     >
 
-                    <Label
+                 <!--   <Label
                         FontSize="Subtitle"
                         Text="Estado"
                         TextColor="White"
@@ -51,7 +51,7 @@
                         x:Name="pEstado"
                         Title="           --Seleccione Estado--"
                         
-                    />
+                    />-->
                    
                     <Label
                         Text="Municipio"

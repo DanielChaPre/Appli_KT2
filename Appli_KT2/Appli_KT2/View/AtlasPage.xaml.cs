@@ -198,7 +198,9 @@ namespace Appli_KT2.View
                         if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
                         {
                             // pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
-                            FiltrarMunicipio(municipiosViewModel.ListMunicipios);
+                            // FiltrarMunicipio(municipiosViewModel.ListMunicipios);
+                            var municipio = from a in municipiosViewModel.ListMunicipios where a.IdEstado == 11 select a;
+                            pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
                             pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
                             pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
                             return false;
@@ -330,7 +332,7 @@ namespace Appli_KT2.View
             }
             else
             {
-                var municipio = from a in municipios where a.IdEstado == estados.IdEstado select a;
+                var municipio = from a in municipios where a.IdEstado == 11 select a;
                 pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
                 return;
             }
