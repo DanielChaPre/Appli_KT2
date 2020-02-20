@@ -6,6 +6,8 @@ using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using Plugin.FacebookClient;
 using Plugin.FacebookClient.Abstractions;
+using Plugin.GoogleClient;
+using Plugin.GoogleClient.Shared;
 //ñusing Plugin.FacebookClient.Abstractions;
 //using Plugin.GoogleClient;
 //using Plugin.GoogleClient.Shared;
@@ -41,21 +43,32 @@ namespace Appli_KT2.ViewModel
         private string url;
         private string confirmarcontrasena;
 
-        private GoogleProfile _googleProfile;
-        private readonly GoogleService _googleServices;
-
-        public GoogleProfile GoogleProfile
-        {
-            get { return _googleProfile; }
-            set
-            {
-                _googleProfile = value;
-                OnPropertyChanged();
-            }
-        }
 
         #endregion
         #region propiedades
+        private  IGoogleClientManager _googleClientManager;
+        public UserProfile User1 { get; set; } = new UserProfile();
+        public string Name
+        {
+            get => User1.Name;
+            set => User1.Name = value;
+        }
+
+        public string Email
+        {
+            get => User1.Email;
+            set => User1.Email = value;
+        }
+
+        public Uri PictureU
+        {
+            get => User1.Picture;
+            set => User1.Picture = value;
+        }
+
+        public bool IsLoggedIn { get; set; }
+
+		public string Token { get; set; }
 
         public string ConfirmarContrasena
         {
@@ -114,7 +127,10 @@ namespace Appli_KT2.ViewModel
         {
             this.IsRemember = true;
             this.IsEnable = true;
-            _googleServices = new GoogleService();
+            
+
+
+            IsLoggedIn = false;
         }
       
         #endregion
@@ -172,7 +188,7 @@ namespace Appli_KT2.ViewModel
         {
             get
             {
-                return new RelayCommand(IniciarGoogle2);
+                return new RelayCommand(IniciarGoogle);
             }
         }
 
@@ -641,92 +657,78 @@ namespace Appli_KT2.ViewModel
         }
         /*
          * Configurar tanto el facebook como el google en android e ios para poder utilizarlos de manera adecuada
-         * *
+         * */
         private async void IniciarGoogle()
         {
             try
             {
-               await CrossGoogleClient.Current.LoginAsync();
-                IGoogleClientManager _googleService = CrossGoogleClient.Current;
-
-                if (!string.IsNullOrEmpty(_googleService.ActiveToken))
-                {
-                    //Always require user authentication
-                    _googleService.Logout();
-                }
-
-                EventHandler<GoogleClientResultEventArgs<GoogleUser>> userLoginDelegate = null;
-                userLoginDelegate = async (object sender, GoogleClientResultEventArgs<GoogleUser> e) =>
-                {
-                    switch (e.Status)
-                    {
-                        case GoogleActionStatus.Completed:
-                        #if DEBUG
-                            var googleUserString = JsonConvert.SerializeObject(e.Data);
-                            Console.WriteLine($"Google Logged in succesfully: {googleUserString}");
-                       #endif
-
-                            //var socialLoginData = new NetworkAuthData
-                            //{
-                            //    Id = e.Data.Id,
-                            //    Logo = authNetwork.Icon,
-                            //    Foreground = authNetwork.Foreground,
-                            //    Background = authNetwork.Background,
-                            //    Picture = e.Data.Picture.AbsoluteUri,
-                            //    Name = e.Data.Name,
-                            //};
-
-                          //  await App.Current.MainPage.Navigation.PushModalAsync(new HomePage(socialLoginData));
-                            break;
-                        case GoogleActionStatus.Canceled:
-                            await App.Current.MainPage.DisplayAlert("Google Auth", "Canceled", "Ok");
-                            break;
-                        case GoogleActionStatus.Error:
-                            await App.Current.MainPage.DisplayAlert("Google Auth", "Error", "Ok");
-                            break;
-                        case GoogleActionStatus.Unauthorized:
-                            await App.Current.MainPage.DisplayAlert("Google Auth", "Unauthorized", "Ok");
-                            break;
-                    }
-
-                    _googleService.OnLogin -= userLoginDelegate;
-                };
-
-                _googleService.OnLogin += userLoginDelegate;
-
-                await _googleService.LoginAsync();
+                _googleClientManager = CrossGoogleClient.Current;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+
+                throw;
+            }
+           
+            _googleClientManager.OnLogin += OnLoginCompleted;
+            try
+            {
+                await _googleClientManager.LoginAsync();
+            }
+            catch (GoogleClientSignInNetworkErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInCanceledErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInInvalidAccountErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientSignInInternalErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientNotInitializedErrorException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
+            }
+            catch (GoogleClientBaseException e)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", e.Message, "OK");
             }
         }
-        */
-        private async void IniciarGoogle2()
+
+        private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new GoogleProfileCsPage());
+            if (loginEventArgs.Data != null)
+            {
+                GoogleUser googleUser = loginEventArgs.Data;
+                User1.Name = googleUser.Name;
+                User1.Email = googleUser.Email;
+                User1.Picture = googleUser.Picture;
+                var GivenName = googleUser.GivenName;
+                var FamilyName = googleUser.FamilyName;
+
+
+                // Log the current User email
+                Console.WriteLine(User1.Email);
+                IsLoggedIn = true;
+
+                var token = CrossGoogleClient.Current.ActiveToken;
+                Token = token;
+            }
+            else
+            {
+                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+            }
+
+            _googleClientManager.OnLogin -= OnLoginCompleted;
+
         }
 
-        public async Task<string> GetAccessTokenAsync(string code)
-        {
-
-            var accessToken = await _googleServices.GetAccessTokenAsync(code);
-
-            return accessToken;
-        }
-
-        public async Task SetGoogleUserProfileAsync(string accessToken)
-        {
-
-            GoogleProfile = await _googleServices.GetGoogleUserProfileAsync(accessToken);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         #endregion
         internal class NetworkAuthData
         {
@@ -765,6 +767,13 @@ namespace Appli_KT2.ViewModel
             public int UserId { get; set; }
         }
 
-
+        public class UserProfile : INotifyPropertyChanged
+        {
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public Uri Picture { get; set; }
+            public event PropertyChangedEventHandler PropertyChanged;
+        }
+        
     }
 }

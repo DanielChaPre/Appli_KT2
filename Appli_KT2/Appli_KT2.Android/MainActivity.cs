@@ -8,8 +8,8 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using Plugin.FacebookClient;
-//using Plugin.GoogleClient;
 using Java.Security;
+using Plugin.GoogleClient;
 
 namespace Appli_KT2.Droid
 {
@@ -22,10 +22,11 @@ namespace Appli_KT2.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            //GoogleClientManager.Initialize(this, null, "409996360266-oljnte6qo43jieck1j5u0imu64q0idcp.apps.googleusercontent.com");
+            GoogleClientManager.Initialize(this);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             FacebookClientManager.Initialize(this);
-            //GoogleClientManager.Initialize(this);
          
             LoadApplication(new App());
             #if DEBUG
@@ -43,8 +44,8 @@ namespace Appli_KT2.Droid
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
         {
             base.OnActivityResult(requestCode, resultCode, intent);
+            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
             FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
-         //   GoogleClientManager.OnAuthCompleted(requestCode, resultCode, intent);
         }
 
         public static void PrintHashKey(Context pContext)

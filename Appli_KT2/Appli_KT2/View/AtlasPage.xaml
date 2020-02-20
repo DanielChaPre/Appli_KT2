@@ -49,7 +49,7 @@
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
                         x:Name="pEstado"
-                        Title="           --Seleccione Estado--"
+                        Title="           "
                         
                     />-->
                    
