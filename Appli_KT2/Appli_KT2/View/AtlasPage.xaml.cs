@@ -15,9 +15,9 @@ namespace Appli_KT2.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AtlasPage : ContentPage
 	{
-        MunicipioViewModel municipiosViewModel;
-        PlantelESViewModel plantelESViewModel;
-        CarreraViewModel carreraViewModel;
+        MunicipioViewModel municipiosViewModel = new MunicipioViewModel();
+        PlantelESViewModel plantelESViewModel = new PlantelESViewModel();
+        CarreraViewModel carreraViewModel = new CarreraViewModel();
         EstadosViewModel estadosViewModel = new EstadosViewModel();
         Estados estados = new Estados();
         Municipios municipios = new Municipios();
@@ -183,95 +183,68 @@ namespace Appli_KT2.View
 
         private void LlenarMunicipios()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 try
                 {
-                    if (municipiosViewModel == null)
+                    while (municipiosViewModel.ListMunicipios.Count != 0)
                     {
-                        municipiosViewModel = new MunicipioViewModel();
-                        municipiosViewModel.ObtenerTodosMunicipios();
+                        var municipio = from a in municipiosViewModel.ListMunicipios where a.IdEstado == 11 select a;
+                        pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
+                        pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
+
+                        pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
+
+                        return false;
                     }
-                    else
-                    {
-                       
-                        if (municipiosViewModel.ListMunicipios != null || municipiosViewModel.ListMunicipios.Count != 0)
-                        {
-                            // pMunicipio.ItemsSource = municipiosViewModel.ListMunicipios;
-                            // FiltrarMunicipio(municipiosViewModel.ListMunicipios);
-                            var municipio = from a in municipiosViewModel.ListMunicipios where a.IdEstado == 11 select a;
-                            pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
-                            pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
-                            pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
-                            return false;
-                        }
-                    }
+                    
                     return true;
                 }
-                catch (Exception ex)
+                catch (NullReferenceException ex)
                 {
                     return true;
-                    throw;
                 }
             });
         }
 
         private void LlenarPlantelesES()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () => 
+            Device.StartTimer(TimeSpan.FromSeconds(5), () => 
             {
                 try
                 {
-                    if (plantelESViewModel == null)
+
+                    while (plantelESViewModel.ListPlantelES.Count != 0)
                     {
-                        plantelESViewModel = new PlantelESViewModel();
-                        plantelESViewModel.ObtenerPlantelES();
+                        FiltrarPlanteles(plantelESViewModel.ListPlantelES);
+                        pPlantelesES.ItemDisplayBinding = new Binding("PlantelesES.NombrePlantelES");
+                        pPlantelesES.SelectedIndexChanged += SeleccionarPlanteles;
+
+                        return false;
                     }
-                    else
-                    {
-                        if (plantelESViewModel.ListPlantelES != null || plantelESViewModel.ListPlantelES.Count != 0)
-                        {
-                            //  pPlantelesES.ItemsSource = plantelESViewModel.ListPlantelES;
-                            FiltrarPlanteles(plantelESViewModel.ListPlantelES);
-                            pPlantelesES.ItemDisplayBinding = new Binding("PlantelesES.NombrePlantelES");
-                            pPlantelesES.SelectedIndexChanged += SeleccionarPlanteles;
-                            return false;
-                        }
-                    }
+
                     return true;
                 }
                 catch (Exception ex)
                 {
                     return true;
-                    throw;
                 }
             });
         }
 
         private void LlenarCarreras()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 try
                 {
-                    if (carreraViewModel == null)
+                    while (carreraViewModel.ListCarreraES.Count != 0)
                     {
-                        carreraViewModel = new CarreraViewModel();
-                        //carreraViewModel.ObtenerPlant();
-                    }
-                    else
-                    {
-                        if (carreraViewModel.ListCarreraES != null || carreraViewModel.ListCarreraES.Count != 0)
-                        {
-                            //pCarreras.ItemsSource = carreraViewModel;
-                            FiltrarCarreraras(carreraViewModel.ListCarreraES);
-                            pCarreras.ItemDisplayBinding = new Binding("NombreCarreraES");
-                            pCarreras.SelectedIndexChanged += SeleccionarCarrera;
+                        FiltrarCarreraras(carreraViewModel.ListCarreraES);
+                        pCarreras.ItemDisplayBinding = new Binding("NombreCarreraES");
+                        pCarreras.SelectedIndexChanged += SeleccionarCarrera;
 
-                            //pPlantelesES.ItemsSource = plantelESViewModel.ListPlantelES;
-                            //pPlantelesES.ItemDisplayBinding = new Binding("NombreInstitucionES");
-                            return false;
-                        }
+                        return false;
                     }
                     return true;
                 }

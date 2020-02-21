@@ -13,6 +13,11 @@ namespace Appli_KT2.ViewModel
         private string plantelES;
         private List<DetallePlantel> lstPlantelES = new List<DetallePlantel>();
 
+        public PlantelESViewModel()
+        {
+            ObtenerPlantelES();
+        }
+
         public List<DetallePlantel> ListPlantelES
         {
             get;

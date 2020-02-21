@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              BackgroundImageSource="pleca_textura.jpg"
+             x:Class="Appli_KT2.View.RelacionarUsuarioRedSocialPage">
+    <ContentPage.Content>
+        <Frame
+            BindingContext="{Binding Login}"
+            HasShadow="true" 
+            BorderColor="Silver"
+            Margin="10,10,10,-10" 
+            VerticalOptions="Center">
+            <StackLayout>
+                <ActivityIndicator
+                    IsRunning="True"
+                    x:Name="cargarAccion"
+                    />
+                <StackLayout
+                BackgroundColor="White"
+                Orientation="Vertical" 
+                Padding="10,10"
+                VerticalOptions="Center">
+
+                    <Button
+                    BackgroundColor="#FF8200"
+                    Text="¿Eres alumno registrado en SUREDSU?"
+                    TextColor="White"
+                     x:Name="btnAlumno"
+                    />
+                    <StackLayout
+                    IsVisible="False"
+                    x:Name="lytAlumno"
+                    >
+                        <Label 
+                    Text="CURP"
+                    TextColor="Gray"
+                    x:Name="lblUsuarioAlumno"/>
+
+                        <Entry 
+                   
+                    TextColor="#000F9F"
+                    x:Name="txtAlumno"/>
+
+                        <Label 
+                    Text="Contraseña"
+                    TextColor="Gray"
+                    x:Name="lblContraseñaAlumno"/>
+
+                        <Entry 
+                    IsPassword="True"
+                   
+                    TextColor="#000F9F"
+                    x:Name="txtContraseñaAlumno"/>
+
+                        <Button
+                    BackgroundColor="#0a225a"
+                        Margin="35,0"
+                    Text="Ingresar"
+                    TextColor="White"
+                     x:Name="btnIngresarAlumno"/>
+
+                    </StackLayout>
+                    <Button
+                    BackgroundColor="#FF8200"
+                    Text="¿Eres un usuario ya registrado?"
+                    TextColor="White"
+                     x:Name="btnUsuario"
+                    />
+                    <StackLayout
+                    IsVisible="False"
+                    x:Name="lytUsuario"
+                    >
+                        <Label 
+                    Text="Usuario"
+                    TextColor="Gray"
+                    x:Name="lblUsuario"/>
+
+                        <Entry 
+                    Text="{Binding Usuario, Mode=TwoWay}"
+                    TextColor="#000F9F"
+                    x:Name="txtUsuario"/>
+
+                        <Label 
+                    Text="Contraseña"
+                    TextColor="Gray"
+                    x:Name="lblContraseña"/>
+
+                        <Entry 
+                    IsPassword="True"
+                    Text="{Binding Contrasenia, Mode=TwoWay}"
+                    TextColor="#000F9F"
+                    x:Name="txtContraseña"/>
+
+                        <Button
+                    BackgroundColor="#0a225a"
+                          Margin="35,0"
+                    Text="Ingresar"
+                    TextColor="White"
+                     x:Name="btnIngresarUsuario"/>
+                    </StackLayout>
+                    <Button
+                    BackgroundColor="#FF8200"
+                    Text="No estoy registrado"
+                    TextColor="White"
+                    x:Name="btnGuardar"
+                    />
+                </StackLayout>
+            </StackLayout>
+            
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>

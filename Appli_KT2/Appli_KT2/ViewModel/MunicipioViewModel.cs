@@ -19,7 +19,7 @@ namespace Appli_KT2.ViewModel
         private List<Municipios> lstMunicipios = new List<Municipios>();
         public MunicipioViewModel()
         {
-          //  ObtenerMunicipios();
+            ObtenerTodosMunicipios();
         }
 
         public List<Municipios> ListMunicipios
@@ -28,7 +28,7 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        public async Task<bool> ObtenerTodosMunicipios()
+        public async void ObtenerTodosMunicipios()
         {
             try
             {
@@ -53,15 +53,15 @@ namespace Appli_KT2.ViewModel
                     }
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListMunicipios = this.lstMunicipios;
-                    return true;
+                    return ;
                 }
 
-                return false;
+                return ;
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
-                return false;
+                return ;
             }
         }
 

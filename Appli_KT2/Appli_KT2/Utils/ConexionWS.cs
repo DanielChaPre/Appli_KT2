@@ -51,6 +51,12 @@ namespace Appli_KT2.Utils
         private string consultarUsuarioAlumno = "/usuarioalumno/";
         private string consultarhistorial = "/historial/";
         private string consultarDetallePlantel = "/buscardetalleplantel/";
+        private string validarUsuarioFacebook = "/validarUsuarioFacebook/";
+        private string validarUsuarioGoogle = "/validarUsuarioGoogle/";
+        private string relacionarFacebookUsuario = "/relacionarFacebookUsuario/";
+        private string relacionarGoogleUsuario = "/relacionarGoogleUsuario/";
+        private string relacionarFacebookAlumno = "/relacionarFacebookAlumno/";
+        private string relacionarGoogleAlumno = "/relacionarGoogleAlumno/";
         
 
         public string URL
@@ -142,5 +148,11 @@ namespace Appli_KT2.Utils
         public string Consultarhistorial { get => consultarhistorial; set => consultarhistorial = value; }
         public string ConsultarDetallePlantel { get => consultarDetallePlantel; set => consultarDetallePlantel = value; }
         public string ValidarUsuarioAlumno { get => validarUsuarioAlumno; set => validarUsuarioAlumno = value; }
+        public string ValidarUsuarioFacebook { get => validarUsuarioFacebook; set => validarUsuarioFacebook = value; }
+        public string ValidarUsuarioGoogle { get => validarUsuarioGoogle; set => validarUsuarioGoogle = value; }
+        public string RelacionarFacebookUsuario { get => relacionarFacebookUsuario; set => relacionarFacebookUsuario = value; }
+        public string RelacionarGoogleUsuario { get => relacionarGoogleUsuario; set => relacionarGoogleUsuario = value; }
+        public string RelacionarFacebookAlumno { get => relacionarFacebookAlumno; set => relacionarFacebookAlumno = value; }
+        public string RelacionarGoogleAlumno { get => relacionarGoogleAlumno; set => relacionarGoogleAlumno = value; }
     }
 }

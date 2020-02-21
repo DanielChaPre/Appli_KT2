@@ -119,6 +119,7 @@ namespace Appli_KT2.ViewModel
                             Texto = lstNotificaciones[i].Texto,
                             Titulo = lstNotificaciones[i].Titulo,
                             Url = lstNotificaciones[i].Url,
+                            Estatus = lstNotificaciones[i].Estatus,
                             Icon = SeleccionarImagen(lstNotificaciones[i].Cve_tipo_notificacion)
                         };
                         lstnotificaciones.Add(entNotificaciones);
@@ -156,13 +157,6 @@ namespace Appli_KT2.ViewModel
                 }
                 return database;
             }
-        }
-        
-        public async void prueba()
-        {
-            // var item = (Notificaciones)BindingContext;
-            // hacer referencia a la lista de datos que traen en la lista
-            // await Database.SaveItemAsync();
         }
 
         public string SeleccionarImagen(int tipo)

@@ -19,6 +19,7 @@ namespace Appli_KT2.Model
         private string cve_categoria;
         private int cve_notificacion;
         private int cve_tipo_notificacion;
+        private int estatus;
         private string fecha_notificacion;
         private string hora_notificacion;
         private string responsable;
@@ -61,6 +62,18 @@ namespace Appli_KT2.Model
             set
             {
                 cve_tipo_notificacion = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Estatus
+        {
+            get
+            {
+                return estatus;
+            }
+            set
+            {
+                estatus = value;
                 OnPropertyChanged();
             }
         }

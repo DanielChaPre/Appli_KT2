@@ -127,8 +127,8 @@ namespace Appli_KT2.ViewModel
         {
             this.IsRemember = true;
             this.IsEnable = true;
-            
-
+            App.Current.Properties["usuarioFacebook"] = "";
+            App.Current.Properties["usuarioGoogle"] = "";
 
             IsLoggedIn = false;
         }
@@ -630,7 +630,15 @@ namespace Appli_KT2.ViewModel
                         case FacebookActionStatus.Completed:
                             var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
                             //facebookProfile  es el que tiene los datos de la cuenta de facebook
-                            await App.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                            App.Current.Properties["usuarioFacebook"] = facebookProfile.Id;
+                            if (await ValidarUsuarioFacebook(facebookProfile.Id))
+                            {
+                                await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                            }
+                            else
+                            {
+                                await Application.Current.MainPage.Navigation.PushModalAsync(new RelacionarUsuarioRedSocialPage());
+                            }
                             break;
                         case FacebookActionStatus.Canceled:
                             await App.Current.MainPage.DisplayAlert("Facebook Auth", "Canceled", "Ok");
@@ -701,7 +709,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        private void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
+        private async void OnLoginCompleted(object sender, GoogleClientResultEventArgs<GoogleUser> loginEventArgs)
         {
             if (loginEventArgs.Data != null)
             {
@@ -711,22 +719,123 @@ namespace Appli_KT2.ViewModel
                 User1.Picture = googleUser.Picture;
                 var GivenName = googleUser.GivenName;
                 var FamilyName = googleUser.FamilyName;
-
-
-                // Log the current User email
-                Console.WriteLine(User1.Email);
+                App.Current.Properties["usuarioGoogle"] = googleUser.Id;
                 IsLoggedIn = true;
-
                 var token = CrossGoogleClient.Current.ActiveToken;
                 Token = token;
+                if (await ValidarUsuarioGoogle(googleUser.Id))
+                {
+                    await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                }
+                else
+                {
+                    await Application.Current.MainPage.Navigation.PushModalAsync(new RelacionarUsuarioRedSocialPage());
+                }
             }
             else
             {
-                App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("Error", loginEventArgs.Message, "OK");
             }
 
             _googleClientManager.OnLogin -= OnLoginCompleted;
 
+        }
+
+        public void Logout()
+        {
+            _googleClientManager.OnLogout += OnLogoutCompleted;
+            _googleClientManager.Logout();
+        }
+
+        private void OnLogoutCompleted(object sender, EventArgs loginEventArgs)
+        {
+            IsLoggedIn = false;
+            User1.Email = "Offline";
+            _googleClientManager.OnLogout -= OnLogoutCompleted;
+        }
+
+        private async Task<bool> ValidarUsuarioFacebook(string perfil)
+        {
+            try
+            {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                url = conexion.URL + "" + conexion.ValidarUsuarioFacebook + perfil;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<List<string>>(content);
+                    if (result.Count != 0)
+                    {
+                        var tipo = result[0];
+                        var cveUsuario = result[1];
+                        var nombre = result[2];
+                        var apePaterno = result[3];
+                        App.Current.Properties["tipo_usuario"] = tipo;
+                        App.Current.Properties["cveUsuario"] = cveUsuario;
+                        App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private async Task<bool> ValidarUsuarioGoogle(string perfil)
+        {
+            try
+            {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                url = conexion.URL + "" + conexion.ValidarUsuarioGoogle + perfil;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<List<string>>(content);
+                    if (result.Count != 0)
+                    {
+                        var tipo = result[0];
+                        var cveUsuario = result[1];
+                        var nombre = result[2];
+                        var apePaterno = result[3];
+                        App.Current.Properties["tipo_usuario"] = tipo;
+                        App.Current.Properties["cveUsuario"] = cveUsuario;
+                        App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         #endregion
