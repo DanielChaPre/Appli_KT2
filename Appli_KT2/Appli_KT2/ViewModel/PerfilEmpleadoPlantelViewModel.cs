@@ -20,7 +20,7 @@ namespace Appli_KT2.ViewModel
         private EmpleadoPlantel empleadoPlantel;
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
-        private Colonia _selectedColonia;
+        private Colonias _selectedColonia;
         private Estados entEstados;
         MetodoHTTP metodosHTTP;
         private bool isrun;
@@ -104,7 +104,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public Colonia SelectedColonia
+        public Colonias SelectedColonia
         {
             get
             {
@@ -170,7 +170,7 @@ namespace Appli_KT2.ViewModel
             conexion = new ConexionWS();
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
-            dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearEmpleadoPlantel, json);
+            dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearEmpleadoPlantel, json);
             await Application.Current.MainPage.DisplayAlert("Exito", "Se a guadado la información de manera correcta", "Aceptar");
             await ConsultarEmpleadoPlantel();
             return;

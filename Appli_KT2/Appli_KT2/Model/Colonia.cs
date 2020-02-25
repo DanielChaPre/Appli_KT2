@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-   public  class Colonia : INotifyPropertyChanged
+   public  class Colonias : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

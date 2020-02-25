@@ -20,7 +20,7 @@ namespace Appli_KT2.ViewModel
         private Alumno alumno;
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
-        private Colonia _selectedColonia;
+        private Colonias _selectedColonia;
         private Estados entEstados;
         MetodoHTTP metodosHTTP;
         private bool isrun;
@@ -108,7 +108,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public Colonia SelectedColonia
+        public Colonias SelectedColonia
         {
             get
             {
@@ -183,7 +183,7 @@ namespace Appli_KT2.ViewModel
             conexion = new ConexionWS();
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
-            dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearAlumno, json);
+            dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearAlumno, json);
             await ConsultarAlumno();
             return;
         }
@@ -254,8 +254,19 @@ namespace Appli_KT2.ViewModel
                         Telefono1 = Telefono1,
                         FOLIOSUREDSU1 = FOLIOSUREDSU1,
                         FolioSUREMS1 = FolioSUREMS1,
-                        IdColonia = IdColonia,
-                        IdMunicipio = IdMunicipio,
+                        Municipios = new Municipios()
+                        {
+                            IdEstado = _selectedMunicipio.IdEstado,
+                            IdMunicipio = _selectedMunicipio.IdMunicipio,
+                            NombreMunicipio = _selectedMunicipio.NombreMunicipio
+                        },
+                        Colonias = new Colonias()
+                        {
+                            Cp = _selectedColonia.Cp,
+                            IdColonia = _selectedColonia.IdColonia,
+                            IdMunicipio = _selectedColonia.IdMunicipio,
+                            NombreColonia = _selectedColonia.NombreColonia,
+                        },
                         IdPais = IdPais,
                         ClavePlantelESEC1 = ClavePlantelESEC1,
                         IdPlantelEMS = IdPlantelEMS,
@@ -339,9 +350,9 @@ namespace Appli_KT2.ViewModel
                     Telefono1 = entalumno.Telefono1;
                     FOLIOSUREDSU1 = entalumno.FOLIOSUREDSU1;
                     FolioSUREMS1 = entalumno.FolioSUREMS1;
-                    IdColonia = entalumno.IdColonia;
-                    IdMunicipio = entalumno.IdMunicipio;
                     IdPais = entalumno.IdPais;
+                    _selectedColonia = entalumno.Colonias;
+                    _selectedMunicipio = entalumno.Municipios;
                     ClavePlantelESEC1 = entalumno.ClavePlantelESEC1;
                     IdPlantelEMS = entalumno.IdPlantelEMS;
                     await ConsultarPlantelEMS(entalumno.IdPlantelEMS);
@@ -358,8 +369,6 @@ namespace Appli_KT2.ViewModel
                 else
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
-                    App.Current.Properties["cveUsuario"] = 0;
-                    App.Current.Properties["idAlumno"] = 0;
                     IsRun = false;
                     IsVisible = true;
                     IsAcciones = false;
@@ -371,8 +380,6 @@ namespace Appli_KT2.ViewModel
             else
             {
                 await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
-                App.Current.Properties["cveUsuario"] = 0;
-                App.Current.Properties["idAlumno"] = 0;
                 IsRun = false;
                 IsVisible = true;
                 IsAcciones = false;
@@ -419,6 +426,13 @@ namespace Appli_KT2.ViewModel
                     break;
             }
         }
+
+        private void SeleccionarColonias(int idColonias)
+        {
+           
+
+        }
+
         #endregion
     }
 

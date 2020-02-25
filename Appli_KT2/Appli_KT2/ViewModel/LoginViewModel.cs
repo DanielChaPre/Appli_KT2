@@ -633,10 +633,11 @@ namespace Appli_KT2.ViewModel
                             App.Current.Properties["usuarioFacebook"] = facebookProfile.Id;
                             if (await ValidarUsuarioFacebook(facebookProfile.Id))
                             {
-                                await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                                Application.Current.MainPage = new NavigationPage(new MainPage());
                             }
                             else
                             {
+                                //Application.Current.MainPage = new NavigationPage(new MainPage());
                                 await Application.Current.MainPage.Navigation.PushModalAsync(new RelacionarUsuarioRedSocialPage());
                             }
                             break;
@@ -725,7 +726,7 @@ namespace Appli_KT2.ViewModel
                 Token = token;
                 if (await ValidarUsuarioGoogle(googleUser.Id))
                 {
-                    await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {
@@ -813,10 +814,12 @@ namespace Appli_KT2.ViewModel
                     {
                         var tipo = result[0];
                         var cveUsuario = result[1];
-                        var nombre = result[2];
-                        var apePaterno = result[3];
+                        var idAlumno = result[2];
+                        var nombre = result[3];
+                        var apePaterno = result[4];
                         App.Current.Properties["tipo_usuario"] = tipo;
                         App.Current.Properties["cveUsuario"] = cveUsuario;
+                        App.Current.Properties["idAlumno"] = idAlumno;
                         App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
                         return true;
                     }
@@ -831,7 +834,7 @@ namespace Appli_KT2.ViewModel
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

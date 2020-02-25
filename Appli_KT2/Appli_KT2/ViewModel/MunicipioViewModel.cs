@@ -83,6 +83,8 @@ namespace Appli_KT2.ViewModel
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var listaMunicipios = JsonConvert.DeserializeObject<List<Municipios>>(content);
+                    lstMunicipios = new List<Municipios>();
+                    ListMunicipios = null;
                     for (int i = 0; i < listaMunicipios.Count; i++)
                     {
                         var entMunicipios = new Municipios()

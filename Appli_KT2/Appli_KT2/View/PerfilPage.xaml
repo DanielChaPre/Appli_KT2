@@ -221,6 +221,7 @@
                         x:Name="framePreguntaPadre"
                         >
                         <StackLayout>
+                            
                             <StackLayout
                                 x:Name="lytPadre"
                                 >
@@ -245,7 +246,26 @@
                                         x:Name="btnNo"
                                     />
                                 </StackLayout>
+                            </StackLayout>
+                            <StackLayout
+                                x:Name="lytCurpHijo"
+                                >
+                                <Label 
+                                    FontSize="Subtitle"
+                                    TextColor="Gray"
+                                    Text="CURP del Hijo"/>
 
+                                <Entry
+                                    Placeholder="Ingrese la curp de su hijo"
+                                    Text="{Binding CurpHijo, Mode=TwoWay}"
+                                     FontSize="Small"
+                                     x:Name="txtCurpHijoPadre"/>
+                                <Button
+                                        BackgroundColor="Navy"
+                                         Text="Comprobar"
+                                        TextColor="White"
+                                        x:Name="btnBuscarCurp"
+                                    />
                             </StackLayout>
                         </StackLayout>
                     </Frame>
@@ -261,6 +281,7 @@
                                 />
                             <StackLayout
                                 IsVisible="{Binding IsVisible}"
+                                x:Name="formularioPadreFamilia"
                                 >
                                <Label
                             FontSize="Subtitle"
@@ -270,7 +291,8 @@
                                 <Entry
                             Placeholder="Ingrese su Nombre(s)" 
                             Text="{Binding Nombre, Mode=TwoWay}"
-                            FontSize="Small"/>
+                            FontSize="Small"
+                                    x:Name="txtNombrePadre"/>
 
                                 <Label 
                             FontSize="Subtitle"
@@ -280,7 +302,8 @@
                                 <Entry 
                             Placeholder="Ingrese su apellido paterno"
                                 Text="{Binding Apellido_Paterno, Mode=TwoWay}"
-                            FontSize="Small"/>
+                            FontSize="Small"
+                                     x:Name="txtApePatPadre"/>
 
                                 <Label 
                             FontSize="Subtitle"
@@ -290,7 +313,8 @@
                                 <Entry 
                             Placeholder="Ingrese su apellido materno"
                                 Text="{Binding Apellido_Materno ,Mode=TwoWay}"
-                            FontSize="Small"/>
+                            FontSize="Small"
+                                     x:Name="txtApeMatPadre"/>
 
                                 <Label 
                             FontSize="Subtitle"
@@ -300,17 +324,10 @@
                                 <Entry
                                 Placeholder="Ingrese su número de telefono"
                                 Text="{Binding Numero_Telefono, Mode=TwoWay}"
-                                FontSize="Small"/>
+                                FontSize="Small"
+                                     x:Name="txtNumTelPadre"/>
 
-                                <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="CURP del Hijo"/>
-
-                                <Entry
-                                Placeholder="Ingrese la curp de su hijo"
-                                Text="{Binding CurpHijo, Mode=TwoWay}"
-                                 FontSize="Small"/>
+                              
                             </StackLayout>
                         </StackLayout>
                       

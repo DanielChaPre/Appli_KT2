@@ -23,7 +23,7 @@ namespace Appli_KT2.ViewModel
         private Entpersona objeto;
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
-        private Colonia _selectedColonia;
+        private Colonias _selectedColonia;
         private Estados entEstados;
         MetodoHTTP metodosHTTP;
         private bool nuevo_registro;
@@ -55,7 +55,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public Colonia SelectedColonia
+        public Colonias SelectedColonia
         {
             get
             {
@@ -122,7 +122,7 @@ namespace Appli_KT2.ViewModel
             conexion = new ConexionWS();
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
-            dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearPerfil,json);
+            dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearPerfil,json);
             await ConsultarUsuarioGeneral();
             return;
         }

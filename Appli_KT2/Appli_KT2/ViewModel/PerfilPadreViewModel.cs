@@ -24,7 +24,7 @@ namespace Appli_KT2.ViewModel
         private RootObjectPadreFamilia rootObject;
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
-        private Colonia _selectedColonia;
+        private Colonias _selectedColonia;
         MetodoHTTP metodosHTTP;
         private bool isrun;
         private bool isvisible;
@@ -112,7 +112,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public Colonia SelectedColonia
+        public Colonias SelectedColonia
         {
             get
             {
@@ -168,7 +168,7 @@ namespace Appli_KT2.ViewModel
             conexion = new ConexionWS();
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
-            dynamic respuesta = metodosHTTP.Post(conexion.URL + conexion.CrearPadreFamilia, json);
+            dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearPadreFamilia, json);
             await ConsultarPadreFamilia();
             return;
         }
@@ -215,7 +215,7 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-                BuscarAlumnoCurp();
+                //BuscarAlumnoCurp();
                 rootObject = new RootObjectPadreFamilia()
                 {
                     padreFamilia = new PadreFamilia()
@@ -307,6 +307,7 @@ namespace Appli_KT2.ViewModel
                             Alias_Red = padreFamilia.Persona.Usuario.Alias_Red
                         }
                     };
+                    App.Current.Properties["idAlumnoPadre"] = padreFamilia.IdAlumno;
                     App.Current.Properties["cveUsuario"] = persona.Usuario.Cve_Usuario;
                     App.Current.Properties["cvePersona"] = persona.Cve_Persona;
                     App.Current.Properties["nombreUsuario"] = persona.Nombre + " " + persona.Apellido_Paterno;
@@ -343,13 +344,13 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public async void BuscarAlumnoCurp()
+        public async Task<int> BuscarAlumnoCurp(string curphijo)
         {
             try
             {
                 _client = new HttpClient();
                 conexion = new ConexionWS();
-                var url = conexion.URL + "" + conexion.BuscarAlumnoCurp + CurpHijo;
+                var url = conexion.URL + "" + conexion.BuscarAlumnoCurp + curphijo;
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
@@ -357,12 +358,14 @@ namespace Appli_KT2.ViewModel
                     var content = await response.Content.ReadAsStringAsync();
                     var idAlumno = JsonConvert.DeserializeObject<int>(content);
                     App.Current.Properties["idAlumnoPadre"] = idAlumno;
+                    return idAlumno;
                 }
+                else
+                    return 0;
             }
             catch (Exception ex)
             {
-
-                throw;
+                return 0;
             }
         }
 

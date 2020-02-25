@@ -102,7 +102,12 @@ namespace Appli_KT2.ViewModel
             }
             else
             {
-                if (this.contrasenia.Length <= 8)
+                if (this.contrasenia.Length < 8)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Aceptar");
+                    return;
+                }
+                else
                 {
                     RegistrarPerfil();
                 }
@@ -233,6 +238,8 @@ namespace Appli_KT2.ViewModel
                 if (result)
                 {
                     App.Current.Properties["tipo_usuario"] = 1;
+                    App.Current.Properties["usuario"] = this.usuario;
+                    App.Current.Properties["contrasena"] = this.contrasenia;
                     await Application.Current.MainPage.DisplayAlert("Error", "El usuario se guardo de manera correcta en la tabla", "Aceptar");
                     Application.Current.MainPage = new NavigationPage(new MainPage());
                 }

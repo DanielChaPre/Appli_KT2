@@ -137,7 +137,7 @@ namespace Appli_KT2.View
                 ShareDialogClass share = new ShareDialogClass();
                 await share.ShareUri("WWW.HolaMundo.com", "Compartir link de descarga de Appli-KT");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }

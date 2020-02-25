@@ -28,7 +28,7 @@ namespace Appli_KT2.Model
         private string FolioSUREMS;
         private string Password;
         private int SeguirEstudiando;
-        private int idColonia;
+        private Colonias Colonia;
         private int idPlantelEMS;
         private string ClavePlantelESEC;
         private int idCarreraES1;
@@ -42,7 +42,7 @@ namespace Appli_KT2.Model
         private string PregutaActual;
         private int Finalizo;
         private int TerminosAceptadso;
-        private int idMunicipio;
+        private Municipios Municipio;
         private int idPais;
         private string OtraColonia;
         private string idMunicipioPlantel;
@@ -187,20 +187,20 @@ namespace Appli_KT2.Model
                 SetValue(ref this.idCarreraES3, value);
             }
         }
-        public int IdColonia
+        public Colonias Colonias
         {
-            get { return this.idColonia; }
+            get { return this.Colonia; }
             set
             {
-                SetValue(ref this.idColonia, value);
+                SetValue(ref this.Colonia, value);
             }
         }
-        public int IdMunicipio
+        public Municipios Municipios
         {
-            get { return this.idMunicipio; }
+            get { return this.Municipio; }
             set
             {
-                SetValue(ref this.idMunicipio, value);
+                SetValue(ref this.Municipio, value);
             }
         }
         public string IdMunicipioPlantel

@@ -38,7 +38,7 @@ namespace Appli_KT2.View
                 {
                     cargarAccion.IsVisible = false;
                     await Application.Current.MainPage.DisplayAlert("Exito", "Se relaciono la red social con su cuenta", "Aceptar");
-                    await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {
@@ -52,7 +52,7 @@ namespace Appli_KT2.View
                 {
                     cargarAccion.IsVisible = false;
                     await Application.Current.MainPage.DisplayAlert("Exito", "Se relaciono la red social con su cuenta", "Aceptar");
-                    await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {
@@ -76,7 +76,7 @@ namespace Appli_KT2.View
                 {
                     cargarAccion.IsVisible = false;
                     await Application.Current.MainPage.DisplayAlert("Exito", "Se relaciono la red social con su cuenta", "Aceptar");
-                    await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace Appli_KT2.View
                 {
                     cargarAccion.IsVisible = false;
                     await Application.Current.MainPage.DisplayAlert("Exito", "Se relaciono la red social con su cuenta", "Aceptar");
-                    await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage());
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else
                 {

@@ -8,17 +8,17 @@ using System.Text;
 
 namespace Appli_KT2.ViewModel
 {
-    public class ColoniaViewModel : Colonia
+    public class ColoniaViewModel : Colonias
     {
         private string cp;
-        private List<Colonia> lstColonias = new List<Colonia>();
+        private List<Colonias> lstColonias = new List<Colonias>();
         public ColoniaViewModel(string cp)
         {
             this.cp = cp;
             ObtenerColonias();
         }
 
-        public List<Colonia> ListColonias
+        public List<Colonias> ListColonias
         {
             get;
             set;
@@ -36,10 +36,10 @@ namespace Appli_KT2.ViewModel
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var listaColonia = JsonConvert.DeserializeObject<List<Colonia>>(content);
+                    var listaColonia = JsonConvert.DeserializeObject<List<Colonias>>(content);
                     for (int i = 0; i < listaColonia.Count; i++)
                     {
-                        var entColonia = new Colonia()
+                        var entColonia = new Colonias()
                         {
                             IdColonia = listaColonia[i].IdColonia,
                             Cp = listaColonia[i].Cp,
