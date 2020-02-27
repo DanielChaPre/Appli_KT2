@@ -57,6 +57,8 @@ namespace Appli_KT2.Utils
         private string relacionarGoogleUsuario = "/relacionarGoogleUsuario/";
         private string relacionarFacebookAlumno = "/relacionarFacebookAlumno/";
         private string relacionarGoogleAlumno = "/relacionarGoogleAlumno/";
+        private string buscarImagenesPlantel = "/imagenesplantel/";
+        private string obtenerCarrerasPlantel = "/carrerasplantel/";
         
 
         public string URL
@@ -154,5 +156,7 @@ namespace Appli_KT2.Utils
         public string RelacionarGoogleUsuario { get => relacionarGoogleUsuario; set => relacionarGoogleUsuario = value; }
         public string RelacionarFacebookAlumno { get => relacionarFacebookAlumno; set => relacionarFacebookAlumno = value; }
         public string RelacionarGoogleAlumno { get => relacionarGoogleAlumno; set => relacionarGoogleAlumno = value; }
+        public string BuscarImagenesPlantel { get => buscarImagenesPlantel; set => buscarImagenesPlantel = value; }
+        public string ObtenerCarrerasPlantel { get => obtenerCarrerasPlantel; set => obtenerCarrerasPlantel = value; }
     }
 }

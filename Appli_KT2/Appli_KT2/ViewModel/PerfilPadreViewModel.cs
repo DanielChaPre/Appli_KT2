@@ -48,7 +48,8 @@ namespace Appli_KT2.ViewModel
             get { return this.curphijo; }
             set
             {
-                SetValue(ref this.curphijo, value);
+                curphijo = value;
+                OnPropertyChanged();
             }
         }
 
@@ -57,7 +58,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isrun; }
             set
             {
-                SetValue(ref this.isrun, value);
+                isrun = value;
+                OnPropertyChanged();
             }
         }
 
@@ -66,7 +68,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isvisible; }
             set
             {
-                SetValue(ref this.isvisible, value);
+                isvisible = value;
+                OnPropertyChanged();
             }
         }
 
@@ -75,7 +78,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isinsertar; }
             set
             {
-                SetValue(ref this.isinsertar, value);
+                isinsertar = value;
+                OnPropertyChanged();
             }
         }
 
@@ -84,7 +88,8 @@ namespace Appli_KT2.ViewModel
             get { return this.isacciones; }
             set
             {
-                SetValue(ref this.isacciones, value);
+                isacciones = value;
+                OnPropertyChanged();
             }
         }
 
@@ -93,7 +98,8 @@ namespace Appli_KT2.ViewModel
             get { return this.plantelEMS; }
             set
             {
-                SetValue(ref this.plantelEMS, value);
+                plantelEMS = value;
+                OnPropertyChanged();
             }
         }
 
@@ -220,21 +226,21 @@ namespace Appli_KT2.ViewModel
                 {
                     padreFamilia = new PadreFamilia()
                     {
-                       
-                       CVE_Padre_Familia = Convert.ToInt32(App.Current.Properties["cvePadreFamilia"].ToString()),
+
+                       Cve_Padre_Familia = Convert.ToInt32(App.Current.Properties["cvePadreFamilia"].ToString()),
                        IdAlumno =  (int) App.Current.Properties["idAlumnoPadre"],
-                       Fecha_Registro = Fecha_Registro,
+                       Fecha_Registro = "01/01/0001",
                        Persona = new Persona()
                        {
                            Cve_Persona = Convert.ToInt32(App.Current.Properties["cvePersona"].ToString()),
-                           Nombre = Nombre,
-                           Apellido_Paterno = Apellido_Paterno,
-                           Apellido_Materno = Apellido_Materno,
+                           Nombre = Persona.Nombre,
+                           Apellido_Paterno = Persona.Apellido_Paterno,
+                           Apellido_Materno = Persona.Apellido_Materno,
                            RFC = "N/A",
                            CURP = "N/A",
                            Sexo = "Sin especificar",
                            Fecha_Nacimiento = "01/01/0001",
-                           Numero_Telefono = Numero_Telefono,
+                           Numero_Telefono = Persona.Numero_Telefono,
                            Estado_Civil = 0,
                            Nacionalidad = "N/A",
                            Municipio = "N/A",
@@ -257,7 +263,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -279,7 +284,7 @@ namespace Appli_KT2.ViewModel
                 var padreFamilia = JsonConvert.DeserializeObject<PadreFamilia>(content);
                 if (padreFamilia != null)
                 {
-                    CVE_Padre_Familia = padreFamilia.CVE_Padre_Familia;
+                    Cve_Padre_Familia = padreFamilia.Cve_Padre_Familia;
                     IdAlumno = padreFamilia.IdAlumno;
                     Fecha_Registro = padreFamilia.Fecha_Registro;
                     Persona = new Persona()
@@ -308,9 +313,10 @@ namespace Appli_KT2.ViewModel
                         }
                     };
                     App.Current.Properties["idAlumnoPadre"] = padreFamilia.IdAlumno;
-                    App.Current.Properties["cveUsuario"] = persona.Usuario.Cve_Usuario;
-                    App.Current.Properties["cvePersona"] = persona.Cve_Persona;
-                    App.Current.Properties["nombreUsuario"] = persona.Nombre + " " + persona.Apellido_Paterno;
+                    App.Current.Properties["cveUsuario"] = padreFamilia.Persona.Usuario.Cve_Usuario;
+                    App.Current.Properties["cvePersona"] = padreFamilia.Persona.Cve_Persona;
+                    App.Current.Properties["cvePadreFamilia"] = padreFamilia.Cve_Padre_Familia;
+                    App.Current.Properties["nombreUsuario"] = padreFamilia.Persona.Nombre + " " + padreFamilia.Persona.Apellido_Paterno;
                     IsRun = false;
                     IsVisible = true;
                     IsInsertar = false;
@@ -323,6 +329,7 @@ namespace Appli_KT2.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
+                    App.Current.Properties["cvePadreFamilia"] = 0;
                     IsRun = false;
                     IsVisible = true;
                     IsInsertar = true;
@@ -366,22 +373,6 @@ namespace Appli_KT2.ViewModel
             catch (Exception ex)
             {
                 return 0;
-            }
-        }
-
-        private void SeleccionarSexo(string sexo)
-        {
-            switch (sexo)
-            {
-                case "H":
-                    Sexo = "Hombre";
-                    break;
-                case "M":
-                    Sexo = "Mujer";
-                    break;
-                default:
-                    Sexo = "Indistinto";
-                    break;
             }
         }
         #endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -30,6 +31,7 @@ namespace Appli_KT2.Model
         private string cve_nivel_agrupado;
         private string cve_nivel_estudio;
         private PlantelesES plantelesES;
+        private Xamarin.Forms.ImageSource imagenDecodificada;
 
         public int Cve_detalle_plantel
         {
@@ -196,6 +198,19 @@ namespace Appli_KT2.Model
             set
             {
                 plantelesES = value;
+                OnPropertyChanged();
+            }
+        }
+        [JsonIgnore]
+        public Xamarin.Forms.ImageSource ImagenDecodificada
+        {
+            get
+            {
+                return imagenDecodificada;
+            }
+            set
+            {
+                imagenDecodificada = value;
                 OnPropertyChanged();
             }
         }

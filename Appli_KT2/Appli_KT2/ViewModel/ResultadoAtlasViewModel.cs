@@ -3,6 +3,7 @@ using Appli_KT2.Utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using Xamarin.Forms;
@@ -42,7 +43,7 @@ namespace Appli_KT2.ViewModel
                            Cve_nivel_estudio = listaPlanteles[i].Cve_nivel_estudio,
                            Fechas = listaPlanteles[i].Fechas,
                            Latitud = listaPlanteles[i].Latitud,
-                           Logo_plantel = SeleccionarImagen(listaPlanteles[i].PlantelesES.NombrePlantelES),
+                           Logo_plantel = listaPlanteles[i].Logo_plantel,
                            Longitud = listaPlanteles[i].Longitud,
                            Nivel_estudio = listaPlanteles[i].Nivel_estudio,
                            Requisitos = listaPlanteles[i].Requisitos,
@@ -66,6 +67,10 @@ namespace Appli_KT2.ViewModel
                         };
                         lstPlantelES.Add(entPlanteles);
                     }
+                    for (int i = 0; i < lstPlantelES.Count; i++)
+                    {
+                        lstPlantelES[i].ImagenDecodificada = GetImage(lstPlantelES[i].Logo_plantel);
+                    }
                     this.ListPlantelES = this.lstPlantelES;
                 }
             }
@@ -76,6 +81,18 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        public Xamarin.Forms.ImageSource GetImage(string strEncoded)
+        {
+
+            if (strEncoded.Equals("-"))
+            {
+                return null;
+            }
+            byte[] arrBytImage = Convert.FromBase64String(strEncoded);
+            Xamarin.Forms.ImageSource objImage = null;
+            objImage = ImageSource.FromStream(() => new MemoryStream(arrBytImage));
+            return objImage;
+        }
 
         public string  SeleccionarImagen(string institucion)
         {

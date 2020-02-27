@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.NotificacionesPage"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             BackgroundColor="WhiteSmoke"
+             BackgroundImageSource="pleca_textura.jpg"
              Padding="5,0">
    
     <ContentPage.Content>
@@ -13,8 +13,7 @@
             <ActivityIndicator
                 VerticalOptions="Center"
                 Margin="0,250,0,0"
-                IsRunning="{Binding IsRun}"
-                IsVisible="{Binding IsRun}"
+                Color="White"
                 x:Name="actiCargar"
             />
             <Label
@@ -51,7 +50,8 @@
                                         Grid.Column="0"
                                         Source="{Binding Icon}"
                                         HorizontalOptions="Center"
-                                        WidthRequest="50"/>
+                                        WidthRequest="50"
+                                        x:Name="imgprueba"/>
                                     <Grid 
                                         Padding="0,10"
                                         HorizontalOptions="Start"
@@ -64,12 +64,13 @@
                                         </Grid.RowDefinitions>
                                         <Label 
                                             FontSize="Title"
-                                            x:Name="idLabel" 
+                                            x:Name="lblestatus" 
                                             Grid.Column="0"
                                             Grid.Row="0"
                                             Text="{Binding Titulo}" 
                                             TextColor="Black" 
-                                            VerticalOptions="CenterAndExpand"/>
+                                            VerticalOptions="CenterAndExpand"
+                                           />
                                     </Grid>
                                 </Grid>
                             </Frame>

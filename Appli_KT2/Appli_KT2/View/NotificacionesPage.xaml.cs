@@ -51,12 +51,25 @@ namespace Appli_KT2.View
                         actiCargar.IsVisible = false;
                         return false;
                     }
-                    actiCargar.IsRunning = false;
-                    actiCargar.IsVisible = false;
-                    lblnoti.IsVisible = false;
+                   
                     listViewEjemplo1.IsVisible = true;
                     listViewEjemplo1.ItemsSource = notificacionesViewModel.Lst_Notificaciones;
                     listViewEjemplo1.ItemSelected += OnClickOpcionSeleccionada;
+                    for (int i = 0; i < notificacionesViewModel.Lst_Notificaciones.Count; i++)
+                    {
+                        if (notificacionesViewModel.Lst_Notificaciones[i].Estatus == 0)
+                        {
+                           
+                           // this..TextColor=Color.Gray;
+                        }
+                        else
+                        {
+                           //this.lblestatus.TextColor= Color.Black;
+                        }
+                    }
+                    actiCargar.IsRunning = false;
+                    actiCargar.IsVisible = false;
+                    lblnoti.IsVisible = false;
                     return false;
                 }
                 return true; // True = Repeat again, False = Stop the timer

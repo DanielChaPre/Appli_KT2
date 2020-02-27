@@ -19,7 +19,7 @@ namespace Appli_KT2.View
         PerfilAlumnoViewModel perfilAlumno;
         PerfilEmpleadoPlantelViewModel perfilEmpleadoPlantel;
         PerfilEmpleadoViewModel perfilEmpleado;
-        PerfilPadreViewModel perfilPadre;
+        PerfilPadreViewModel perfilPadre = new PerfilPadreViewModel();
         EstadosViewModel estadosViewModel = new EstadosViewModel();
         MunicipioViewModel municipiosViewModel;
         ColoniaViewModel coloniaViewModel;
@@ -185,8 +185,6 @@ namespace Appli_KT2.View
             lytPadre.IsVisible = false;
             lytCurpHijo.IsVisible = true;
             btnBuscarCurp.Clicked += BuscarCurp;
-
-            perfilPadre = new PerfilPadreViewModel();
         }
 
         private async void BuscarCurp(object sender, EventArgs e)

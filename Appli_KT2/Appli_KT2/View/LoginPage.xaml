@@ -14,7 +14,7 @@
                 Margin="0,150,0,0"
                 VerticalOptions="Center"
                 Orientation="Vertical">
-                <Grid
+           <!--     <Grid
                     Margin="0,0,0,75">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -45,8 +45,30 @@
                         Grid.Row="0"
                         HeightRequest="85"
                         Margin="45,0"/>
-                </Grid>
+                </Grid>-->
 
+                <Button 
+                    BackgroundColor="#4267B2"
+                    CornerRadius="10"
+                    Command="{Binding IniciarFacebookCommand}"
+                    Image="ic_facebook.png"
+                    HeightRequest="60"
+                    Margin="10,5"
+                    Padding="12,0,0,0"
+                    Text="Iniciar sesión con Facebook"
+                    TextColor="White"
+                />
+                <Button 
+                    BackgroundColor="#FFFFFF"
+                    CornerRadius="10"
+                    Command="{Binding IniciarGoogleCommand}"
+                    Image="ic_google.png"
+                    HeightRequest="60"
+                    Margin="10,5"
+                    Padding="12,5,0,5"
+                    Text="Acceder con Google"
+                    TextColor="Black"
+                />
                 <Button 
                     BackgroundColor="#0a225a"
                     CornerRadius="10"

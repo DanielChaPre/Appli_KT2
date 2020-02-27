@@ -8,24 +8,32 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Text="New"  
+            Text="Filtrar"  
             Icon="filter_outline.png"  
             Priority="0"  
-            Order="Primary"
+            Order="Secondary"
             x:Name="icFilter"/>
         
         <ToolbarItem 
-            Text="New"  
+            Text="Compartir"  
             Icon="share.png"  
             Priority="0"  
-            Order="Primary" 
+            Order="Secondary" 
             x:Name="icShare"/>
+
+        <ToolbarItem 
+            Text="Sincronizar"  
+            Icon="share.png"  
+            Priority="0"  
+            Order="Secondary" 
+            x:Name="icSincronizar"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Resultado}"
             >
             <ActivityIndicator
+                Color="White"
                 VerticalOptions="Center"
                 Margin="0,250,0,0"
                 IsRunning="{Binding IsRunning}"
@@ -45,7 +53,8 @@
                              Margin="0,3"
                              HasShadow="true" 
                              BorderColor="Silver"
-                             Padding="0">
+                             Padding="0"
+                                x:Name="framePrueba">
                                 <Grid
                                 Padding="0">
                                     <Grid.ColumnDefinitions>
@@ -53,16 +62,15 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions >
-                                        <RowDefinition Height="150"/>
+                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <StackLayout
                                      Grid.Column="0">
                                         <Image 
-                                        ScaleY="5"
-                                        HeightRequest="200"
-                                        Source="{Binding Logo_plantel}"
-                                        WidthRequest="90"
-                                        VerticalOptions="CenterAndExpand"/>
+                                            ScaleY="5"
+                                            Source="{Binding ImagenDecodificada}"
+                                            VerticalOptions="CenterAndExpand"
+                                            x:Name="imagenPrueba"/>
                                     </StackLayout>
 
                                     <Grid 
@@ -89,8 +97,8 @@
                                         x:Name="lblDireccion" 
                                         Grid.Column="0"
                                         Grid.Row="1"
-                                        Text="{Binding Subsistema}" 
-                                        TextColor="Gray"
+                                        Text="{Binding PlantelesES.Subsistema}" 
+                                        TextColor="Black"
                                         Margin="1"
                                         VerticalOptions="CenterAndExpand"/>
                                         <Label 
@@ -98,9 +106,8 @@
                                         x:Name="lblWeb" 
                                         Grid.Column="0"
                                         Grid.Row="2"
-                                        TextDecorations="Underline"
-                                        Text="{Binding Sostenimiento}" 
-                                        TextColor="Blue"
+                                        Text="{Binding PlantelesES.Sostenimiento}" 
+                                        TextColor="Black"
                                         Margin="1"
                                         VerticalOptions="EndAndExpand"/>
                                     </Grid>

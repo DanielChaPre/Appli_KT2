@@ -89,8 +89,8 @@ namespace Appli_KT2.View
                 await splashImage.ScaleTo(0.8, 1200, Easing.Linear);
                 lblCarga.IsVisible = false;
                 activityIndicator.IsRunning = false;
-                SesionPrueba();
-               // VerificarLogin();
+                //SesionPrueba();
+                VerificarLogin();
                 //VerificarConfiguracionTema();
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }
@@ -107,8 +107,8 @@ namespace Appli_KT2.View
             App.Current.Properties["usuario"] = "danchavez197@gmail.com";
             App.Current.Properties["contrasena"] = "D@niel194";
             App.Current.Properties["idAlumno"] = "0";
-            App.Current.Properties["tipo_usuario"] = 1;
-            App.Current.Properties["nombreUsuario"] = "";
+            App.Current.Properties["tipo_usuario"] = 7;
+            App.Current.Properties["nombreUsuario"] = "Martin Chavez";
             return; 
             /**
             directivo

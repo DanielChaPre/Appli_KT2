@@ -33,6 +33,8 @@ namespace Appli_KT2.View
         {
             historialViewModel = new HistorialViewModel();
             listViewHistorial.BindingContext = historialViewModel;
+            actiCargar.IsRunning = true;
+            actiCargar.IsVisible = true;
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
              {
                  while (historialViewModel.LstHistorial != null || historialViewModel.LstHistorial.Count != 0)

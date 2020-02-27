@@ -290,7 +290,7 @@
 
                                 <Entry
                             Placeholder="Ingrese su Nombre(s)" 
-                            Text="{Binding Nombre, Mode=TwoWay}"
+                            Text="{Binding Persona.Nombre, Mode=TwoWay}"
                             FontSize="Small"
                                     x:Name="txtNombrePadre"/>
 
@@ -301,7 +301,7 @@
 
                                 <Entry 
                             Placeholder="Ingrese su apellido paterno"
-                                Text="{Binding Apellido_Paterno, Mode=TwoWay}"
+                                Text="{Binding Persona.Apellido_Paterno, Mode=TwoWay}"
                             FontSize="Small"
                                      x:Name="txtApePatPadre"/>
 
@@ -312,7 +312,7 @@
 
                                 <Entry 
                             Placeholder="Ingrese su apellido materno"
-                                Text="{Binding Apellido_Materno ,Mode=TwoWay}"
+                                Text="{Binding Persona.Apellido_Materno ,Mode=TwoWay}"
                             FontSize="Small"
                                      x:Name="txtApeMatPadre"/>
 
@@ -323,7 +323,7 @@
 
                                 <Entry
                                 Placeholder="Ingrese su número de telefono"
-                                Text="{Binding Numero_Telefono, Mode=TwoWay}"
+                                Text="{Binding Persona.Numero_Telefono, Mode=TwoWay}"
                                 FontSize="Small"
                                      x:Name="txtNumTelPadre"/>
 

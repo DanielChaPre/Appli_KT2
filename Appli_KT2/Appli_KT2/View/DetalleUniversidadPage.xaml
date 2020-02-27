@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-    
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:local="clr-namespace:Appli_KT2.ViewModel"
              x:Class="Appli_KT2.View.DetalleUniversidadPage"
              xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             Title="Universidad Tecnológi..."
              Padding="5,2">
-    
+
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="New"  
@@ -17,7 +16,7 @@
             Order="Primary" 
             x:Name="icShare"/>
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout 
@@ -70,7 +69,8 @@
                                                     Grid.Column="1"
                                                     Source="{Binding imagen}" 
                                                     VerticalOptions="CenterAndExpand"
-                                                    ScaleY="1.75"/>
+                                                    ScaleY="1.75"
+                                                    x:Name="imgCarruselPlantel"/>
 
                                             </StackLayout>
                                         </DataTemplate>
@@ -82,7 +82,7 @@
                                    Source="ic_arrow_forward.png"
                                    VerticalOptions="CenterAndExpand"/>
                             </Grid>
-                           
+
                             <local:Carouselndicator
                                 IndicatorHeight="12" IndicatorWidth="12" 
                                 UnselectedIndicator="ic_unselected_circle.png" 
@@ -103,7 +103,7 @@
                         </StackLayout>
                     </AbsoluteLayout>
                 </Frame>
-               
+
                 <!--Dirección-->
                 <Label 
                     Margin="0,5,0,0"
@@ -115,14 +115,15 @@
                     VerticalOptions="Center">
                     <StackLayout>
                         <Label 
-                            Text="Blvd. Universidad Tecnológica 225, Universidad Tecnologica, San Carlos la Roncha, 37670 León, Gto."
+                            
                             TextColor="Gray"
+                            x:Name="lblDireccionPlantel"
                             />
-                        <maps:Map x:Name="MyMap"
+                        <maps:Map 
+                            x:Name="MyMap"
                               WidthRequest="320"
                               HeightRequest="200"                  
                               IsShowingUser="true"
-                              
                               MoveToLastRegionOnLayoutChange="false"
                               MapType="Street" />
                     </StackLayout>
@@ -181,30 +182,39 @@
                 </Grid>
                 <!--Carreras de la universidad-->
                 <Label Text="Carreras" HorizontalTextAlignment="Center"/>
-                <Label Text="TSU (Técnico Superior Univesitario)"
-                       Margin="0,5,0,0"
-                       />
                 <Frame
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
                     VerticalOptions="Center">
-                    <StackLayout>
-                        <Button BackgroundColor="Gray" Text="TI área Entornos Virtuales y Negocios Digitales" TextColor="White"/>
-                        <Button BackgroundColor="Gray" Text="TI área Desarrollo de Software Multiplataforma" TextColor="White"/>
-                        <Button BackgroundColor="Gray" Text="TI área Infraestructura de Redes Digitales" TextColor="White"/>
-                    </StackLayout>
-                </Frame>
-                <Label Text="Ingeniería/Licenciatura (Continuidad para egresados de TSU)"/>
-                <Frame
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    BorderColor="Silver"
-                    VerticalOptions="Center">
-                    <StackLayout>
-                        <Button BackgroundColor="Gray" Text="Ingeniería en Tecnologías de la información" TextColor="White"/>
-                        <Button BackgroundColor="Gray" Text="Licenciatura en Gestión del Capital Humano" TextColor="White"/>
-                        <Button BackgroundColor="Gray" Text="Ingeniería en Tecnología Ambiental" TextColor="White"/>
+                    <StackLayout
+                        x:Name="lytCarreras"
+                        >
+                        <ListView 
+                            x:Name="listViewCarreras" 
+                            CachingStrategy="RecycleElement"
+                            HasUnevenRows="True"
+                            ItemsSource="{Binding }"
+                              >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell 
+                                      Height="150" >
+                                        <Frame
+                                             Margin="0,3"
+                                             HasShadow="true" 
+                                             BorderColor="Silver"
+                                             Padding="0"
+                                                x:Name="framePrueba">
+                                            <Label
+                                                Text="{Binding }"
+                                                x:Name="lblCarrera"
+                                                />
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackLayout>
                 </Frame>
                 <!--Costos-->
@@ -333,5 +343,5 @@
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-    
+
 </ContentPage>

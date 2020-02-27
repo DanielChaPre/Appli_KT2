@@ -7,12 +7,12 @@ using System.Text;
 
 namespace Appli_KT2.Model
 {
-    public class PadreFamilia : Persona, INotifyPropertyChanged
+    public class PadreFamilia : INotifyPropertyChanged
     {
-        public int cve_padre_familia;
-        public int idAlumno;
-        public string fecha_registro;
-        public Persona persona;
+        private int cve_padre_familia;
+        private int idAlumno;
+        private string fecha_registro;
+        private Persona persona;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,30 +21,30 @@ namespace Appli_KT2.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public int CVE_Padre_Familia
+        public int Cve_Padre_Familia
         {
-            get { return this.cve_padre_familia; }
+            get { return cve_padre_familia; }
             set
             {
-                this.cve_padre_familia = value;
+                cve_padre_familia = value;
                 OnPropertyChanged();
             }
         }
         public int IdAlumno
         {
-            get { return this.idAlumno; }
+            get { return idAlumno; }
             set
             {
-                this.idAlumno = value;
+                idAlumno = value;
                 OnPropertyChanged();
             }
         }
         public string Fecha_Registro
         {
-            get { return this.fecha_registro; }
+            get { return fecha_registro; }
             set
             {
-                this.fecha_registro = value;
+                fecha_registro = value;
                 OnPropertyChanged();
             }
         }

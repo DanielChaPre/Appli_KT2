@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Web;
+using Xamarin.Forms;
 
 namespace Appli_KT2.Utils
 {
@@ -34,8 +35,14 @@ namespace Appli_KT2.Utils
                 }
 
                 IRestResponse response = client.Execute(request);
-                dynamic datos = JsonConvert.DeserializeObject(response.Content);
-                return datos;
+                if (response.IsSuccessful)
+                {
+                    dynamic datos = JsonConvert.DeserializeObject(response.Content);
+                    Application.Current.MainPage.DisplayAlert("Exito", "Su información se a guardado de manera correcta", "Aceptar");
+                    return datos;
+                }
+
+                return null;
             }
             catch (Exception)
             {

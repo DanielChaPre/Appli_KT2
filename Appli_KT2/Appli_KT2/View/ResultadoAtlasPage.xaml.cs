@@ -24,13 +24,18 @@ namespace Appli_KT2.View
         }
         protected override async void OnAppearing()
         {
+            listViewResultAtlas.IsVisible = false;
+            actiCargarResultado.IsVisible = true;
+            actiCargarResultado.IsRunning = true;
             LlenarMenu();
             await Task.Yield();
         }
 
         public void LlenarMenu()
         {
+
             //EscuelasClass oEjemploListView1Model = new EscuelasClass();
+            
             resultadoAtlasViewModel = new ResultadoAtlasViewModel();
             listViewResultAtlas.ItemsSource = null;
             listViewResultAtlas.BindingContext = resultadoAtlasViewModel;
@@ -54,6 +59,7 @@ namespace Appli_KT2.View
                         FiltrarResultado(resultadoAtlasViewModel.ListPlantelES);
                         //listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.ListPlantelES;
                         listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
+                        
                         return false;
                     }
                     return true;
@@ -115,27 +121,12 @@ namespace Appli_KT2.View
             listViewResultAtlas.ItemsSource = ListaPlanteles;
         }
 
-        //private void FiltrarMunicipio(int )
-        //{
-
-        //}
-
-        //private void FiltrarInstitucion()
-        //{
-
-        //}
-
-        //private void FiltrarCarrera
-        //{
-
-        //}
-
         private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
         {
             listViewResultAtlas.SelectedItem = null;
             if (banderaClick)
             {
-                var item = e.SelectedItem as PlantelesES;
+                var item = e.SelectedItem as DetallePlantel;
                 if ((item != null))
                 {
                     banderaClick = false;
