@@ -41,10 +41,10 @@ namespace Appli_KT2.ViewModel
                     {
                         var entColonia = new Colonias()
                         {
-                            IdColonia = listaColonia[i].IdColonia,
-                            Cp = listaColonia[i].Cp,
+                            idColonia = listaColonia[i].idColonia,
+                            CP = listaColonia[i].CP,
                             NombreColonia = listaColonia[i].NombreColonia,
-                            IdMunicipio = listaColonia[i].IdMunicipio
+                            idMunicipio = listaColonia[i].idMunicipio
                         };
                         lstColonias.Add(entColonia);
                     }

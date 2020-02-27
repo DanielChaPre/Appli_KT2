@@ -772,10 +772,12 @@ namespace Appli_KT2.ViewModel
                     {
                         var tipo = result[0];
                         var cveUsuario = result[1];
-                        var nombre = result[2];
-                        var apePaterno = result[3];
+                        var idAlumno = result[2];
+                        var nombre = result[3];
+                        var apePaterno = result[4];
                         App.Current.Properties["tipo_usuario"] = tipo;
                         App.Current.Properties["cveUsuario"] = cveUsuario;
+                        App.Current.Properties["idAlumno"] = idAlumno;
                         App.Current.Properties["nombreUsuario"] = nombre + " " + apePaterno;
                         return true;
                     }

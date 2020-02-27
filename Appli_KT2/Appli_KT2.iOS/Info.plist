@@ -57,7 +57,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Appli_KT</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.Appli_KT2</string>
+	<string>com.companyname.Appli-KT2</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
@@ -68,5 +68,16 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Google Services</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.409996360266-1pkicefk814i6f8nhkjar2g73ecel7n0</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

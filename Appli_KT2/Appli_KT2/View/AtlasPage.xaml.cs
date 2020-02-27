@@ -145,14 +145,14 @@ namespace Appli_KT2.View
 
         private async void BuscarAtlas(object sender, EventArgs e)
         {
-            if (municipios.IdMunicipio == 0)
+            if (municipios.idMunicipio == 0)
             {
                 App.Current.Properties["municipios"] = 0;
 
             }
             else
             {
-                App.Current.Properties["municipios"] = municipios.IdMunicipio;
+                App.Current.Properties["municipios"] = municipios.idMunicipio;
             }
              if (plantelesES.PlantelesES == null)
             {
@@ -189,7 +189,7 @@ namespace Appli_KT2.View
                 {
                     while (municipiosViewModel.ListMunicipios.Count != 0)
                     {
-                        var municipio = from a in municipiosViewModel.ListMunicipios where a.IdEstado == 11 select a;
+                        var municipio = from a in municipiosViewModel.ListMunicipios where a.idEstado == 11 select a;
                         pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
                         pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
 
@@ -305,7 +305,7 @@ namespace Appli_KT2.View
             }
             else
             {
-                var municipio = from a in municipios where a.IdEstado == 11 select a;
+                var municipio = from a in municipios where a.idEstado == 11 select a;
                 pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
                 return;
             }
@@ -313,7 +313,7 @@ namespace Appli_KT2.View
 
         public void FiltrarPlanteles(List<DetallePlantel> plantelesEs)
         {
-            if (municipios.IdEstado == 0)
+            if (municipios.idEstado == 0)
             {
                 pPlantelesES.ItemsSource = plantelesEs;
                 return;
@@ -321,7 +321,7 @@ namespace Appli_KT2.View
             else
             {
                 //var alumnosC = lstMunicipios.Where(a => a.IdEstado == 43);
-                var planteles = from a in plantelesEs where a.PlantelesES.Municipio == municipios.IdMunicipio select a;
+                var planteles = from a in plantelesEs where a.PlantelesES.Municipio == municipios.idMunicipio select a;
                 pPlantelesES.ItemsSource = planteles.Cast<DetallePlantel>().ToList();
                 return;
             }

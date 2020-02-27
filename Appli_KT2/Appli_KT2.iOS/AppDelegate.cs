@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Appli_KT2.Utils;
 using Foundation;
-//using Plugin.GoogleClient;
+using Plugin.GoogleClient;
 using UIKit;
 using Xamarin.Forms;
 
@@ -25,32 +25,34 @@ namespace Appli_KT2.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-           // GoogleClientManager.Initialize();
+            GoogleClientManager.Initialize();
             Xamarin.FormsMaps.Init();
             LoadApplication(new App());
             //FacebookClientManager.Initialize(app, options);
             return base.FinishedLaunching(app, options);
         }
 
-     /*    public override void OnActivated(UIApplication uiApplication)
-         {
-             base.OnActivated(uiApplication);
-             FacebookClientManager.OnActivated();
-         }
-
-         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
-         {
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
             base.OpenUrl(app, url, options);
-           // return GoogleClientManager.OnOpenUrl(app, url, options);
-            return FacebookClientManager.OpenUrl(app, url, options);
-         }
+            return GoogleClientManager.OnOpenUrl(app, url, options);
+           // return FacebookClientManager.OpenUrl(app, url, options);
+        }
 
-         public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
-         {
-             // Convert iOS NSUrl to C#/netxf/BCL System.Uri
+        /*    public override void OnActivated(UIApplication uiApplication)
+            {
+                base.OnActivated(uiApplication);
+                FacebookClientManager.OnActivated();
+            }
 
-             return FacebookClientManager.OpenUrl(application, url, sourceApplication, annotation);
 
-         }*/
+
+            public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+            {
+                // Convert iOS NSUrl to C#/netxf/BCL System.Uri
+
+                return FacebookClientManager.OpenUrl(application, url, sourceApplication, annotation);
+
+            }*/
     }
 }

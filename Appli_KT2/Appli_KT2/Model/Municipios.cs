@@ -14,19 +14,19 @@ namespace Appli_KT2.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        private int idMunicipio;
+        private int idmunicipio;
         private string nombreMunicipio;
-        private int idEstado;
+        private int idestado;
 
-        public int IdEstado
+        public int idEstado
         {
             get
             {
-                return idEstado;
+                return idestado;
             }
             set
             {
-                idEstado = value;
+                idestado = value;
                 OnPropertyChanged();
             }
         }
@@ -42,15 +42,15 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public int IdMunicipio
+        public int idMunicipio
         {
             get
             {
-                return idMunicipio;
+                return idmunicipio;
             }
             set
             {
-                idMunicipio = value;
+                idmunicipio = value;
                 OnPropertyChanged();
             }
         }
