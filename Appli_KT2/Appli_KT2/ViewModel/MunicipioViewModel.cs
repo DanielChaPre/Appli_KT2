@@ -44,9 +44,9 @@ namespace Appli_KT2.ViewModel
                     {
                         var entMunicipios = new Municipios()
                         {
-                            IdMunicipio = listaMunicipios[i].IdMunicipio,
+                            idMunicipio = listaMunicipios[i].idMunicipio,
                             NombreMunicipio = listaMunicipios[i].NombreMunicipio,
-                            IdEstado = listaMunicipios[i].IdEstado
+                            idEstado = listaMunicipios[i].idEstado
                         };
                         lstMunicipios.Add(entMunicipios);
                        
@@ -89,9 +89,9 @@ namespace Appli_KT2.ViewModel
                     {
                         var entMunicipios = new Municipios()
                         {
-                            IdMunicipio = listaMunicipios[i].IdMunicipio,
+                            idMunicipio = listaMunicipios[i].idMunicipio,
                             NombreMunicipio = listaMunicipios[i].NombreMunicipio,
-                            IdEstado = listaMunicipios[i].IdEstado
+                            idEstado = listaMunicipios[i].idEstado
                         };
                         lstMunicipios.Add(entMunicipios);
                     }

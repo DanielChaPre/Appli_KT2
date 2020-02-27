@@ -146,7 +146,7 @@ namespace Appli_KT2.View
         private void AsignarDireccion()
         {
             var municipio = perfilAlumno.SelectedMunicipio;
-            var CP = perfilAlumno.SelectedColonia.Cp;
+            var CP = perfilAlumno.SelectedColonia.CP;
             var colonia = perfilAlumno.SelectedColonia;
 
            // pMunicipio.SelectedIndex = municipio.IdMunicipio;
@@ -308,7 +308,7 @@ namespace Appli_KT2.View
                     var index = 0;
                     foreach (var item in estadosViewModel.ListEstados)
                     {
-                        if (item.IdEstado == perfilAlumno.SelectedMunicipio.IdEstado)
+                        if (item.IdEstado == perfilAlumno.SelectedMunicipio.idEstado)
                         {
                             break;
                         }
@@ -342,12 +342,12 @@ namespace Appli_KT2.View
                         {
                             if (idEstado == 0)
                             {
-                                var municipio = from a in municipiosViewModel.ListMunicipios where a.IdEstado == 11 select a;
+                                var municipio = from a in municipiosViewModel.ListMunicipios where a.idEstado == 11 select a;
                                 // var indexItem = perfilAlumno.SelectedMunicipio.IdMunicipio;
                                 var index = 0;
                                 foreach (var item in municipio)
                                 {
-                                    if (item.IdMunicipio == perfilAlumno.SelectedMunicipio.IdMunicipio)
+                                    if (item.idMunicipio == perfilAlumno.SelectedMunicipio.idMunicipio)
                                     {
                                         break;
                                     }
@@ -364,7 +364,7 @@ namespace Appli_KT2.View
                             }
                             else
                             {
-                                var municipio = from a in municipiosViewModel.ListMunicipios where a.IdEstado == idEstado select a;
+                                var municipio = from a in municipiosViewModel.ListMunicipios where a.idEstado == idEstado select a;
                                 pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
                                 pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
                                 return false;

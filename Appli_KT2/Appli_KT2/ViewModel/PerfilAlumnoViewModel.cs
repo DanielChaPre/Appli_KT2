@@ -256,15 +256,15 @@ namespace Appli_KT2.ViewModel
                         FolioSUREMS1 = FolioSUREMS1,
                         Municipios = new Municipios()
                         {
-                            IdEstado = _selectedMunicipio.IdEstado,
-                            IdMunicipio = _selectedMunicipio.IdMunicipio,
+                            idEstado = _selectedMunicipio.idEstado,
+                            idMunicipio = _selectedMunicipio.idMunicipio,
                             NombreMunicipio = _selectedMunicipio.NombreMunicipio
                         },
                         Colonias = new Colonias()
                         {
-                            Cp = _selectedColonia.Cp,
-                            IdColonia = _selectedColonia.IdColonia,
-                            IdMunicipio = _selectedColonia.IdMunicipio,
+                            CP = _selectedColonia.CP,
+                            idColonia = _selectedColonia.idColonia,
+                            idMunicipio = _selectedColonia.idMunicipio,
                             NombreColonia = _selectedColonia.NombreColonia,
                         },
                         IdPais = IdPais,
