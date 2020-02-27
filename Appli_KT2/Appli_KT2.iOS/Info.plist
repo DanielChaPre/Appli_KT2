@@ -22,6 +22,17 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>857924591318663</string>
+	<key>FacebookDisplayName</key>
+	<string>Appli_KT</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -44,7 +55,7 @@
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Can we use your location at all times?</string>
 	<key>CFBundleDisplayName</key>
-	<string>Appli_KT2</string>
+	<string>Appli_KT</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.companyname.Appli_KT2</string>
 	<key>CFBundleVersion</key>
