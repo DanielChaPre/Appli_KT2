@@ -63,6 +63,7 @@ namespace Appli_KT2.View
 
              this.BackgroundColor = Color.FromHex("#110791");
           //  this.BackgroundColor = Color.White;
+
             this.Content = sub;
 		}
         
