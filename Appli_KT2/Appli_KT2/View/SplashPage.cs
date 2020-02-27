@@ -96,7 +96,7 @@ namespace Appli_KT2.View
             }
             catch (Exception ex)
             {
-                
+                Console.WriteLine(ex.Message);
             }
         }
 
