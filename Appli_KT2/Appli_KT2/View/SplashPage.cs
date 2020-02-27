@@ -61,6 +61,7 @@ namespace Appli_KT2.View
             sub.Children.Add(activityIndicator);
             sub.Children.Add(lblCarga);
 
+
              this.BackgroundColor = Color.FromHex("#110791");
           //  this.BackgroundColor = Color.White;
 
