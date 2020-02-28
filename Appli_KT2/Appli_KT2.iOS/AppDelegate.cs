@@ -25,9 +25,9 @@ namespace Appli_KT2.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            GoogleClientManager.Initialize();
             Xamarin.FormsMaps.Init();
             LoadApplication(new App());
+            GoogleClientManager.Initialize("IzaSyAdfu7B4WIVn3G2HpfM8OE3PtXilqlWTaI");
             //FacebookClientManager.Initialize(app, options);
             return base.FinishedLaunching(app, options);
         }
