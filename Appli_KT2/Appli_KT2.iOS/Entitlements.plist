@@ -4,9 +4,14 @@
 <dict>
 	<key>com.apple.developer.networking.wifi-info</key>
 	<true/>
+<<<<<<< HEAD
+	<key>com.apple.developer.networking.networkextension</key>
+	<array/>
+=======
 	<key>keychain-access-groups</key>
 	<array>
 		<string>com.companyname.Appli-KT2</string>
 	</array>
+>>>>>>> a2d8f6408288f2c3560da4e3dfec03dac242936b
 </dict>
 </plist>

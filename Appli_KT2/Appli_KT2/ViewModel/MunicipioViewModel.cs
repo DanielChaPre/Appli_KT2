@@ -59,7 +59,7 @@ namespace Appli_KT2.ViewModel
 
                 return ;
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
                 return ;
