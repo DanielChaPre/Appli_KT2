@@ -1,11 +1,9 @@
 ﻿using Appli_KT2.Model;
+using Appli_KT2.Utils;
 using Appli_KT2.ViewModel;
+using Plugin.LocalNotifications;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +14,7 @@ namespace Appli_KT2.View
 	{
          private static bool banderaClick;
         private NotificacionesViewModel notificacionesViewModel;
+
         public NotificacionesPage()
         {
             InitializeComponent();
@@ -59,8 +58,9 @@ namespace Appli_KT2.View
                     {
                         if (notificacionesViewModel.Lst_Notificaciones[i].Estatus == 0)
                         {
-                           
-                           // this..TextColor=Color.Gray;
+
+                            // this..TextColor=Color.Gray;
+                            //CrossLocalNotifications.Current.Show("", "");
                         }
                         else
                         {

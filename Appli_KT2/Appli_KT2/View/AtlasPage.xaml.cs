@@ -1,6 +1,7 @@
 ﻿using Appli_KT2.Model;
+using Appli_KT2.Utils;
 using Appli_KT2.ViewModel;
-
+using Plugin.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Appli_KT2.View
         Municipios municipios = new Municipios();
         DetallePlantel plantelesES = new DetallePlantel();
         CarrerasES carrerasES = new CarrerasES();
+        ConexionInternet conexionInternet = new ConexionInternet();
 
 
         public AtlasPage ()
@@ -30,12 +32,44 @@ namespace Appli_KT2.View
 			InitializeComponent ();
             VerificarUsuario();
             btnBuscar.Clicked += BuscarAtlas;
+           
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            LlenarFiltros();
+            VerificarInternet();
+        }
+
+        private void VerificarInternet()
+        {
+            var status = 1;
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                try
+                {
+                    
+                    if (conexionInternet.VerificarInternet())
+                    {
+                        if (status == 1)
+                        {
+                            LlenarFiltros();
+                            status = 0;
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        status = 1;
+                        Application.Current.MainPage.DisplayAlert("Notificación", "Los filtros no funcionaran por falta de conexión a internet", "Aceptar");
+                    }
+                    return true;
+                }
+                catch (NullReferenceException ex)
+                {
+                    return true;
+                }
+            });
         }
 
         private void IniciarSesion()

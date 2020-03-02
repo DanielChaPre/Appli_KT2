@@ -3196,6 +3196,7 @@ namespace Appli_KT2.Droid
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_id = global::Appli_KT2.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_inflatedId = global::Appli_KT2.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::BottomNavigationBar.Resource.Styleable.ViewStubCompat_android_layout = global::Appli_KT2.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::Plugin.LocalNotifications.Resource.Drawable.plugin_lc_smallicon = global::Appli_KT2.Droid.Resource.Drawable.plugin_lc_smallicon;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::Appli_KT2.Droid.Resource.Animation.slide_in_right;
 			global::Xamarin.Auth.Resource.Animation.slide_out_left = global::Appli_KT2.Droid.Resource.Animation.slide_out_left;
 			global::Xamarin.Auth.Resource.Attribute.alpha = global::Appli_KT2.Droid.Resource.Attribute.alpha;
@@ -11683,26 +11684,26 @@ namespace Appli_KT2.Droid
 			// aapt resource value: 0x7f02005a
 			public const int avd_hide_password = 2130837594;
 			
-			// aapt resource value: 0x7f0201bc
-			public const int avd_hide_password_1 = 2130837948;
-			
 			// aapt resource value: 0x7f0201bd
-			public const int avd_hide_password_2 = 2130837949;
+			public const int avd_hide_password_1 = 2130837949;
 			
 			// aapt resource value: 0x7f0201be
-			public const int avd_hide_password_3 = 2130837950;
+			public const int avd_hide_password_2 = 2130837950;
+			
+			// aapt resource value: 0x7f0201bf
+			public const int avd_hide_password_3 = 2130837951;
 			
 			// aapt resource value: 0x7f02005b
 			public const int avd_show_password = 2130837595;
 			
-			// aapt resource value: 0x7f0201bf
-			public const int avd_show_password_1 = 2130837951;
-			
 			// aapt resource value: 0x7f0201c0
-			public const int avd_show_password_2 = 2130837952;
+			public const int avd_show_password_1 = 2130837952;
 			
 			// aapt resource value: 0x7f0201c1
-			public const int avd_show_password_3 = 2130837953;
+			public const int avd_show_password_2 = 2130837953;
+			
+			// aapt resource value: 0x7f0201c2
+			public const int avd_show_password_3 = 2130837954;
 			
 			// aapt resource value: 0x7f02005c
 			public const int bb_bottom_bar_top_shadow = 2130837596;
@@ -12661,11 +12662,11 @@ namespace Appli_KT2.Droid
 			// aapt resource value: 0x7f02019a
 			public const int notification_icon_background = 2130837914;
 			
-			// aapt resource value: 0x7f0201ba
-			public const int notification_template_icon_bg = 2130837946;
-			
 			// aapt resource value: 0x7f0201bb
-			public const int notification_template_icon_low_bg = 2130837947;
+			public const int notification_template_icon_bg = 2130837947;
+			
+			// aapt resource value: 0x7f0201bc
+			public const int notification_template_icon_low_bg = 2130837948;
 			
 			// aapt resource value: 0x7f02019b
 			public const int notification_tile_bg = 2130837915;
@@ -12677,88 +12678,91 @@ namespace Appli_KT2.Droid
 			public const int pleca_textura = 2130837917;
 			
 			// aapt resource value: 0x7f02019e
-			public const int salle_01 = 2130837918;
+			public const int plugin_lc_smallicon = 2130837918;
 			
 			// aapt resource value: 0x7f02019f
-			public const int salle_02 = 2130837919;
+			public const int salle_01 = 2130837919;
 			
 			// aapt resource value: 0x7f0201a0
-			public const int salle_03 = 2130837920;
+			public const int salle_02 = 2130837920;
 			
 			// aapt resource value: 0x7f0201a1
-			public const int salle_04 = 2130837921;
+			public const int salle_03 = 2130837921;
 			
 			// aapt resource value: 0x7f0201a2
-			public const int salle_05 = 2130837922;
+			public const int salle_04 = 2130837922;
 			
 			// aapt resource value: 0x7f0201a3
-			public const int satafe_01 = 2130837923;
+			public const int salle_05 = 2130837923;
 			
 			// aapt resource value: 0x7f0201a4
-			public const int satafe_02 = 2130837924;
+			public const int satafe_01 = 2130837924;
 			
 			// aapt resource value: 0x7f0201a5
-			public const int satafe_03 = 2130837925;
+			public const int satafe_02 = 2130837925;
 			
 			// aapt resource value: 0x7f0201a6
-			public const int satafe_04 = 2130837926;
+			public const int satafe_03 = 2130837926;
 			
 			// aapt resource value: 0x7f0201a7
-			public const int satafe_05 = 2130837927;
+			public const int satafe_04 = 2130837927;
 			
 			// aapt resource value: 0x7f0201a8
-			public const int share = 2130837928;
+			public const int satafe_05 = 2130837928;
 			
 			// aapt resource value: 0x7f0201a9
-			public const int sices = 2130837929;
+			public const int share = 2130837929;
 			
 			// aapt resource value: 0x7f0201aa
-			public const int tooltip_frame_dark = 2130837930;
+			public const int sices = 2130837930;
 			
 			// aapt resource value: 0x7f0201ab
-			public const int tooltip_frame_light = 2130837931;
+			public const int tooltip_frame_dark = 2130837931;
 			
 			// aapt resource value: 0x7f0201ac
-			public const int trash_can_outline = 2130837932;
+			public const int tooltip_frame_light = 2130837932;
 			
 			// aapt resource value: 0x7f0201ad
-			public const int ug = 2130837933;
+			public const int trash_can_outline = 2130837933;
 			
 			// aapt resource value: 0x7f0201ae
-			public const int ug_ = 2130837934;
+			public const int ug = 2130837934;
 			
 			// aapt resource value: 0x7f0201af
-			public const int ug_01 = 2130837935;
+			public const int ug_ = 2130837935;
 			
 			// aapt resource value: 0x7f0201b0
-			public const int ug_02 = 2130837936;
+			public const int ug_01 = 2130837936;
 			
 			// aapt resource value: 0x7f0201b1
-			public const int ug_03 = 2130837937;
+			public const int ug_02 = 2130837937;
 			
 			// aapt resource value: 0x7f0201b2
-			public const int upjr_01 = 2130837938;
+			public const int ug_03 = 2130837938;
 			
 			// aapt resource value: 0x7f0201b3
-			public const int upjr_02 = 2130837939;
+			public const int upjr_01 = 2130837939;
 			
 			// aapt resource value: 0x7f0201b4
-			public const int upjr_03 = 2130837940;
+			public const int upjr_02 = 2130837940;
 			
 			// aapt resource value: 0x7f0201b5
-			public const int utl = 2130837941;
+			public const int upjr_03 = 2130837941;
 			
 			// aapt resource value: 0x7f0201b6
-			public const int utl2 = 2130837942;
+			public const int utl = 2130837942;
 			
 			// aapt resource value: 0x7f0201b7
-			public const int utl3 = 2130837943;
+			public const int utl2 = 2130837943;
 			
 			// aapt resource value: 0x7f0201b8
-			public const int utl4 = 2130837944;
+			public const int utl3 = 2130837944;
 			
 			// aapt resource value: 0x7f0201b9
-			public const int utl_ = 2130837945;
+			public const int utl4 = 2130837945;
+			
+			// aapt resource value: 0x7f0201ba
+			public const int utl_ = 2130837946;
 			
 			static Drawable()
 			{

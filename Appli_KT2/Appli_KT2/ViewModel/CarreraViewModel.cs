@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Appli_KT2.ViewModel
 {
@@ -14,7 +15,7 @@ namespace Appli_KT2.ViewModel
 
         public CarreraViewModel()
         {
-            ObtenerCarreraES();
+            VerificarInternet();
         }
 
         public List<CarrerasES> ListCarreraES
@@ -61,6 +62,38 @@ namespace Appli_KT2.ViewModel
 
                 throw;
             }
+        }
+
+        private void VerificarInternet()
+        {
+            var status = 1;
+            ConexionInternet conexionInternet = new ConexionInternet();
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                try
+                {
+
+                    if (conexionInternet.VerificarInternet())
+                    {
+                        if (status == 1)
+                        {
+                            ObtenerCarreraES();
+                            status = 0;
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        status = 1;
+                        Application.Current.MainPage.DisplayAlert("Notificación", "Los filtros no funcionaran por falta de conexión a internet", "Aceptar");
+                    }
+                    return true;
+                }
+                catch (NullReferenceException ex)
+                {
+                    return true;
+                }
+            });
         }
     }
 }

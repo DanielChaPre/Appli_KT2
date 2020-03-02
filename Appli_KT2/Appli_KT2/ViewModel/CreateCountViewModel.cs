@@ -49,7 +49,7 @@ namespace Appli_KT2.ViewModel
         {
             get
             {
-                return new RelayCommand(CrearCuenta);
+                return new RelayCommand(VerificarInternet);
             }
         }
 
@@ -282,6 +282,38 @@ namespace Appli_KT2.ViewModel
                 return false;
                 throw;
             }
+        }
+
+        private void VerificarInternet()
+        {
+            var status = 1;
+            ConexionInternet conexionInternet = new ConexionInternet();
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                try
+                {
+
+                    if (conexionInternet.VerificarInternet())
+                    {
+                        if (status == 1)
+                        {
+                            CrearCuenta();
+                            status = 0;
+                        }
+                        return true;
+                    }
+                    else
+                    {
+                        status = 1;
+                        Application.Current.MainPage.DisplayAlert("Notificación", "La creación de la cuenta fallara debido a la falta de conexión a internet", "Aceptar");
+                    }
+                    return true;
+                }
+                catch (NullReferenceException ex)
+                {
+                    return true;
+                }
+            });
         }
         #endregion
     }

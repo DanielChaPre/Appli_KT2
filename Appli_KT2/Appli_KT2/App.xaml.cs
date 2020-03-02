@@ -1,4 +1,6 @@
 ﻿using Appli_KT2.View;
+using Appli_KT2.ViewModel;
+using Plugin.LocalNotifications;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -10,7 +12,7 @@ namespace Appli_KT2
 {
     public partial class App : Xamarin.Forms.Application
     {
-
+        NotificacionesViewModel notificacionesViewModel = new NotificacionesViewModel();
         public static MasterDetailPage MasterD { get; set; }
 
         public App()
@@ -32,6 +34,33 @@ namespace Appli_KT2
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public async void LlenarMenu()
+        {
+          
+            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            {
+                while (notificacionesViewModel.Lst_Notificaciones != null || notificacionesViewModel.Lst_Notificaciones.Count != 0)
+                {
+
+                    if (notificacionesViewModel.Lst_Notificaciones.Count == 0)
+                    {
+                        //await Application.Current.MainPage.DisplayAlert("Aviso", "No se encuentran notificaciones existentes para el usuario", "Aceptar")
+                        return true;
+                    }
+
+                    for (int i = 0; i < notificacionesViewModel.Lst_Notificaciones.Count; i++)
+                    {
+                        if (notificacionesViewModel.Lst_Notificaciones[i].Estatus == 0)
+                        {
+                            CrossLocalNotifications.Current.Show(notificacionesViewModel.Lst_Notificaciones[i].Titulo, notificacionesViewModel.Lst_Notificaciones[i].Texto);
+                        }
+                    }
+                    return true;
+                }
+                return true; // True = Repeat again, False = Stop the timer
+            });
         }
     }
 }

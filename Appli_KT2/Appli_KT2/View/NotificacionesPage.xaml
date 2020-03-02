@@ -9,6 +9,7 @@
     <ContentPage.Content>
         <StackLayout
                BindingContext="{Binding Notificaciones}"
+            x:Name="stackLayout"
             >
             <ActivityIndicator
                 VerticalOptions="Center"
