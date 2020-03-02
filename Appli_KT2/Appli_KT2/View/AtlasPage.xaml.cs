@@ -32,7 +32,6 @@ namespace Appli_KT2.View
 			InitializeComponent ();
             VerificarUsuario();
             btnBuscar.Clicked += BuscarAtlas;
-           
         }
 
         protected override void OnAppearing()

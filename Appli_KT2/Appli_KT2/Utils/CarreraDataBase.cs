@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Appli_KT2.Utils
 {
-    public class ImagenPlantelDataBase
+    public class CarreraDataBase
     {
         static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
@@ -18,7 +18,7 @@ namespace Appli_KT2.Utils
         static SQLiteAsyncConnection Database => lazyInitializer.Value;
         static bool initialized = false;
 
-        public ImagenPlantelDataBase()
+        public CarreraDataBase()
         {
             InitializeAsync().SafeFireAndForget(false);
         }
@@ -27,39 +27,39 @@ namespace Appli_KT2.Utils
         {
             if (!initialized)
             {
-                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(ImagenPlantel).Name))
+                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(CarrerasES).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(ImagenPlantel)).ConfigureAwait(false);
+                    await Database.CreateTablesAsync(CreateFlags.None, typeof(CarrerasES)).ConfigureAwait(false);
                     initialized = true;
                 }
             }
         }
 
-        public Task<List<ImagenPlantel>> GetItemsAsync()
+        public Task<List<CarrerasES>> GetItemsAsync()
         {
-            return Database.Table<ImagenPlantel>().ToListAsync();
+            return Database.Table<CarrerasES>().ToListAsync();
         }
 
-        public Task<List<ImagenPlantel>> GetItemsNotDoneAsync()
+        public Task<List<CarrerasES>> GetItemsPlantelAsync(string idPlantel)
         {
             // SQL queries are also possible
-            return Database.QueryAsync<ImagenPlantel>("SELECT * FROM [ImagenPlantel] WHERE [Done] = 0");
+            return Database.QueryAsync<CarrerasES>("SELECT * FROM [CarrerasES] WHERE [IdPlantelesES] = "+idPlantel+"");
         }
 
-        public Task<List<ImagenPlantel>> DeleteAllAsync()
+        public Task<List<CarrerasES>> DeleteAllAsync()
         {
             // SQL queries are also possible
-            return Database.QueryAsync<ImagenPlantel>("Delete FROM [ImagenPlantel]");
+            return Database.QueryAsync<CarrerasES>("Delete FROM [CarrerasES]");
         }
 
-        public Task<ImagenPlantel> GetItemAsync(int id)
+        public Task<CarrerasES> GetItemAsync(int id)
         {
-            return Database.Table<ImagenPlantel>().Where(i => i.Cve_detalle_plantel == id).FirstOrDefaultAsync();
+            return Database.Table<CarrerasES>().Where(i => i.idCarreraES == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveItemAsync(ImagenPlantel item)
+        public Task<int> SaveItemAsync(CarrerasES item)
         {
-            if (item.Cve_detalle_plantel != 0)
+            if (item.idCarreraES != 0)
             {
                 return Database.UpdateAsync(item);
             }
@@ -69,7 +69,7 @@ namespace Appli_KT2.Utils
             }
         }
 
-        public Task<int> DeleteItemAsync(ImagenPlantel item)
+        public Task<int> DeleteItemAsync(CarrerasES item)
         {
             return Database.DeleteAsync(item);
         }

@@ -15,6 +15,8 @@ namespace Appli_KT2.ViewModel
 
         private List<ImagenPlantel> lstImagenes = new List<ImagenPlantel>();
         private List<CarrerasES> lstCarreraES = new List<CarrerasES>();
+        private ImagenPlantelDataBase imagenDataBase = new ImagenPlantelDataBase();
+
         public DetalleUniversidadViewModel()
         {
 
@@ -124,6 +126,43 @@ namespace Appli_KT2.ViewModel
             }
         }
 
+        public async void ConsultarImagenesPlanteles()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var uri = new Uri(string.Format(conexion.URL + conexion.BuscarImagenesPlanteles));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var listaImagenes = JsonConvert.DeserializeObject<List<ImagenPlantel>>(content);
+                    for (int i = 0; i < listaImagenes.Count; i++)
+                    {
+                        var entImagenes = new ImagenPlantel()
+                        {
+                            Cve_detalle_plantel = listaImagenes[i].Cve_detalle_plantel,
+                            Cve_imagen_plantel = listaImagenes[i].Cve_imagen_plantel,
+                            Descripcion = listaImagenes[i].Descripcion,
+                            Imagen_principal = listaImagenes[i].Imagen_principal,
+                            Ruta = listaImagenes[i].Ruta
+                        };
+                        lstImagenes.Add(entImagenes);
+                    }
+                    for (int i = 0; i < lstImagenes.Count; i++)
+                    {
+                        lstImagenes[i].ImagenDecodificada = GetImage(lstImagenes[i].Ruta);
+                    }
+                    this.ListImagenes = this.lstImagenes;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+        }
+
         public Xamarin.Forms.ImageSource GetImage(string strEncoded)
         {
 
@@ -135,6 +174,22 @@ namespace Appli_KT2.ViewModel
             Xamarin.Forms.ImageSource objImage = null;
             objImage = ImageSource.FromStream(() => new MemoryStream(arrBytImage));
             return objImage;
+        }
+
+        public void SincronizarImagenesPlantel()
+        {
+            if (ListImagenes.Count != 0)
+            {
+                for (int i = 0; i < ListCarreraES.Count; i++)
+                {
+                    imagenDataBase.DeleteAllAsync();
+                    imagenDataBase.SaveItemAsync(ListImagenes[i]);
+                }
+            }
+            else
+            {
+                SincronizarImagenesPlantel();
+            }
         }
     }
 }

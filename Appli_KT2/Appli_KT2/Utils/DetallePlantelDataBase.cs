@@ -43,7 +43,13 @@ namespace Appli_KT2.Utils
         public Task<List<DetallePlantel>> GetItemsNotDoneAsync()
         {
             // SQL queries are also possible
-            return Database.QueryAsync<DetallePlantel>("SELECT * FROM [Notificaciones] WHERE [Done] = 0");
+            return Database.QueryAsync<DetallePlantel>("SELECT * FROM [DetallePlantel] WHERE [Done] = 0");
+        }
+
+        public Task<List<DetallePlantel>> DeleteAllAsync()
+        {
+            // SQL queries are also possible
+            return Database.QueryAsync<DetallePlantel>("Delete FROM [DetallePlantel]");
         }
 
         public Task<DetallePlantel> GetItemAsync(int id)

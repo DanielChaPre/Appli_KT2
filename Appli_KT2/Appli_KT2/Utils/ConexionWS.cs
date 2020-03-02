@@ -59,7 +59,8 @@ namespace Appli_KT2.Utils
         private string relacionarGoogleAlumno = "/relacionarGoogleAlumno/";
         private string buscarImagenesPlantel = "/imagenesplantel/";
         private string obtenerCarrerasPlantel = "/carrerasplantel/";
-        
+        private string buscarImagenesPlanteles = "/imagenesplanteles";
+
 
         public string URL
         {
@@ -158,5 +159,6 @@ namespace Appli_KT2.Utils
         public string RelacionarGoogleAlumno { get => relacionarGoogleAlumno; set => relacionarGoogleAlumno = value; }
         public string BuscarImagenesPlantel { get => buscarImagenesPlantel; set => buscarImagenesPlantel = value; }
         public string ObtenerCarrerasPlantel { get => obtenerCarrerasPlantel; set => obtenerCarrerasPlantel = value; }
+        public string BuscarImagenesPlanteles { get => buscarImagenesPlanteles; set => buscarImagenesPlanteles = value; }
     }
 }

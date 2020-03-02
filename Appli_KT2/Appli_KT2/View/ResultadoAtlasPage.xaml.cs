@@ -17,25 +17,37 @@ namespace Appli_KT2.View
         private static bool banderaClick;
         ResultadoAtlasViewModel resultadoAtlasViewModel;
         List<DetallePlantel> ListaPlanteles = new List<DetallePlantel>();
+        PlantelESViewModel plantelESViewModel = new PlantelESViewModel();
+        CarreraViewModel carreraViewModel = new CarreraViewModel();
+        DetalleUniversidadViewModel detalleUniversidadViewModel = new DetalleUniversidadViewModel();
+        MunicipioViewModel municipioViewModel = new MunicipioViewModel();
+
         public ResultadoAtlasPage ()
 		{
 			InitializeComponent ();
             banderaClick = true;
         }
+
         protected override async void OnAppearing()
         {
             listViewResultAtlas.IsVisible = false;
             actiCargarResultado.IsVisible = true;
             actiCargarResultado.IsRunning = true;
+            icSincronizar.Clicked += Sincronizar;
             LlenarMenu();
             await Task.Yield();
         }
 
+        private void Sincronizar(object sender, EventArgs e)
+        {
+            detalleUniversidadViewModel.SincronizarImagenesPlantel();
+            carreraViewModel.SincronizarCarrera();
+            plantelESViewModel.SincronizarDetallePlantel();
+            municipioViewModel.
+        }
+
         public void LlenarMenu()
         {
-
-            //EscuelasClass oEjemploListView1Model = new EscuelasClass();
-            
             resultadoAtlasViewModel = new ResultadoAtlasViewModel();
             listViewResultAtlas.ItemsSource = null;
             listViewResultAtlas.BindingContext = resultadoAtlasViewModel;

@@ -12,6 +12,7 @@ namespace Appli_KT2.ViewModel
     {
         private string plantelES;
         private List<DetallePlantel> lstPlantelES = new List<DetallePlantel>();
+        private DetallePlantelDataBase detallePlantelDataBase = new DetallePlantelDataBase();
 
         public PlantelESViewModel()
         {
@@ -78,6 +79,21 @@ namespace Appli_KT2.ViewModel
             {
 
                 throw;
+            }
+        }
+
+        public void SincronizarDetallePlantel()
+        {
+            if (ListPlantelES.Count != 0)
+            {
+                for (int i = 0; i < ListPlantelES.Count; i++)
+                {
+                    detallePlantelDataBase.SaveItemAsync(ListPlantelES[i]);
+                }
+            }
+            else
+            {
+                SincronizarDetallePlantel();
             }
         }
     }

@@ -17,6 +17,7 @@ namespace Appli_KT2.ViewModel
 
         private string estado;
         private List<Municipios> lstMunicipios = new List<Municipios>();
+        private MunicipioDataBase municipioDataBase = new MunicipioDataBase();
         public MunicipioViewModel()
         {
             ObtenerTodosMunicipios();
@@ -104,6 +105,22 @@ namespace Appli_KT2.ViewModel
             catch (Exception ex)
             {
                 throw;
+            }
+        }
+
+        public void SincronizarDetallePlantel()
+        {
+            if (ListMunicipios.Count != 0)
+            {
+                for (int i = 0; i < ListMunicipios.Count; i++)
+                {
+                    municipioDataBase.DeleteAllAsync();
+                    municipioDataBase.SaveItemAsync(ListMunicipios[i]);
+                }
+            }
+            else
+            {
+                SincronizarDetallePlantel();
             }
         }
 

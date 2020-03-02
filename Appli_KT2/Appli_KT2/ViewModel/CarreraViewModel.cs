@@ -12,6 +12,7 @@ namespace Appli_KT2.ViewModel
     public class CarreraViewModel : CarrerasES
     {
         private List<CarrerasES> lstCarreraES = new List<CarrerasES>();
+        private CarreraDataBase carreraDataBase = new CarreraDataBase();
 
         public CarreraViewModel()
         {
@@ -94,6 +95,22 @@ namespace Appli_KT2.ViewModel
                     return true;
                 }
             });
+        }
+
+        public void SincronizarCarrera()
+        {
+            if (ListCarreraES.Count != 0)
+            {
+                for (int i = 0; i < ListCarreraES.Count; i++)
+                {
+                    carreraDataBase.DeleteAllAsync();
+                    carreraDataBase.SaveItemAsync(ListCarreraES[i]);
+                }
+            }
+            else
+            {
+                SincronizarCarrera();
+            }
         }
     }
 }
