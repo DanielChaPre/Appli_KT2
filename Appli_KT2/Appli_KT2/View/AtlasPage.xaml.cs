@@ -289,28 +289,6 @@ namespace Appli_KT2.View
             });
         }
 
-        //private void LlenarEstados()
-        //{
-        //    Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-        //    {
-        //        while (estadosViewModel.ListEstados.Count != 0)
-        //        {
-        //            pEstado.ItemsSource = estadosViewModel.ListEstados;
-        //            pEstado.ItemDisplayBinding = new Binding("NombreEstado");
-        //            pEstado.SelectedIndexChanged += SeleccionarEstado;
-                   
-        //            return false;
-        //        }
-        //        return true; // True = Repeat again, False = Stop the timer
-        //    });
-        //}
-
-        //private void SeleccionarEstado(object sender, EventArgs e)
-        //{
-        //    estados = (Estados)pEstado.SelectedItem;
-        //    LlenarMunicipios();
-        //}
-
         private void SeleccionarMunicipio(object sender, EventArgs e)
         {
             municipios = (Municipios)pMunicipio.SelectedItem;
