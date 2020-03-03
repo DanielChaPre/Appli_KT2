@@ -14,12 +14,12 @@ namespace Appli_KT2.Utils
 
             if (status.Equals("Conectado"))
             {
-                Application.Current.MainPage.DisplayAlert("Alerta", "Se cuenta con conexión a internet", "Aceptar");
+                //Application.Current.MainPage.DisplayAlert("Alerta", "Se cuenta con conexión a internet", "Aceptar");
                 return true;
             }
             else
             {
-                Application.Current.MainPage.DisplayAlert("Alerta", "No se cuenta con conexión a internet, esto puede provocar que la aplicación no funcione de la manera adecuada", "Aceptar");
+                //Application.Current.MainPage.DisplayAlert("Alerta", "No se cuenta con conexión a internet, esto puede provocar que la aplicación no funcione de la manera adecuada", "Aceptar");
                 return false;
             }
         }

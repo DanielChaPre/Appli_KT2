@@ -108,7 +108,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public void SincronizarDetallePlantel()
+        public void SincronizarMunicipio()
         {
             if (ListMunicipios.Count != 0)
             {
@@ -120,7 +120,7 @@ namespace Appli_KT2.ViewModel
             }
             else
             {
-                SincronizarDetallePlantel();
+                SincronizarMunicipio();
             }
         }
 

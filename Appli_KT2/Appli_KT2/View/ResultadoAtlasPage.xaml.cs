@@ -43,7 +43,7 @@ namespace Appli_KT2.View
             detalleUniversidadViewModel.SincronizarImagenesPlantel();
             carreraViewModel.SincronizarCarrera();
             plantelESViewModel.SincronizarDetallePlantel();
-            municipioViewModel.
+            municipioViewModel.SincronizarMunicipio();
         }
 
         public void LlenarMenu()

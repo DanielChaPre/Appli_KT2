@@ -70,20 +70,20 @@
 	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
-<dict>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-            <string>409996360266-1pkicefk814i6f8nhkjar2g73ecel7n0.apps.googleusercontent.com</string>
-        </array>
-    </dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>409996360266-1pkicefk814i6f8nhkjar2g73ecel7n0.apps.googleusercontent.com</string>
+			</array>
+		</dict>
 		<dict>
 			<key>CFBundleURLName</key>
 			<string>Google Services</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-	   <string>com.googleusercontent.apps.409996360266-1pkicefk814i6f8nhkjar2g73ecel7n0</string>
+				<string>com.googleusercontent.apps.409996360266-1pkicefk814i6f8nhkjar2g73ecel7n0</string>
 			</array>
 		</dict>
 	</array>

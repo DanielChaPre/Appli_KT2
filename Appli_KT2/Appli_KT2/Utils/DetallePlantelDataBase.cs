@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Appli_KT2.Utils
 {
@@ -25,14 +26,23 @@ namespace Appli_KT2.Utils
 
         async Task InitializeAsync()
         {
-            if (!initialized)
+            try
             {
-                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(DetallePlantel).Name))
+                if (!initialized)
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(DetallePlantel)).ConfigureAwait(false);
-                    initialized = true;
+                    if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(DetallePlantel).Name))
+                    {
+                        await Database.CreateTablesAsync(CreateFlags.None, typeof(PlantelesES)).ConfigureAwait(false);
+                        await Database.CreateTablesAsync(CreateFlags.None, typeof(DetallePlantel)).ConfigureAwait(false);
+                        initialized = true;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+               // await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+            }
+
         }
 
         public Task<List<DetallePlantel>> GetItemsAsync()

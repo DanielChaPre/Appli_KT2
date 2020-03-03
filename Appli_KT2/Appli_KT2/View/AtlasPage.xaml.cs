@@ -25,6 +25,7 @@ namespace Appli_KT2.View
         DetallePlantel plantelesES = new DetallePlantel();
         CarrerasES carrerasES = new CarrerasES();
         ConexionInternet conexionInternet = new ConexionInternet();
+        private bool estatusInternet;
 
 
         public AtlasPage ()
@@ -38,6 +39,12 @@ namespace Appli_KT2.View
         {
             base.OnAppearing();
             VerificarInternet();
+            if (estatusInternet)
+            {
+                Application.Current.MainPage.DisplayAlert("Alerta", "Se cuenta con acceso a internet","Aceptar");
+            }else
+                Application.Current.MainPage.DisplayAlert("Alerta", "Algunas funciones no funcionaran de manera correcta", "Aceptar");
+
         }
 
         private void VerificarInternet()
@@ -54,13 +61,15 @@ namespace Appli_KT2.View
                         {
                             LlenarFiltros();
                             status = 0;
+                            estatusInternet = true;
                         }
                         return true;
                     }
                     else
                     {
                         status = 1;
-                        Application.Current.MainPage.DisplayAlert("Notificación", "Los filtros no funcionaran por falta de conexión a internet", "Aceptar");
+                        estatusInternet = false;
+                      //  
                     }
                     return true;
                 }
