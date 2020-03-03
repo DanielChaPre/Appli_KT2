@@ -29,7 +29,7 @@ namespace Appli_KT2.Utils
             {
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(ImagenPlantel).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(ImagenPlantel)).ConfigureAwait(false);
+                   // await Database.CreateTablesAsync(CreateFlags.None, typeof(ImagenPlantel)).ConfigureAwait(false);
                     initialized = true;
                 }
             }

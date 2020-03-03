@@ -29,7 +29,7 @@ namespace Appli_KT2.Utils
             {
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Municipios).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(Municipios)).ConfigureAwait(false);
+                    //await Database.CreateTablesAsync(CreateFlags.None, typeof(Municipios)).ConfigureAwait(false);
                     initialized = true;
                 }
             }
