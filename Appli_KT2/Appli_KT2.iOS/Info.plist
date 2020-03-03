@@ -64,8 +64,6 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>Appli_KT2</string>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
 	<key>CFBundleURLTypes</key>
