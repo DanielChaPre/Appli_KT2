@@ -35,37 +35,37 @@ namespace Appli_KT2.ViewModel
                     var listaPlanteles = JsonConvert.DeserializeObject<List<DetallePlantel>>(content);
                     for (int i = 0; i < listaPlanteles.Count; i++)
                     {
-                        var entPlanteles = new DetallePlantel()
-                        {
-                           Costos = listaPlanteles[i].Costos,
-                           Cve_detalle_plantel = listaPlanteles[i].Cve_detalle_plantel,
-                           Cve_nivel_agrupado = listaPlanteles[i].Cve_nivel_agrupado,
-                           Cve_nivel_estudio = listaPlanteles[i].Cve_nivel_estudio,
-                           Fechas = listaPlanteles[i].Fechas,
-                           Latitud = listaPlanteles[i].Latitud,
-                           Logo_plantel = listaPlanteles[i].Logo_plantel,
-                           Longitud = listaPlanteles[i].Longitud,
-                           Nivel_estudio = listaPlanteles[i].Nivel_estudio,
-                           Requisitos = listaPlanteles[i].Requisitos,
-                           Reseña = listaPlanteles[i].Reseña,
-                           Ubicacion = listaPlanteles[i].Ubicacion,
-                           Url_vinculacion = listaPlanteles[i].Url_vinculacion,
-                           PlantelesES = new PlantelesES()
-                           {
-                               Activo = listaPlanteles[i].PlantelesES.Activo,
-                               ClaveInstitucion = listaPlanteles[i].PlantelesES.ClaveInstitucion,
-                               ClavePlantel = listaPlanteles[i].PlantelesES.ClavePlantel,
-                               idPlantelES = listaPlanteles[i].PlantelesES.idPlantelES,
-                               Municipio = listaPlanteles[i].PlantelesES.Municipio,
-                               NivelAgrupado = listaPlanteles[i].PlantelesES.NivelAgrupado,
-                               NombreInstitucionES = listaPlanteles[i].PlantelesES.NombreInstitucionES,
-                               NombrePlantelES = listaPlanteles[i].PlantelesES.NombrePlantelES,
-                               OPD = listaPlanteles[i].PlantelesES.OPD,
-                               Sostenimiento = listaPlanteles[i].PlantelesES.Sostenimiento,
-                               Subsistema = listaPlanteles[i].PlantelesES.Subsistema
-                           }
-                        };
-                        lstPlantelES.Add(entPlanteles);
+                        //var entPlanteles = new DetallePlantel()
+                        //{
+                        //   Costos = listaPlanteles[i].Costos,
+                        //   Cve_detalle_plantel = listaPlanteles[i].Cve_detalle_plantel,
+                        //   Cve_nivel_agrupado = listaPlanteles[i].Cve_nivel_agrupado,
+                        //   Cve_nivel_estudio = listaPlanteles[i].Cve_nivel_estudio,
+                        //   Fechas = listaPlanteles[i].Fechas,
+                        //   Latitud = listaPlanteles[i].Latitud,
+                        //   Logo_plantel = listaPlanteles[i].Logo_plantel,
+                        //   Longitud = listaPlanteles[i].Longitud,
+                        //   Nivel_estudio = listaPlanteles[i].Nivel_estudio,
+                        //   Requisitos = listaPlanteles[i].Requisitos,
+                        //   Reseña = listaPlanteles[i].Reseña,
+                        //   Ubicacion = listaPlanteles[i].Ubicacion,
+                        //   Url_vinculacion = listaPlanteles[i].Url_vinculacion,
+                        //   PlantelesES = new PlantelesES()
+                        //   {
+                        //       Activo = listaPlanteles[i].PlantelesES.Activo,
+                        //       ClaveInstitucion = listaPlanteles[i].PlantelesES.ClaveInstitucion,
+                        //       ClavePlantel = listaPlanteles[i].PlantelesES.ClavePlantel,
+                        //       idPlantelES = listaPlanteles[i].PlantelesES.idPlantelES,
+                        //       Municipio = listaPlanteles[i].PlantelesES.Municipio,
+                        //       NivelAgrupado = listaPlanteles[i].PlantelesES.NivelAgrupado,
+                        //       NombreInstitucionES = listaPlanteles[i].PlantelesES.NombreInstitucionES,
+                        //       NombrePlantelES = listaPlanteles[i].PlantelesES.NombrePlantelES,
+                        //       OPD = listaPlanteles[i].PlantelesES.OPD,
+                        //       Sostenimiento = listaPlanteles[i].PlantelesES.Sostenimiento,
+                        //       Subsistema = listaPlanteles[i].PlantelesES.Subsistema
+                        //   }
+                        //};
+                        //lstPlantelES.Add(entPlanteles);
                     }
                     for (int i = 0; i < lstPlantelES.Count; i++)
                     {

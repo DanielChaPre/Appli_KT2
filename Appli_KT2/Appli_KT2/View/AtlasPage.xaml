@@ -38,21 +38,31 @@
                 <StackLayout
                     VerticalOptions="CenterAndExpand"
                     >
-
-                 <!--   <Label
+                    <Label
                         FontSize="Subtitle"
-                        Text="Estado"
+                        Text="Buscar carrera"
+                        TextColor="White"
+                    />
+
+                    <Entry
+                        FontSize="Body"
+                        TextColor="Black"
+                        x:Name="txtCarrera"
+                    />
+
+                    <Label
+                        FontSize="Subtitle"
+                        Text="Carrera"
                         TextColor="White"
                     />
                     <Picker
                         BackgroundColor="White"
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
-                        x:Name="pEstado"
-                        Title="           "
-                        
-                    />-->
-                   
+                        x:Name="pCarreras"
+                        Title="           --Seleccione Carrera--"
+                    />
+
                     <Label
                         Text="Municipio"
                         TextColor="White"
@@ -77,18 +87,7 @@
                         Title="           --Seleccione Plantel--"
                     />
                     
-                    <Label
-                        FontSize="Subtitle"
-                        Text="Carrera"
-                        TextColor="White"
-                    />
-                    <Picker
-                        BackgroundColor="White"
-                        Margin="0,0,0,25"
-                        TextColor="#1b213c"
-                        x:Name="pCarreras"
-                        Title="           --Seleccione Carrera--"
-                    />
+                    
                     
                     <Button
                         BackgroundColor="#fd8204"

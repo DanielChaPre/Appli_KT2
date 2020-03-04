@@ -67,7 +67,7 @@ namespace Appli_KT2.View
                     if (detalleUniversidadViewModel == null)
                     {
                         detalleUniversidadViewModel = new DetalleUniversidadViewModel();
-                        detalleUniversidadViewModel.ConsultarImagenesPlanteles(EntDetallePlantel.PlantelesES.idPlantelES);
+                        //detalleUniversidadViewModel.ConsultarImagenesPlanteles(EntDetallePlantel.PlantelesES.idPlantelES);
                     }
                     while (detalleUniversidadViewModel.ListImagenes != null)
                     {
@@ -111,7 +111,7 @@ namespace Appli_KT2.View
                 {
                     if (detalleUniversidadViewModel.ListCarreraES == null)
                     {
-                        detalleUniversidadViewModel.ObtenerCarreraES(EntDetallePlantel.PlantelesES.idPlantelES);
+                        //detalleUniversidadViewModel.ObtenerCarreraES(EntDetallePlantel.PlantelesES.idPlantelES);
                     }
                     while (detalleUniversidadViewModel.ListImagenes != null)
                     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -28,6 +29,7 @@ namespace Appli_KT2.Model
         private string _oPD;
         private string _nivelAgrupado;
 
+        [PrimaryKey]
         public int idPlantelES
         {
             get

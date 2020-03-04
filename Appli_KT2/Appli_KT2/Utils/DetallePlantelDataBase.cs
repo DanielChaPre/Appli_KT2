@@ -17,6 +17,7 @@ namespace Appli_KT2.Utils
         });
 
         static SQLiteAsyncConnection Database => lazyInitializer.Value;
+        SQLiteConnection db;
         static bool initialized = false;
 
         public DetallePlantelDataBase()
@@ -32,15 +33,19 @@ namespace Appli_KT2.Utils
                 {
                     if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(DetallePlantel).Name))
                     {
-                       // await Database.CreateTablesAsync(CreateFlags.None, typeof(PlantelesES)).ConfigureAwait(false);
-                       // await Database.CreateTablesAsync(CreateFlags.None, typeof(DetallePlantel)).ConfigureAwait(false);
+                        db = new SQLiteConnection(Database.DatabasePath);
+                        db.CreateTable<PlantelesES>();
+                        db.CreateTable<DetallePlantel>();
+
+                        //await Database.CreateTablesAsync(CreateFlags.None, typeof(PlantelesES)).ConfigureAwait(false);
+                        //await Database.CreateTablesAsync(CreateFlags.None, typeof(DetallePlantel)).ConfigureAwait(false);
                         initialized = true;
                     }
                 }
             }
             catch (Exception ex)
             {
-               // await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
             }
 
         }

@@ -35,6 +35,7 @@ namespace Appli_KT2.Utils
         private string consultarAlumno = "/alumno/";
         private string consultarNotificaciones = "/notificacion/";
         private string eliminarNotificaciones = "/notificacion/";
+        private string obtenerDetallePlanteles = "/detallePlantel";
         private string obtenerPlanteles = "/planteles";
         private string obtenerPlantelEMS = "/buscarplantelEMS/";
         private string obtenerCarreras = "/carreras";
@@ -160,5 +161,6 @@ namespace Appli_KT2.Utils
         public string BuscarImagenesPlantel { get => buscarImagenesPlantel; set => buscarImagenesPlantel = value; }
         public string ObtenerCarrerasPlantel { get => obtenerCarrerasPlantel; set => obtenerCarrerasPlantel = value; }
         public string BuscarImagenesPlanteles { get => buscarImagenesPlanteles; set => buscarImagenesPlanteles = value; }
+        public string ObtenerDetallePlanteles { get => obtenerDetallePlanteles; set => obtenerDetallePlanteles = value; }
     }
 }

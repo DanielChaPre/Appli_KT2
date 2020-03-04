@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,9 +31,10 @@ namespace Appli_KT2.Model
         private string nivel_estudio;
         private string cve_nivel_agrupado;
         private string cve_nivel_estudio;
-        private PlantelesES plantelesES;
+        private int idplantelesES;
         private Xamarin.Forms.ImageSource imagenDecodificada;
 
+        [PrimaryKey]
         public int Cve_detalle_plantel
         {
             get
@@ -168,6 +170,7 @@ namespace Appli_KT2.Model
         public string Cve_nivel_agrupado
         {
             get
+
             {
                 return cve_nivel_agrupado;
             }
@@ -177,6 +180,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        
         public string Cve_nivel_estudio
         {
             get
@@ -189,18 +193,21 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public PlantelesES PlantelesES
+      //  [ForeignKey(typeof(PlantelesES))]
+        
+        public int idPlantelesES
         {
             get
             {
-                return plantelesES;
+                return idplantelesES;
             }
             set
             {
-                plantelesES = value;
+                idplantelesES = value;
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         public Xamarin.Forms.ImageSource ImagenDecodificada
         {
