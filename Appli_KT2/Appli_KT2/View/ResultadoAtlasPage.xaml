@@ -32,6 +32,28 @@
         <StackLayout
             BindingContext="{Binding Resultado}"
             >
+            <Frame
+                BackgroundColor="White"
+                HorizontalOptions="Center"
+                Margin="0,200,0,0"
+                VerticalOptions="Center"
+                x:Name="frameSincronizacion"
+                >
+                <StackLayout>
+                    <Label
+                        FontSize="Title"
+                    Text="Sincronizando datos, espere por favor..."
+                    />
+                    <ActivityIndicator
+                    Color="DarkBlue"
+                    VerticalOptions="Center"
+                    Margin="0,50,0,0"
+                    IsRunning="True"
+                    IsVisible="True"
+                    />  
+                </StackLayout>
+                
+            </Frame>
             <ActivityIndicator
                 Color="White"
                 VerticalOptions="Center"
@@ -48,7 +70,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell 
-                        Height="150" >
+                        Height="200" >
                             <Frame
                              Margin="0,3"
                              HasShadow="true" 
@@ -67,10 +89,11 @@
                                     <StackLayout
                                      Grid.Column="0">
                                         <Image 
-                                            ScaleY="5"
-                                            Source="{Binding ImagenDecodificada}"
+                                            ScaleY="3"
+                                            Source="{Binding DetallePlantel.ImagenDecodificada}"
                                             VerticalOptions="CenterAndExpand"
-                                            x:Name="imagenPrueba"/>
+                                            x:Name="imagenPrueba"
+                                            WidthRequest="250"/>
                                     </StackLayout>
 
                                     <Grid 
@@ -88,7 +111,7 @@
                                         x:Name="lblOpcion" 
                                         Grid.Column="0"
                                         Grid.Row="0"
-                                        Text="{Binding PlantelesES.NombrePlantelES}" 
+                                        Text="{Binding NombrePlantelES}" 
                                         TextColor="Black" 
                                         Margin="1"
                                         VerticalOptions="StartAndExpand"/>
@@ -97,7 +120,7 @@
                                         x:Name="lblDireccion" 
                                         Grid.Column="0"
                                         Grid.Row="1"
-                                        Text="{Binding PlantelesES.Subsistema}" 
+                                        Text="{Binding Subsistema}" 
                                         TextColor="Black"
                                         Margin="1"
                                         VerticalOptions="CenterAndExpand"/>
@@ -106,7 +129,7 @@
                                         x:Name="lblWeb" 
                                         Grid.Column="0"
                                         Grid.Row="2"
-                                        Text="{Binding PlantelesES.Sostenimiento}" 
+                                        Text="{Binding Sostenimiento}" 
                                         TextColor="Black"
                                         Margin="1"
                                         VerticalOptions="EndAndExpand"/>

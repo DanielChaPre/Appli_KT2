@@ -30,58 +30,80 @@ namespace Appli_KT2.View
 
         protected override async void OnAppearing()
         {
+            frameSincronizacion.IsVisible = false;
             listViewResultAtlas.IsVisible = false;
             actiCargarResultado.IsVisible = true;
             actiCargarResultado.IsRunning = true;
             icSincronizar.Clicked += Sincronizar;
-            LlenarMenu();
+            LlenarLista();
             await Task.Yield();
         }
 
-        private void Sincronizar(object sender, EventArgs e)
+        private async void Sincronizar(object sender, EventArgs e)
         {
-            detalleUniversidadViewModel.SincronizarImagenesPlantel();
-            carreraViewModel.SincronizarCarrera();
-            plantelESViewModel.SincronizarDetallePlantel();
-            municipioViewModel.SincronizarMunicipio();
+            frameSincronizacion.IsVisible = true;
+            await detalleUniversidadViewModel.SincronizarImagenesPlantel();
+            await carreraViewModel.SincronizarCarrera();
+            await plantelESViewModel.SincronizarDetallePlantel();
+            await plantelESViewModel.SincronizarPlantelesES();
+            await municipioViewModel.SincronizarMunicipio();
+            frameSincronizacion.IsVisible = false;
+            LlenarLista();
         }
 
-        public void LlenarMenu()
+        public void LlenarLista()
         {
             resultadoAtlasViewModel = new ResultadoAtlasViewModel();
             listViewResultAtlas.ItemsSource = null;
             listViewResultAtlas.BindingContext = resultadoAtlasViewModel;
-            resultadoAtlasViewModel.ConsultarPlanteles();
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            resultadoAtlasViewModel.ConsultarPlantelesDetalleBD();
+            if (resultadoAtlasViewModel.lstPlanteles.Count == 0)
             {
-                try
-                {
-                    while (resultadoAtlasViewModel.ListPlantelES != null)
-                    {
-                        resultadoAtlasViewModel.ConsultarPlanteles();
-                        if (resultadoAtlasViewModel.ListPlantelES.Count == 0)
-                        {
-                            actiCargarResultado.IsVisible = false;
-                            actiCargarResultado.IsRunning = false;
-                            return false;
-                        }
-                        actiCargarResultado.IsVisible = false;
-                        actiCargarResultado.IsRunning = false;
-                        listViewResultAtlas.IsVisible = true;
-                        FiltrarResultado(resultadoAtlasViewModel.ListPlantelES);
-                        //listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.ListPlantelES;
-                        listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
-                        
-                        return false;
-                    }
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return true;
-                    throw;
-                }
-            });
+                actiCargarResultado.IsVisible = false;
+                actiCargarResultado.IsRunning = false;
+                Application.Current.MainPage.DisplayAlert("Alerta", "No se encontraron universidades, actualize la información", "Aceptar");
+               // Application.Current.MainPage.Navigation.PopAsync();
+            }
+            actiCargarResultado.IsVisible = false;
+            actiCargarResultado.IsRunning = false;
+            listViewResultAtlas.IsVisible = true;
+            FiltrarResultado(resultadoAtlasViewModel.ListPlantelES);
+            Application.Current.MainPage.DisplayAlert("Alerta", "Si llegara a faltar información, no es problema de la aplicación, si no de la base de datos de SUREDSU", "Aceptar");
+            listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.lstPlanteles;
+            listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
+
+            //resultadoAtlasViewModel = new ResultadoAtlasViewModel();
+
+            //Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            //{
+            //    try
+            //    {
+            //        while (resultadoAtlasViewModel.ListPlantelES != null)
+            //        {
+            //            resultadoAtlasViewModel.ConsultarPlanteles();
+            //            if (resultadoAtlasViewModel.ListPlantelES.Count == 0)
+            //            {
+            //                actiCargarResultado.IsVisible = false;
+            //                actiCargarResultado.IsRunning = false;
+            //                return false;
+            //            }
+            //            actiCargarResultado.IsVisible = false;
+            //            actiCargarResultado.IsRunning = false;
+            //            listViewResultAtlas.IsVisible = true;
+            //            FiltrarResultado(resultadoAtlasViewModel.ListPlantelES);
+            //            //listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.ListPlantelES;
+            //            listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
+
+            //            return false;
+            //        }
+            //        return true;
+            //    }
+            //    catch (Exception)
+            //    {
+            //        return true;
+            //        throw;
+            //    }
+            //});
         }
 
         private void FiltrarResultado(List<DetallePlantel> lstDetallePlantel)

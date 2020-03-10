@@ -61,6 +61,9 @@ namespace Appli_KT2.Utils
         private string buscarImagenesPlantel = "/imagenesplantel/";
         private string obtenerCarrerasPlantel = "/carrerasplantel/";
         private string buscarImagenesPlanteles = "/imagenesplanteles";
+        private string obtenerPlantillaUsuario = "/plantilla/";
+        private string obtenerPlantillaAlumno = "/plantillaAlumno/";
+        
 
 
         public string URL
@@ -162,5 +165,7 @@ namespace Appli_KT2.Utils
         public string ObtenerCarrerasPlantel { get => obtenerCarrerasPlantel; set => obtenerCarrerasPlantel = value; }
         public string BuscarImagenesPlanteles { get => buscarImagenesPlanteles; set => buscarImagenesPlanteles = value; }
         public string ObtenerDetallePlanteles { get => obtenerDetallePlanteles; set => obtenerDetallePlanteles = value; }
+        public string ObtenerPlantillaUsuario { get => obtenerPlantillaUsuario; set => obtenerPlantillaUsuario = value; }
+        public string ObtenerPlantillaAlumno { get => obtenerPlantillaAlumno; set => obtenerPlantillaAlumno = value; }
     }
 }

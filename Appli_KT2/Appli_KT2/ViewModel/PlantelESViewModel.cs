@@ -1,10 +1,13 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Appli_KT2.ViewModel
 {
@@ -12,7 +15,8 @@ namespace Appli_KT2.ViewModel
     {
         private string plantelES;
         private List<PlantelesES> lstPlantelES = new List<PlantelesES>();
-        private DetallePlantelDataBase detallePlantelDataBase = new DetallePlantelDataBase();
+        private List<DetallePlantel> lstDetallePlantel = new List<DetallePlantel>();
+        //private DetallePlantelDataBase detallePlantelDataBase = new DetallePlantelDataBase();
 
         public PlantelESViewModel()
         {
@@ -25,7 +29,13 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        public async void ObtenerPlantelES()
+        public List<DetallePlantel> ListDetallePlantel
+        {
+            get;
+            set;
+        }
+
+        public async Task<bool> ObtenerPlantelES()
         {
             try
             {
@@ -41,32 +51,80 @@ namespace Appli_KT2.ViewModel
                     {
                         var entPlanteles = new PlantelesES()
                         {
-                                Activo = listaPlanteles[i].Activo,
-                                //  CarreraES = listaPlanteles[i].CarreraES,
-                                ClaveInstitucion = listaPlanteles[i].ClaveInstitucion,
-                                ClavePlantel = listaPlanteles[i].ClavePlantel,
-                                idPlantelES = listaPlanteles[i].idPlantelES,
-                                Municipio = listaPlanteles[i].Municipio,
-                                NivelAgrupado = listaPlanteles[i].NivelAgrupado,
-                                NombreInstitucionES = listaPlanteles[i].NombreInstitucionES,
-                                NombrePlantelES = listaPlanteles[i].NombrePlantelES,
-                                OPD = listaPlanteles[i].OPD,
-                                Sostenimiento = listaPlanteles[i].Sostenimiento,
-                                Subsistema = listaPlanteles[i].Subsistema
-                            
+                            Activo = listaPlanteles[i].Activo,
+                            //  CarreraES = listaPlanteles[i].CarreraES,
+                            ClaveInstitucion = listaPlanteles[i].ClaveInstitucion,
+                            ClavePlantel = listaPlanteles[i].ClavePlantel,
+                            idPlantelES = listaPlanteles[i].idPlantelES,
+                            Municipio = listaPlanteles[i].Municipio,
+                            NivelAgrupado = listaPlanteles[i].NivelAgrupado,
+                            NombreInstitucionES = listaPlanteles[i].NombreInstitucionES,
+                            NombrePlantelES = listaPlanteles[i].NombrePlantelES,
+                            OPD = listaPlanteles[i].OPD,
+                            Sostenimiento = listaPlanteles[i].Sostenimiento,
+                            Subsistema = listaPlanteles[i].Subsistema
+
                         };
                         lstPlantelES.Add(entPlanteles);
                     }
                     this.ListPlantelES = this.lstPlantelES;
+                    return true;
                 }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
-
-                throw;
+                return false;
+                
             }
         }
 
+        public async Task<bool> ObtenerDetallePlantel()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerDetallePlanteles));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var listaPlanteles = JsonConvert.DeserializeObject<List<DetallePlantel>>(content);
+                    for (int i = 0; i < listaPlanteles.Count; i++)
+                    {
+                        var entPlanteles = new DetallePlantel()
+                        {
+                            Costos = listaPlanteles[i].Costos,
+                            Cve_detalle_plantel = listaPlanteles[i].Cve_detalle_plantel,
+                            Cve_nivel_agrupado = listaPlanteles[i].Cve_nivel_agrupado,
+                            Cve_nivel_estudio = listaPlanteles[i].Cve_nivel_estudio,
+                            Fechas = listaPlanteles[i].Fechas,
+                            Latitud = listaPlanteles[i].Latitud,
+                            Logo_plantel = listaPlanteles[i].Logo_plantel,
+                            Longitud = listaPlanteles[i].Longitud,
+                            Nivel_estudio = listaPlanteles[i].Nivel_estudio,
+                            Requisitos = listaPlanteles[i].Requisitos,
+                            Reseña = listaPlanteles[i].Reseña,
+                            Ubicacion = listaPlanteles[i].Ubicacion,
+                            Url_vinculacion = listaPlanteles[i].Url_vinculacion,
+                            idPlantelesES = listaPlanteles[i].idPlantelesES
+                        };
+                        lstDetallePlantel.Add(entPlanteles);
+                    }
+                    this.ListDetallePlantel = this.lstDetallePlantel;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+
+            }
+        }
         //public async void ObtenerPlantelES()
         //{
         //    try
@@ -124,19 +182,65 @@ namespace Appli_KT2.ViewModel
         //    }
         //}
 
-        public void SincronizarDetallePlantel()
+        public async Task SincronizarDetallePlantel()
         {
-            if (ListPlantelES.Count != 0)
+            try
             {
-                for (int i = 0; i < ListPlantelES.Count; i++)
+                SQLiteConnection conn;
+                conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+                conn.CreateTable<DetallePlantel>();
+                if (await ObtenerDetallePlantel())
                 {
-                   //detallePlantelDataBase.SaveItemAsync(ListPlantelES[i]);s
+                    SincronizarDetallePlantel();
+                }
+                if (ListDetallePlantel.Count != 0)
+                {
+                    for (int i = 0; i < ListDetallePlantel.Count; i++)
+                    {
+                        //detallePlantelDataBase.SaveItemAsync(ListPlantelES[i]);s
+                        conn.InsertOrReplace(ListDetallePlantel[i]);
+                    }
+                }
+                else
+                {
+                    SincronizarDetallePlantel();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                SincronizarDetallePlantel();
             }
+          
+        }
+
+        public async Task SincronizarPlantelesES()
+        {
+            try
+            {
+                SQLiteConnection conn;
+                conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+                conn.CreateTable<PlantelesES>();
+                if (await ObtenerPlantelES())
+                {
+                    SincronizarDetallePlantel();
+                }
+                if (ListPlantelES.Count != 0)
+                {
+                    for (int i = 0; i < ListPlantelES.Count; i++)
+                    {
+                        //detallePlantelDataBase.SaveItemAsync(ListPlantelES[i]);s
+                        conn.InsertOrReplace(ListPlantelES[i]);
+                    }
+                }
+                else
+                {
+                    SincronizarDetallePlantel();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+           
         }
     }
 }

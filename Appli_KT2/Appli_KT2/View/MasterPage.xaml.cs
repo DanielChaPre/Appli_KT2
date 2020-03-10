@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Appli_KT2.Utils;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,14 +12,15 @@ using Xamarin.Forms.Xaml;
 
 namespace Appli_KT2.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MasterPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MasterPage : ContentPage
+    {
         private int tipo_usuario;
-
-		public MasterPage ()
-		{
-			InitializeComponent ();
+        private List<string> listaPlantillas = new List<string>();
+        private List<string> listaMenu = new List<string>();
+        public MasterPage()
+        {
+            InitializeComponent();
             this.tipo_usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString());
             AccesoUsuario();
             lblNombreUsuario.Text = App.Current.Properties["nombreUsuario"].ToString();
@@ -123,9 +127,93 @@ namespace Appli_KT2.View
             }
         }
 
-        private async  void BtnCliente_Click(object sender, EventArgs e)
+        private async void BtnCliente_Click(object sender, EventArgs e)
         {
             await Application.Current.MainPage.DisplayAlert("Prueba", "Prueba del click", "Aceptar");
+        }
+
+        public void CrearMenuAlumno()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void CrearMenuUsuario()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task ObtenerPlantillaUsuario()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var cveUsuario = Convert.ToInt32(App.Current.Properties["cveUsuario"].ToString());
+                if (cveUsuario == 0)
+                {
+                    return;
+                }
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerPlantillaUsuario+cveUsuario));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var listaPlant = JsonConvert.DeserializeObject<List<string>>(content);
+                    //var lstplantillas = new List<string>();
+                    listaPlantillas = null;
+                    listaPlantillas = listaPlant;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task ObtenerPlantillaAlumno()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var idAlumno = Convert.ToInt32(App.Current.Properties["idAlumno"].ToString());
+                if (idAlumno == 0)
+                {
+                    return;
+                }
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerPlantillaAlumno + idAlumno));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var listaPlant = JsonConvert.DeserializeObject<List<string>>(content);
+                    //var lstplantillas = new List<string>();
+                    listaPlantillas = null;
+                    listaPlantillas = listaPlant;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using Appli_KT2.Utils;
 using Appli_KT2.ViewModel;
 using Plugin.Connectivity;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Appli_KT2.View
         CarrerasES carrerasES = new CarrerasES();
         ConexionInternet conexionInternet = new ConexionInternet();
         private bool estatusInternet;
+        public SQLiteConnection conn;
 
 
         public AtlasPage ()
@@ -38,7 +40,8 @@ namespace Appli_KT2.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            txtCarrera.TextChanged += BuscarCarrera;
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            //  txtCarrera.TextChanged += BuscarCarrera;
             VerificarInternet();
             if (estatusInternet)
             {
@@ -228,77 +231,57 @@ namespace Appli_KT2.View
 
         private void LlenarMunicipios()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
-                try
-                {
-                    while (municipiosViewModel.ListMunicipios.Count != 0)
-                    {
-                        var municipio = from a in municipiosViewModel.ListMunicipios where a.idEstado == 11 select a;
-                        pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
-                        pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
+            conn.CreateTable<Municipios>();
+            var details = (from x in conn.Table <Municipios>() select x).ToList();
+            pMunicipio.ItemsSource = details;
+            pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
 
-                        pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
+             pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
+            //Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            //{
+            //    try
+            //    {
+            //        while (municipiosViewModel.ListMunicipios.Count != 0)
+            //        {
+            //            var municipio = from a in municipiosViewModel.ListMunicipios where a.idEstado == 11 select a;
+            //            pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
+            //            pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
 
-                        return false;
-                    }
-                    
-                    return true;
-                }
-                catch (NullReferenceException ex)
-                {
-                    return true;
-                }
-            });
+            //            pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
+
+            //            return false;
+            //        }
+
+            //        return true;
+            //    }
+            //    catch (NullReferenceException ex)
+            //    {
+            //        return true;
+            //    }
+            //});
+
         }
 
         private void LlenarPlantelesES()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(5), () => 
-            {
-                try
-                {
+            conn.CreateTable<PlantelesES>();
+            var details = (from x in conn.Table<PlantelesES>() select x).ToList();
+            pPlantelesES.ItemsSource = details;
+            pPlantelesES.ItemDisplayBinding = new Binding("NombrePlantelES");
 
-                    while (plantelESViewModel.ListPlantelES.Count != 0)
-                    {
-                        FiltrarPlanteles(plantelESViewModel.ListPlantelES);
-                        pPlantelesES.ItemDisplayBinding = new Binding("PlantelesES.NombrePlantelES");
-                        pPlantelesES.SelectedIndexChanged += SeleccionarPlanteles;
-
-                        return false;
-                    }
-
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return true;
-                }
-            });
+            pPlantelesES.SelectedIndexChanged += SeleccionarPlanteles;
+           
         }
 
         private void LlenarCarreras()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
-                try
-                {
-                    while (carreraViewModel.ListCarreraES.Count != 0)
-                    {
-                        FiltrarCarreraras(carreraViewModel.ListCarreraES);
-                        pCarreras.ItemDisplayBinding = new Binding("NombreCarreraES");
-                        pCarreras.SelectedIndexChanged += SeleccionarCarrera;
+            conn.CreateTable<CarrerasES>();
+            var details = (from x in conn.Table<CarrerasES>() select x).ToList();
+            pCarreras.ItemsSource = details;
+            pCarreras.ItemDisplayBinding = new Binding("NombreCarreraES");
 
-                        return false;
-                    }
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    return true;
-                    throw;
-                }
-            });
+            pCarreras.SelectedIndexChanged += SeleccionarCarrera;
+           
         }
 
         private void BuscarCarrera(object sender, TextChangedEventArgs e)
@@ -370,7 +353,7 @@ namespace Appli_KT2.View
             }
         }
 
-        public void FiltrarCarreraras(List<CarrerasES> carreras)
+        public void FiltrarCarreras(List<CarrerasES> carreras)
         {
             if (plantelesES == null || plantelesES.idPlantelES == 0)
             {

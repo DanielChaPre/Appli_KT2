@@ -1,10 +1,12 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Appli_KT2.ViewModel
@@ -25,7 +27,7 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        public async void ObtenerCarreraES()
+        public async Task<bool> ObtenerCarreraES()
         {
             try
             {
@@ -56,12 +58,14 @@ namespace Appli_KT2.ViewModel
                         lstCarreraES.Add(entCarreras);
                     }
                     this.ListCarreraES = this.lstCarreraES;
+                    return true;
                 }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
-
-                throw;
+                return false;
             }
         }
 
@@ -97,14 +101,20 @@ namespace Appli_KT2.ViewModel
             });
         }
 
-        public void SincronizarCarrera()
+        public async Task SincronizarCarrera()
         {
+            SQLiteConnection conn;
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            conn.CreateTable<CarrerasES>();
+            if (!await ObtenerCarreraES())
+            {
+                SincronizarCarrera();
+            }
             if (ListCarreraES.Count != 0)
             {
                 for (int i = 0; i < ListCarreraES.Count; i++)
                 {
-                    carreraDataBase.DeleteAllAsync();
-                    carreraDataBase.SaveItemAsync(ListCarreraES[i]);
+                    conn.InsertOrReplace(ListCarreraES[i]);
                 }
             }
             else

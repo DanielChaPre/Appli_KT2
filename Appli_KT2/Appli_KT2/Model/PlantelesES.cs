@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +29,7 @@ namespace Appli_KT2.Model
         private string _nombreInstitucionES;
         private string _oPD;
         private string _nivelAgrupado;
+        private DetallePlantel detallePlantel;
 
         [PrimaryKey]
         public int idPlantelES
@@ -159,6 +161,21 @@ namespace Appli_KT2.Model
             set
             {
                 _nivelAgrupado = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        public DetallePlantel DetallePlantel
+        {
+            get
+            {
+                return detallePlantel;
+            }
+            set
+            {
+                detallePlantel = value;
                 OnPropertyChanged();
             }
         }

@@ -1,18 +1,20 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Appli_KT2.ViewModel
 {
     public class DetalleUniversidadViewModel : ImagenPlantel
     {
-
+       
         private List<ImagenPlantel> lstImagenes = new List<ImagenPlantel>();
         private List<CarrerasES> lstCarreraES = new List<CarrerasES>();
         private ImagenPlantelDataBase imagenDataBase = new ImagenPlantelDataBase();
@@ -89,7 +91,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public async void ConsultarImagenesPlanteles(int idPlantel)
+        public async Task<bool> ConsultarImagenesPlanteles(int idPlantel)
         {
             try
             {
@@ -113,20 +115,24 @@ namespace Appli_KT2.ViewModel
                         };
                         lstImagenes.Add(entImagenes);
                     }
-                    for (int i = 0; i < lstImagenes.Count; i++)
-                    {
-                        lstImagenes[i].ImagenDecodificada = GetImage(lstImagenes[i].Ruta);
-                    }
+                    //for (int i = 0; i < lstImagenes.Count; i++)
+                    //{
+                    //    lstImagenes[i].ImagenDecodificada = GetImage(lstImagenes[i].Ruta);
+                    //}
                     this.ListImagenes = this.lstImagenes;
+                    return true;
                 }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
+                return false;
             }
         }
 
-        public async void ConsultarImagenesPlanteles()
+        public async Task<bool> ConsultarImagenesPlanteles()
         {
             try
             {
@@ -150,16 +156,20 @@ namespace Appli_KT2.ViewModel
                         };
                         lstImagenes.Add(entImagenes);
                     }
-                    for (int i = 0; i < lstImagenes.Count; i++)
-                    {
-                        lstImagenes[i].ImagenDecodificada = GetImage(lstImagenes[i].Ruta);
-                    }
+                    //for (int i = 0; i < lstImagenes.Count; i++)
+                    //{
+                    //    lstImagenes[i].ImagenDecodificada = GetImage(lstImagenes[i].Ruta);
+                    //}
                     this.ListImagenes = this.lstImagenes;
+                    return true;
                 }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
+                return false;
             }
         }
 
@@ -176,20 +186,39 @@ namespace Appli_KT2.ViewModel
             return objImage;
         }
 
-        public void SincronizarImagenesPlantel()
+        public async Task<bool> SincronizarImagenesPlantel()
         {
-            if (ListImagenes.Count != 0)
+            try
             {
-                for (int i = 0; i < ListCarreraES.Count; i++)
+                SQLiteConnection conn;
+                conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+                conn.CreateTable<ImagenPlantel>();
+                if (!await ConsultarImagenesPlanteles())
                 {
-                    imagenDataBase.DeleteAllAsync();
-                    imagenDataBase.SaveItemAsync(ListImagenes[i]);
+                    SincronizarImagenesPlantel();
+                }
+                if (ListImagenes.Count != 0)
+                {
+                    for (int i = 0; i < ListCarreraES.Count; i++)
+                    {
+                        //imagenDataBase.DeleteAllAsync();
+                        //imagenDataBase.SaveItemAsync(ListImagenes[i]);
+                        conn.InsertOrReplace(ListCarreraES[i]);
+                        
+                    }
+                    return true;
+                }
+                else
+                {
+                    SincronizarImagenesPlantel();
+                    return false;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                SincronizarImagenesPlantel();
+                return false;
             }
+           
         }
     }
 }

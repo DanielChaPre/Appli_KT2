@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -42,6 +43,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+        [PrimaryKey]
         public int idMunicipio
         {
             get

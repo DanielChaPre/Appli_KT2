@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Appli_KT2.Model
 {
@@ -33,6 +34,7 @@ namespace Appli_KT2.Model
         private string cve_nivel_estudio;
         private int idplantelesES;
         private Xamarin.Forms.ImageSource imagenDecodificada;
+        //private PlantelesES plantelesES; 
 
         [PrimaryKey]
         public int Cve_detalle_plantel
@@ -209,7 +211,8 @@ namespace Appli_KT2.Model
         }
 
         [JsonIgnore]
-        public Xamarin.Forms.ImageSource ImagenDecodificada
+        [Ignore]
+        public ImageSource ImagenDecodificada
         {
             get
             {
@@ -221,5 +224,20 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+
+        //[JsonIgnore]
+        //[Ignore]
+        //public PlantelesES PlantelesES
+        //{
+        //    get
+        //    {
+        //        return plantelesES;
+        //    }
+        //    set
+        //    {
+        //        plantelesES = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
     }
 }

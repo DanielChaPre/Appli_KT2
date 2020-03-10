@@ -36,7 +36,7 @@ namespace Appli_KT2
             // Handle when your app resumes
         }
 
-        public async void LlenarMenu()
+        public async void RecibirNotificaciones()
         {
           
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>

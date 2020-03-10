@@ -45,6 +45,7 @@
                     />
 
                     <Entry
+                        BackgroundColor="White"
                         FontSize="Body"
                         TextColor="Black"
                         x:Name="txtCarrera"

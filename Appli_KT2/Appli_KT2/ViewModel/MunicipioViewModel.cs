@@ -1,6 +1,7 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        public async void ObtenerTodosMunicipios()
+        public async Task ObtenerTodosMunicipios()
         {
             try
             {
@@ -66,7 +67,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public async void ObtenerMunicipios()
+        public async Task ObtenerMunicipios()
         {
             try
             {
@@ -108,14 +109,20 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public void SincronizarMunicipio()
+        public async Task SincronizarMunicipio()
         {
-            if (ListMunicipios.Count != 0)
+            SQLiteConnection conn;
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            conn.CreateTable<Municipios>();
+            App.Current.Properties["NombreEstado"] = 11;
+            await ObtenerTodosMunicipios();
+            var municipio = from a in ListMunicipios where a.idEstado == 11 select a;
+            var listaMunicipios  = municipio.Cast<Municipios>().ToList();
+            if (listaMunicipios.Count != 0)
             {
-                for (int i = 0; i < ListMunicipios.Count; i++)
+                for (int i = 0; i < listaMunicipios.Count; i++)
                 {
-                    municipioDataBase.DeleteAllAsync();
-                    municipioDataBase.SaveItemAsync(ListMunicipios[i]);
+                    conn.InsertOrReplace(listaMunicipios[i]);
                 }
             }
             else

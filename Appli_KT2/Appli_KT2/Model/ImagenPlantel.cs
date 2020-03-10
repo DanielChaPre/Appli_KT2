@@ -1,5 +1,6 @@
 ﻿using Appli_KT2.ViewModel;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,6 +26,8 @@ namespace Appli_KT2.Model
                 SetValue(ref this.cve_detalle_plantel, value);
             }
         }
+
+        [PrimaryKey]
         public int Cve_imagen_plantel
         {
             get { return this.cve_imagen_plantel; }
@@ -58,6 +61,7 @@ namespace Appli_KT2.Model
             }
         }
         [JsonIgnore]
+        [Ignore]
         public ImageSource ImagenDecodificada
         {
             get { return this.imagenDecodificada; }

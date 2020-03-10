@@ -97,8 +97,7 @@ namespace Appli_KT2.ViewModel
                 IsVisible = false;
                 _client = new HttpClient();
                 conexion = new ConexionWS();
-               // var cveUsuario = Xamarin.Forms.Application.Current.Properties["cveUsuario"];
-                var cveUsuario = 72;
+                var cveUsuario = Xamarin.Forms.Application.Current.Properties["cveUsuario"];
                 url = conexion.URL + "" + conexion.ConsultarNotificaciones+cveUsuario;
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);
@@ -119,7 +118,7 @@ namespace Appli_KT2.ViewModel
                             Texto = lstNotificaciones[i].Texto,
                             Titulo = lstNotificaciones[i].Titulo,
                             Url = lstNotificaciones[i].Url,
-                            Estatus = lstNotificaciones[i].Estatus,
+                           // Estatus = lstNotificaciones[i].Estatus,
                             Icon = SeleccionarImagen(lstNotificaciones[i].Cve_tipo_notificacion)
                         };
                         lstnotificaciones.Add(entNotificaciones);
