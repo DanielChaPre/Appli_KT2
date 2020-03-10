@@ -50,13 +50,13 @@ namespace Appli_KT2
                         return true;
                     }
 
-                    for (int i = 0; i < notificacionesViewModel.Lst_Notificaciones.Count; i++)
-                    {
-                        if (notificacionesViewModel.Lst_Notificaciones[i].Estatus == 0)
-                        {
-                            CrossLocalNotifications.Current.Show(notificacionesViewModel.Lst_Notificaciones[i].Titulo, notificacionesViewModel.Lst_Notificaciones[i].Texto);
-                        }
-                    }
+                    //for (int i = 0; i < notificacionesViewModel.Lst_Notificaciones.Count; i++)
+                    //{
+                    //    if (notificacionesViewModel.Lst_Notificaciones[i].Estatus == 0)
+                    //    {
+                    //        CrossLocalNotifications.Current.Show(notificacionesViewModel.Lst_Notificaciones[i].Titulo, notificacionesViewModel.Lst_Notificaciones[i].Texto);
+                    //    }
+                    //}
                     return true;
                 }
                 return true; // True = Repeat again, False = Stop the timer

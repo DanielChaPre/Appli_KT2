@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Appli_KT2.Model
 {
@@ -19,7 +20,7 @@ namespace Appli_KT2.Model
         private string cve_categoria;
         private int cve_notificacion;
         private int cve_tipo_notificacion;
-        private int estatus;
+        private string estatus;
         private string fecha_notificacion;
         private string hora_notificacion;
         private string responsable;
@@ -28,6 +29,8 @@ namespace Appli_KT2.Model
         private string url;
         [JsonIgnore]
         private string icon;
+        [JsonIgnore]
+        private Color estatuscolor;
 
         public string Cve_categoria
         {
@@ -65,7 +68,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public int Estatus
+        public string Estatus
         {
             get
             {
@@ -160,6 +163,19 @@ namespace Appli_KT2.Model
             set
             {
                 icon = value;
+                OnPropertyChanged();
+            }
+        }
+        [JsonIgnore]
+        public Color EstatusColor
+        {
+            get
+            {
+                return estatuscolor;
+            }
+            set
+            {
+                estatuscolor = value;
                 OnPropertyChanged();
             }
         }

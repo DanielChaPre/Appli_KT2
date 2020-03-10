@@ -41,7 +41,7 @@ namespace Appli_KT2.View
         {
             base.OnAppearing();
             conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
-            //  txtCarrera.TextChanged += BuscarCarrera;
+            txtCarrera.TextChanged += BuscarCarrera;
             VerificarInternet();
             if (estatusInternet)
             {
@@ -196,7 +196,6 @@ namespace Appli_KT2.View
             if (municipios.idMunicipio == 0)
             {
                 App.Current.Properties["municipios"] = 0;
-
             }
             else
             {
@@ -218,7 +217,7 @@ namespace Appli_KT2.View
             {
                 App.Current.Properties["Carrera"] = carrerasES.IdPlantelesES;
             }
-            await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
+                await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
         }
    
         private void LlenarFiltros()
@@ -232,43 +231,20 @@ namespace Appli_KT2.View
         private void LlenarMunicipios()
         {
             conn.CreateTable<Municipios>();
+            
             var details = (from x in conn.Table <Municipios>() select x).ToList();
             pMunicipio.ItemsSource = details;
             pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
 
              pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
-            //Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            //{
-            //    try
-            //    {
-            //        while (municipiosViewModel.ListMunicipios.Count != 0)
-            //        {
-            //            var municipio = from a in municipiosViewModel.ListMunicipios where a.idEstado == 11 select a;
-            //            pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
-            //            pMunicipio.ItemDisplayBinding = new Binding("NombreMunicipio");
-
-            //            pMunicipio.SelectedIndexChanged += SeleccionarMunicipio;
-
-            //            return false;
-            //        }
-
-            //        return true;
-            //    }
-            //    catch (NullReferenceException ex)
-            //    {
-            //        return true;
-            //    }
-            //});
-
         }
 
         private void LlenarPlantelesES()
         {
-            conn.CreateTable<PlantelesES>();
-            var details = (from x in conn.Table<PlantelesES>() select x).ToList();
-            pPlantelesES.ItemsSource = details;
-            pPlantelesES.ItemDisplayBinding = new Binding("NombrePlantelES");
-
+                conn.CreateTable<PlantelesES>();
+                var details = (from x in conn.Table<PlantelesES>() select x).ToList();
+                pPlantelesES.ItemsSource = details;
+                pPlantelesES.ItemDisplayBinding = new Binding("NombrePlantelES");
             pPlantelesES.SelectedIndexChanged += SeleccionarPlanteles;
            
         }
@@ -293,14 +269,9 @@ namespace Appli_KT2.View
             else
             {
                 var listaInstituciones = new List<string>();
-                for (int i = 0; i < carreraViewModel.ListCarreraES.Count; i++)
-                {
-                    if (carreraViewModel.ListCarreraES[i].NombreCarreraES.Contains(txtCarrera.Text.ToUpper()))
-                    {
-                        listaInstituciones.Add(carreraViewModel.ListCarreraES[i].NombreCarreraES);
-                    }
-                }
-                pCarreras.ItemsSource = listaInstituciones;
+                string carreraBuscar = txtCarrera.Text.Replace(" ", "%");
+                var listaCarreras = conn.Query<CarrerasES>("SELECT DISTINCT * FROM CarrerasES Where NombreCarreraES LIKE ?", "%" + carreraBuscar + "%");
+                pCarreras.ItemsSource = listaCarreras;
             }
         }
 
@@ -318,7 +289,18 @@ namespace Appli_KT2.View
 
         private void SeleccionarCarrera(object sender, EventArgs e)
         {
-            carrerasES = (CarrerasES)pCarreras.SelectedItem;
+            try
+            {
+                carrerasES = (CarrerasES)pCarreras.SelectedItem;
+                var listaPlanteles = conn.Query<PlantelesES>("SELECT p.* FROM CarrerasES AS c" +
+                        " INNER JOIN PlantelesES AS p on p.idPlantelES = c.IdPlantelesES " +
+                        "WHERE c.NombreCarreraES = ?",""+carrerasES.NombreCarreraES+"");
+                pPlantelesES.ItemsSource = listaPlanteles;
+            }
+            catch (Exception ex)
+            {
+            }
+          
             //LlenarCarreras();
         }
 
@@ -339,14 +321,16 @@ namespace Appli_KT2.View
 
         public void FiltrarPlanteles(List<PlantelesES> plantelesEs)
         {
+            conn.CreateTable<PlantelesES>();
+           
             if (municipios.idEstado == 0)
             {
-                pPlantelesES.ItemsSource = plantelesEs;
+                var details = (from x in conn.Table<PlantelesES>() select x).ToList();
+                pPlantelesES.ItemsSource = details;
                 return;
             }
             else
             {
-                //var alumnosC = lstMunicipios.Where(a => a.IdEstado == 43);
                 var planteles = from a in plantelesEs where a.Municipio == municipios.idMunicipio select a;
                 pPlantelesES.ItemsSource = planteles.Cast<DetallePlantel>().ToList();
                 return;

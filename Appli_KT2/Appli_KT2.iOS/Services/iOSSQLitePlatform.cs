@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Appli_KT2.iOS.Services;
 using Appli_KT2.Utils;
 using Foundation;
 using SQLite;
 using UIKit;
-
+[assembly: Xamarin.Forms.Dependency(typeof(iOSSQLitePlatform))]
 namespace Appli_KT2.iOS.Services
 {
     public class iOSSQLitePlatform : ISQLitePlatform

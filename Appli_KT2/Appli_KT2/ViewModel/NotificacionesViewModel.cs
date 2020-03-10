@@ -184,5 +184,33 @@ namespace Appli_KT2.ViewModel
                 throw;
             }
         }
+
+        public Color SeleccionarColorEstatus(string estatus)
+        {
+            try
+            {
+                Color color = Color.Black;
+                switch (estatus)
+                {
+                    case "Leida":
+                        //Oferta educativa
+                        color = Color.Gray;
+                        break;
+                    case "No Leida":
+                        // Suredsu
+                        color = Color.Black;
+                        break;
+                    default:
+                        break;
+                }
+
+                return color;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

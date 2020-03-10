@@ -6,6 +6,8 @@
              x:Class="Appli_KT2.View.DetalleUniversidadPage"
              xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:behaviors="clr-namespace:Appli_KT2.Utils;assembly=Appli_KT2"
+             BackgroundImageSource="pleca_textura.jpg"
              Padding="5,2">
 
     <ContentPage.ToolbarItems>
@@ -67,7 +69,7 @@
 
                                                 <Image 
                                                     Grid.Column="1"
-                                                    Source="{Binding imagen}" 
+                                                    Source="{Binding ImagenDecodificada}" 
                                                     VerticalOptions="CenterAndExpand"
                                                     ScaleY="1.75"
                                                     x:Name="imgCarruselPlantel"/>
@@ -99,6 +101,7 @@
                                 Text="Universidad Tecnológica de León"
                                 TextColor="Black"
                                 VerticalOptions="EndAndExpand"
+                                x:Name="txtNombreEscuela"
                             />
                         </StackLayout>
                     </AbsoluteLayout>
@@ -120,12 +123,14 @@
                             x:Name="lblDireccionPlantel"
                             />
                         <maps:Map 
-                            x:Name="MyMap"
-                              WidthRequest="320"
-                              HeightRequest="200"                  
-                              IsShowingUser="true"
-                              MoveToLastRegionOnLayoutChange="false"
-                              MapType="Street" />
+                            x:Name="MapView" 
+                            HeightRequest="200"
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="FillAndExpand">
+                            <maps:Map.Behaviors>
+                                <behaviors:MapBehavior ></behaviors:MapBehavior>
+                            </maps:Map.Behaviors>
+                        </maps:Map>
                     </StackLayout>
                 </Frame>
                 <!--Fechas-->

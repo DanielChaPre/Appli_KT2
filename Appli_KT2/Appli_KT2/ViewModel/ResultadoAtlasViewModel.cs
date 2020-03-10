@@ -26,6 +26,7 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
+
         public void ConsultarPlantelesDetalleBD()
         {
             try

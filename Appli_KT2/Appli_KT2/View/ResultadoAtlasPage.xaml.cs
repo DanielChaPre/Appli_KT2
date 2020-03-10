@@ -15,8 +15,8 @@ namespace Appli_KT2.View
 	public partial class ResultadoAtlasPage : ContentPage
 	{
         private static bool banderaClick;
-        ResultadoAtlasViewModel resultadoAtlasViewModel;
-        List<DetallePlantel> ListaPlanteles = new List<DetallePlantel>();
+        ResultadoAtlasViewModel resultadoAtlasViewModel = new ResultadoAtlasViewModel();
+        List<PlantelesES> ListaPlanteles = new List<PlantelesES>();
         PlantelESViewModel plantelESViewModel = new PlantelESViewModel();
         CarreraViewModel carreraViewModel = new CarreraViewModel();
         DetalleUniversidadViewModel detalleUniversidadViewModel = new DetalleUniversidadViewModel();
@@ -53,7 +53,6 @@ namespace Appli_KT2.View
 
         public void LlenarLista()
         {
-            resultadoAtlasViewModel = new ResultadoAtlasViewModel();
             listViewResultAtlas.ItemsSource = null;
             listViewResultAtlas.BindingContext = resultadoAtlasViewModel;
             resultadoAtlasViewModel.ConsultarPlantelesDetalleBD();
@@ -67,54 +66,21 @@ namespace Appli_KT2.View
             actiCargarResultado.IsVisible = false;
             actiCargarResultado.IsRunning = false;
             listViewResultAtlas.IsVisible = true;
-            FiltrarResultado(resultadoAtlasViewModel.ListPlantelES);
+            FiltrarResultado(resultadoAtlasViewModel.lstPlanteles);
             Application.Current.MainPage.DisplayAlert("Alerta", "Si llegara a faltar información, no es problema de la aplicación, si no de la base de datos de SUREDSU", "Aceptar");
-            listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.lstPlanteles;
+            //listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.lstPlanteles;
             listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
-
-            //resultadoAtlasViewModel = new ResultadoAtlasViewModel();
-
-            //Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            //{
-            //    try
-            //    {
-            //        while (resultadoAtlasViewModel.ListPlantelES != null)
-            //        {
-            //            resultadoAtlasViewModel.ConsultarPlanteles();
-            //            if (resultadoAtlasViewModel.ListPlantelES.Count == 0)
-            //            {
-            //                actiCargarResultado.IsVisible = false;
-            //                actiCargarResultado.IsRunning = false;
-            //                return false;
-            //            }
-            //            actiCargarResultado.IsVisible = false;
-            //            actiCargarResultado.IsRunning = false;
-            //            listViewResultAtlas.IsVisible = true;
-            //            FiltrarResultado(resultadoAtlasViewModel.ListPlantelES);
-            //            //listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.ListPlantelES;
-            //            listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
-
-            //            return false;
-            //        }
-            //        return true;
-            //    }
-            //    catch (Exception)
-            //    {
-            //        return true;
-            //        throw;
-            //    }
-            //});
         }
 
-        private void FiltrarResultado(List<DetallePlantel> lstDetallePlantel)
+        private void FiltrarResultado(List<PlantelesES> lstDetallePlantel)
         {
             var municipio = Convert.ToInt32(App.Current.Properties["municipios"].ToString());
             var institucion = Convert.ToInt32(App.Current.Properties["institucion"].ToString());
             var carrera = Convert.ToInt32(App.Current.Properties["Carrera"].ToString());
             if (municipio !=  0)
             {
-                //var LstEscuelas = from a in lstDetallePlantel where a.PlantelesES.Municipio == municipio select a;
-                //ListaPlanteles = LstEscuelas.Cast<DetallePlantel>().ToList();
+                var LstEscuelas = from a in lstDetallePlantel where a.Municipio == municipio select a;
+                ListaPlanteles = LstEscuelas.Cast<PlantelesES>().ToList();
                 //pMunicipio.ItemsSource = municipio.Cast<Municipios>().ToList();
             }
 
@@ -122,13 +88,13 @@ namespace Appli_KT2.View
             {
                 if (ListaPlanteles.Count != 0)
                 {
-                   // var LstEscuela2 = from a in ListaPlanteles where a.PlantelesES.idPlantelES == institucion select a;
-                    //ListaPlanteles = LstEscuela2.Cast<DetallePlantel>().ToList();
+                    var LstEscuela2 = from a in ListaPlanteles where a.idPlantelES == institucion select a;
+                    ListaPlanteles = LstEscuela2.Cast<PlantelesES>().ToList();
                 }
                 else
                 {
-                    //var LstEscuela2 = from a in lstDetallePlantel where a.PlantelesES.idPlantelES == institucion select a;
-                    //ListaPlanteles = LstEscuela2.Cast<DetallePlantel>().ToList();
+                    var LstEscuela2 = from a in lstDetallePlantel where a.idPlantelES == institucion select a;
+                    ListaPlanteles = LstEscuela2.Cast<PlantelesES>().ToList();
                 }
             }
 
@@ -136,13 +102,13 @@ namespace Appli_KT2.View
             {
                 if (ListaPlanteles.Count != 0)
                 {
-                    //var LstEscuela2 = from a in ListaPlanteles where a.PlantelesES.idPlantelES == carrera select a;
-                    //ListaPlanteles = LstEscuela2.Cast<DetallePlantel>().ToList();
+                    var LstEscuela2 = from a in ListaPlanteles where a.idPlantelES == carrera select a;
+                    ListaPlanteles = LstEscuela2.Cast<PlantelesES>().ToList();
                 }
                 else
                 {
-                    //var LstEscuela2 = from a in lstDetallePlantel where a.PlantelesES.idPlantelES == carrera select a;
-                    //ListaPlanteles = LstEscuela2.Cast<DetallePlantel>().ToList();
+                    var LstEscuela2 = from a in lstDetallePlantel where a.idPlantelES == carrera select a;
+                    ListaPlanteles = LstEscuela2.Cast<PlantelesES>().ToList();
                 }
             }
 
@@ -160,7 +126,7 @@ namespace Appli_KT2.View
             listViewResultAtlas.SelectedItem = null;
             if (banderaClick)
             {
-                var item = e.SelectedItem as DetallePlantel;
+                var item = e.SelectedItem as PlantelesES;
                 if ((item != null))
                 {
                     banderaClick = false;

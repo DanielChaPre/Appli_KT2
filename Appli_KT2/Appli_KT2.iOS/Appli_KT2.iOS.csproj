@@ -471,4 +471,7 @@
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\no_existe_imagen.png" />
+  </ItemGroup>
 </Project>
