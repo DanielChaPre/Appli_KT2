@@ -43,11 +43,11 @@ namespace Appli_KT2.View
             conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
             txtCarrera.TextChanged += BuscarCarrera;
             VerificarInternet();
-            if (estatusInternet)
-            {
-                Application.Current.MainPage.DisplayAlert("Alerta", "Se cuenta con acceso a internet","Aceptar");
-            }else
-                Application.Current.MainPage.DisplayAlert("Alerta", "Algunas funciones no funcionaran de manera correcta", "Aceptar");
+            //if (estatusInternet)
+            //{
+            //    Application.Current.MainPage.DisplayAlert("Alerta", "Se cuenta con acceso a internet","Aceptar");
+            //}else
+            //    Application.Current.MainPage.DisplayAlert("Alerta", "Algunas funciones no funcionaran de manera correcta", "Aceptar");
 
         }
 
@@ -201,7 +201,7 @@ namespace Appli_KT2.View
             {
                 App.Current.Properties["municipios"] = municipios.idMunicipio;
             }
-             if (plantelesES.idPlantelES == null)
+             if (plantelesES.idPlantelES == 0)
             {
                 App.Current.Properties["institucion"] = 0;
             }
@@ -284,7 +284,7 @@ namespace Appli_KT2.View
         private void SeleccionarPlanteles(object sender, EventArgs e)
         {
             plantelesES = (PlantelesES)pPlantelesES.SelectedItem;
-            LlenarCarreras();
+            //LlenarCarreras();
         }
 
         private void SeleccionarCarrera(object sender, EventArgs e)

@@ -208,7 +208,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell 
-                                      Height="50" >
+                                      Height="100" >
                                         <Frame
                                              Margin="0,3"
                                              HasShadow="true" 
