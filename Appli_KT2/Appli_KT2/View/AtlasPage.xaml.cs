@@ -1,4 +1,4 @@
-﻿using Appli_KT2.Model;
+using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Appli_KT2.ViewModel;
 using Plugin.Connectivity;
@@ -43,12 +43,21 @@ namespace Appli_KT2.View
             conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
             txtCarrera.TextChanged += BuscarCarrera;
             VerificarInternet();
+<<<<<<< HEAD
             //if (estatusInternet)
             //{
             //    Application.Current.MainPage.DisplayAlert("Alerta", "Se cuenta con acceso a internet","Aceptar");
             //}else
             //    Application.Current.MainPage.DisplayAlert("Alerta", "Algunas funciones no funcionaran de manera correcta", "Aceptar");
 
+=======
+            /*if (estatusInternet)
+            {
+                Application.Current.MainPage.DisplayAlert("Alerta", "Se cuenta con acceso a internet","Aceptar");
+            }else
+                Application.Current.MainPage.DisplayAlert("Alerta", "Algunas funciones no funcionaran de manera correcta", "Aceptar");
+                */
+>>>>>>> a24356d... uhjh
         }
 
         
