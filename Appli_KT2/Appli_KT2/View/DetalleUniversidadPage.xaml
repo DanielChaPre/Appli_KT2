@@ -22,7 +22,6 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout 
-                BackgroundColor="WhiteSmoke"
                 >
                 <!--Aqui ira las imagenes y el nombre de la universidad-->
                 <Frame
@@ -110,7 +109,8 @@
                 <!--Dirección-->
                 <Label 
                     Margin="0,5,0,0"
-                    Text="Dirección" HorizontalTextAlignment="Center"/>
+                    Text="Dirección" HorizontalTextAlignment="Center"
+                    TextColor="White"/>
                 <Frame
                     BackgroundColor="White"
                     HasShadow="true" 
@@ -128,7 +128,7 @@
                             HorizontalOptions="FillAndExpand" 
                             VerticalOptions="FillAndExpand">
                             <maps:Map.Behaviors>
-                                <behaviors:MapBehavior ></behaviors:MapBehavior>
+                                <behaviors:MapBehavior ItemsSource="{Binding lstPlanteles}"></behaviors:MapBehavior>
                             </maps:Map.Behaviors>
                         </maps:Map>
                     </StackLayout>
@@ -136,7 +136,8 @@
                 <!--Fechas-->
                 <Label 
                     Text="Fechas"
-                    HorizontalTextAlignment="Center"/>
+                    HorizontalTextAlignment="Center"
+                    TextColor="White"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -186,10 +187,13 @@
                     </Frame>
                 </Grid>
                 <!--Carreras de la universidad-->
-                <Label Text="Carreras" HorizontalTextAlignment="Center"/>
+                <Label Text="Carreras" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
                 <Frame
+                    
                     BackgroundColor="White"
                     HasShadow="true" 
+                    HeightRequest="250"
                     BorderColor="Silver"
                     VerticalOptions="Center">
                     <StackLayout
@@ -199,12 +203,12 @@
                             x:Name="listViewCarreras" 
                             CachingStrategy="RecycleElement"
                             HasUnevenRows="True"
-                            ItemsSource="{Binding }"
+                            
                               >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell 
-                                      Height="150" >
+                                      Height="50" >
                                         <Frame
                                              Margin="0,3"
                                              HasShadow="true" 
@@ -212,8 +216,9 @@
                                              Padding="0"
                                                 x:Name="framePrueba">
                                             <Label
-                                                Text="{Binding }"
+                                                Text="{Binding NombreCarreraES}"
                                                 x:Name="lblCarrera"
+                                                TextColor="Black"
                                                 />
                                         </Frame>
                                     </ViewCell>
@@ -226,6 +231,7 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="Costos"
+                    TextColor="White"
                     />
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -242,6 +248,7 @@
                         HorizontalOptions="Center"
                         Text="Ficha"
                           VerticalOptions="Center"
+                        TextColor="White"
                         />
                     <Label
                         Grid.Column="1"
@@ -249,6 +256,7 @@
                         HorizontalOptions="Center"
                         Text="Cuota cuatrimestre"
                           VerticalOptions="Center"
+                        TextColor="White"
                         />
                     <Frame
                         BackgroundColor="White"
@@ -276,7 +284,7 @@
                     </Frame>
 
                 </Grid>
-                <!--Requisitos-->
+                <!--Requisitos
                 <Label Text="Requisitos o Documentos a presentar"/>
                 <Frame
                     BackgroundColor="White"
@@ -344,7 +352,7 @@
                                   VerticalOptions="StartAndExpand"/>
                         </Grid>
                     </StackLayout>
-                </Frame>
+                </Frame>-->
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
