@@ -320,72 +320,81 @@ namespace Appli_KT2.ViewModel
         }
         public async Task<bool> ConsultarAlumno()
         {
-            IsRun = true;
-            IsVisible = false;
-            ConsultarUsuarioAlumno();
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            var idAlumno = App.Current.Properties["idAlumno"];
-            var url = conexion.URL + "" + conexion.ConsultarAlumno + idAlumno;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var entalumno = JsonConvert.DeserializeObject<Alumno>(content);
-                if (entalumno != null)
+                IsRun = true;
+                IsVisible = false;
+                ConsultarUsuarioAlumno();
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                var idAlumno = App.Current.Properties["idAlumno"];
+                var url = conexion.URL + "" + conexion.ConsultarAlumno + idAlumno;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    IdAlumno = entalumno.IdAlumno;
-                    Nombre1 = entalumno.Nombre1;
-                    ApellidoPaterno1 = entalumno.ApellidoPaterno1;
-                    ApellidoMaterno1 = entalumno.ApellidoMaterno1;
-                    CURP1 = entalumno.CURP1;
-                    Sexo1 = entalumno.Sexo1;
-                    SeleccionarSexo(entalumno.Sexo1);
-                    Calle1 = entalumno.Calle1;
-                    NumeroExterior1 = entalumno.NumeroExterior1;
-                    NumeroInterior1 = entalumno.NumeroInterior1;
-                    Email1 = entalumno.Email1;
-                    Celular1 = entalumno.Celular1;
-                    Telefono1 = entalumno.Telefono1;
-                    FOLIOSUREDSU1 = entalumno.FOLIOSUREDSU1;
-                    FolioSUREMS1 = entalumno.FolioSUREMS1;
-                    IdPais = entalumno.IdPais;
-                    _selectedColonia = entalumno.Colonias;
-                    _selectedMunicipio = entalumno.Municipios;
-                    ClavePlantelESEC1 = entalumno.ClavePlantelESEC1;
-                    IdPlantelEMS = entalumno.IdPlantelEMS;
-                    await ConsultarPlantelEMS(entalumno.IdPlantelEMS);
-                    Nacionalidad1 = entalumno.Nacionalidad1;
-                    App.Current.Properties["idAlumno"] = entalumno.IdAlumno;
-                    App.Current.Properties["nombreUsuario"] = entalumno.Nombre1 + " " + entalumno.ApellidoPaterno1;
-                    IsRun = false;
-                    IsVisible = true;
-                    IsAcciones = true;
-                    IsInsertar = false;
-                    nuevo_registro = false;
-                    return true;
+                    var content = await response.Content.ReadAsStringAsync();
+                    var entalumno = JsonConvert.DeserializeObject<Alumno>(content);
+                    if (entalumno != null)
+                    {
+                        IdAlumno = entalumno.IdAlumno;
+                        Nombre1 = entalumno.Nombre1;
+                        ApellidoPaterno1 = entalumno.ApellidoPaterno1;
+                        ApellidoMaterno1 = entalumno.ApellidoMaterno1;
+                        CURP1 = entalumno.CURP1;
+                        Sexo1 = entalumno.Sexo1;
+                        SeleccionarSexo(entalumno.Sexo1);
+                        Calle1 = entalumno.Calle1;
+                        NumeroExterior1 = entalumno.NumeroExterior1;
+                        NumeroInterior1 = entalumno.NumeroInterior1;
+                        Email1 = entalumno.Email1;
+                        Celular1 = entalumno.Celular1;
+                        Telefono1 = entalumno.Telefono1;
+                        FOLIOSUREDSU1 = entalumno.FOLIOSUREDSU1;
+                        FolioSUREMS1 = entalumno.FolioSUREMS1;
+                        IdPais = entalumno.IdPais;
+                        _selectedColonia = entalumno.Colonias;
+                        _selectedMunicipio = entalumno.Municipios;
+                        ClavePlantelESEC1 = entalumno.ClavePlantelESEC1;
+                        IdPlantelEMS = entalumno.IdPlantelEMS;
+                        await ConsultarPlantelEMS(entalumno.IdPlantelEMS);
+                        Nacionalidad1 = entalumno.Nacionalidad1;
+                        App.Current.Properties["idAlumno"] = entalumno.IdAlumno;
+                        App.Current.Properties["nombreUsuario"] = entalumno.Nombre1 + " " + entalumno.ApellidoPaterno1;
+                        IsRun = false;
+                        IsVisible = true;
+                        IsAcciones = true;
+                        IsInsertar = false;
+                        nuevo_registro = false;
+                        return true;
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
+                        IsRun = false;
+                        IsVisible = true;
+                        IsAcciones = false;
+                        IsInsertar = true;
+                        nuevo_registro = true;
+                        return false;
+                    }
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
                     IsRun = false;
                     IsVisible = true;
                     IsAcciones = false;
                     IsInsertar = true;
-                    nuevo_registro = true;
                     return false;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
-                IsRun = false;
-                IsVisible = true;
-                IsAcciones = false;
-                IsInsertar = true;
-                return false;
+
+                throw;
             }
+           
         }
 
         private async Task<bool> ConsultarPlantelEMS(int idEMS)

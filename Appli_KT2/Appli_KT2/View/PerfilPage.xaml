@@ -33,6 +33,11 @@
             <ScrollView>
                 <StackLayout>
                     <!--Alumno 11-->
+                    <Label
+                        FontSize="Caption"
+                        Text="Los campos que tienen astedisco son obligatorios"
+                        TextColor="Gray"
+                        />
                     <Frame
                         x:Name="frameAlumno"
                         >
@@ -49,7 +54,7 @@
                                 <Label
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Nombre(s)"/>
+                                    Text="* Nombre(s)"/>
 
                                 <Entry
                                     Placeholder="Ingrese su Nombre(s)" 
@@ -59,7 +64,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Apellido Paterno"/>
+                                    Text="* Apellido Paterno"/>
 
                                 <Entry 
                                      Placeholder="Ingrese su apellido paterno"
@@ -69,7 +74,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Apellido Materno"/>
+                                    Text="* Apellido Materno"/>
 
                                 <Entry 
                                     Placeholder="Ingrese su apellido materno"
@@ -79,7 +84,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="CURP"/>
+                                    Text="* CURP"/>
 
                                 <Entry
                                      Placeholder="Ingrese su CURP" 
@@ -89,7 +94,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Sexo"/>
+                                    Text="* Sexo"/>
 
                                 <Picker 
                                 Title="Sexo" 
@@ -106,7 +111,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Correo electronico"/>
+                                    Text="* Correo electronico"/>
 
                                 <Entry
                                     Placeholder="Ingrese su correo electronico"
@@ -116,7 +121,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Número celular"/>
+                                    Text="* Número celular"/>
 
                                 <Entry
                                     Placeholder="Ingrese su número de celular"
@@ -126,7 +131,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Número Telefono"/>
+                                    Text="* Número Telefono"/>
 
                                 <Entry
                                     Placeholder="Ingrese su número de telefono"
@@ -136,7 +141,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Folio SUREMS"/>
+                                    Text="* Folio SUREMS"/>
                                 
                                 <Entry 
                                     Placeholder="Ingrese su folio SUREMS"
@@ -146,7 +151,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Folio SUREDSU"/>
+                                    Text="* Folio SUREDSU"/>
 
                                 <Entry 
                                     Placeholder="Ingrese su folio SUREDSU"
@@ -155,7 +160,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="CCT_Escuela"/>    
+                                    Text="* CCT_Escuela"/>
 
                                 <Entry 
                                     Placeholder="Ingrese el CCT de la escuela"
@@ -165,18 +170,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Procedencia_EMS"/>
-
-                                <Picker 
-                                Title="Escuela Medio Superior"
-                                >
-
-                                </Picker>
-
-                                <Label 
-                                    FontSize="Subtitle"
-                                    TextColor="Gray"
-                                    Text="Nacionalidad"/>   
+                                    Text="* Nacionalidad"/>   
 
                                 <Entry 
                                      Placeholder="Ingrese su Nacionalidad"
@@ -186,7 +180,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Calle"/>  
+                                    Text="* Calle"/>  
 
                                 <Entry
                                     Placeholder="Ingrese su calle"
@@ -196,7 +190,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Número Exterior"/>        
+                                    Text="* Número Exterior"/>        
 
                                 <Entry
                                     Placeholder="Ingrese su número de exterior"
@@ -206,7 +200,7 @@
                                 <Label 
                                 FontSize="Subtitle"
                                 TextColor="Gray"
-                                Text="Número Interior"/>    
+                                Text="* Número Interior"/>    
 
                                 <Entry
                                      Placeholder="Ingrese su número de interior"
@@ -286,9 +280,9 @@
                                <Label
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Nombre(s)"/>
+                            Text="* Nombre(s)"/>
 
-                                <Entry
+                            <Entry
                             Placeholder="Ingrese su Nombre(s)" 
                             Text="{Binding Persona.Nombre, Mode=TwoWay}"
                             FontSize="Small"
@@ -297,18 +291,18 @@
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Apellido Paterno"/>
+                            Text="* Apellido Paterno"/>
 
                                 <Entry 
-                            Placeholder="Ingrese su apellido paterno"
+                                Placeholder="Ingrese su apellido paterno"
                                 Text="{Binding Persona.Apellido_Paterno, Mode=TwoWay}"
-                            FontSize="Small"
+                                FontSize="Small"
                                      x:Name="txtApePatPadre"/>
 
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Apellido Materno"/>
+                            Text="* Apellido Materno"/>
 
                                 <Entry 
                             Placeholder="Ingrese su apellido materno"
@@ -319,7 +313,7 @@
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Número Telefono"/>
+                            Text="* Número Telefono"/>
 
                                 <Entry
                                 Placeholder="Ingrese su número de telefono"
@@ -349,7 +343,7 @@
                                 <Label
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Nombre(s)"/>
+                                    Text="* Nombre(s)"/>
 
                                 <Entry
                                     Placeholder="Ingrese su Nombre(s)" 
@@ -361,7 +355,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Apellido Paterno"/>
+                                    Text="* Apellido Paterno"/>
 
 
                                 <Entry 
@@ -374,7 +368,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Apellido Materno"/>
+                                    Text="* Apellido Materno"/>
 
 
                                 <Entry 
@@ -387,7 +381,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Celular"/>
+                                    Text="* Celular"/>
 
                                 <Entry
                                   Placeholder="Ingrese su número de telefono" 
@@ -415,7 +409,7 @@
                                 <Label
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Nombre(s)"/>
+                                    Text="* Nombre(s)"/>
 
                                 <Entry
                                     Placeholder="Ingrese su Nombre(s)" 
@@ -427,7 +421,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Apellido Paterno"/>
+                                    Text="* Apellido Paterno"/>
 
 
                                 <Entry 
@@ -440,7 +434,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Apellido Materno"/>
+                                    Text="* Apellido Materno"/>
 
 
                                 <Entry 
@@ -453,7 +447,7 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="Celular"/>
+                                    Text="* Celular"/>
 
                                 <Entry
                                   Placeholder="Ingrese su número de telefono" 
@@ -477,7 +471,7 @@
                                 <Label
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Nombre(s)"/>
+                            Text="* Nombre(s)"/>
 
                                 <Entry
                             Placeholder="Ingrese su Nombre(s)" 
@@ -487,7 +481,7 @@
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Apellido Paterno"/>
+                            Text="* Apellido Paterno"/>
 
                                 <Entry 
                             Placeholder="Ingrese su apellido paterno"
@@ -497,7 +491,7 @@
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Apellido Materno"/>
+                            Text="* Apellido Materno"/>
 
                                 <Entry 
                             Placeholder="Ingrese su apellido materno"
@@ -507,7 +501,7 @@
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="Número Telefono"/>
+                            Text="* Número Telefono"/>
 
                                 <Entry
                                 Placeholder="Ingrese su número de telefono"

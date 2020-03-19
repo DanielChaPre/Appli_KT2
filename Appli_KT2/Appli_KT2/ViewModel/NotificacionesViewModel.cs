@@ -1,4 +1,6 @@
-﻿using Appli_KT2.Model;
+﻿
+
+using Appli_KT2.Model;
 using Appli_KT2.Utils;
 using Newtonsoft.Json;
 using System;

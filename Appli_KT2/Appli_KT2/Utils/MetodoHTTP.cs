@@ -126,9 +126,13 @@ namespace Appli_KT2.Utils
                 }
 
                 IRestResponse response = client.Execute(request);
-                dynamic datos = JsonConvert.DeserializeObject(response.Content);
-                return datos;
-
+                if (response.IsSuccessful)
+                {
+                    dynamic datos = JsonConvert.DeserializeObject(response.Content);
+                    App.Current.MainPage.Navigation.PopAsync();
+                    return datos;
+                }
+                return null;
             }
             catch (Exception ex)
             {

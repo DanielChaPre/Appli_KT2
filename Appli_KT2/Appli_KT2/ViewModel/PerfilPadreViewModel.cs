@@ -41,6 +41,7 @@ namespace Appli_KT2.ViewModel
             IsVisible = false;
             IsInsertar = false;
             IsAcciones = false;
+            Persona = new Persona();
         }
 
         public string CurpHijo
@@ -172,6 +173,11 @@ namespace Appli_KT2.ViewModel
         {
             metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
+            if (string.IsNullOrEmpty(Persona.Nombre) || string.IsNullOrEmpty(Persona.Apellido_Paterno) || string.IsNullOrEmpty(Persona.Apellido_Materno) || string.IsNullOrEmpty(Persona.Numero_Telefono))
+            {
+                await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                return;
+            }
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
             dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearPadreFamilia, json);
@@ -204,6 +210,11 @@ namespace Appli_KT2.ViewModel
             {
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
+                if (Persona == null || string.IsNullOrEmpty(Persona.Nombre) || string.IsNullOrEmpty(Persona.Apellido_Paterno) || string.IsNullOrEmpty(Persona.Apellido_Materno) || string.IsNullOrEmpty(Persona.Numero_Telefono))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                    return;
+                }
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarPadreFamilia, json, nuevo_registro);
@@ -212,7 +223,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
+                await Application.Current.MainPage.DisplayAlert("Error", "Se a encontrado un error por favor comuniquese con el administrador", "Aceptar");
                 return;
             }
         }
@@ -239,11 +250,11 @@ namespace Appli_KT2.ViewModel
                            RFC = "N/A",
                            CURP = "N/A",
                            Sexo = "Sin especificar",
-                           Fecha_Nacimiento = "01/01/0001",
+                           Fecha_Nacimiento = "0001-01-01",
                            Numero_Telefono = Persona.Numero_Telefono,
                            Estado_Civil = 0,
                            Nacionalidad = "N/A",
-                           Municipio = "N/A",
+                           Municipio = "1",
                            IdColonia = 0,
                            Usuario = new Usuario()
                            {

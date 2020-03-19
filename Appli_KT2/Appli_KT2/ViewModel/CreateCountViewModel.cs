@@ -59,14 +59,15 @@ namespace Appli_KT2.ViewModel
         private async void CrearCuenta()
         {
             // MainViewModel.GetInstance().CrearCuenta = new CreateCountViewModel();
+            await Application.Current.MainPage.DisplayAlert("Aviso", "Se esta creando la cuenta, espere un momento.", "Aceptar");
             if (string.IsNullOrEmpty(this.usuario))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Ingrese el usuario", "Acceptar");
+                await Application.Current.MainPage.DisplayAlert("Error", "Ingrese el usuario", "Aceptar");
                 return;
             }
             if (string.IsNullOrEmpty(this.contrasenia))
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Ingrese la contraseña", "Acceptar");
+                await Application.Current.MainPage.DisplayAlert("Error", "Ingrese la contraseña", "Aceptar");
                 return;
             }
 
@@ -88,7 +89,7 @@ namespace Appli_KT2.ViewModel
                     {
                         if (await VerificarRegistroAlumno())
                         {
-                            await Application.Current.MainPage.DisplayAlert("Error", "El usuario ya esta registrado", "Aceptar");
+                            await Application.Current.MainPage.DisplayAlert("Aviso", "El usuario ya esta registrado", "Aceptar");
                             return;
                         }
                         else
@@ -135,7 +136,7 @@ namespace Appli_KT2.ViewModel
                 idAlumno = JsonConvert.DeserializeObject<int>(content);
                 if (idAlumno != 0)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "La curp coincide con una curp existente, inicie sesión de manera normal con una contraseña", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Aviso", "La curp coincide con una curp existente, inicie sesión de manera normal con una contraseña", "Aceptar");
                     Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                     return true;
                 }
@@ -180,14 +181,14 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Aceptar");
                     return false;
                 }
 
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error" + ex.Message, "Accept");
+                await Application.Current.MainPage.DisplayAlert("Error", "Error" + ex.Message, "Aceptar");
                 return false;
             }
         }
@@ -240,7 +241,7 @@ namespace Appli_KT2.ViewModel
                     App.Current.Properties["tipo_usuario"] = 1;
                     App.Current.Properties["usuario"] = this.usuario;
                     App.Current.Properties["contrasena"] = this.contrasenia;
-                    await Application.Current.MainPage.DisplayAlert("Error", "El usuario se guardo de manera correcta en la tabla", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Exito", "El usuario se guardo de manera correcta en la tabla", "Aceptar");
                     Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else

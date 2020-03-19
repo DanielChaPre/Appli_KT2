@@ -37,6 +37,7 @@ namespace Appli_KT2.ViewModel
             IsVisible = false;
             IsInsertar = false;
             IsAcciones = false;
+            Persona = new Persona();
         }
 
         public bool IsRun
@@ -168,6 +169,11 @@ namespace Appli_KT2.ViewModel
             IsVisible = false;
             metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
+            if (string.IsNullOrEmpty(Persona.Nombre) || string.IsNullOrEmpty(Persona.Apellido_Paterno) || string.IsNullOrEmpty(Persona.Apellido_Materno) || string.IsNullOrEmpty(Persona.Numero_Telefono))
+            {
+                await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                return;
+            }
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
             dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearEmpleadoPlantel, json);
@@ -206,6 +212,11 @@ namespace Appli_KT2.ViewModel
                 IsVisible = false;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
+                if (string.IsNullOrEmpty(Persona.Nombre) || string.IsNullOrEmpty(Persona.Apellido_Paterno) || string.IsNullOrEmpty(Persona.Apellido_Materno) || string.IsNullOrEmpty(Persona.Numero_Telefono))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                    return;
+                }
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarEmpleadoPlantel, json, nuevo_registro);

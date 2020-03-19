@@ -27,32 +27,19 @@
                 />
 
                 <Label 
-                    Text="Contraseña nueva"
+                    Text="Ingrese su correo"
                     TextColor="Gray"
-
                 />
 
                 <Entry 
-                    IsPassword="True"
                     Text="{Binding  Password, Mode=TwoWay}"
-                    TextColor="#000F9F"
-                 />
-
-                <Label 
-                    Text="Confirmar contraseña nueva"
-                    TextColor="Gray"
-                />
-
-                <Entry 
-                    IsPassword="True"
-                    Text="{Binding  NuevaContrasena, Mode=TwoWay}"
                     TextColor="#000F9F"
                  />
 
                 <Button 
                     BackgroundColor="#FF8200"
                     Command="{Binding RecuperarContrasenaCommand}"
-                    Text="Iniciar sesión"
+                    Text="Enviar correo"
                     TextColor="White"
                     x:Name="btnIniciar"
                 />

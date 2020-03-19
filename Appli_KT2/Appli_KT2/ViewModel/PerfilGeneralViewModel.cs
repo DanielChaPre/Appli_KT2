@@ -120,6 +120,11 @@ namespace Appli_KT2.ViewModel
         {
             metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
+            if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(Apellido_Paterno) || string.IsNullOrEmpty(Apellido_Materno) || string.IsNullOrEmpty(Numero_Telefono))
+            {
+                await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                return;
+            }
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
             dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearPerfil,json);
@@ -207,6 +212,11 @@ namespace Appli_KT2.ViewModel
             {
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
+                if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(Apellido_Paterno) || string.IsNullOrEmpty(Apellido_Materno) || string.IsNullOrEmpty(Numero_Telefono))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                    return;
+                }
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarPerfil, json, nuevo_registro);
@@ -235,11 +245,11 @@ namespace Appli_KT2.ViewModel
                         RFC = "N/A",
                         CURP = "N/A",
                         Sexo = "Sin especificar",
-                        Fecha_Nacimiento = "01/01/0001",
+                        Fecha_Nacimiento = "01-01-0001",
                         Numero_Telefono = Numero_Telefono,
                         Estado_Civil = 0,
                         Nacionalidad = "N/A",
-                        Municipio = "N/A",
+                        Municipio = "1",
                         IdColonia = 0,
                         Usuario = new Usuario()
                         {

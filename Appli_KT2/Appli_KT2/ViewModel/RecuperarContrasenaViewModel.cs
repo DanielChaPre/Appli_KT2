@@ -4,7 +4,9 @@ using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -67,42 +69,70 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-                if (string.IsNullOrEmpty(this.Password) || string.IsNullOrEmpty(this.NuevaContrasena))
+                //Quien lo envia
+                var fromAddress = new MailAddress("danchavez197@gmail.com", "From Name");
+                // Quien lo resive
+                var toAddress = new MailAddress(Password, "To Name");
+                //Contraseña del correo quien lo envia
+                const string fromPassword = "Daniel1998";
+                //Titulo del correo
+                const string subject = "Recuperar Contraseña";
+
+                const string body = "Prueba de Correo";
+
+                var smtp = new SmtpClient
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Ingresa la nueva contraseña o la confirmación de esta", "Accept");
-                    return;
-                }
-                this.IsRunning = true;
-                if (!VerificarNuevaContrasena())
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
                 {
-                    this.IsRunning = false;
-                    await Application.Current.MainPage.DisplayAlert("Error", "Las contraseñas no coinciden", "Accept");
-                    return;
-                }
-                _client = new HttpClient();
-                conexion = new ConexionWS();
-                var usuario = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
-                url = conexion.URL + "" + conexion.RecuperarContrasena + "" + usuario + "/" + this.nuevaContrasena;
-                var uri = new Uri(string.Format(@"" + url, string.Empty));
-                var response = await _client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
+                    Subject = subject,
+                    Body = body
+                })
                 {
-                    var content = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<bool>(content);
-                    if (result)
-                    {
-                        this.IsRunning = false;
-                        await Application.Current.MainPage.DisplayAlert("Error", "Contraseña Actualizada", "Accept");
-                        Xamarin.Forms.Application.Current.Properties["contrasena"] = this.nuevaContrasena;
-                        Application.Current.MainPage = new NavigationPage(new MainPage());
-                    }
+                    smtp.Send(message);
                 }
-                else
-                {
-                    this.IsRunning = false;
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error: " + response.StatusCode, "Accept");
-                    return;
-                }
+                //if (string.IsNullOrEmpty(this.Password) || string.IsNullOrEmpty(this.NuevaContrasena))
+                //{
+                //    await Application.Current.MainPage.DisplayAlert("Error", "Ingresa la nueva contraseña o la confirmación de esta", "Accept");
+                //    return;
+                //}
+                //this.IsRunning = true;
+                //if (!VerificarNuevaContrasena())
+                //{
+                //    this.IsRunning = false;
+                //    await Application.Current.MainPage.DisplayAlert("Error", "Las contraseñas no coinciden", "Accept");
+                //    return;
+                //}
+                //_client = new HttpClient();
+                //conexion = new ConexionWS();
+                //var usuario = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
+                //url = conexion.URL + "" + conexion.RecuperarContrasena + "" + usuario + "/" + this.nuevaContrasena;
+                //var uri = new Uri(string.Format(@"" + url, string.Empty));
+                //var response = await _client.GetAsync(uri);
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var content = await response.Content.ReadAsStringAsync();
+                //    var result = JsonConvert.DeserializeObject<bool>(content);
+                //    if (result)
+                //    {
+                //        this.IsRunning = false;
+                //        await Application.Current.MainPage.DisplayAlert("Error", "Contraseña Actualizada", "Accept");
+                //        Xamarin.Forms.Application.Current.Properties["contrasena"] = this.nuevaContrasena;
+                //        Application.Current.MainPage = new NavigationPage(new MainPage());
+                //    }
+                //}
+                //else
+                //{
+                //    this.IsRunning = false;
+                //    await Application.Current.MainPage.DisplayAlert("Error", "Error: " + response.StatusCode, "Accept");
+                //    return;
+                //}
             }
             catch (Exception ex)
             {

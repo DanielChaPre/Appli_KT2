@@ -176,6 +176,11 @@ namespace Appli_KT2.ViewModel
         {
             metodosHTTP = new MetodoHTTP();
             conexion = new ConexionWS();
+            if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(Apellido_Paterno) || string.IsNullOrEmpty(Apellido_Materno) || string.IsNullOrEmpty(Numero_Telefono))
+            {
+                await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                return;
+            }
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
             dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearEmpleado, json);
@@ -208,6 +213,11 @@ namespace Appli_KT2.ViewModel
             {
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
+                if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(Apellido_Paterno) || string.IsNullOrEmpty(Apellido_Materno) || string.IsNullOrEmpty(Numero_Telefono))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Alerta", "Uno de los campos esta vacio, todos tienen que estar llenos", "Aceptar");
+                    return;
+                }
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarEmpleado, json, nuevo_registro);
