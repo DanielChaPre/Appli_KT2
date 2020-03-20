@@ -75,14 +75,6 @@ namespace Appli_KT2.ViewModel
                             Url = lstHistorial[i].Url,
                             Descripcion = lstHistorial[i].Descripcion,
                         };
-                        if (Url.Contains(""))
-                        {
-
-                        }
-                        else
-                        {
-
-                        }
                         lsthistorialUsuario.Add(entHistorial);
                     }
                     this.LstHistorial = this.lsthistorialUsuario;

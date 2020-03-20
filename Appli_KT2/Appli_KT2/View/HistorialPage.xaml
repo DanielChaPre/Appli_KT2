@@ -11,6 +11,7 @@
         >
         <StackLayout>
             <ActivityIndicator
+                Color="White"
                 VerticalOptions="Center"
                 Margin="0,250,0,0"
                 IsRunning="{Binding IsRun}"

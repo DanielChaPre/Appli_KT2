@@ -36,7 +36,7 @@ namespace Appli_KT2.View
             actiCargar.IsRunning = true;
             actiCargar.IsVisible = true;
             lblhistorial.IsVisible = false;
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(8), () =>
              {
                  while (historialViewModel.LstHistorial != null || historialViewModel.LstHistorial.Count != 0)
                  {
