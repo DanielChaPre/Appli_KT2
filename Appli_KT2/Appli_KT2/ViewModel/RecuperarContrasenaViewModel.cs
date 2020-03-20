@@ -77,8 +77,14 @@ namespace Appli_KT2.ViewModel
                 const string fromPassword = "Daniel1998";
                 //Titulo del correo
                 const string subject = "Recuperar Contraseña";
-
-                const string body = "Prueba de Correo";
+                var usuario = Xamarin.Forms.Application.Current.Properties["cveUsuario"].ToString();
+                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(usuario);
+                var usuarioBase64 = System.Convert.ToBase64String(plainTextBytes);
+                usuarioBase64.Replace("+","-");
+                usuarioBase64.Replace("/", "_");
+                usuarioBase64.Replace("=", "");
+                var url = "https://applikt.utleon.edu.mx/index.php?accion=cmVjdXBlcmFyX2NvbnRyYXNlbmE&usuario=" + usuarioBase64 + "";
+                string body = url;
 
                 var smtp = new SmtpClient
                 {
@@ -97,42 +103,6 @@ namespace Appli_KT2.ViewModel
                 {
                     smtp.Send(message);
                 }
-                //if (string.IsNullOrEmpty(this.Password) || string.IsNullOrEmpty(this.NuevaContrasena))
-                //{
-                //    await Application.Current.MainPage.DisplayAlert("Error", "Ingresa la nueva contraseña o la confirmación de esta", "Accept");
-                //    return;
-                //}
-                //this.IsRunning = true;
-                //if (!VerificarNuevaContrasena())
-                //{
-                //    this.IsRunning = false;
-                //    await Application.Current.MainPage.DisplayAlert("Error", "Las contraseñas no coinciden", "Accept");
-                //    return;
-                //}
-                //_client = new HttpClient();
-                //conexion = new ConexionWS();
-                //var usuario = Xamarin.Forms.Application.Current.Properties["usuario"].ToString();
-                //url = conexion.URL + "" + conexion.RecuperarContrasena + "" + usuario + "/" + this.nuevaContrasena;
-                //var uri = new Uri(string.Format(@"" + url, string.Empty));
-                //var response = await _client.GetAsync(uri);
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    var content = await response.Content.ReadAsStringAsync();
-                //    var result = JsonConvert.DeserializeObject<bool>(content);
-                //    if (result)
-                //    {
-                //        this.IsRunning = false;
-                //        await Application.Current.MainPage.DisplayAlert("Error", "Contraseña Actualizada", "Accept");
-                //        Xamarin.Forms.Application.Current.Properties["contrasena"] = this.nuevaContrasena;
-                //        Application.Current.MainPage = new NavigationPage(new MainPage());
-                //    }
-                //}
-                //else
-                //{
-                //    this.IsRunning = false;
-                //    await Application.Current.MainPage.DisplayAlert("Error", "Error: " + response.StatusCode, "Accept");
-                //    return;
-                //}
             }
             catch (Exception ex)
             {

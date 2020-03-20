@@ -249,13 +249,14 @@ namespace Appli_KT2.ViewModel
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var login = JsonConvert.DeserializeObject<bool>(content);
-                    if (login)
+                    var login = JsonConvert.DeserializeObject<string>(content);
+                    if (!string.IsNullOrEmpty(login))
                     {
                         this.IsRunning = false;
                         this.IsEnable = true;
                         MainViewModel.GetInstance().Login = new LoginViewModel();
                         await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                        Xamarin.Forms.Application.Current.Properties["cveUsuario"] = login;
                         Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                         Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                     }
@@ -285,7 +286,6 @@ namespace Appli_KT2.ViewModel
             {
                 _client = new HttpClient();
                 conexion = new ConexionWS();
-
                 url = conexion.URL + "" + conexion.ValidarUsuarioAlumno + "" + this.idAlumno;
                 var uri = new Uri(string.Format(@"" + url, string.Empty));
                 var response = await _client.GetAsync(uri);
@@ -293,13 +293,14 @@ namespace Appli_KT2.ViewModel
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var login = JsonConvert.DeserializeObject<bool>(content);
-                    if (login)
+                    var login = JsonConvert.DeserializeObject<string>(content);
+                    if (!string.IsNullOrEmpty(login))
                     {
                         this.IsRunning = false;
                         this.IsEnable = true;
                         MainViewModel.GetInstance().Login = new LoginViewModel();
                         await Application.Current.MainPage.Navigation.PushAsync(new IniciarContraseniaPage());
+                        Xamarin.Forms.Application.Current.Properties["cveUsuario"] = login;
                         Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
                         Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                         Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;
@@ -311,6 +312,7 @@ namespace Appli_KT2.ViewModel
                         this.IsEnable = true;
                         MainViewModel.GetInstance().Login = new LoginViewModel();
                         await Application.Current.MainPage.Navigation.PushAsync(new CrearContrasenaAlumnoPAge());
+                        Xamarin.Forms.Application.Current.Properties["cveUsuario"] = 0;
                         Xamarin.Forms.Application.Current.Properties["idAlumno"] = idAlumno;
                         Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                         Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = true;

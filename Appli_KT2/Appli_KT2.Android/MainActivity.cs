@@ -29,8 +29,11 @@ namespace Appli_KT2.Droid
             FacebookClientManager.Initialize(this);
             LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.appli_kt_icono2;
             LoadApplication(new App());
+            AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) => {
+                args.Handled = false;
+            };
             #if DEBUG
-            PrintHashKey(this);
+                        PrintHashKey(this);
             #endif
         }
 

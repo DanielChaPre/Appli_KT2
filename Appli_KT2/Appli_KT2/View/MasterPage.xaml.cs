@@ -1,4 +1,5 @@
 ﻿using Appli_KT2.Utils;
+using Appli_KT2.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,15 @@ namespace Appli_KT2.View
         private int tipo_usuario;
         private List<string> listaPlantillas = new List<string>();
         private List<string> listaMenu = new List<string>();
+        private MainTabbedViewModel mainTabbedViewModel;
         public MasterPage()
         {
             InitializeComponent();
             this.tipo_usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString());
-            AccesoUsuario();
+            //AccesoUsuario();
             lblNombreUsuario.Text = App.Current.Properties["nombreUsuario"].ToString();
-            //CrearMenuDinamico();
+            mainTabbedViewModel = new MainTabbedViewModel();
+            CrearMenuDinamico();
         }
 
         public void AccesoUsuario()
@@ -110,15 +113,39 @@ namespace Appli_KT2.View
         {
             try
             {
-                for (int i = 1; i < 5; i++)
+                switch (this.tipo_usuario)
                 {
-                    Button btnPrueba = new Button();
-                    btnPrueba.Text = "prueba " + i;
-                    btnPrueba.Clicked += BtnCliente_Click;
-                    btnPrueba.BackgroundColor = Color.BlueViolet;
-                    btnPrueba.TextColor = Color.White;
-
-                    stlMenu.Children.Add(btnPrueba);
+                    case 0:
+                        btnIniciar.IsVisible = true;
+                        btnPerfil.IsVisible = false;
+                        btnHistorial.IsVisible = false;
+                        btnNotificaciones.IsVisible = false;
+                        btnSuredsu.IsVisible = true;
+                        break;
+                    case 1:
+                        CrearMenuUsuario();
+                        break;
+                    case 2:
+                        CrearMenuAlumno();
+                        break;
+                    case 3:
+                        CrearMenuUsuario();
+                        break;
+                    case 4:
+                        CrearMenuUsuario();
+                        break;
+                    case 5:
+                        CrearMenuUsuario();
+                        break;
+                    case 6:
+                        CrearMenuUsuario();
+                        break;
+                    case 7:
+                        CrearMenuUsuario();
+                        break;
+                    default:
+                        CrearMenuUsuario();
+                        break;
                 }
             }
             catch (Exception ex)
@@ -129,14 +156,55 @@ namespace Appli_KT2.View
 
         private async void BtnCliente_Click(object sender, EventArgs e)
         {
+            
             await Application.Current.MainPage.DisplayAlert("Prueba", "Prueba del click", "Aceptar");
         }
 
-        public void CrearMenuAlumno()
+        private void OcultarMenu()
+        {
+            btnIniciar.IsVisible = false;
+            btnPerfil.IsVisible = false;
+            btnHistorial.IsVisible = false;
+            btnNotificaciones.IsVisible = false;
+            btnSuredsu.IsVisible = false;
+        }
+
+        public async void CrearMenuAlumno()
+        {
+                try
+                {
+                OcultarMenu();
+                    await ObtenerPlantillaAlumno();
+                for (int i = 0; i < listaPlantillas.Count; i++)
+                {
+                    LlenarListaMenuA(listaPlantillas[i]);
+                }
+                for (int i = 0; i < listaMenu.Count; i++)
+                {
+                    CrearMenuA(listaMenu[i], i);
+                }
+            }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+        }
+
+        public async void CrearMenuUsuario()
         {
             try
             {
-
+                OcultarMenu();
+                await ObtenerPlantillaUsuario();
+                for (int i = 0; i < listaPlantillas.Count; i++)
+                {
+                    LlenarListaMenu(listaPlantillas[i]);
+                }
+                for (int i = 0; i < listaMenu.Count; i++)
+                {
+                    CrearMenuU(listaMenu[i], i);
+                }
             }
             catch (Exception)
             {
@@ -145,16 +213,177 @@ namespace Appli_KT2.View
             }
         }
 
-        public void CrearMenuUsuario()
+        public void LlenarListaMenu(string plantilla)
         {
-            try
+            switch (plantilla)
             {
-
+                case "Eventos históricos":
+                    listaMenu.Add(plantilla);
+                    break;
+                case "Perfiles":
+                    listaMenu.Add(plantilla);
+                    break;
+                case "Notificaciones":
+                    listaMenu.Add(plantilla);
+                    break;
+                case "Enlace SUREDSU":
+                    listaMenu.Add(plantilla);
+                    break;
+                default:
+                    break;
             }
-            catch (Exception)
-            {
+        }
 
-                throw;
+        public void LlenarListaMenuA(string plantilla)
+        {
+            switch (plantilla)
+            {
+                case "Historial web":
+                    listaMenu.Add(plantilla);
+                    break;
+                case "Mi perfil":
+                    listaMenu.Add(plantilla);
+                    break;
+                case "Buzón de notificaciones":
+                    listaMenu.Add(plantilla);
+                    break;
+                case "Enlace SUREDSU":
+                    listaMenu.Add(plantilla);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void CrearMenuU(string plantilla, int posicion)
+        {
+            switch (plantilla)
+            {
+                case "Historial web":
+                    // listaMenu.Add(plantilla);
+                    Button btnEventHistorial = new Button();
+                    btnEventHistorial.ImageSource = "ic_calendar_text_outline.png";
+                    btnEventHistorial.Text = plantilla;
+                    btnEventHistorial.BindingContext = mainTabbedViewModel;
+                    btnEventHistorial.Command = mainTabbedViewModel.IrHistorialCommand;
+                    if((posicion%2)==0)
+                        btnEventHistorial.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnEventHistorial.BackgroundColor = Color.FromHex("#0a225a");
+                    btnEventHistorial.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnEventHistorial);
+                    break;
+                case "Perfiles":
+                    Button btnPerfiles = new Button();
+                    btnPerfiles.ImageSource = "ic_cuenta.png";
+                    btnPerfiles.Text = plantilla;
+                    btnPerfiles.BindingContext = mainTabbedViewModel;
+                    btnPerfiles.Command = mainTabbedViewModel.IrPerfilCommand;
+                    if ((posicion % 2) == 0)
+                        btnPerfiles.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnPerfiles.BackgroundColor = Color.FromHex("#0a225a");
+                    btnPerfiles.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnPerfiles);
+                    break;
+                case "Notificaciones":
+                    Button btnNotificacion = new Button();
+                    btnNotificacion.ImageSource = "ic_notifications.png";
+                    btnNotificacion.Text = plantilla;
+                    btnNotificacion.BindingContext = mainTabbedViewModel;
+                    btnNotificacion.Command = mainTabbedViewModel.IrNotificacionesCommand;
+                    if ((posicion % 2) == 0)
+                        btnNotificacion.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnNotificacion.BackgroundColor = Color.FromHex("#0a225a");
+                    btnNotificacion.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnNotificacion);
+                    break;
+                case "Proceso SUREDSU":
+                    Button btnEnlaceSuredsu = new Button();
+                    btnEnlaceSuredsu.ImageSource = "ic_school_outline.png";
+                    btnEnlaceSuredsu.Text = plantilla;
+                    btnEnlaceSuredsu.BindingContext = mainTabbedViewModel;
+                    btnEnlaceSuredsu.Command = mainTabbedViewModel.IrSuredsuCommand;
+                    if ((posicion % 2) == 0)
+                        btnEnlaceSuredsu.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnEnlaceSuredsu.BackgroundColor = Color.FromHex("#0a225a");
+                    btnEnlaceSuredsu.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnEnlaceSuredsu);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void CrearMenuA(string plantilla, int posicion)
+        {
+            switch (plantilla)
+            {
+                case "Historial web":
+                    // listaMenu.Add(plantilla);
+                    Button btnEventHistorial = new Button();
+                    btnEventHistorial.ImageSource = "ic_calendar_text_outline.png";
+                    btnEventHistorial.Text = plantilla;
+                    btnEventHistorial.BindingContext = mainTabbedViewModel;
+                    btnEventHistorial.Command = mainTabbedViewModel.IrHistorialCommand;
+                    if ((posicion % 2) == 0)
+                        btnEventHistorial.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnEventHistorial.BackgroundColor = Color.FromHex("#0a225a");
+                    btnEventHistorial.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnEventHistorial);
+                    break;
+                case "Mi perfil":
+                    Button btnPerfiles = new Button();
+                    btnPerfiles.ImageSource = "ic_cuenta.png";
+                    btnPerfiles.Text = plantilla;
+                    btnPerfiles.BindingContext = mainTabbedViewModel;
+                    btnPerfiles.Command = mainTabbedViewModel.IrPerfilCommand;
+                    if ((posicion % 2) == 0)
+                        btnPerfiles.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnPerfiles.BackgroundColor = Color.FromHex("#0a225a");
+                    btnPerfiles.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnPerfiles);
+                    break;
+                case "Buzón de notificaciones":
+                    Button btnNotificacion = new Button();
+                    btnNotificacion.ImageSource = "ic_notifications.png";
+                    btnNotificacion.Text = plantilla;
+                    btnNotificacion.BindingContext = mainTabbedViewModel;
+                    btnNotificacion.Command = mainTabbedViewModel.IrNotificacionesCommand;
+                    if ((posicion % 2) == 0)
+                        btnNotificacion.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnNotificacion.BackgroundColor = Color.FromHex("#0a225a");
+                    btnNotificacion.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnNotificacion);
+                    break;
+                case "Proceso SUREDSU":
+                    Button btnEnlaceSuredsu = new Button();
+                    btnEnlaceSuredsu.ImageSource = "ic_school_outline.png";
+                    btnEnlaceSuredsu.Text = plantilla;
+                    btnEnlaceSuredsu.BindingContext = mainTabbedViewModel;
+                    btnEnlaceSuredsu.Command = mainTabbedViewModel.IrSuredsuCommand;
+                    if ((posicion % 2) == 0)
+                        btnEnlaceSuredsu.BackgroundColor = Color.FromHex("#1b213c");
+                    else
+                        btnEnlaceSuredsu.BackgroundColor = Color.FromHex("#0a225a");
+                    btnEnlaceSuredsu.TextColor = Color.White;
+
+                    stlMenu.Children.Add(btnEnlaceSuredsu);
+                    break;
+                default:
+                    break;
             }
         }
 

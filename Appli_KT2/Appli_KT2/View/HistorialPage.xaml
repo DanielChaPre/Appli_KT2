@@ -20,10 +20,10 @@
             
             <Label
                 FontSize="Title"
-                Margin="0,300,0,0"
+                Margin="0,100,0,0"
                 Text="No se encuentro un historial"
                 TextColor="Gray"
-                x:Name="lblnoti"
+                x:Name="lblhistorial"
                 />
 
             <ListView 

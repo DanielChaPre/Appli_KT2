@@ -36,7 +36,7 @@ namespace Appli_KT2.View
             App.Current.Properties["cveNotificacion"] = entnotificaciones.Cve_notificacion;
            if( await notificacionesViewModel.EliminarNotificaciones())
             {
-                await Application.Current.MainPage.DisplayAlert("Exito", "Se a eliminado de " +
+                await Application.Current.MainPage.DisplayAlert("Exito", "Se ha eliminado de " +
                     "manera correcta la notificación", "Aceptar");
                 await Navigation.PushAsync(new NotificacionesPage());
                 return;

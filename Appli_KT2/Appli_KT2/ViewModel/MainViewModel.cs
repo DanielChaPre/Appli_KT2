@@ -10,7 +10,7 @@ namespace Appli_KT2.ViewModel
 
         public LoginViewModel Login { get; set; }
         public PerfilGeneralViewModel RegistrarUG { get; set; }
-        public PerfilAlumnoViewModel RegistrarA { get; set; }
+        //public PerfilAlumnoViewModel RegistrarA { get; set; }
         public PerfilEmpleadoPlantelViewModel RegistrarEP { get; set; }
         public PerfilEmpleadoViewModel RegistrarE { get; set; }
         public PerfilPadreViewModel RegistrarP { get; set; }

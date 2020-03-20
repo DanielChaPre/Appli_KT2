@@ -143,7 +143,7 @@ namespace Appli_KT2.ViewModel
                 await Application.Current.MainPage.DisplayAlert("Error", "La curp no coincide con ningun registro existente ", "Aceptar");
                 Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                 Xamarin.Forms.Application.Current.Properties["contrasena"] = this.contrasenia;
-                MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
+               // MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
                 await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
                 return false;
 
@@ -207,7 +207,7 @@ namespace Appli_KT2.ViewModel
                 {
                     Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
                     Xamarin.Forms.Application.Current.Properties["contrasena"] = this.contrasenia;
-                    MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
+                   // MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
                     await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
                 
                     //Application.Current.MainPage = new NavigationPage(new MainPage());
@@ -241,7 +241,7 @@ namespace Appli_KT2.ViewModel
                     App.Current.Properties["tipo_usuario"] = 1;
                     App.Current.Properties["usuario"] = this.usuario;
                     App.Current.Properties["contrasena"] = this.contrasenia;
-                    await Application.Current.MainPage.DisplayAlert("Exito", "El usuario se guardo de manera correcta en la tabla", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Exito", "El usuario se guardo de manera exitosa", "Aceptar");
                     Application.Current.MainPage = new NavigationPage(new MainPage());
                 }
                 else

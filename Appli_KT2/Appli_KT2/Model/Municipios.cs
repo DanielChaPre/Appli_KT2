@@ -43,6 +43,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+
         [PrimaryKey]
         public int idMunicipio
         {

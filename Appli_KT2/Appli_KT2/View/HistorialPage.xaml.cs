@@ -35,20 +35,21 @@ namespace Appli_KT2.View
             listViewHistorial.BindingContext = historialViewModel;
             actiCargar.IsRunning = true;
             actiCargar.IsVisible = true;
+            lblhistorial.IsVisible = false;
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
              {
                  while (historialViewModel.LstHistorial != null || historialViewModel.LstHistorial.Count != 0)
                  {
                      if (historialViewModel.LstHistorial.Count == 0)
                      {
-                         lblnoti.IsVisible = true;
+                         lblhistorial.IsVisible = true;
                          actiCargar.IsRunning = false;
                          actiCargar.IsVisible = false;
                          return false;
                      }
                      actiCargar.IsRunning = false;
                      actiCargar.IsVisible = false;
-                     lblnoti.IsVisible = false;
+                     lblhistorial.IsVisible = false;
                      listViewHistorial.IsVisible = true;
                      listViewHistorial.ItemsSource = historialViewModel.LstHistorial;
                      return false;
@@ -61,7 +62,7 @@ namespace Appli_KT2.View
         private void BtnAbrir_Clicked(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
-            Device.OpenUri(new System.Uri(mi.CommandParameter.ToString()));
+            Device.OpenUri(new System.Uri("https://applikt.utleon.edu.mx/" + mi.CommandParameter.ToString()));
         }
 
         private async void BtnCompartir_Clicked(object sender, EventArgs e)

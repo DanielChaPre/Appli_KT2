@@ -37,6 +37,7 @@ namespace Appli_KT2.ViewModel
             IsVisible = false;
             IsInsertar = false;
             IsAcciones = false;
+            GC.Collect();
         }
 
         public bool IsRun
@@ -150,15 +151,6 @@ namespace Appli_KT2.ViewModel
         }
 
         #region Commandos
-
-        public ICommand InsertarPerfilCommand
-        {
-            get
-            {
-                return new RelayCommand(InsertarPerfil);
-            }
-        }
-
         public ICommand ActualizarPerfilCommand
         {
             get
@@ -174,21 +166,6 @@ namespace Appli_KT2.ViewModel
                 return new RelayCommand(DesactivarPerfil);
             }
         }
-
-        public async void InsertarPerfil()
-        {
-            IsRun = false;
-            IsVisible = true;
-            metodosHTTP = new MetodoHTTP();
-            conexion = new ConexionWS();
-            LlenarDatos();
-            string json = JsonConvert.SerializeObject(rootObject);
-            dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearAlumno, json);
-            await ConsultarAlumno();
-            return;
-        }
-
-
 
         private async void DesactivarPerfil()
         {
@@ -318,13 +295,14 @@ namespace Appli_KT2.ViewModel
                 throw;
             }
         }
+
         public async Task<bool> ConsultarAlumno()
         {
             try
             {
                 IsRun = true;
                 IsVisible = false;
-                ConsultarUsuarioAlumno();
+               // ConsultarUsuarioAlumno();
                 _client = new HttpClient();
                 conexion = new ConexionWS();
                 var idAlumno = App.Current.Properties["idAlumno"];
@@ -333,34 +311,36 @@ namespace Appli_KT2.ViewModel
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
+                    GC.Collect();
                     var content = await response.Content.ReadAsStringAsync();
-                    var entalumno = JsonConvert.DeserializeObject<Alumno>(content);
-                    if (entalumno != null)
+                    var alumno = JsonConvert.DeserializeObject<Alumno>(content);
+                    
+                    if (alumno != null)
                     {
-                        IdAlumno = entalumno.IdAlumno;
-                        Nombre1 = entalumno.Nombre1;
-                        ApellidoPaterno1 = entalumno.ApellidoPaterno1;
-                        ApellidoMaterno1 = entalumno.ApellidoMaterno1;
-                        CURP1 = entalumno.CURP1;
-                        Sexo1 = entalumno.Sexo1;
-                        SeleccionarSexo(entalumno.Sexo1);
-                        Calle1 = entalumno.Calle1;
-                        NumeroExterior1 = entalumno.NumeroExterior1;
-                        NumeroInterior1 = entalumno.NumeroInterior1;
-                        Email1 = entalumno.Email1;
-                        Celular1 = entalumno.Celular1;
-                        Telefono1 = entalumno.Telefono1;
-                        FOLIOSUREDSU1 = entalumno.FOLIOSUREDSU1;
-                        FolioSUREMS1 = entalumno.FolioSUREMS1;
-                        IdPais = entalumno.IdPais;
-                        _selectedColonia = entalumno.Colonias;
-                        _selectedMunicipio = entalumno.Municipios;
-                        ClavePlantelESEC1 = entalumno.ClavePlantelESEC1;
-                        IdPlantelEMS = entalumno.IdPlantelEMS;
-                        await ConsultarPlantelEMS(entalumno.IdPlantelEMS);
-                        Nacionalidad1 = entalumno.Nacionalidad1;
-                        App.Current.Properties["idAlumno"] = entalumno.IdAlumno;
-                        App.Current.Properties["nombreUsuario"] = entalumno.Nombre1 + " " + entalumno.ApellidoPaterno1;
+                        IdAlumno =alumno.IdAlumno;
+                        Nombre1 = alumno.Nombre1;
+                        ApellidoPaterno1 = alumno.ApellidoPaterno1;
+                        ApellidoMaterno1 = alumno.ApellidoMaterno1;
+                        CURP1 = alumno.CURP1;
+                        Sexo1 = alumno.Sexo1;
+                        SeleccionarSexo(alumno.Sexo1);
+                        Calle1 =alumno.Calle1;
+                        NumeroExterior1 = alumno.NumeroExterior1;
+                        NumeroInterior1 = alumno.NumeroInterior1;
+                        Email1 =alumno.Email1;
+                        Celular1 = alumno.Celular1;
+                        Telefono1 = alumno.Telefono1;
+                        FOLIOSUREDSU1 = alumno.FOLIOSUREDSU1;
+                        FolioSUREMS1 = alumno.FolioSUREMS1;
+                        IdPais = alumno.IdPais;
+                        _selectedColonia = alumno.Colonias;
+                        _selectedMunicipio = alumno.Municipios;
+                        ClavePlantelESEC1 = alumno.ClavePlantelESEC1;
+                        IdPlantelEMS = alumno.IdPlantelEMS;
+                        await ConsultarPlantelEMS(alumno.IdPlantelEMS);
+                        Nacionalidad1 = alumno.Nacionalidad1;
+                        App.Current.Properties["idAlumno"] = alumno.IdAlumno;
+                        App.Current.Properties["nombreUsuario"] = alumno.Nombre1 + " " + alumno.ApellidoPaterno1;
                         IsRun = false;
                         IsVisible = true;
                         IsAcciones = true;
@@ -434,12 +414,6 @@ namespace Appli_KT2.ViewModel
                     Sexo = "Indistinto";
                     break;
             }
-        }
-
-        private void SeleccionarColonias(int idColonias)
-        {
-           
-
         }
 
         #endregion

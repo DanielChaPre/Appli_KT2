@@ -115,7 +115,7 @@ namespace Appli_KT2.View
         {
             ToolbarItem icShare = new ToolbarItem
             {
-                Text = "Conmpartir Aplicación",
+                Text = "Compartir Appli-KT",
                 Order = ToolbarItemOrder.Secondary,
                 Priority = 0
             };

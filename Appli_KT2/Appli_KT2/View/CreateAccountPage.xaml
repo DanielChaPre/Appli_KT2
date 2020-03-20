@@ -44,7 +44,7 @@
                     x:Name="txtContraseña"/>
                 <Label
                     FontSize="Micro"
-                    Text="la contraseña debe de ser de 8 dígitos minimo, al menos 1 mayúcula, 1 número, 1 carácter especial"
+                    Text="La contraseña debe de ser de 8 dígitos mínimo, al menos 1 mayúcula, 1 número, 1 carácter especial"
                     TextColor="Red"
                     />
                 <Grid
