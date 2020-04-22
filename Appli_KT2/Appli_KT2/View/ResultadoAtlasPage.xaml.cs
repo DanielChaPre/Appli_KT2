@@ -21,6 +21,7 @@ namespace Appli_KT2.View
         CarreraViewModel carreraViewModel = new CarreraViewModel();
         DetalleUniversidadViewModel detalleUniversidadViewModel = new DetalleUniversidadViewModel();
         MunicipioViewModel municipioViewModel = new MunicipioViewModel();
+        PerfilAlumnoViewModel perfilAlumno = new PerfilAlumnoViewModel();
 
         public ResultadoAtlasPage ()
 		{
@@ -41,13 +42,19 @@ namespace Appli_KT2.View
 
         private async void Sincronizar(object sender, EventArgs e)
         {
+            listViewResultAtlas.IsVisible = false;
             frameSincronizacion.IsVisible = true;
             await detalleUniversidadViewModel.SincronizarImagenesPlantel();
             await carreraViewModel.SincronizarCarrera();
+            await carreraViewModel.SincronizarDetalleCarrera();
             await plantelESViewModel.SincronizarDetallePlantel();
             await plantelESViewModel.SincronizarPlantelesES();
             await municipioViewModel.SincronizarMunicipio();
+            await perfilAlumno.SincronizarAptitudAlumno();
+            await perfilAlumno.SincronizarAptitudes();
+  
             frameSincronizacion.IsVisible = false;
+            listViewResultAtlas.IsVisible = true;
             LlenarLista();
         }
 
@@ -67,7 +74,7 @@ namespace Appli_KT2.View
             actiCargarResultado.IsRunning = false;
             listViewResultAtlas.IsVisible = true;
             FiltrarResultado(resultadoAtlasViewModel.lstPlanteles);
-            Application.Current.MainPage.DisplayAlert("Alerta", "Si llegara a faltar información, no es problema de la aplicación, si no de la base de datos de SUREDSU", "Aceptar");
+            Application.Current.MainPage.DisplayAlert("Alerta", "Si llegara a faltar información, no es a causa de la aplicación", "Aceptar");
             //listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.lstPlanteles;
             listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
         }
@@ -77,6 +84,7 @@ namespace Appli_KT2.View
             var municipio = Convert.ToInt32(App.Current.Properties["municipios"].ToString());
             var institucion = Convert.ToInt32(App.Current.Properties["institucion"].ToString());
             var carrera = Convert.ToInt32(App.Current.Properties["Carrera"].ToString());
+            lstDetallePlantel = lstDetallePlantel.OrderBy(p => p.NombrePlantelES).ToList();
             if (municipio !=  0)
             {
                 var LstEscuelas = from a in lstDetallePlantel where a.Municipio == municipio select a;

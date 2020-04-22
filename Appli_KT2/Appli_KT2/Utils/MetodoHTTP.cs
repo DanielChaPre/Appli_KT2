@@ -38,7 +38,7 @@ namespace Appli_KT2.Utils
                 if (response.IsSuccessful)
                 {
                     dynamic datos = JsonConvert.DeserializeObject(response.Content);
-                    Application.Current.MainPage.DisplayAlert("Exito", "Su información se a guardado de manera correcta", "Aceptar");
+                    Application.Current.MainPage.DisplayAlert("Exito", "Su información se a guardado", "Aceptar");
                     return datos;
                 }
 

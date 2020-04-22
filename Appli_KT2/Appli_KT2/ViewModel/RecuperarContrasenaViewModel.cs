@@ -84,7 +84,7 @@ namespace Appli_KT2.ViewModel
                 usuarioBase64.Replace("/", "_");
                 usuarioBase64.Replace("=", "");
                 var url = "https://applikt.utleon.edu.mx/index.php?accion=cmVjdXBlcmFyX2NvbnRyYXNlbmE&usuario=" + usuarioBase64 + "";
-                string body = url;
+                string body = "De clic en el link para ir al formulario para recuperar contraseña\n\n" + url;
 
                 var smtp = new SmtpClient
                 {
@@ -102,7 +102,7 @@ namespace Appli_KT2.ViewModel
                 })
                 {
                     smtp.Send(message);
-                    await Application.Current.MainPage.DisplayAlert("Exito", "Se a enviado el correo", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Exito", "Se ha enviado el correo", "Aceptar");
                     await Application.Current.MainPage.Navigation.PopAsync();
                 }
             }

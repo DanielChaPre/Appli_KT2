@@ -2,6 +2,7 @@
 using Appli_KT2.Utils;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -22,6 +23,7 @@ namespace Appli_KT2.ViewModel
         private Municipios _selectedMunicipio;
         private Colonias _selectedColonia;
         private Estados entEstados;
+        private Resultado resultadoAptitud;
         MetodoHTTP metodosHTTP;
         private bool isrun;
         private bool isvisible;
@@ -30,6 +32,7 @@ namespace Appli_KT2.ViewModel
         private string sexo;
         private string plantelEMS;
         private bool nuevo_registro;
+        private List<Aptitud> ListAptitudes = new List<Aptitud>();
 
         public PerfilAlumnoViewModel()
         {
@@ -413,6 +416,128 @@ namespace Appli_KT2.ViewModel
                 default:
                     Sexo = "Indistinto";
                     break;
+            }
+        }
+
+        public async Task SincronizarAptitudAlumno()
+        {
+            var idAlumno = App.Current.Properties["idAlumno"].ToString();
+            if (idAlumno.Equals("0"))
+            {
+                return;
+            }
+            SQLiteConnection conn;
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            conn.CreateTable<Resultado>();
+            if (!await ObtenerResultadoAptitud())
+            {
+                SincronizarAptitudAlumno();
+            }
+            if (resultadoAptitud != null)
+            {
+
+                conn.InsertOrReplace(resultadoAptitud);
+
+            }
+            else
+            {
+                SincronizarAptitudAlumno();
+            }
+        }
+
+        public async Task SincronizarAptitudes()
+        {
+            SQLiteConnection conn;
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            conn.CreateTable<Aptitud>();
+            if (!await ObtenerAptitudes())
+            {
+                SincronizarAptitudes();
+            }
+            if (ListAptitudes != null)
+            {
+                for (int i = 0; i < ListAptitudes.Count; i++)
+                {
+                    conn.InsertOrReplace(ListAptitudes[i]);
+                }
+
+                conn.InsertOrReplace(resultadoAptitud);
+            }
+            else
+            {
+                SincronizarAptitudes();
+            }
+        }
+
+        private async Task<bool> ObtenerResultadoAptitud()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var idAlumno = App.Current.Properties["idAlumno"].ToString();
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerAptitudesAlumno+idAlumno));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                   
+                    var content = await response.Content.ReadAsStringAsync();
+                    var resultado = JsonConvert.DeserializeObject<Resultado>(content);
+                    if (resultado != null)
+                    {
+                        resultadoAptitud = new Resultado()
+                        {
+                            idAlumno = resultado.idAlumno,
+                            aptitud1 = resultado.aptitud1,
+                            aptitud2 = resultado.aptitud2,
+                            aptitud3 = resultado.aptitud3
+                        };
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+        private async Task<bool> ObtenerAptitudes()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerAptitudes));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var content = await response.Content.ReadAsStringAsync();
+                    var aptitudes = JsonConvert.DeserializeObject<List<Aptitud>>(content);
+                    for (int i = 0; i < aptitudes.Count; i++)
+                    {
+                        var aptitud = new Aptitud()
+                        {
+                            Cve_aptitud = aptitudes[i].Cve_aptitud,
+                            Estatus = aptitudes[i].Estatus,
+                            Nombre = aptitudes[i].Nombre
+                        };
+                        ListAptitudes.Add(aptitud);
+                    }
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

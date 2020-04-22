@@ -233,6 +233,8 @@ namespace Appli_KT2.ViewModel
                 if (string.IsNullOrEmpty(this.User))
                 {
                     await Application.Current.MainPage.DisplayAlert("Error", "Ingresa el usuario", "Accept");
+                    this.IsRunning = false;
+                    this.IsEnable = false;
                     return;
                 }
 

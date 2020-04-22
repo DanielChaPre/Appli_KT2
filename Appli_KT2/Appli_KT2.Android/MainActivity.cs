@@ -60,7 +60,6 @@ namespace Appli_KT2.Droid
                 {
                     MessageDigest md = MessageDigest.GetInstance("SHA");
                     md.Update(signature.ToByteArray());
-
                     System.Diagnostics.Debug.WriteLine(Convert.ToBase64String(md.Digest()));
                 }
             }

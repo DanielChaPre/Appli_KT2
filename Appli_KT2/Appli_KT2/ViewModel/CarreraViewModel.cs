@@ -14,6 +14,7 @@ namespace Appli_KT2.ViewModel
     public class CarreraViewModel : CarrerasES
     {
         private List<CarrerasES> lstCarreraES = new List<CarrerasES>();
+        private List<DetalleCarreraPlantel> lstDetalleCarreraES = new List<DetalleCarreraPlantel>();
         private CarreraDataBase carreraDataBase = new CarreraDataBase();
 
         public CarreraViewModel()
@@ -22,6 +23,12 @@ namespace Appli_KT2.ViewModel
         }
 
         public List<CarrerasES> ListCarreraES
+        {
+            get;
+            set;
+        }
+
+        public List<DetalleCarreraPlantel> ListDetalleCarreraES
         {
             get;
             set;
@@ -99,6 +106,70 @@ namespace Appli_KT2.ViewModel
                     return true;
                 }
             });
+        }
+
+        public async Task SincronizarDetalleCarrera()
+        {
+            SQLiteConnection conn;
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            conn.CreateTable<DetalleCarreraPlantel>();
+            if (!await ObtenerDetalleCarreraES())
+            {
+                SincronizarDetalleCarrera();
+            }
+            if (ListCarreraES.Count != 0)
+            {
+                for (int i = 0; i < ListCarreraES.Count; i++)
+                {
+                    conn.InsertOrReplace(ListCarreraES[i]);
+                }
+            }
+            else
+            {
+                SincronizarDetalleCarrera();
+            }
+        }
+
+        private async Task<bool> ObtenerDetalleCarreraES()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerDetalleCarrera));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var listaCarreras = JsonConvert.DeserializeObject<List<DetalleCarreraPlantel>>(content);
+                    for (int i = 0; i < listaCarreras.Count; i++)
+                    {
+                        var entCarreras = new DetalleCarreraPlantel()
+                        {
+                            Costos = listaCarreras[i].Costos,
+                            Cve_detalle_carrera_plantel = listaCarreras[i].Cve_detalle_carrera_plantel,
+                            Cve_detalle_plantel = listaCarreras[i].Cve_detalle_plantel,
+                            Duracion = listaCarreras[i].Duracion,
+                            IdCarreraES = listaCarreras[i].IdCarreraES,
+                            Modalidad = listaCarreras[i].Modalidad,
+                            Perfil_egreso = listaCarreras[i].Perfil_egreso,
+                            Perfil_ingreso = listaCarreras[i].Perfil_ingreso,
+                            RVOE = listaCarreras[i].RVOE,
+                            Sector_productivo = listaCarreras[i].Sector_productivo
+
+                        };
+                        lstDetalleCarreraES.Add(entCarreras);
+                    }
+                    this.ListDetalleCarreraES = this.lstDetalleCarreraES;
+                    return true;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public async Task SincronizarCarrera()

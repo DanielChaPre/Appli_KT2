@@ -6,15 +6,34 @@
              Padding="10,0">
   
     <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame
+                    Margin="0,100,0,0"
+                    IsVisible="False"
+                     BackgroundColor="White"
+                     VerticalOptions="CenterAndExpand"
+                     x:Name="frameSincronizacion">
+                    <StackLayout>
+                        <Label
+                            Text="Sincronizando, espere por favor..." 
+                        />
+                        <ActivityIndicator
+                        IsRunning="True"
+                        Color="Blue"
+                        />
+                    </StackLayout>
 
-        <Frame 
+                </Frame>
+                <Frame 
             BackgroundColor="Transparent"
-            VerticalOptions="CenterAndExpand">
+            VerticalOptions="CenterAndExpand"
+                    x:Name="frameFiltro">
 
-            <StackLayout
+                    <StackLayout
                 Padding="2,3">
 
-                <Label
+                        <Label
                     FontSize="Title"
                     HorizontalOptions="Start"
                     HorizontalTextAlignment="Start"
@@ -24,39 +43,39 @@
                     VerticalTextAlignment="End"
                 />
 
-                <Label
+                        <Label
                     FontSize="Subtitle"
                     HorizontalOptions="Start"
                     HorizontalTextAlignment="Start"
                     Margin="0,0,0,35"
-                    Text="Planteles, carerras y más..."
+                    Text="Planteles, carreras y más..."
                     TextColor="#fd8204"
                     VerticalOptions="StartAndExpand"
                     VerticalTextAlignment="Start"
                 />
 
-                <StackLayout
+                        <StackLayout
                     VerticalOptions="CenterAndExpand"
                     >
-                    <Label
+                            <Label
                         FontSize="Subtitle"
                         Text="Buscar carrera"
                         TextColor="White"
                     />
 
-                    <Entry
+                            <Entry
                         BackgroundColor="White"
                         FontSize="Body"
                         TextColor="Black"
                         x:Name="txtCarrera"
                     />
 
-                    <Label
+                            <Label
                         FontSize="Subtitle"
                         Text="Carrera"
                         TextColor="White"
                     />
-                    <Picker
+                            <Picker
                         BackgroundColor="White"
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
@@ -64,33 +83,33 @@
                         Title="           --Seleccione Carrera--"
                     />
 
-                    <Label
+                            <Label
                         Text="Municipio"
                         TextColor="White"
                     />
-                    <Picker
+                            <Picker
                         BackgroundColor="White"
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
                         x:Name="pMunicipio"
                         Title="           --Seleccione Municipio--"
                     />
-                    
-                    <Label
+
+                            <Label
                         Text="Institución de Educación Sup."
                         TextColor="White"
                     />
-                    <Picker
+                            <Picker
                         BackgroundColor="White"
                         Margin="0,0,0,15"
                         TextColor="#1b213c"
                         x:Name="pPlantelesES"
                         Title="           --Seleccione Plantel--"
                     />
-                    
-                    
-                    
-                    <Button
+
+
+
+                            <Button
                         BackgroundColor="#fd8204"
                         HorizontalOptions="Center"
                         Margin="0,30,0,0"
@@ -99,8 +118,98 @@
                         VerticalOptions="EndAndExpand"
                         WidthRequest="150"
                         x:Name="btnBuscar"/>
-                </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame
+                    IsVisible="False"
+                    x:Name="frameSugerencias"
+                    >
+                    <StackLayout>
+                        <Label
+                            Text="Sugerencias de carreras"
+                        />
+                        <ListView 
+                            x:Name="listViewSugerencias" 
+                            CachingStrategy="RecycleElement"
+                            HasUnevenRows="True"
+                        >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell 
+                                       Height="200" >
+                                        <Frame
+                                             Margin="0,3"
+                                             HasShadow="true" 
+                                             BorderColor="Silver"
+                                             Padding="0"
+                                             x:Name="framePrueba">   
+                                            <Grid
+                                                Padding="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="90"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <StackLayout
+                                                    Grid.Column="0">
+                                                    <Image 
+                                                        ScaleY="3"
+                                                        Source="{Binding DetallePlantel.ImagenDecodificada}"
+                                                        VerticalOptions="CenterAndExpand"
+                                                        x:Name="imagenPrueba"
+                                                        WidthRequest="250"/>
+                                                </StackLayout>
+                                                <Grid 
+                                                    Padding="0,10"
+                                                    HorizontalOptions="Start"
+                                                    Grid.Column="1">    
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions >
+                                                        <RowDefinition Height="Auto"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Label 
+                                                        FontSize="20"
+                                                        x:Name="lblOpcion" 
+                                                        Grid.Column="0"
+                                                        Grid.Row="0"
+                                                        Text="{Binding NombrePlantelES}" 
+                                                        TextColor="Black" 
+                                                        Margin="1"
+                                                        VerticalOptions="StartAndExpand"/>
+                                                    <Label 
+                                                        FontSize="10"
+                                                        x:Name="lblDireccion" 
+                                                        Grid.Column="0"
+                                                        Grid.Row="1"
+                                                        Text="{Binding Subsistema}" 
+                                                        TextColor="Black"
+                                                        Margin="1"
+                                                        VerticalOptions="CenterAndExpand"/>
+                                                    <Label 
+                                                        FontSize="10"
+                                                        x:Name="lblWeb" 
+                                                        Grid.Column="0"
+                                                        Grid.Row="2"
+                                                        Text="{Binding Sostenimiento}" 
+                                                        TextColor="Black"
+                                                        Margin="1"
+                                                        VerticalOptions="EndAndExpand"/>
+                                                </Grid>
+                                            </Grid>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
-        </Frame>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

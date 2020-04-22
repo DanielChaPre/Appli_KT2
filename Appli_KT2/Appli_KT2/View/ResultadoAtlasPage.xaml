@@ -53,7 +53,9 @@
                     />  
                 </StackLayout>
                 
-            </Frame>
+            </Frame
+              
+                >
             <ActivityIndicator
                 Color="White"
                 VerticalOptions="Center"

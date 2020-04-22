@@ -220,13 +220,13 @@ namespace Appli_KT2.View
                 case "Eventos históricos":
                     listaMenu.Add(plantilla);
                     break;
-                case "Perfiles":
+                case "Mi perfil":
                     listaMenu.Add(plantilla);
                     break;
-                case "Notificaciones":
+                case "Buzon de Notificaciones":
                     listaMenu.Add(plantilla);
                     break;
-                case "Enlace SUREDSU":
+                case "Encuesta SUREDSU":
                     listaMenu.Add(plantilla);
                     break;
                 default:
@@ -247,7 +247,7 @@ namespace Appli_KT2.View
                 case "Buzón de notificaciones":
                     listaMenu.Add(plantilla);
                     break;
-                case "Enlace SUREDSU":
+                case "Encuesta SUREDSU":
                     listaMenu.Add(plantilla);
                     break;
                 default:
@@ -274,7 +274,7 @@ namespace Appli_KT2.View
 
                     stlMenu.Children.Add(btnEventHistorial);
                     break;
-                case "Perfiles":
+                case "Mi perfil":
                     Button btnPerfiles = new Button();
                     btnPerfiles.ImageSource = "ic_cuenta.png";
                     btnPerfiles.Text = plantilla;
@@ -302,7 +302,7 @@ namespace Appli_KT2.View
 
                     stlMenu.Children.Add(btnNotificacion);
                     break;
-                case "Proceso SUREDSU":
+                case "Encuesta SUREDSU":
                     Button btnEnlaceSuredsu = new Button();
                     btnEnlaceSuredsu.ImageSource = "ic_school_outline.png";
                     btnEnlaceSuredsu.Text = plantilla;
@@ -368,7 +368,7 @@ namespace Appli_KT2.View
 
                     stlMenu.Children.Add(btnNotificacion);
                     break;
-                case "Proceso SUREDSU":
+                case "Encuesta SUREDSU":
                     Button btnEnlaceSuredsu = new Button();
                     btnEnlaceSuredsu.ImageSource = "ic_school_outline.png";
                     btnEnlaceSuredsu.Text = plantilla;

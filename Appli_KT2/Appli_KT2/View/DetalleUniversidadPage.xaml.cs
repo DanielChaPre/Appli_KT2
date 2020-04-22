@@ -30,6 +30,7 @@ namespace Appli_KT2.View
         private MapBehavior mapBehavior;
         public List<PlantelesES> lstPlanteles = new List<PlantelesES>();
         public SQLiteConnection conn;
+        private static bool banderaClick = true;
         public DetalleUniversidadPage (PlantelesES plantelesES)
        // public DetalleUniversidadPage ()
 		{
@@ -141,34 +142,38 @@ namespace Appli_KT2.View
 
             var listaCarreras = conn.Query<CarrerasES>("SELECT * FROM CarrerasES Where IdPlantelesES = ?", "" + EntDetallePlantel.idPlantelES + "");
             listViewCarreras.ItemsSource = listaCarreras;
-            //var listaImagenes = conn.Query<ImagenPlantel>("SELECT * FROM ImagenPlantel ");
-            //Device.StartTimer(TimeSpan.FromSeconds(3), () =>
-            //{
-            //    try
-            //    {
-            //        if (detalleUniversidadViewModel.ListCarreraES == null)
-            //        {
-            //            //detalleUniversidadViewModel.ObtenerCarreraES(EntDetallePlantel.PlantelesES.idPlantelES);
-            //        }
-            //        while (detalleUniversidadViewModel.ListImagenes != null)
-            //        {
-            //            ListaCarreras = new List<CarrerasES>();
-            //            ListaCarreras = detalleUniversidadViewModel.ListCarreraES;
-            //            BindingContext = this;
-            //            iscreatecarreras = true;
-            //            return false;
-            //        }
-            //        return true;
-            //    }
-            //    catch (Exception)
-            //    {
-            //        return true;
-            //        throw;
-            //    }
-            //});
+            listViewCarreras.ItemSelected += obtenerdetallecarrera;
         }
 
-	}
+        private async void obtenerdetallecarrera(object sender, SelectedItemChangedEventArgs e)
+        {
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            listViewCarreras.SelectedItem = null;
+            if (banderaClick)
+            {
+                var item = e.SelectedItem as CarrerasES;
+                if ((item != null))
+                {
+                    banderaClick = false;
+                    //  await Navigation.PushAsync(new DetalleUniversidadPage(item));
+                    //DetalleCarreraPlantel detalle = new DetalleCarreraPlantel();
+                    var detalle = conn.Query<DetalleCarreraPlantel>("SELECT * FROM DetalleCarreraPlantel Where IdCarreraES = ?", "" + item.idCarreraES + "");
+                    if (detalle.Count == 0)
+                    {
+                        await DisplayAlert("Información", "No se cuenta con información más detallada", "Aceptar");
+                    }
+
+                    await DisplayAlert("Información", detalle[0].Costos, "Aceptar");
+                    await Task.Run(async () =>
+                    {
+                        await Task.Delay(500);
+                        banderaClick = true;
+                    });
+                }
+            }
+        }           
+
+    }
 
     public class CarouselModel
     {
