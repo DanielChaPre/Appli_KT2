@@ -44,7 +44,7 @@ namespace Appli_KT2.View
         {
             listViewResultAtlas.IsVisible = false;
             frameSincronizacion.IsVisible = true;
-            await detalleUniversidadViewModel.SincronizarImagenesPlantel();
+         //   await detalleUniversidadViewModel.SincronizarImagenesPlantel();
             await carreraViewModel.SincronizarCarrera();
             await carreraViewModel.SincronizarDetalleCarrera();
             await plantelESViewModel.SincronizarDetallePlantel();
@@ -77,6 +77,7 @@ namespace Appli_KT2.View
             Application.Current.MainPage.DisplayAlert("Alerta", "Si llegara a faltar información, no es a causa de la aplicación", "Aceptar");
             //listViewResultAtlas.ItemsSource = resultadoAtlasViewModel.lstPlanteles;
             listViewResultAtlas.ItemSelected += OnClickOpcionSeleccionada;
+            
         }
 
         private void FiltrarResultado(List<PlantelesES> lstDetallePlantel)

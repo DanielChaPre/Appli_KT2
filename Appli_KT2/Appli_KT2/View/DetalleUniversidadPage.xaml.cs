@@ -69,6 +69,8 @@ namespace Appli_KT2.View
           //  CrearCarruselImagen();
             LlenarCarrerasPlantel();
             LlenarDireccion();
+            listViewCarreras.ItemSelected += OnClickOpcionSeleccionada;
+            banderaClick = true;
         }
 
         private void CrearCarruselImagen(int cvedetalle)
@@ -76,9 +78,7 @@ namespace Appli_KT2.View
             try
             {
                 conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
-                //  conn.CreateTable<ImagenPlantel>();
 
-                //var listaImagenes = conn.Query<ImagenPlantel>("SELECT * FROM ImagenPlantel Where Cve_detalle_plantel = ?", "" + cvedetalle + "");
                 var listaImagenes = conn.Query<ImagenPlantel>("SELECT * FROM ImagenPlantel ");
                 for (int i = 0; i < listaImagenes.Count; i++)
                 {
@@ -162,8 +162,12 @@ namespace Appli_KT2.View
                     {
                         await DisplayAlert("Información", "No se cuenta con información más detallada", "Aceptar");
                     }
+                    else
+                    {
+                        await Navigation.PushAsync(new DetalleCarreraPage(detalle[1], EntDetallePlantel.NombreInstitucionES, item.NombreCarreraES));
 
-                    await DisplayAlert("Información", detalle[0].Costos, "Aceptar");
+                    }
+                    // await DisplayAlert("Información", detalle[0].Costos, "Aceptar");
                     await Task.Run(async () =>
                     {
                         await Task.Delay(500);
@@ -171,8 +175,37 @@ namespace Appli_KT2.View
                     });
                 }
             }
-        }           
+        }
+        private async void OnClickOpcionSeleccionada(object sender, SelectedItemChangedEventArgs e)
+        {
+            try
+            {
+                listViewCarreras.SelectedItem = null;
+                if (banderaClick)
+                {
+                    var item = e.SelectedItem as CarrerasES;
+                    if ((item != null))
+                    {
+                        banderaClick = false;
+                        conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+                        var listaCarreras = conn.Query<DetalleCarreraPlantel>("SELECT * FROM DetalleCarreraPlantel Where IdCarreraES = ?", "" + item.idCarreraES + "");
 
+                      
+                        await Task.Run(async () =>
+                        {
+                            await Task.Delay(500);
+                            banderaClick = true;
+                        });
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
     }
 
     public class CarouselModel

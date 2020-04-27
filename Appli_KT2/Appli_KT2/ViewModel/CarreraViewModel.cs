@@ -154,7 +154,7 @@ namespace Appli_KT2.ViewModel
                             Modalidad = listaCarreras[i].Modalidad,
                             Perfil_egreso = listaCarreras[i].Perfil_egreso,
                             Perfil_ingreso = listaCarreras[i].Perfil_ingreso,
-                            RVOE = listaCarreras[i].RVOE,
+                            RVOE1 = listaCarreras[i].RVOE1,
                             Sector_productivo = listaCarreras[i].Sector_productivo
 
                         };

@@ -18,6 +18,7 @@ namespace Appli_KT2.View
     {
         private int tipo_usuario;
         private List<string> listaPlantillas = new List<string>();
+        private List<PlantillaEnlace> listaPlantillas2 = new List<PlantillaEnlace>();
         private List<string> listaMenu = new List<string>();
         private MainTabbedViewModel mainTabbedViewModel;
         public MasterPage()
@@ -156,7 +157,7 @@ namespace Appli_KT2.View
 
         private async void BtnCliente_Click(object sender, EventArgs e)
         {
-            
+
             await Application.Current.MainPage.DisplayAlert("Prueba", "Prueba del click", "Aceptar");
         }
 
@@ -171,10 +172,10 @@ namespace Appli_KT2.View
 
         public async void CrearMenuAlumno()
         {
-                try
-                {
+            try
+            {
                 OcultarMenu();
-                    await ObtenerPlantillaAlumno();
+                await ObtenerPlantillaAlumno();
                 for (int i = 0; i < listaPlantillas.Count; i++)
                 {
                     LlenarListaMenuA(listaPlantillas[i]);
@@ -183,12 +184,12 @@ namespace Appli_KT2.View
                 {
                     CrearMenuA(listaMenu[i], i);
                 }
+                await ObtenerPlantillaUsuarioEnlace();
             }
-                catch (Exception)
-                {
-
-                    throw;
-                }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async void CrearMenuUsuario()
@@ -205,6 +206,7 @@ namespace Appli_KT2.View
                 {
                     CrearMenuU(listaMenu[i], i);
                 }
+                await ObtenerPlantillaUsuarioEnlace();
             }
             catch (Exception)
             {
@@ -266,7 +268,7 @@ namespace Appli_KT2.View
                     btnEventHistorial.Text = plantilla;
                     btnEventHistorial.BindingContext = mainTabbedViewModel;
                     btnEventHistorial.Command = mainTabbedViewModel.IrHistorialCommand;
-                    if((posicion%2)==0)
+                    if ((posicion % 2) == 0)
                         btnEventHistorial.BackgroundColor = Color.FromHex("#1b213c");
                     else
                         btnEventHistorial.BackgroundColor = Color.FromHex("#0a225a");
@@ -288,7 +290,7 @@ namespace Appli_KT2.View
 
                     stlMenu.Children.Add(btnPerfiles);
                     break;
-                case "Notificaciones":
+                case "Buzón de notificaciones":
                     Button btnNotificacion = new Button();
                     btnNotificacion.ImageSource = "ic_notifications.png";
                     btnNotificacion.Text = plantilla;
@@ -398,7 +400,7 @@ namespace Appli_KT2.View
                 {
                     return;
                 }
-                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerPlantillaUsuario+cveUsuario));
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerPlantillaUsuario + cveUsuario));
                 HttpResponseMessage response = await _client.GetAsync(uri);
 
                 if (response.IsSuccessStatusCode)
@@ -414,6 +416,71 @@ namespace Appli_KT2.View
             {
                 throw;
             }
+        }
+
+        public async Task ObtenerPlantillaUsuarioEnlace()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var cveUsuario = Convert.ToInt32(App.Current.Properties["cveUsuario"].ToString());
+                if (cveUsuario == 0)
+                {
+                    return;
+                }
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerPlantillaEnlace + cveUsuario));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var listaPlant = JsonConvert.DeserializeObject<List<PlantillaEnlace>>(content);
+                    //var lstplantillas = new List<string>();
+                    listaPlantillas2 = null;
+                    listaPlantillas2 = listaPlant;
+                    GenerarMenuEnlace();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void GenerarMenuEnlace()
+        {
+            for (int i = 0; i < listaPlantillas2.Count; i++)
+            {
+                Button btnEnlace = new Button();
+                btnEnlace.ImageSource = "ic_school_outline.png";
+                btnEnlace.Text = listaPlantillas2[i].nombre;
+                btnEnlace.BindingContext = mainTabbedViewModel;
+                if ((i % 2) == 0)
+                    btnEnlace.BackgroundColor = Color.FromHex("#1b213c");
+                else
+                    btnEnlace.BackgroundColor = Color.FromHex("#0a225a");
+                btnEnlace.TextColor = Color.White;
+                btnEnlace.Clicked += (object sender, EventArgs e) =>
+                {
+                    var plantilla = btnEnlace.Text;
+                    for (int j = 0; j < listaPlantillas2.Count; j++)
+                    {
+                        
+                        if (plantilla.Equals(listaPlantillas2[j].nombre))
+                        {
+                            //App.Current.MainPage.DisplayAlert("prueba", listaPlantillas2[j].nombre, "Aceptar");
+                            App.Current.MainPage.Navigation.PushAsync(new EnlacePage(listaPlantillas2[j].ruta));
+                        }
+                    }
+                };
+                stlMenu.Children.Add(btnEnlace);
+            }
+        }
+
+        private void IrEnlace(object sender, EventArgs e)
+        {
+            
         }
 
         public async Task ObtenerPlantillaAlumno()
@@ -444,5 +511,11 @@ namespace Appli_KT2.View
                 throw;
             }
         }
+    }
+
+    public class PlantillaEnlace
+    {
+        public string nombre { get; set; }
+        public string ruta { get; set; }
     }
 }

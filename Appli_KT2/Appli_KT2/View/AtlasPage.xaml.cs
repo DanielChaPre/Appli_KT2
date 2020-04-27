@@ -273,7 +273,7 @@ namespace Appli_KT2.View
             frameSugerencias.IsVisible = false;
             frameFiltro.IsVisible = false;
             frameSincronizacion.IsVisible = true;
-            await detalleUniversidadViewModel.SincronizarImagenesPlantel();
+          
             await carreraViewModel.SincronizarCarrera();
             await carreraViewModel.SincronizarDetalleCarrera();
             await plantelESViewModel.SincronizarDetallePlantel();
@@ -281,6 +281,7 @@ namespace Appli_KT2.View
             await municipioViewModel.SincronizarMunicipio();
             await perfilAlumno.SincronizarAptitudAlumno();
             await perfilAlumno.SincronizarAptitudes();
+         //   await detalleUniversidadViewModel.SincronizarImagenesPlantel();
 
             frameSincronizacion.IsVisible = false;
             frameSugerencias.IsVisible = false;

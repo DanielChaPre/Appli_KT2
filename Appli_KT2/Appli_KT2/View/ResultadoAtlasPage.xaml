@@ -6,7 +6,7 @@
              Padding="5,0">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem
+  <!--      <ToolbarItem
             Text="Filtrar"  
             Icon="filter_outline.png"  
             Priority="0"  
@@ -18,7 +18,7 @@
             Icon="share.png"  
             Priority="0"  
             Order="Secondary" 
-            x:Name="icShare"/>
+            x:Name="icShare"/>-->
 
         <ToolbarItem 
             Text="Sincronizar"  
@@ -91,6 +91,7 @@
                                     <StackLayout
                                      Grid.Column="0">
                                         <Image 
+                                            Margin="0,15,0,0"
                                             ScaleY="3"
                                             Source="{Binding DetallePlantel.ImagenDecodificada}"
                                             VerticalOptions="CenterAndExpand"

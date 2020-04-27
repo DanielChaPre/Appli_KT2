@@ -68,6 +68,8 @@ namespace Appli_KT2.Utils
         private string guardarBusquedaCarrera = "/busquedacarrera/";
         private string guardarHistorialVisita = "/historialvisita/";
         private string obtenerAptitudes = "/aptitudes";
+        private string obtenerPlantillaEnlace = "/plantillaEnlace/";
+        private string obtenerPlantillaEnlaceAlumno = "/plantillaEnlaceAlumno/";
 
 
 
@@ -177,5 +179,7 @@ namespace Appli_KT2.Utils
         public string GuardarBusquedaCarrera { get => guardarBusquedaCarrera; set => guardarBusquedaCarrera = value; }
         public string GuardarHistorialVisita { get => guardarHistorialVisita; set => guardarHistorialVisita = value; }
         public string ObtenerAptitudes { get => obtenerAptitudes; set => obtenerAptitudes = value; }
+        public string ObtenerPlantillaEnlace { get => obtenerPlantillaEnlace; set => obtenerPlantillaEnlace = value; }
+        public string ObtenerPlantillaEnlaceAlumno { get => obtenerPlantillaEnlaceAlumno; set => obtenerPlantillaEnlaceAlumno = value; }
     }
 }

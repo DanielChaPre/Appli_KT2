@@ -38,7 +38,7 @@ namespace Appli_KT2.Utils
                 var pin = new Pin
                 {
                     Type = PinType.Place,
-                    Position = new Position(x.DetallePlantel.Latitud, x.DetallePlantel.Longitud),
+                    Position = new Position(Convert.ToDouble(x.DetallePlantel.Latitud), Convert.ToDouble(x.DetallePlantel.Longitud)),
                     Label = x.NombrePlantelES,
                     Address = x.DetallePlantel.Reseña,
 

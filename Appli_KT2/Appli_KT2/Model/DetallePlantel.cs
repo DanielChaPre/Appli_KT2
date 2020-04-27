@@ -26,8 +26,8 @@ namespace Appli_KT2.Model
         private string requisitos;
         private string fechas;
         private string reseña;
-        private double latitud;
-        private double longitud;
+        private string latitud;
+        private string longitud;
         private string ubicacion;
         private string nivel_estudio;
         private string cve_nivel_agrupado;
@@ -121,7 +121,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public double Latitud
+        public string Latitud
         {
             get
             {
@@ -133,7 +133,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public double Longitud
+        public string Longitud
         {
             get
             {

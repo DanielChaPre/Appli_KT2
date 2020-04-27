@@ -93,7 +93,7 @@ namespace Appli_KT2.View
                 activityIndicator.IsRunning = false;
                 //SesionPrueba();
                 VerificarLogin();
-                App.Current.Properties["sincronizacion"] = "0";
+                App.Current.Properties["sincronizacion"] = "1";
                 //VerificarConfiguracionTema();
                 Application.Current.MainPage = new NavigationPage(new MainPage());
             }

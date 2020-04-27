@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Appli_KT2.View.DetalleCarreraPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout 
+                >
+                <!-- nombre de la universidad y de la carrera-->
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center"
+                    >
+                    <AbsoluteLayout>
+                        <StackLayout
+                            AbsoluteLayout.LayoutBounds="0,0,1,0.9"
+                            AbsoluteLayout.LayoutFlags="All"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            x:Name="logoLayout">
+
+                            <Label
+                                FontSize="Title"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtNombreEscuela"
+                            />
+
+                            <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtNombreCarrea"
+                            />
+                        </StackLayout>
+                    </AbsoluteLayout>
+                </Frame>
+
+                <!--Perfil de egreso e ingreso-->
+                <Label 
+                    Margin="0,5,0,0"
+                    Text="Perfil de ingreso y egreso" HorizontalTextAlignment="Center"
+                    TextColor="White"/>
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout>
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Perfil de Ingreso"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                
+                            />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtPerfilIngreso"
+                            />
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                
+                            />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Perfil de Egreso"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtPerfilEgreso"
+                            />
+
+                    </StackLayout>
+                </Frame>
+
+                <!--Sector Productivo-->
+                <Label Text="Sector Productivo" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        >
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtSectorProductivo"
+                            />
+                    </StackLayout>
+                </Frame>
+
+                <!--Caracteristicas-->
+                <Label Text="Carreras" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        >
+                        <ListView 
+                            x:Name="listViewCarreras" 
+                            CachingStrategy="RecycleElement"
+                            HasUnevenRows="True"
+                            
+                              >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell 
+                                      Height="100" >
+                                        <Frame
+                                             Margin="0,3"
+                                             HasShadow="true" 
+                                             BorderColor="Silver"
+                                             Padding="0"
+                                                x:Name="framePrueba">
+                                            <Label
+                                                Text="{Binding NombreCarreraES}"
+                                                x:Name="lblCarrera"
+                                                TextColor="Black"
+                                                />
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Frame>
+
+                <!--Costos-->
+                <Label Text="Modalidad y duración" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        >
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Modalidad"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                            />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtModalidad"
+                            />
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Duración"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                            />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtDuracion"
+                            />
+                    </StackLayout>
+                </Frame>
+
+                <!--Requisistos-->
+                <Label Text="Requisitos" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        >
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtRequisitos"/>
+
+                    </StackLayout>
+                </Frame>
+
+                <!--Contacto-->
+                <Label Text="Contacto" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        >
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Nombre:"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                            />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtNombreContacto"
+                            />
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Correo contacto"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                            />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtCorreoContacto"
+                            />
+                        
+                    </StackLayout>
+                </Frame>
+
+                <!--Actividades extracurriculares-->
+                <Label Text="Actividades extracurriculares" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        >
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtActividades"
+                          />
+                    </StackLayout>
+                </Frame>
+
+                <!--Fechas-->
+                <Label Text="Fechas" HorizontalTextAlignment="Center"
+                       TextColor="White"/>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    HeightRequest="250"
+                    BorderColor="Silver"
+                    VerticalOptions="Center">
+                        <StackLayout
+                        >
+                            <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Fecha de Expedicion"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                          />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtFechaExp"
+                          />
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Fecha de Inscripción"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                          />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtFechaIns"
+                          />
+                        <Label
+                                FontSize="Subtitle"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Fecha de inicio"
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                          />
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtFechaInicio"
+                          />
+                    </StackLayout>
+                    </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
