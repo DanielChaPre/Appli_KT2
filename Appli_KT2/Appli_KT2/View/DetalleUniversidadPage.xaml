@@ -7,6 +7,7 @@
              xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              xmlns:behaviors="clr-namespace:Appli_KT2.Utils;assembly=Appli_KT2"
+             xmlns:viewmodels="clr-namespace:Appli_KT2.ViewModel;assembly=Appli_KT2"
              BackgroundImageSource="pleca_textura.jpg"
              Padding="5,2">
 
@@ -68,7 +69,7 @@
 
                                                 <Image 
                                                     Grid.Column="1"
-                                                    Source="{Binding ImagenDecodificada}" 
+                                                    Source="{Binding imagen}" 
                                                     VerticalOptions="CenterAndExpand"
                                                     ScaleY="1.75"
                                                     x:Name="imgCarruselPlantel"/>
@@ -127,9 +128,6 @@
                             HeightRequest="200"
                             HorizontalOptions="FillAndExpand" 
                             VerticalOptions="FillAndExpand">
-                            <maps:Map.Behaviors>
-                                <behaviors:MapBehavior ItemsSource="{Binding lstPlanteles}"></behaviors:MapBehavior>
-                            </maps:Map.Behaviors>
                         </maps:Map>
                     </StackLayout>
                 </Frame>
@@ -156,8 +154,9 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell 
-                                      Height="100" >
+                                      Height="80" >
                                         <Frame
+                                            BackgroundColor="Gray"
                                              Margin="0,3"
                                              HasShadow="true" 
                                              BorderColor="Silver"
@@ -167,6 +166,8 @@
                                                 Text="{Binding NombreCarreraES}"
                                                 x:Name="lblCarrera"
                                                 TextColor="Black"
+                                                VerticalTextAlignment="Center"
+                                                HorizontalTextAlignment="Center"
                                                 />
                                         </Frame>
                                     </ViewCell>

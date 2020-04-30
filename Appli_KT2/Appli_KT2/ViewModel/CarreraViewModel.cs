@@ -60,7 +60,6 @@ namespace Appli_KT2.ViewModel
                             IdPlantelesES = listaCarreras[i].IdPlantelesES,
                             Nivel = listaCarreras[i].Nivel,
                             NombreCarreraES = listaCarreras[i].NombreCarreraES
-
                         };
                         lstCarreraES.Add(entCarreras);
                     }
@@ -117,11 +116,12 @@ namespace Appli_KT2.ViewModel
             {
                 SincronizarDetalleCarrera();
             }
-            if (ListCarreraES.Count != 0)
+            if (ListDetalleCarreraES.Count != 0)
             {
-                for (int i = 0; i < ListCarreraES.Count; i++)
+                for (int i = 0; i < ListDetalleCarreraES.Count; i++)
                 {
-                    conn.InsertOrReplace(ListCarreraES[i]);
+                 //   conn.Query<DetalleCarreraPlantel>("Delete from DetalleCarreraPlantel");
+                    conn.InsertOrReplace(ListDetalleCarreraES[i]);
                 }
             }
             else
@@ -155,7 +155,21 @@ namespace Appli_KT2.ViewModel
                             Perfil_egreso = listaCarreras[i].Perfil_egreso,
                             Perfil_ingreso = listaCarreras[i].Perfil_ingreso,
                             RVOE1 = listaCarreras[i].RVOE1,
-                            Sector_productivo = listaCarreras[i].Sector_productivo
+                            Sector_productivo = listaCarreras[i].Sector_productivo,
+                            Actividades_extracurriculares = listaCarreras[i].Actividades_extracurriculares, 
+                            Correo_contacto = listaCarreras[i].Correo_contacto,
+                            Cve_nivel_agrupado = listaCarreras[i].Cve_nivel_agrupado,
+                            Cve_nivel_carrera = listaCarreras[i].Cve_nivel_carrera,
+                            Cve_nivel_estudio = listaCarreras[i].Cve_nivel_estudio,
+                            Fecha_expedicion = listaCarreras[i].Fecha_expedicion,
+                            Fecha_inicio = listaCarreras[i].Fecha_inicio,
+                            Fecha_inscripcion = listaCarreras[i].Fecha_inscripcion,
+                            Nombre_contacto = listaCarreras[i].Nombre_contacto,
+                            Nombre_region = listaCarreras[i].Nombre_region,
+                            Region = listaCarreras[i].Region,
+                            Requisitos = listaCarreras[i].Requisitos,
+                            Resenia = listaCarreras[i].Resenia,
+                            Vinculacion = listaCarreras[i].Vinculacion
 
                         };
                         lstDetalleCarreraES.Add(entCarreras);
@@ -174,6 +188,7 @@ namespace Appli_KT2.ViewModel
 
         public async Task SincronizarCarrera()
         {
+         
             SQLiteConnection conn;
             conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
             conn.CreateTable<CarrerasES>();
@@ -185,6 +200,7 @@ namespace Appli_KT2.ViewModel
             {
                 for (int i = 0; i < ListCarreraES.Count; i++)
                 {
+                    //conn.Query<CarrerasES>("Delete from CarrerasES");
                     conn.InsertOrReplace(ListCarreraES[i]);
                 }
             }

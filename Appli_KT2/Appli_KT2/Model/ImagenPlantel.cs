@@ -16,6 +16,8 @@ namespace Appli_KT2.Model
         private int imagen_principal;
         private string ruta;
         private string descripcion;
+        private string imagenbase64;
+
         private Xamarin.Forms.ImageSource imagenDecodificada;
 
         public int Cve_detalle_plantel
@@ -52,6 +54,15 @@ namespace Appli_KT2.Model
                 SetValue(ref this.ruta, value);
             }
         }
+        public string Imagenbase64
+        {
+            get { return this.imagenbase64; }
+            set
+            {
+                SetValue(ref this.imagenbase64, value);
+            }
+        }
+
         public string Descripcion
         {
             get { return this.descripcion; }
@@ -60,6 +71,7 @@ namespace Appli_KT2.Model
                 SetValue(ref this.descripcion, value);
             }
         }
+
         [JsonIgnore]
         [Ignore]
         public ImageSource ImagenDecodificada

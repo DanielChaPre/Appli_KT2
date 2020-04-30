@@ -16,31 +16,41 @@ namespace Appli_KT2.View
         private DetalleCarreraPlantel detalleCarreraPlantel;
         private string nombreEscuela;
         private string nombreCarrera;
-		public DetalleCarreraPage (DetalleCarreraPlantel detalleCarreraPlantel, string escuela, string carrera)
+		public DetalleCarreraPage (DetalleCarreraPlantel detalleCarreraPlanteles, string escuela, string carrera)
 		{
-            this.detalleCarreraPlantel = detalleCarreraPlantel;
+            InitializeComponent();
+            this.detalleCarreraPlantel = detalleCarreraPlanteles;
             this.nombreEscuela = escuela;
             this.nombreCarrera = carrera;
-
-			InitializeComponent ();
+            LlenarInformacion();
+			
 		}
 
         public void LlenarInformacion()
         {
-            txtActividades.Text = detalleCarreraPlantel.Actividades_extracurriculares;
-            txtCorreoContacto.Text = detalleCarreraPlantel.Correo_contacto;
-            txtDuracion.Text = detalleCarreraPlantel.Duracion;
-            txtFechaExp.Text = detalleCarreraPlantel.Fecha_expedicion;
-            txtFechaInicio.Text = detalleCarreraPlantel.Fecha_inicio;
-            txtFechaIns.Text = detalleCarreraPlantel.Fecha_inscripcion;
-            txtModalidad.Text = detalleCarreraPlantel.Modalidad;
-            txtNombreCarrea.Text = nombreCarrera;
-            txtNombreContacto.Text = detalleCarreraPlantel.Nombre_contacto;
-            txtNombreEscuela.Text = nombreEscuela;
-            txtPerfilEgreso.Text = detalleCarreraPlantel.Perfil_egreso;
-            txtPerfilIngreso.Text = detalleCarreraPlantel.Perfil_ingreso;
-            txtRequisitos.Text = detalleCarreraPlantel.Requisitos;
-            txtSectorProductivo.Text = detalleCarreraPlantel.Sector_productivo;
+            try
+            {
+                txtActividades.Text = detalleCarreraPlantel.Actividades_extracurriculares;
+                txtCorreoContacto.Text = detalleCarreraPlantel.Correo_contacto;
+                txtDuracion.Text = detalleCarreraPlantel.Duracion;
+                txtFechaExp.Text = detalleCarreraPlantel.Fecha_expedicion;
+                txtFechaInicio.Text = detalleCarreraPlantel.Fecha_inicio;
+                txtFechaIns.Text = detalleCarreraPlantel.Fecha_inscripcion;
+                txtCostos.Text = detalleCarreraPlantel.Costos;
+                txtModalidad.Text = detalleCarreraPlantel.Modalidad;
+                txtNombreCarrea.Text = nombreCarrera;
+                txtNombreContacto.Text = detalleCarreraPlantel.Nombre_contacto;
+                txtNombreEscuela.Text = nombreEscuela;
+                txtPerfilEgreso.Text = detalleCarreraPlantel.Perfil_egreso;
+                txtPerfilIngreso.Text = detalleCarreraPlantel.Perfil_ingreso;
+                txtRequisitos.Text = detalleCarreraPlantel.Requisitos;
+                txtSectorProductivo.Text = detalleCarreraPlantel.Sector_productivo;
+            }
+            catch (Exception ex)
+            {
+
+            }
+           
         }
 	}
 }

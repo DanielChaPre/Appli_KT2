@@ -121,6 +121,49 @@ namespace Appli_KT2.ViewModel
             #endregion
         }
 
+        public void ValidarContraseña(string contraseña)
+        {
+            Random obj = new Random();
+            //Generamos 3 arrays con los distintos caracteres
+            string carNormales = "abcdefghijklmnoupqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string carNum = "0123456789";
+            string carEsp = "%$#?¿@";
+            string pass = contraseña; //Aquí vamos a guardar el pass;
+            int norm = 0;  //Contador de caracteres normales
+            int esp = 0;   //Contador de car especiales
+            int num = 0;   //Contador de car mayusculas
+
+            for (int i = 0; i < pass.Length; i++) //Ponemos hasta 10 porque es la longitud del pass
+            {
+                int arr = obj.Next(0, 3); //Generamos un valor aleatorio para ver en que array vamos a mirar
+
+                if (arr == 0)
+                {
+                    if (norm < 4)
+                    {
+                        pass = pass + carNormales[obj.Next(0, 53)].ToString(); //Seleccionamos un caracter de este array
+                        norm = norm + 1;
+                    }
+                }
+                else if (arr == 1)
+                {
+                    if (num < 4)
+                    {
+                        pass = pass + carNum[obj.Next(0, 10)].ToString(); //Seleccionamos un caracter de este array
+                        num = num + 1;
+                    }
+                }
+                else
+                {
+                    if (esp < 2)
+                    {
+                        pass = pass + carEsp[obj.Next(0, 5)].ToString(); //Seleccionamos un caracter de este array
+                        esp = esp + 1;
+                    }
+                }
+            }
+        }
+
         private async Task<bool> BuscarAlumno()
         {
             _client = new HttpClient();

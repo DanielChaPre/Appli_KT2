@@ -152,7 +152,8 @@ namespace Appli_KT2.ViewModel
                             Cve_imagen_plantel = listaImagenes[i].Cve_imagen_plantel,
                             Descripcion = listaImagenes[i].Descripcion,
                             Imagen_principal = listaImagenes[i].Imagen_principal,
-                            Ruta = listaImagenes[i].Ruta
+                            Ruta = listaImagenes[i].Ruta,
+                            Imagenbase64 = listaImagenes[i].Imagenbase64
                         };
                         lstImagenes.Add(entImagenes);
                     }

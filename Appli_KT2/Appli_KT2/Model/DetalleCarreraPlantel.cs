@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -31,6 +32,7 @@ namespace Appli_KT2.Model
         private int cve_nivel_agrupado;
         private int cve_nivel_carrera;
 
+        [PrimaryKey]
         public int Cve_detalle_carrera_plantel { get => cve_detalle_carrera_plantel; set => cve_detalle_carrera_plantel = value; }
         public int IdCarreraES { get => idCarreraES; set => idCarreraES = value; }
         public string Perfil_ingreso { get => perfil_ingreso; set => perfil_ingreso = value; }

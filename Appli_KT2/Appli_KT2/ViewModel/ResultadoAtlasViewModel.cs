@@ -39,13 +39,31 @@ namespace Appli_KT2.ViewModel
                 {
                     for (int j = 0; j < lstDetalle.Count; j++)
                     {
-                        if (lstPlanteles[i].idPlantelES == lstDetalle[j].idPlantelesES)
+                        if (lstPlanteles[i].idPlantelES == lstDetalle[j].IdPlantelesES)
                         {
-                            lstDetalle[j].ImagenDecodificada = GetImage(lstDetalle[j].Logo_plantel);
+                            if (lstDetalle[j].Logo_plantel.Equals("-"))
+                            {
+                                lstDetalle[j].ImagenDecodificada = "imagenescuela.png";
+                            }
+                            else
+                            {
+                                lstDetalle[j].ImagenDecodificada = GetImage(lstDetalle[j].Logo_plantel);
+                            }
+                           
                             lstPlanteles[i].DetallePlantel = lstDetalle[j];
+
                         }
                     }
                 }
+                conn.CreateTable<PlantelesES>();
+                for (int p = 0; p < lstPlanteles.Count; p++)
+                {
+                    //detallePlantelDataBase.SaveItemAsync(ListPlantelES[i]);s
+                    conn.InsertOrReplace(lstPlanteles[p]);
+
+                }
+
+                var plantelesEs = (from x in conn.Table<PlantelesES>() select x).ToList();
             }
             catch (Exception)
             {
@@ -67,7 +85,7 @@ namespace Appli_KT2.ViewModel
                 {
                     for (int j = 0; j < lstDetalle.Count; j++)
                     {
-                        if (lstPlanteles[i].idPlantelES == lstDetalle[j].idPlantelesES)
+                        if (lstPlanteles[i].idPlantelES == lstDetalle[j].IdPlantelesES)
                         {
                             lstDetalle[j].ImagenDecodificada = GetImage(lstDetalle[j].Logo_plantel);
                             lstPlanteles[i].DetallePlantel = lstDetalle[j];

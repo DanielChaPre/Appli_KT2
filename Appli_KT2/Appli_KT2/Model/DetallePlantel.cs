@@ -22,17 +22,15 @@ namespace Appli_KT2.Model
         private int cve_detalle_plantel;
         private string url_vinculacion;
         private string logo_plantel;
-        private string costos;
-        private string requisitos;
-        private string fechas;
-        private string reseña;
         private string latitud;
         private string longitud;
         private string ubicacion;
-        private string nivel_estudio;
-        private string cve_nivel_agrupado;
-        private string cve_nivel_estudio;
-        private int idplantelesES;
+        private string domicilio;
+        private string telefono;
+        private string nombre_corto;
+        private int idPlantelesES;
+        private string idColonia;
+        private int cve_subsistema;
         private Xamarin.Forms.ImageSource imagenDecodificada;
         //private PlantelesES plantelesES; 
 
@@ -73,54 +71,6 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public string Costos
-        {
-            get
-            {
-                return costos;
-            }
-            set
-            {
-                costos = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Requisitos
-        {
-            get
-            {
-                return requisitos;
-            }
-            set
-            {
-                requisitos = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Fechas
-        {
-            get
-            {
-                return fechas;
-            }
-            set
-            {
-                fechas = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Reseña
-        {
-            get
-            {
-                return reseña;
-            }
-            set
-            {
-                reseña = value;
-                OnPropertyChanged();
-            }
-        }
         public string Latitud
         {
             get
@@ -157,55 +107,16 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-        public string Nivel_estudio
+      
+        public int IdPlantelesES
         {
             get
             {
-                return nivel_estudio;
+                return idPlantelesES;
             }
             set
             {
-                nivel_estudio = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Cve_nivel_agrupado
-        {
-            get
-
-            {
-                return cve_nivel_agrupado;
-            }
-            set
-            {
-                cve_nivel_agrupado = value;
-                OnPropertyChanged();
-            }
-        }
-        
-        public string Cve_nivel_estudio
-        {
-            get
-            {
-                return cve_nivel_estudio;
-            }
-            set
-            {
-                cve_nivel_estudio = value;
-                OnPropertyChanged();
-            }
-        }
-      //  [ForeignKey(typeof(PlantelesES))]
-        
-        public int idPlantelesES
-        {
-            get
-            {
-                return idplantelesES;
-            }
-            set
-            {
-                idplantelesES = value;
+                idPlantelesES = value;
                 OnPropertyChanged();
             }
         }
@@ -221,6 +132,67 @@ namespace Appli_KT2.Model
             set
             {
                 imagenDecodificada = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Domicilio
+        {
+            get
+            {
+                return domicilio;
+            }
+            set
+            {
+                domicilio = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Telefono
+        {
+            get
+            {
+                return telefono;
+            }
+            set
+            {
+                telefono = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Nombre_corto
+        {
+            get
+            {
+                return nombre_corto;
+            }
+            set
+            {
+                nombre_corto = value;
+                OnPropertyChanged();
+            }
+        }
+        public string IdColonia
+        {
+            get
+            {
+                return idColonia;
+            }
+            set
+            {
+                idColonia = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Cve_subsistema
+        {
+            get
+            {
+                return cve_subsistema;
+            }
+            set
+            {
+                cve_subsistema = value;
                 OnPropertyChanged();
             }
         }

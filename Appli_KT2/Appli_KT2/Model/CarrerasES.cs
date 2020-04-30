@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -26,6 +27,7 @@ namespace Appli_KT2.Model
         private string campoEspecifico2016;
         private string campoEspecificoAnterior;
 
+        [PrimaryKey]
         public int idCarreraES
         {
             get

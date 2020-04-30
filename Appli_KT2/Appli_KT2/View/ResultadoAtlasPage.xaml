@@ -123,7 +123,7 @@
                                         x:Name="lblDireccion" 
                                         Grid.Column="0"
                                         Grid.Row="1"
-                                        Text="{Binding Subsistema}" 
+                                        Text="" 
                                         TextColor="Black"
                                         Margin="1"
                                         VerticalOptions="CenterAndExpand"/>
@@ -132,7 +132,7 @@
                                         x:Name="lblWeb" 
                                         Grid.Column="0"
                                         Grid.Row="2"
-                                        Text="{Binding Sostenimiento}" 
+                                        Text="" 
                                         TextColor="Black"
                                         Margin="1"
                                         VerticalOptions="EndAndExpand"/>

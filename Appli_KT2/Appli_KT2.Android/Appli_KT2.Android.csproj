@@ -438,5 +438,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\no_existe_imagen.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\imagenescuela.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

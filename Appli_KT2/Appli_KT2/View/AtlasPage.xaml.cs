@@ -49,6 +49,7 @@ namespace Appli_KT2.View
             conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
             txtCarrera.TextChanged += BuscarCarrera;
             VerificarInternet();
+           App.Current.Properties["PalabraCarrera"] = "";
         }
 
 
@@ -210,11 +211,11 @@ namespace Appli_KT2.View
             }
             if (carrerasES.IdPlantelesES == 0)
             {
-                App.Current.Properties["Carrera"] = 0;
+                App.Current.Properties["Carrera"] = "";
             }
             else
             {
-                App.Current.Properties["Carrera"] = carrerasES.IdPlantelesES;
+                App.Current.Properties["Carrera"] = carrerasES.NombreCarreraES;
             }
             await Application.Current.MainPage.Navigation.PushAsync(new ResultadoAtlasPage());
         }
@@ -281,7 +282,7 @@ namespace Appli_KT2.View
             await municipioViewModel.SincronizarMunicipio();
             await perfilAlumno.SincronizarAptitudAlumno();
             await perfilAlumno.SincronizarAptitudes();
-         //   await detalleUniversidadViewModel.SincronizarImagenesPlantel();
+            await detalleUniversidadViewModel.SincronizarImagenesPlantel();
 
             frameSincronizacion.IsVisible = false;
             frameSugerencias.IsVisible = false;
@@ -324,6 +325,7 @@ namespace Appli_KT2.View
                 ListaCarreras.Add(carreras[i]);
             }
             pCarreras.ItemsSource = ListaCarreras;
+
             pCarreras.ItemDisplayBinding = new Binding("NombreCarreraES");
 
             pCarreras.SelectedIndexChanged += SeleccionarCarrera;
@@ -392,24 +394,56 @@ namespace Appli_KT2.View
             if (string.IsNullOrEmpty(txtCarrera.Text))
             {
                 pCarreras.ItemsSource = ListaCarreras;
+                pMunicipio.ItemsSource = ListaMunicipios;
+                pPlantelesES.ItemsSource = ListaPlanteles;
+                App.Current.Properties["PalabraCarrera"] = "";
             }
             else
             {
-                var carrera = new CarrerasES()
-                {
-                    NombreCarreraES = "Seleccionar Carrera"
-                };
-                var listaInstituciones = new List<string>();
-                string carreraBuscar = txtCarrera.Text.Replace(" ", "%");
-                var listaCarreras = conn.Query<CarrerasES>("SELECT DISTINCT * FROM CarrerasES Where NombreCarreraES LIKE ?", "%" + carreraBuscar + "%");
-                List<CarrerasES> carrerasEs = new List<CarrerasES>();
-                carrerasEs.Add(carrera);
-                for (int i = 0; i < listaCarreras.Count; i++)
-                {
-                    carrerasEs.Add(listaCarreras[i]);
-                }
-                pCarreras.ItemsSource = carrerasEs;
+                App.Current.Properties["PalabraCarrera"] = txtCarrera.Text;
+                FiltrarPalabraCarrera(txtCarrera.Text);
+                FiltrarPalabraInstitucion(txtCarrera.Text);
+                FiltrarPalabraMunicipio(txtCarrera.Text);
             }
+        }
+
+        private void FiltrarPalabraCarrera(string palabracarrera)
+        {
+            var carrera = new CarrerasES()
+            {
+                NombreCarreraES = "Seleccionar Carrera"
+            };
+            var listaInstituciones = new List<string>();
+            string carreraBuscar = txtCarrera.Text.Replace(" ", "%");
+            var listaCarreras = conn.Query<CarrerasES>("SELECT DISTINCT * FROM CarrerasES Where NombreCarreraES LIKE ?", "%" + palabracarrera + "%");
+            List<CarrerasES> carrerasEs = new List<CarrerasES>();
+            carrerasEs.Add(carrera);
+            for (int i = 0; i < listaCarreras.Count; i++)
+            {
+                carrerasEs.Add(listaCarreras[i]);
+            }
+            pCarreras.ItemsSource = carrerasEs;
+        }
+
+        private void FiltrarPalabraMunicipio(string palabracarrera)
+        {
+            var listaInstituciones = new List<string>();
+            string carreraBuscar = txtCarrera.Text.Replace(" ", "%");
+            var listaMunicipios = conn.Query<Municipios>("SELECT DISTINCT Municipios.* FROM CarrerasES " +
+                " INNER JOIN PlantelesES ON PlantelesES.idPlantelES = CarrerasES.IdPlantelesES" +
+                " INNER JOIN Municipios ON Municipios.idMunicipio = PlantelesES.Municipio" +
+                " Where CarrerasES.NombreCarreraES LIKE ?", "%" + palabracarrera + "%");
+            pMunicipio.ItemsSource = listaMunicipios;
+        }
+
+        private void FiltrarPalabraInstitucion(string palabracarrera)
+        {
+            var listaInstituciones = new List<string>();
+            string carreraBuscar = txtCarrera.Text.Replace(" ", "%");
+            var listaPlanteles = conn.Query<PlantelesES>("SELECT DISTINCT PlantelesES.* FROM CarrerasES " +
+                " INNER JOIN PlantelesES ON PlantelesES.idPlantelES = CarrerasES.IdPlantelesES" +
+                " Where CarrerasES.NombreCarreraES LIKE ?", "%" + palabracarrera + "%");
+            pPlantelesES.ItemsSource = listaPlanteles;
         }
 
         private void SeleccionarMunicipio(object sender, EventArgs e)

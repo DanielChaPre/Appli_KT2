@@ -40,7 +40,7 @@ namespace Appli_KT2.Utils
                     Type = PinType.Place,
                     Position = new Position(Convert.ToDouble(x.DetallePlantel.Latitud), Convert.ToDouble(x.DetallePlantel.Longitud)),
                     Label = x.NombrePlantelES,
-                    Address = x.DetallePlantel.Reseña,
+                    Address = x.DetallePlantel.Domicilio,
 
                 };
 

@@ -96,20 +96,19 @@ namespace Appli_KT2.ViewModel
                     {
                         var entPlanteles = new DetallePlantel()
                         {
-                            Costos = listaPlanteles[i].Costos,
                             Cve_detalle_plantel = listaPlanteles[i].Cve_detalle_plantel,
-                            Cve_nivel_agrupado = listaPlanteles[i].Cve_nivel_agrupado,
-                            Cve_nivel_estudio = listaPlanteles[i].Cve_nivel_estudio,
-                            Fechas = listaPlanteles[i].Fechas,
                             Latitud = listaPlanteles[i].Latitud,
                             Logo_plantel = listaPlanteles[i].Logo_plantel,
                             Longitud = listaPlanteles[i].Longitud,
-                            Nivel_estudio = listaPlanteles[i].Nivel_estudio,
-                            Requisitos = listaPlanteles[i].Requisitos,
-                            Reseña = listaPlanteles[i].Reseña,
                             Ubicacion = listaPlanteles[i].Ubicacion,
                             Url_vinculacion = listaPlanteles[i].Url_vinculacion,
-                            idPlantelesES = listaPlanteles[i].idPlantelesES
+                            Cve_subsistema = listaPlanteles[i].Cve_subsistema,
+                            Domicilio = listaPlanteles[i].Domicilio,
+                            IdColonia = listaPlanteles[i].IdColonia,
+                            IdPlantelesES = listaPlanteles[i].IdPlantelesES,
+                            Nombre_corto = listaPlanteles[i].Nombre_corto,
+                            Telefono = listaPlanteles[i].Telefono
+
                         };
                         lstDetallePlantel.Add(entPlanteles);
                     }
@@ -161,12 +160,17 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
+                var p = ListDetallePlantel.Count;
                 SQLiteConnection conn;
                 conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
                 conn.CreateTable<PlantelesES>();
+                //if (await ObtenerDetallePlantel())
+                //{
+                //    SincronizarPlantelesES();
+                //}
                 if (await ObtenerPlantelES())
                 {
-                    SincronizarDetallePlantel();
+                    SincronizarPlantelesES();
                 }
                 if (ListPlantelES.Count != 0)
                 {
