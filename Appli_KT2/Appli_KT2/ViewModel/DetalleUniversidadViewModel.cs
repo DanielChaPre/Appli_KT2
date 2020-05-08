@@ -47,7 +47,6 @@ namespace Appli_KT2.ViewModel
             catch (Exception ex)
             {
 
-                throw;
             }
         }
 
@@ -127,7 +126,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+               
                 return false;
             }
         }
@@ -169,7 +168,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+              
                 return false;
             }
         }
@@ -200,13 +199,11 @@ namespace Appli_KT2.ViewModel
                 }
                 if (ListImagenes.Count != 0)
                 {
-                    for (int i = 0; i < ListCarreraES.Count; i++)
+                    for (int i = 0; i < ListImagenes.Count; i++)
                     {
-                        //imagenDataBase.DeleteAllAsync();
-                        //imagenDataBase.SaveItemAsync(ListImagenes[i]);
-                        conn.InsertOrReplace(ListCarreraES[i]);
-                        
+                        conn.InsertOrReplace(ListImagenes[i]);
                     }
+                    conn.Close();
                     return true;
                 }
                 else

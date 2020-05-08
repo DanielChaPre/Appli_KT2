@@ -20,7 +20,7 @@ namespace Appli_KT2.ViewModel
 
         public PlantelESViewModel()
         {
-            ObtenerPlantelES();
+          //  ObtenerPlantelES();
         }
 
         public List<PlantelesES> ListPlantelES
@@ -63,7 +63,6 @@ namespace Appli_KT2.ViewModel
                             OPD = listaPlanteles[i].OPD,
                             Sostenimiento = listaPlanteles[i].Sostenimiento,
                             Subsistema = listaPlanteles[i].Subsistema
-
                         };
                         lstPlantelES.Add(entPlanteles);
                     }
@@ -144,6 +143,7 @@ namespace Appli_KT2.ViewModel
                         //detallePlantelDataBase.SaveItemAsync(ListPlantelES[i]);s
                         conn.InsertOrReplace(ListDetallePlantel[i]);
                     }
+                    conn.Close();
                 }
                 else
                 {
@@ -160,7 +160,7 @@ namespace Appli_KT2.ViewModel
         {
             try
             {
-                var p = ListDetallePlantel.Count;
+               // var p = ListDetallePlantel.Count;
                 SQLiteConnection conn;
                 conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
                 conn.CreateTable<PlantelesES>();
@@ -179,6 +179,7 @@ namespace Appli_KT2.ViewModel
                         //detallePlantelDataBase.SaveItemAsync(ListPlantelES[i]);s
                         conn.InsertOrReplace(ListPlantelES[i]);
                     }
+                    conn.Close();
                 }
                 else
                 {

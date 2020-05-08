@@ -28,21 +28,6 @@ namespace Appli_KT2.Droid.Services
             var path = Path.Combine(dbpath, dbase);
             var connection = new SQLiteConnection(path);
             return connection;
-
         }
-        //private string GetPath()
-        //{
-        //    var dbName = "Applikt.db3";
-        //    var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), dbName);
-        //    return path;
-        //}
-        //public SQLiteConnection GetConnection()
-        //{
-        //    return new SQLiteConnection(GetPath());
-        //}
-        //public SQLiteAsyncConnection GetConnectionAsync()
-        //{
-        //    return new SQLiteAsyncConnection(GetPath());
-        //}
     }
 }

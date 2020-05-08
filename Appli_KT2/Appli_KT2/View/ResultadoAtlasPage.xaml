@@ -2,8 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Appli_KT2.View.ResultadoAtlasPage"
+              xmlns:local="clr-namespace:Appli_KT2"
+             xmlns:pdf="clr-namespace:PdfSharp.Xamarin.Forms;assembly=PdfSharp.Xamarin.Forms"
              BackgroundImageSource="pleca_textura.jpg"
-             Padding="5,0">
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             Padding="5,0"
+             x:Name="contentPrueba">
     
     <ContentPage.ToolbarItems>
   <!--      <ToolbarItem
@@ -11,15 +15,16 @@
             Icon="filter_outline.png"  
             Priority="0"  
             Order="Secondary"
-            x:Name="icFilter"/>
-        
+            x:Name="icFilter"/>-->
+
+
         <ToolbarItem 
             Text="Compartir"  
             Icon="share.png"  
             Priority="0"  
             Order="Secondary" 
-            x:Name="icShare"/>-->
-
+            x:Name="icShare"/>
+        
         <ToolbarItem 
             Text="Sincronizar"  
             Icon="share.png"  
@@ -28,9 +33,14 @@
             x:Name="icSincronizar"/>
         
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:PDFSampleListRendererDelegate  x:Key="PDFSampleListRendererDelegate" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Resultado}"
+            x:Name="prueba"
             >
             <Frame
                 BackgroundColor="White"
@@ -65,14 +75,15 @@
                 x:Name="actiCargarResultado"
                 />
             <ListView 
-            x:Name="listViewResultAtlas" 
-            CachingStrategy="RecycleElement"
-            HasUnevenRows="True"
+                pdf:PdfRendererAttributes.ListRendererDelegate="{DynamicResource PDFSampleListRendererDelegate}"
+                x:Name="listViewResultAtlas" 
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="True"
                   >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell 
-                        Height="200" >
+                        <ViewCell  
+                            >
                             <Frame
                              Margin="0,3"
                              HasShadow="true" 
@@ -82,60 +93,57 @@
                                 <Grid
                                 Padding="0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="90"/>
+                                        <ColumnDefinition Width="120"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions >
+
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <StackLayout
                                      Grid.Column="0">
                                         <Image 
-                                            Margin="0,15,0,0"
-                                            ScaleY="3"
-                                            Source="{Binding DetallePlantel.ImagenDecodificada}"
+                                            Source="{Binding DetallePlantel.ImagenPrincipal}"
                                             VerticalOptions="CenterAndExpand"
                                             x:Name="imagenPrueba"
-                                            WidthRequest="250"/>
+                                            Margin="0,3"
+                                            WidthRequest="120"/>
                                     </StackLayout>
 
                                     <Grid 
-                                    Padding="0,10"
+                                        
                                     HorizontalOptions="Start"
                                     Grid.Column="1">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions >
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
+                                        <Image 
+                                             Grid.Column="0"
+                                            Grid.Row="0"
+                                            Source="{Binding DetallePlantel.ImagenDecodificada}"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="50"/>
                                         <Label 
-                                        FontSize="20"
-                                        x:Name="lblOpcion" 
-                                        Grid.Column="0"
-                                        Grid.Row="0"
-                                        Text="{Binding NombrePlantelES}" 
-                                        TextColor="Black" 
-                                        Margin="1"
-                                        VerticalOptions="StartAndExpand"/>
+                                            FontSize="Body"
+                                            x:Name="lblOpcion"  
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            Text="{Binding NombrePlantelES}" 
+                                            TextColor="Black" 
+                                            Margin="1"
+                                            VerticalOptions="StartAndExpand"/>
                                         <Label 
-                                        FontSize="10"
-                                        x:Name="lblDireccion" 
-                                        Grid.Column="0"
-                                        Grid.Row="1"
-                                        Text="" 
-                                        TextColor="Black"
-                                        Margin="1"
-                                        VerticalOptions="CenterAndExpand"/>
-                                        <Label 
-                                        FontSize="10"
-                                        x:Name="lblWeb" 
-                                        Grid.Column="0"
-                                        Grid.Row="2"
-                                        Text="" 
-                                        TextColor="Black"
-                                        Margin="1"
-                                        VerticalOptions="EndAndExpand"/>
+                                            FontSize="20"
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            TextColor="Black" 
+                                            Margin="1"
+                                            VerticalOptions="StartAndExpand"/>
+
                                     </Grid>
                                 </Grid>
                             </Frame>

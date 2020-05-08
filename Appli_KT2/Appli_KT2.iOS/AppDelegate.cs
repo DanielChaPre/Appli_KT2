@@ -36,6 +36,10 @@ namespace Appli_KT2.iOS
             Xamarin.FormsMaps.Init();
             LoadApplication(new App());
             GoogleClientManager.Initialize("IzaSyAdfu7B4WIVn3G2HpfM8OE3PtXilqlWTaI");
+            Rg.Plugins.Popup.Popup.Init();
+
+            UIUserNotificationSettings settings2 = UIUserNotificationSettings.GetSettingsForTypes(UIUserNotificationType.Badge, null);
+            UIApplication.SharedApplication.RegisterUserNotificationSettings(settings2);
             //FacebookClientManager.Initialize(app, options);
             return base.FinishedLaunching(app, options);
         }

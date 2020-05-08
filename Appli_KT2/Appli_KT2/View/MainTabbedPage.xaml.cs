@@ -18,31 +18,28 @@
 
 		public MainTabbedPage()
 		{
-            InitializeComponent ();
-            icNotificacion.Clicked += onClickIc;
-            icShare.Clicked += OnClickShare;
-           // icLogin.Clicked += OnCLickLogin;
-           
-
-          //  Console.WriteLine("####################" + Xamarin.Forms.Application.Current.Properties["prueba"].ToString());
-          //pruebaShared();
+            try
+            {
+                InitializeComponent();
+                icNotificacion.Clicked += onClickIc;
+                icShare.Clicked += OnClickShare;
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private async void OnCLickLogin(object sender, EventArgs e)
         {
-            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
-        }
-        /*Este método es un ejemplo de como utilizar shared preference y utilizarla en la aplicación*/
-     /*   public void pruebaShared()
-        {
-            Xamarin.Forms.Application.Current.Properties["prueba"] = "Prueba de uso de shared preference";
-            if (Xamarin.Forms.Application.Current.Properties.ContainsKey("prueba"))
+            try
             {
-                Console.WriteLine("P: " + Xamarin.Forms.Application.Current.Properties["prueba"].ToString());
+                await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
             }
-
-          
-        }*/
+            catch (Exception ex)
+            {
+            }
+           
+        }
 
         private async void OnClickShare(object sender, EventArgs e)
         {
@@ -54,14 +51,19 @@
             }
             catch (Exception)
             {
-
-              
             }
         }
 
         private async void onClickIc(object sender, EventArgs e)
         {
-            await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new NotificacionesPage());
+            try
+            {
+                await Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new NotificacionesPage());
+            }
+            catch (Exception ex)
+            {
+            }
+           
         }
     }
 }

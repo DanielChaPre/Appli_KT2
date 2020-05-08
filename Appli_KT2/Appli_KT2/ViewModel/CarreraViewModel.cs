@@ -19,7 +19,14 @@ namespace Appli_KT2.ViewModel
 
         public CarreraViewModel()
         {
-            VerificarInternet();
+            try
+            {
+               // VerificarInternet();
+            }
+            catch (Exception ex)
+            {
+            }
+           
         }
 
         public List<CarrerasES> ListCarreraES
@@ -77,61 +84,76 @@ namespace Appli_KT2.ViewModel
 
         private void VerificarInternet()
         {
-            var status = 1;
-            ConexionInternet conexionInternet = new ConexionInternet();
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            try
             {
-                try
+                var status = 1;
+                ConexionInternet conexionInternet = new ConexionInternet();
+                Device.StartTimer(TimeSpan.FromSeconds(5), () =>
                 {
-
-                    if (conexionInternet.VerificarInternet())
+                    try
                     {
-                        if (status == 1)
+
+                        if (conexionInternet.VerificarInternet())
                         {
-                            ObtenerCarreraES();
-                            status = 0;
+                            if (status == 1)
+                            {
+                                ObtenerCarreraES();
+                                status = 0;
+                            }
+                            return true;
+                        }
+                        else
+                        {
+                            status = 1;
                         }
                         return true;
                     }
-                    else
+                    catch (NullReferenceException ex)
                     {
-                        status = 1;
-                        Application.Current.MainPage.DisplayAlert("Notificación", "Los filtros no funcionaran por falta de conexión a internet", "Aceptar");
+                        return true;
                     }
-                    return true;
-                }
-                catch (NullReferenceException ex)
-                {
-                    return true;
-                }
-            });
+                });
+            }
+            catch (Exception ex)
+            {
+            }
+          
         }
 
         public async Task SincronizarDetalleCarrera()
         {
-            SQLiteConnection conn;
-            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
-            conn.CreateTable<DetalleCarreraPlantel>();
-            if (!await ObtenerDetalleCarreraES())
+            try
             {
-                SincronizarDetalleCarrera();
-            }
-            if (ListDetalleCarreraES.Count != 0)
-            {
-                for (int i = 0; i < ListDetalleCarreraES.Count; i++)
+                SQLiteConnection conn;
+                conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+                conn.CreateTable<DetalleCarreraPlantel>();
+                if (!await ObtenerDetalleCarreraES())
                 {
-                 //   conn.Query<DetalleCarreraPlantel>("Delete from DetalleCarreraPlantel");
-                    conn.InsertOrReplace(ListDetalleCarreraES[i]);
+                    SincronizarDetalleCarrera();
+                }
+                if (ListDetalleCarreraES.Count != 0)
+                {
+                    for (int i = 0; i < ListDetalleCarreraES.Count; i++)
+                    {
+                        //   conn.Query<DetalleCarreraPlantel>("Delete from DetalleCarreraPlantel");
+                        conn.InsertOrReplace(ListDetalleCarreraES[i]);
+                    }
+                    conn.Close();
+                }
+                else
+                {
+                    SincronizarDetalleCarrera();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                SincronizarDetalleCarrera();
             }
+          
         }
 
         private async Task<bool> ObtenerDetalleCarreraES()
         {
+
             try
             {
                 var _client = new HttpClient();
@@ -182,32 +204,41 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
+                App.Current.MainPage.DisplayAlert("Información", "Ha ocurrido un error,  por favor pongase en contacto con el desarrollador.", "Aceptar");
+
                 return false;
             }
         }
 
         public async Task SincronizarCarrera()
         {
-         
-            SQLiteConnection conn;
-            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
-            conn.CreateTable<CarrerasES>();
-            if (!await ObtenerCarreraES())
+            try
             {
-                SincronizarCarrera();
-            }
-            if (ListCarreraES.Count != 0)
-            {
-                for (int i = 0; i < ListCarreraES.Count; i++)
+                SQLiteConnection conn;
+                conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+                conn.CreateTable<CarrerasES>();
+                if (!await ObtenerCarreraES())
                 {
-                    //conn.Query<CarrerasES>("Delete from CarrerasES");
-                    conn.InsertOrReplace(ListCarreraES[i]);
+                    SincronizarCarrera();
+                }
+                if (ListCarreraES.Count != 0)
+                {
+                    for (int i = 0; i < ListCarreraES.Count; i++)
+                    {
+                        //conn.Query<CarrerasES>("Delete from CarrerasES");
+                        conn.InsertOrReplace(ListCarreraES[i]);
+                    }
+                    conn.Close();
+                }
+                else
+                {
+                    SincronizarCarrera();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                SincronizarCarrera();
             }
+            
         }
     }
 }

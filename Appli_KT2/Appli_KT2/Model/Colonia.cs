@@ -15,7 +15,7 @@ namespace Appli_KT2.Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private int idcolonia;
+        private int _idcolonia;
         private string nombreColonia;
         private string cp;
         private int idmunicipio;
@@ -24,11 +24,11 @@ namespace Appli_KT2.Model
         {
             get
             {
-                return idcolonia;
+                return _idcolonia;
             }
             set
             {
-                idColonia = value;
+                _idcolonia = value;
                 OnPropertyChanged();
             }
         }
@@ -69,7 +69,5 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
-
-        public object IdColonia { get; internal set; }
     }
 }

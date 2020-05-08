@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Appli_KT2.ViewModel
@@ -23,7 +24,7 @@ namespace Appli_KT2.ViewModel
 
         public EstadosViewModel()
         {
-            ObtenerEstados();
+          // ObtenerEstados();
         }
 
         public Estados SelectedEstado
@@ -64,7 +65,7 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public async void ObtenerEstados()
+        public async Task<bool> ObtenerEstados()
         {
             try
             {
@@ -93,11 +94,16 @@ namespace Appli_KT2.ViewModel
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListEstados = this.lstEstados;
                     this.ListNombreEstados = this.lstNombreEstados;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                return false;
             }
         }
     }

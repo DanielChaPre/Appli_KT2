@@ -278,7 +278,6 @@ namespace Appli_KT2.ViewModel
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
-                throw;
             }
         }
 
@@ -325,7 +324,6 @@ namespace Appli_KT2.ViewModel
             catch (Exception ex)
             {
 
-                throw;
             }
         }
 
@@ -420,7 +418,6 @@ namespace Appli_KT2.ViewModel
             {
                 Console.WriteLine("Error: " + ex.Message);
                 return false;
-                throw;
             }
         }
 
@@ -491,7 +488,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                throw;
             }
         }
 
@@ -680,7 +676,6 @@ namespace Appli_KT2.ViewModel
             catch (Exception ex)
             {
 
-                throw;
             }
            
             _googleClientManager.OnLogin += OnLoginCompleted;
@@ -798,8 +793,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
 
@@ -842,8 +836,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-
-                throw;
+                return false;
             }
         }
 

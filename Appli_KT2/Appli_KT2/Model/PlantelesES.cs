@@ -30,7 +30,6 @@ namespace Appli_KT2.Model
         private string _oPD;
         private string _nivelAgrupado;
         private DetallePlantel detallePlantel;
-
         [PrimaryKey]
         public int idPlantelES
         {
@@ -179,5 +178,7 @@ namespace Appli_KT2.Model
                 OnPropertyChanged();
             }
         }
+
+
     }
 }

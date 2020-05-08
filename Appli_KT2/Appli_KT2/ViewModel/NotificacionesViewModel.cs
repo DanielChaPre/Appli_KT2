@@ -19,6 +19,7 @@ namespace Appli_KT2.ViewModel
         MetodoHTTP metodoHTTP;
         private string url;
         private List<Notificaciones> lstnotificaciones = new List<Notificaciones>();
+        private List<Notificaciones> lstnotificacionesleidas = new List<Notificaciones>();
         private bool isvisible;
         private bool isrun;
 
@@ -47,7 +48,7 @@ namespace Appli_KT2.ViewModel
         {
             IsVisible = false;
             IsRun = false;
-            ConsultarNotificaciones();
+           // ConsultarNotificaciones();
         }
 
         public List<Notificaciones> Lst_Notificaciones
@@ -91,7 +92,63 @@ namespace Appli_KT2.ViewModel
             }
         }
 
-        public async void ConsultarNotificaciones()
+        public async Task<bool> CambiarEstatusNotificacion(string cveNotificacion)
+        {
+            try
+            {
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                var cveUsuario = Xamarin.Forms.Application.Current.Properties["cveUsuario"];
+            //    var cveNotificacion = Xamarin.Forms.Application.Current.Properties["cveNotificacion"];
+                url = conexion.URL + "" + conexion.CambiarEstatusNotificacion + cveUsuario + "/" + cveNotificacion;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var resultado = JsonConvert.DeserializeObject<bool>(content);
+                    if (resultado)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Error " + response.StatusCode, "Accept");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error " + ex.Message, "Accept");
+                return false;
+            }
+        }
+
+        public async Task ConsultarNotificaciones()
+        {
+            await ConsultarTodasNotificaciones();
+            await ConsultarNotificacionesLeidas();
+
+            for (int i = 0; i < lstnotificaciones.Count; i++)
+            {
+                for (int j = 0; j < lstnotificacionesleidas.Count; j++)
+                {
+                    if (lstnotificaciones[i].Cve_notificacion == lstnotificacionesleidas[j].Cve_notificacion)
+                    {
+                        lstnotificaciones[i].EstatusColor = Color.Black;
+                        lstnotificaciones[i].Estatus = "No leida";
+                    }
+                }
+            }
+
+            Lst_Notificaciones = lstnotificaciones;
+
+        }
+
+        public async Task ConsultarTodasNotificaciones()
         {
             try
             {
@@ -120,8 +177,10 @@ namespace Appli_KT2.ViewModel
                             Texto = lstNotificaciones[i].Texto,
                             Titulo = lstNotificaciones[i].Titulo,
                             Url = lstNotificaciones[i].Url,
-                           // Estatus = lstNotificaciones[i].Estatus,
-                            Icon = SeleccionarImagen(lstNotificaciones[i].Cve_tipo_notificacion)
+                            EstatusColor = EstatusColor = Color.Gray,
+                            Estatus = "leida",
+                        // Estatus = lstNotificaciones[i].Estatus,
+                        Icon = SeleccionarImagen(lstNotificaciones[i].Cve_tipo_notificacion)
                         };
                         lstnotificaciones.Add(entNotificaciones);
                     }
@@ -144,6 +203,54 @@ namespace Appli_KT2.ViewModel
                 IsVisible = true;
                 return;
                 throw;
+            }
+        }
+
+
+
+
+        public async Task ConsultarNotificacionesLeidas()
+        {
+            try
+            {
+
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var cveUsuario = Xamarin.Forms.Application.Current.Properties["cveUsuario"];
+                var url = conexion.URL + "" + conexion.ObtenerNotificacionesNoLeidas1 + cveUsuario;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var lstNotificaciones = JsonConvert.DeserializeObject<List<Notificaciones>>(content);
+                    for (int i = 0; i < lstNotificaciones.Count; i++)
+                    {
+                        var entNotificaciones = new Notificaciones()
+                        {
+                            Cve_notificacion = lstNotificaciones[i].Cve_notificacion,
+                            Cve_categoria = lstNotificaciones[i].Cve_categoria,
+                            Cve_tipo_notificacion = lstNotificaciones[i].Cve_tipo_notificacion,
+                            Fecha_notificacion = lstNotificaciones[i].Fecha_notificacion,
+                            Hora_notificacion = lstNotificaciones[i].Hora_notificacion,
+                            Responsable = lstNotificaciones[i].Responsable,
+                            Texto = lstNotificaciones[i].Texto,
+                            Titulo = lstNotificaciones[i].Titulo,
+                            Url = lstNotificaciones[i].Url,
+                        };
+                        lstnotificacionesleidas.Add(entNotificaciones);
+                    }
+                    return;
+                }
+                else
+                {
+                    //  await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
             }
         }
 
@@ -186,7 +293,6 @@ namespace Appli_KT2.ViewModel
                 throw;
             }
         }
-
         public Color SeleccionarColorEstatus(string estatus)
         {
             try
@@ -214,5 +320,6 @@ namespace Appli_KT2.ViewModel
                 throw;
             }
         }
+
     }
 }

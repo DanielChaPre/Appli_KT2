@@ -14,8 +14,15 @@ namespace Appli_KT2.View
 	{
 		public EnlacePage (string enlace)
 		{
-			InitializeComponent ();
-            webviewenlace.Source = enlace;
+            try
+            {
+                InitializeComponent();
+                webviewenlace.Source = enlace;
+            }
+            catch (Exception ex)
+            {
+            }
+           
 		}
 	}
 }

@@ -4,8 +4,8 @@
              x:Class="Appli_KT2.View.AtlasPage"
              BackgroundImageSource="pleca_textura.jpg"
              Padding="10,0">
-  
     <ContentPage.Content>
+        
         <ScrollView>
             <StackLayout>
                 <Frame
@@ -37,7 +37,7 @@
                     FontSize="Title"
                     HorizontalOptions="Start"
                     HorizontalTextAlignment="Start"
-                    Text="Buscar"
+                    Text="Encuentra tu mejor opción para estudiar"
                     TextColor="#fd8204"
                     VerticalOptions="EndAndExpand"
                     VerticalTextAlignment="End"
@@ -48,7 +48,7 @@
                     HorizontalOptions="Start"
                     HorizontalTextAlignment="Start"
                     Margin="0,0,0,35"
-                    Text="Planteles, carreras y más..."
+                    Text="Todo lo que necesitas saber sobre universidades"
                     TextColor="#fd8204"
                     VerticalOptions="StartAndExpand"
                     VerticalTextAlignment="Start"
@@ -79,6 +79,7 @@
                         BackgroundColor="White"
                         Margin="0,0,0,25"
                         TextColor="#1b213c"
+                        
                         x:Name="pCarreras"
                         Title="           --Seleccione Carrera--"
                     />
@@ -128,7 +129,7 @@
                     >
                     <StackLayout>
                         <Label
-                            Text="Sugerencias de carreras"
+                            Text="Oferta educativa acorde a tus actitudes "
                         />
                         <ListView 
                             x:Name="listViewSugerencias" 
@@ -137,69 +138,67 @@
                         >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <ViewCell 
-                                       Height="200" >
+                                    <ViewCell  >
                                         <Frame
                                              Margin="0,3"
                                              HasShadow="true" 
                                              BorderColor="Silver"
                                              Padding="0"
-                                             x:Name="framePrueba">   
+                                                x:Name="framePrueba">   
                                             <Grid
-                                                Padding="0">
+                                             Padding="0">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="90"/>
+                                                    <ColumnDefinition Width="120"/>
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions >
+
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 <StackLayout
                                                     Grid.Column="0">
                                                     <Image 
-                                                        ScaleY="3"
-                                                        Source="{Binding DetallePlantel.ImagenDecodificada}"
-                                                        VerticalOptions="CenterAndExpand"
-                                                        x:Name="imagenPrueba"
-                                                        WidthRequest="250"/>
+                                                Source="{Binding DetallePlantel.ImagenPrincipal}"
+                                                VerticalOptions="CenterAndExpand"
+                                                x:Name="imagenPrueba"
+                                                Margin="0,3"
+                                                WidthRequest="120"/>
                                                 </StackLayout>
+
                                                 <Grid 
-                                                    Padding="0,10"
-                                                    HorizontalOptions="Start"
-                                                    Grid.Column="1">    
+                                        
+                                    HorizontalOptions="Start"
+                                    Grid.Column="1">
                                                     <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <Grid.RowDefinitions >
                                                         <RowDefinition Height="Auto"/>
                                                     </Grid.RowDefinitions>
+                                                    <Image 
+                                             Grid.Column="0"
+                                            Grid.Row="0"
+                                            Source="{Binding DetallePlantel.ImagenDecodificada}"
+                                            VerticalOptions="CenterAndExpand"
+                                            WidthRequest="50"/>
                                                     <Label 
-                                                        FontSize="20"
-                                                        x:Name="lblOpcion" 
-                                                        Grid.Column="0"
-                                                        Grid.Row="0"
-                                                        Text="{Binding NombrePlantelES}" 
-                                                        TextColor="Black" 
-                                                        Margin="1"
-                                                        VerticalOptions="StartAndExpand"/>
+                                            FontSize="Body"
+                                            x:Name="lblOpcion"  
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            Text="{Binding NombrePlantelES}" 
+                                            TextColor="Black" 
+                                            Margin="1"
+                                            VerticalOptions="StartAndExpand"/>
                                                     <Label 
-                                                        FontSize="10"
-                                                        x:Name="lblDireccion" 
-                                                        Grid.Column="0"
-                                                        Grid.Row="1"
-                                                        Text="{Binding Subsistema}" 
-                                                        TextColor="Black"
-                                                        Margin="1"
-                                                        VerticalOptions="CenterAndExpand"/>
-                                                    <Label 
-                                                        FontSize="10"
-                                                        x:Name="lblWeb" 
-                                                        Grid.Column="0"
-                                                        Grid.Row="2"
-                                                        Text="{Binding Sostenimiento}" 
-                                                        TextColor="Black"
-                                                        Margin="1"
-                                                        VerticalOptions="EndAndExpand"/>
+                                            FontSize="20"
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            TextColor="Black" 
+                                            Margin="1"
+                                            VerticalOptions="StartAndExpand"/>
+
                                                 </Grid>
                                             </Grid>
                                         </Frame>

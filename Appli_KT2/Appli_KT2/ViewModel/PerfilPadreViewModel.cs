@@ -1,5 +1,6 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
+using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -199,7 +200,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -219,11 +219,11 @@ namespace Appli_KT2.ViewModel
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarPadreFamilia, json, nuevo_registro);
                 await ConsultarPadreFamilia();
+                Application.Current.MainPage = new NavigationPage(new MainPage());
                 return;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Se a encontrado un error por favor comuniquese con el administrador", "Aceptar");
                 return;
             }
         }
@@ -250,11 +250,11 @@ namespace Appli_KT2.ViewModel
                            RFC = "N/A",
                            CURP = "N/A",
                            Sexo = "Sin especificar",
-                           Fecha_Nacimiento = "0001-01-01",
+                           Fecha_Nacimiento = "0001/01/01",
                            Numero_Telefono = Persona.Numero_Telefono,
                            Estado_Civil = 0,
                            Nacionalidad = "N/A",
-                           Municipio = "1",
+                           Municipio = 0,
                            IdColonia = 0,
                            Usuario = new Usuario()
                            {
@@ -274,7 +274,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                throw;
             }
         }
 
@@ -337,7 +336,7 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
+                 //   await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
                     App.Current.Properties["cvePadreFamilia"] = 0;
@@ -351,7 +350,6 @@ namespace Appli_KT2.ViewModel
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
                 App.Current.Properties["cveUsuario"] = 0;
                 App.Current.Properties["cvePersona"] = 0;
                 IsRun = false;

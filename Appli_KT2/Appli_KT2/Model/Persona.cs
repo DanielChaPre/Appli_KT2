@@ -28,7 +28,7 @@ namespace Appli_KT2.Model
         private string numero_telefono;
         private int estado_civil;
         private string nacionalidad;
-        private string municipio;
+        private int municipio;
         private int idColonia;
         private Usuario usuario = new Usuario();
 
@@ -144,7 +144,7 @@ namespace Appli_KT2.Model
             }
         }
         //[JsonProperty("Municipio")]
-        public string Municipio
+        public int Municipio
         {
             get { return this.municipio; }
             set

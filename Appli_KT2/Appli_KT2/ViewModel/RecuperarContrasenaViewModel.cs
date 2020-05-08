@@ -102,13 +102,12 @@ namespace Appli_KT2.ViewModel
                 })
                 {
                     smtp.Send(message);
-                    await Application.Current.MainPage.DisplayAlert("Exito", "Se ha enviado el correo", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Éxito", "Se ha enviado el correo", "Aceptar");
                     await Application.Current.MainPage.Navigation.PopAsync();
                 }
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error: "+ex.Message, "Accept");
             }
         }
 

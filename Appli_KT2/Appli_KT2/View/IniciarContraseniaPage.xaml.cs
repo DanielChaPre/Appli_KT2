@@ -14,13 +14,27 @@ namespace Appli_KT2.View
 	{
 		public IniciarContraseniaPage ()
 		{
-			InitializeComponent ();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+            }
+          
 		}
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-            txtContrasenia.Focus();
+            try
+            {
+                base.OnAppearing();
+                txtContrasenia.Focus();
+            }
+            catch (Exception ex)
+            {
+            }
+          
         }
     }
 }

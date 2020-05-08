@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Appli_KT2.View;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.IO;
@@ -38,7 +39,7 @@ namespace Appli_KT2.Utils
                 if (response.IsSuccessful)
                 {
                     dynamic datos = JsonConvert.DeserializeObject(response.Content);
-                    Application.Current.MainPage.DisplayAlert("Exito", "Su información se a guardado", "Aceptar");
+                    Application.Current.MainPage.DisplayAlert("Éxito", "Su información se ha guardado", "Aceptar");
                     return datos;
                 }
 
@@ -129,6 +130,14 @@ namespace Appli_KT2.Utils
                 if (response.IsSuccessful)
                 {
                     dynamic datos = JsonConvert.DeserializeObject(response.Content);
+                    App.Current.Properties["usuario"] = "";
+                    App.Current.Properties["contrasena"] = "";
+                    App.Current.Properties["idAlumno"] = 0;
+                    App.Current.Properties["tipo_usuario"] = 0;
+                    App.Current.Properties["nombreUsuario"] = "Nombre Usuario";
+                    App.Current.Properties["rolUsuario"] = "";
+                  //  App.Current.MainPage.DisplayAlert("Información", "Se ha cerrado sesión", "Aceptar");
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                     App.Current.MainPage.Navigation.PopAsync();
                     return datos;
                 }

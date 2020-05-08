@@ -18,13 +18,26 @@
                 VerticalOptions="Start"
                 Margin="0,0,0,-10"   
                    >
-                <Label
+                <StackLayout
+                    VerticalOptions="End">
+                    <Label
                     FontSize="Subtitle"
                     HorizontalOptions="Center"
                     TextColor="White"
                     VerticalOptions="End"
                     x:Name="lblNombreUsuario"
                     />
+
+                    <Label
+                    FontSize="Subtitle"
+                    HorizontalOptions="Center"
+                    Margin="0,10,0,0"
+                    TextColor="White"
+                    VerticalOptions="End"
+                    x:Name="lblrolUsuario"
+                    />
+                </StackLayout>
+               
             </Frame>
         <Frame 
                 BackgroundColor="#1b213c"

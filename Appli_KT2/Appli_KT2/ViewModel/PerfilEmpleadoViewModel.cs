@@ -1,5 +1,6 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
+using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using System;
@@ -202,7 +203,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -221,12 +221,12 @@ namespace Appli_KT2.ViewModel
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarEmpleado, json, nuevo_registro);
-                await ConsultarEmpleado();
+                if (await ConsultarEmpleado())
+                    Application.Current.MainPage = new NavigationPage(new MainPage());
                 return;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -258,7 +258,7 @@ namespace Appli_KT2.ViewModel
                             Numero_Telefono = Numero_Telefono,
                             Estado_Civil = 0,
                             Nacionalidad = "N/A",
-                            Municipio = "N/A",
+                            Municipio = 0,
                             IdColonia = 0,
                             Usuario = new Usuario()
                             {
@@ -278,8 +278,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-
-                throw;
             }
         }
 
@@ -343,7 +341,7 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
+                 //   await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
                     App.Current.Properties["numeroEmpleado"] = "";
@@ -358,7 +356,6 @@ namespace Appli_KT2.ViewModel
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
                 return false;
             }
         }

@@ -14,11 +14,18 @@ namespace Appli_KT2.View
 	{
 		public MainPage ()
 		{
-			InitializeComponent ();
-            this.Master = new MasterPage();
-            this.Detail = new NavigationPage(new AtlasPage());
+            try
+            {
+                InitializeComponent();
+                this.Master = new MasterPage();
+                this.Detail = new NavigationPage(new AtlasPage());
 
-            App.MasterD = this;
+                App.MasterD = this;
+            }
+            catch (Exception ex)
+            {
+            }
+          
 		}
 	}
 }

@@ -70,6 +70,10 @@ namespace Appli_KT2.Utils
         private string obtenerAptitudes = "/aptitudes";
         private string obtenerPlantillaEnlace = "/plantillaEnlace/";
         private string obtenerPlantillaEnlaceAlumno = "/plantillaEnlaceAlumno/";
+        private string obtenerAptitudCarrera = "/aptitudesCarrera";
+        private string ObtenerNotificacionesNoLeidas = "/noleidas/";
+        private string cambiarEstatusNotificacion = "/leida/";
+        private string obtenerHistorialAlumno = "/historialAlumno/";
 
 
 
@@ -181,5 +185,9 @@ namespace Appli_KT2.Utils
         public string ObtenerAptitudes { get => obtenerAptitudes; set => obtenerAptitudes = value; }
         public string ObtenerPlantillaEnlace { get => obtenerPlantillaEnlace; set => obtenerPlantillaEnlace = value; }
         public string ObtenerPlantillaEnlaceAlumno { get => obtenerPlantillaEnlaceAlumno; set => obtenerPlantillaEnlaceAlumno = value; }
+        public string ObtenerAptitudCarrera { get => obtenerAptitudCarrera; set => obtenerAptitudCarrera = value; }
+        public string ObtenerNotificacionesNoLeidas1 { get => ObtenerNotificacionesNoLeidas; set => ObtenerNotificacionesNoLeidas = value; }
+        public string CambiarEstatusNotificacion { get => cambiarEstatusNotificacion; set => cambiarEstatusNotificacion = value; }
+        public string ObtenerHistorialAlumno { get => obtenerHistorialAlumno; set => obtenerHistorialAlumno = value; }
     }
 }

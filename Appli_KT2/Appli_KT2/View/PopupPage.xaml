@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<popup:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Appli_KT2.View.PopUpPage">
+    <StackLayout
+        Margin="0,250,0,0">
+        <Frame>
+            <Image
+                Source="documento_20200430105055_0.png"
+                x:Name="imagenAmpliada"
+                >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                       Tapped="TapGestureRecognizer_Tapped"
+                       NumberOfTapsRequired="1" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Frame>
+    </StackLayout>
+</popup:PopupPage>
+

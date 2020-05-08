@@ -21,6 +21,8 @@ namespace Appli_KT2.Model
         private string url;
         private string cve_categoria;
         private int cve_usuario;
+        private string titulo;
+        private string fecha_registro;
 
         public int Cve_historial
         {
@@ -70,6 +72,32 @@ namespace Appli_KT2.Model
             set
             {
                 cve_categoria = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Titulo
+        {
+            get
+            {
+                return titulo;
+            }
+            set
+            {
+                titulo = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Fecha_registro
+        {
+            get
+            {
+                return fecha_registro;
+            }
+            set
+            {
+                fecha_registro = value;
                 OnPropertyChanged();
             }
         }

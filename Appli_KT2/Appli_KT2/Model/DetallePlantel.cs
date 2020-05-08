@@ -31,7 +31,9 @@ namespace Appli_KT2.Model
         private int idPlantelesES;
         private string idColonia;
         private int cve_subsistema;
-        private Xamarin.Forms.ImageSource imagenDecodificada;
+        private ImageSource imagenDecodificada;
+        private ImageSource imagenprincipal;
+
         //private PlantelesES plantelesES; 
 
         [PrimaryKey]
@@ -132,6 +134,21 @@ namespace Appli_KT2.Model
             set
             {
                 imagenDecodificada = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        public ImageSource ImagenPrincipal
+        {
+            get
+            {
+                return imagenprincipal;
+            }
+            set
+            {
+                imagenprincipal = value;
                 OnPropertyChanged();
             }
         }

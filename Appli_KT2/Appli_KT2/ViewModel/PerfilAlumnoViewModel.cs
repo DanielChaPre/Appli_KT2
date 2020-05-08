@@ -1,5 +1,6 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
+using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using SQLite;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using static Appli_KT2.View.AtlasPage;
 
 namespace Appli_KT2.ViewModel
 {
@@ -22,8 +24,11 @@ namespace Appli_KT2.ViewModel
         private Estados _selectedEstado;
         private Municipios _selectedMunicipio;
         private Colonias _selectedColonia;
+        private int id_estado, id_municipio, id_colonia;
+        private string cp;
         private Estados entEstados;
         private Resultado resultadoAptitud;
+        public Alumno entalumno = new Alumno();
         MetodoHTTP metodosHTTP;
         private bool isrun;
         private bool isvisible;
@@ -33,6 +38,7 @@ namespace Appli_KT2.ViewModel
         private string plantelEMS;
         private bool nuevo_registro;
         private List<Aptitud> ListAptitudes = new List<Aptitud>();
+        private List<DetalleAptitudCarrera> ListAptitudesCarrera = new List<DetalleAptitudCarrera>();
 
         public PerfilAlumnoViewModel()
         {
@@ -137,6 +143,56 @@ namespace Appli_KT2.ViewModel
                 OnPropertyChanged();
             }
         }
+        public int Id_Colonia
+        {
+            get
+            {
+                return id_colonia;
+            }
+            set
+            {
+                id_colonia = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Id_municipio
+        {
+            get
+            {
+                return id_municipio;
+            }
+            set
+            {
+                id_municipio = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Id_estado
+        {
+            get
+            {
+                return id_estado;
+            }
+            set
+            {
+                id_estado = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public  string CP
+        {
+            get
+            {
+                return cp;
+            }
+            set
+            {
+                cp = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         private void ObtenerMunicipios()
         {
@@ -181,12 +237,11 @@ namespace Appli_KT2.ViewModel
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.EliminarAlumno, json);
-                await ConsultarAlumno();
+                ConsultarAlumno();
                 return;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -199,16 +254,53 @@ namespace Appli_KT2.ViewModel
                 IsVisible = true;
                 metodosHTTP = new MetodoHTTP();
                 conexion = new ConexionWS();
-                LlenarDatos();
+                LlenarDatos2();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarAlumno, json, nuevo_registro);
-                await ConsultarAlumno();
+                if( await ConsultarAlumno())
+                     Application.Current.MainPage = new NavigationPage(new MainPage());
                 return;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
+            }
+        }
+
+        private void LlenarDatos2()
+        {
+            try
+            {
+                rootObject = new RootObjectAlumno();
+                rootObject.alumno = new Alumno();
+
+                rootObject.alumno.IdAlumno = IdAlumno;
+                rootObject.alumno.Nombre1 = Nombre1;
+                rootObject.alumno.ApellidoPaterno1 = ApellidoPaterno1;
+                rootObject.alumno.ApellidoMaterno1 = ApellidoMaterno1;
+                rootObject.alumno.CURP1 = CURP1;
+                rootObject.alumno.Sexo1 = Sexo1;
+                rootObject.alumno.Calle1 = Calle1;
+                rootObject.alumno.NumeroExterior1 = NumeroExterior1;
+                rootObject.alumno.NumeroInterior1 = NumeroInterior1;
+                rootObject.alumno.Email1 = Email1;
+                rootObject.alumno.Celular1 = Celular1;
+                rootObject.alumno.Telefono1 = Telefono1;
+                rootObject.alumno.FOLIOSUREDSU1 = FOLIOSUREDSU1;
+                rootObject.alumno.FolioSUREMS1 = FolioSUREMS1;
+                rootObject.alumno.IdPais = IdPais;
+                rootObject.alumno.ClavePlantelESEC1 = ClavePlantelESEC1;
+                rootObject.alumno.IdPlantelEMS = IdPlantelEMS;
+                rootObject.alumno.Nacionalidad1 = Nacionalidad1;
+                rootObject.alumno.IdColonia = SelectedColonia.idColonia;
+                rootObject.alumno.IdMunicipio = SelectedMunicipio.idMunicipio;
+                rootObject.alumno.IdEstado = SelectedEstado.IdEstado;
+                rootObject.alumno.Cp = SelectedColonia.CP;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 
@@ -234,19 +326,7 @@ namespace Appli_KT2.ViewModel
                         Telefono1 = Telefono1,
                         FOLIOSUREDSU1 = FOLIOSUREDSU1,
                         FolioSUREMS1 = FolioSUREMS1,
-                        Municipios = new Municipios()
-                        {
-                            idEstado = _selectedMunicipio.idEstado,
-                            idMunicipio = _selectedMunicipio.idMunicipio,
-                            NombreMunicipio = _selectedMunicipio.NombreMunicipio
-                        },
-                        Colonias = new Colonias()
-                        {
-                            CP = _selectedColonia.CP,
-                            idColonia = _selectedColonia.idColonia,
-                            idMunicipio = _selectedColonia.idMunicipio,
-                            NombreColonia = _selectedColonia.NombreColonia,
-                        },
+                       
                         IdPais = IdPais,
                         ClavePlantelESEC1 = ClavePlantelESEC1,
                         IdPlantelEMS = IdPlantelEMS,
@@ -289,13 +369,10 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error: " + response.StatusCode + ", existe un error en la petición", "Accept");
                 }
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Error: " + ex.Message, "Accept");
-                throw;
             }
         }
 
@@ -314,10 +391,13 @@ namespace Appli_KT2.ViewModel
                 var response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
-                    GC.Collect();
+                   // GC.Collect();
                     var content = await response.Content.ReadAsStringAsync();
                     var alumno = JsonConvert.DeserializeObject<Alumno>(content);
-                    
+                    App.Current.Properties["acolonia"] = alumno.IdColonia;
+                    App.Current.Properties["aestado"] = alumno.IdEstado;
+                    App.Current.Properties["amunicipio"] = alumno.IdMunicipio;
+                    App.Current.Properties["acp"] = alumno.Cp;
                     if (alumno != null)
                     {
                         IdAlumno =alumno.IdAlumno;
@@ -336,24 +416,26 @@ namespace Appli_KT2.ViewModel
                         FOLIOSUREDSU1 = alumno.FOLIOSUREDSU1;
                         FolioSUREMS1 = alumno.FolioSUREMS1;
                         IdPais = alumno.IdPais;
-                        _selectedColonia = alumno.Colonias;
-                        _selectedMunicipio = alumno.Municipios;
+                        IdColonia = alumno.IdColonia;
+                        IdMunicipio = alumno.IdMunicipio;
+                        Cp = alumno.Cp;
                         ClavePlantelESEC1 = alumno.ClavePlantelESEC1;
                         IdPlantelEMS = alumno.IdPlantelEMS;
                         await ConsultarPlantelEMS(alumno.IdPlantelEMS);
                         Nacionalidad1 = alumno.Nacionalidad1;
                         App.Current.Properties["idAlumno"] = alumno.IdAlumno;
                         App.Current.Properties["nombreUsuario"] = alumno.Nombre1 + " " + alumno.ApellidoPaterno1;
+                      
                         IsRun = false;
                         IsVisible = true;
                         IsAcciones = true;
                         IsInsertar = false;
                         nuevo_registro = false;
+                        entalumno = alumno;
                         return true;
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                         IsRun = false;
                         IsVisible = true;
                         IsAcciones = false;
@@ -364,7 +446,6 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
                     IsRun = false;
                     IsVisible = true;
                     IsAcciones = false;
@@ -374,8 +455,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-
-                throw;
+                return false;
             }
            
         }
@@ -437,7 +517,7 @@ namespace Appli_KT2.ViewModel
             {
 
                 conn.InsertOrReplace(resultadoAptitud);
-
+                conn.Close();
             }
             else
             {
@@ -460,12 +540,73 @@ namespace Appli_KT2.ViewModel
                 {
                     conn.InsertOrReplace(ListAptitudes[i]);
                 }
-
-                conn.InsertOrReplace(resultadoAptitud);
+                conn.Close();
             }
             else
             {
                 SincronizarAptitudes();
+            }
+        }
+
+        public async Task SincronizarAptitudesCarrera()
+        {
+            SQLiteConnection conn;
+            conn = DependencyService.Get<ISQLitePlatform>().GetConnection();
+            conn.CreateTable<DetalleAptitudCarrera>();
+            if (!await ObtenerAptitudesCarrera())
+            {
+                SincronizarAptitudesCarrera();
+            }
+            if (ListAptitudesCarrera != null)
+            {
+               // conn.Query<>;
+                for (int i = 0; i < ListAptitudesCarrera.Count; i++)
+                {
+                    conn.InsertOrReplace(ListAptitudesCarrera[i]);
+                }
+                conn.Close();
+            }
+            else
+            {
+                SincronizarAptitudes();
+            }
+        }
+
+        private async Task<bool> ObtenerAptitudesCarrera()
+        {
+            try
+            {
+                var _client = new HttpClient();
+                var conexion = new ConexionWS();
+                var uri = new Uri(string.Format(conexion.URL + conexion.ObtenerAptitudCarrera));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var content = await response.Content.ReadAsStringAsync();
+                    var aptitudCarrera = JsonConvert.DeserializeObject<List<DetalleAptitudCarrera>>(content);
+                    if (aptitudCarrera != null)
+                    {
+                        for (int i = 0; i < aptitudCarrera.Count; i++)
+                        {
+                            var aptitud = new DetalleAptitudCarrera()
+                            {
+                                cve_aptitud = aptitudCarrera[i].cve_aptitud,
+                                idCarreraES = aptitudCarrera[i].idCarreraES
+                            };
+                            ListAptitudesCarrera.Add(aptitud);
+                        }
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

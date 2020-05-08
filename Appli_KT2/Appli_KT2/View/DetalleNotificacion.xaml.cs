@@ -18,35 +18,73 @@ namespace Appli_KT2.View
         private NotificacionesViewModel notificacionesViewModel;
         public DetalleNotificacion (Notificaciones notificaciones)
 		{
-			InitializeComponent ();
+            InitializeComponent ();
             this.entnotificaciones = new Notificaciones();
             this.entnotificaciones = notificaciones;
-		}
+            var labelClick = new TapGestureRecognizer();
+
+            labelClick.Tapped += (s, e) =>
+            {
+                if (lblEnlace.Text.Contains("https") || lblEnlace.Text.Contains("http"))
+                {
+                    Device.OpenUri(new System.Uri(lblEnlace.Text));
+                }
+                else
+                {
+                    Device.OpenUri(new System.Uri("https/"+lblEnlace.Text));
+                }
+               
+            };
+             lblEnlace.GestureRecognizers.Add(labelClick);
+            notificacionesViewModel = new NotificacionesViewModel();
+            if (entnotificaciones.Estatus.Equals("No leida"))
+            {
+                notificacionesViewModel.CambiarEstatusNotificacion(entnotificaciones.Cve_notificacion.ToString());
+            }
+           
+        }
+
+
+
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-            LlenarDatos();
-            itemEliminar.Clicked += EliminarNotificacion;
+            try
+            {
+                base.OnAppearing();
+                LlenarDatos();
+                itemEliminar.Clicked += EliminarNotificacion;
+            }
+            catch (Exception ex)
+            {
+            }
+
         }
 
         private async void EliminarNotificacion(object sender, EventArgs e)
         {
-            notificacionesViewModel = new NotificacionesViewModel();
-            App.Current.Properties["cveNotificacion"] = entnotificaciones.Cve_notificacion;
-           if( await notificacionesViewModel.EliminarNotificaciones())
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("Exito", "Se ha eliminado de " +
-                    "manera correcta la notificación", "Aceptar");
-                await Navigation.PushAsync(new NotificacionesPage());
-                return;
+                
+                App.Current.Properties["cveNotificacion"] = entnotificaciones.Cve_notificacion;
+                if (await notificacionesViewModel.EliminarNotificaciones())
+                {
+                    await Application.Current.MainPage.DisplayAlert("Exito", "Se ha eliminado de " +
+                        "manera correcta la notificación", "Aceptar");
+                    await Navigation.PushAsync(new NotificacionesPage());
+                    return;
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "No se a podido eliminado de " +
+                       "manera correcta la notificación", "Aceptar");
+                    return;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "No se a podido eliminado de " +
-                   "manera correcta la notificación", "Aceptar");
-                return;
             }
+
         }
 
         public async void LlenarDatos()
@@ -58,12 +96,10 @@ namespace Appli_KT2.View
                 lblFecha.Text = entnotificaciones.Fecha_notificacion;
                 lblHora.Text = entnotificaciones.Hora_notificacion;
                 lblBody.Text = entnotificaciones.Texto;
+                lblEnlace.Text = entnotificaciones.Url;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
-                Console.WriteLine("Error: " + ex.Message);
-                throw;
             }
         }
     }

@@ -10,7 +10,10 @@ using Android.Content;
 using Plugin.FacebookClient;
 using Java.Security;
 using Plugin.GoogleClient;
-using Plugin.LocalNotifications;
+using Plugin.LocalNotification;
+using Rg.Plugins.Popup;
+using Plugin.CurrentActivity;
+//using Plugin.LocalNotifications;
 
 namespace Appli_KT2.Droid
 {
@@ -22,19 +25,41 @@ namespace Appli_KT2.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            PdfSharp.Xamarin.Forms.Droid.Platform.Init();
+
             base.OnCreate(savedInstanceState);
+
             GoogleClientManager.Initialize(this);
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             Xamarin.FormsMaps.Init(this, savedInstanceState);
+
             FacebookClientManager.Initialize(this);
-            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.appli_kt_icono2;
+
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+
+           // LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.appli_kt_icono2;
+            NotificationCenter.CreateNotificationChannel();
+
             LoadApplication(new App());
+
+            NotificationCenter.NotifyNotificationTapped(Intent);
+
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
             AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) => {
                 args.Handled = false;
             };
             #if DEBUG
                         PrintHashKey(this);
             #endif
+        }
+
+        protected override void OnNewIntent(Intent intent)
+        {
+            NotificationCenter.NotifyNotificationTapped(intent);
+            base.OnNewIntent(intent);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

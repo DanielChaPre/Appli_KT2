@@ -58,145 +58,206 @@ namespace Appli_KT2.ViewModel
         #region Métodos
         private async void CrearCuenta()
         {
-            // MainViewModel.GetInstance().CrearCuenta = new CreateCountViewModel();
-            await Application.Current.MainPage.DisplayAlert("Aviso", "Se esta creando la cuenta, espere un momento.", "Aceptar");
-            if (string.IsNullOrEmpty(this.usuario))
+            try
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Ingrese el usuario", "Aceptar");
-                return;
-            }
-            if (string.IsNullOrEmpty(this.contrasenia))
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Ingrese la contraseña", "Aceptar");
-                return;
-            }
-
-            if (this.usuario.Length == 18)
-            {
-                if (!ValidarCurp(this.usuario.ToUpper()))
+                // MainViewModel.GetInstance().CrearCuenta = new CreateCountViewModel();
+                await Application.Current.MainPage.DisplayAlert("Aviso", "Se esta creando la cuenta, espere un momento.", "Aceptar");
+                if (string.IsNullOrEmpty(this.usuario))
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Si se intento ingresar la curp, esta incorrecta", "Aceptar");
+                    await Application.Current.MainPage.DisplayAlert("Error", "Ingrese el usuario", "Aceptar");
                     return;
+                }
+                if (string.IsNullOrEmpty(this.contrasenia))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Ingrese la contraseña", "Aceptar");
+                    return;
+                }
+
+                if (this.usuario.Length == 18)
+                {
+                    if (!ValidarCurp(this.usuario.ToUpper()))
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "Si se intento ingresar la curp, esta incorrecta", "Aceptar");
+                        return;
+                    }
+                    else
+                    {
+                        if (this.contrasenia.Length < 8)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Aceptar");
+                            return;
+                        }
+                        else
+                        {
+                            if (await VerificarRegistroAlumno())
+                            {
+                                await Application.Current.MainPage.DisplayAlert("Aviso", "El usuario ya esta registrado", "Aceptar");
+                                return;
+                            }
+                            else
+                            {
+                                if (await BuscarAlumno())
+                                    return;
+                                RegistrarAlumno();
+                            }
+                        }
+                    }
                 }
                 else
                 {
                     if (this.contrasenia.Length < 8)
                     {
+
                         await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Aceptar");
                         return;
                     }
                     else
                     {
-                        if (await VerificarRegistroAlumno())
+                        ValidarContraseña(this.contrasenia);
+                        if (ValidarEmail())
                         {
-                            await Application.Current.MainPage.DisplayAlert("Aviso", "El usuario ya esta registrado", "Aceptar");
-                            return;
-                        }
-                        else
-                        {
-                            if (await BuscarAlumno())
-                                return;
-                            RegistrarAlumno();
+                            RegistrarPerfil();
                         }
                     }
+                }
+                //Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                #region comentario
+                /*
+                 */
+                #endregion
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        public bool ValidarEmail()
+        {
+            String expresion;
+            expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+            if (Regex.IsMatch(this.usuario, expresion))
+            {
+                if (Regex.Replace(this.usuario, expresion, String.Empty).Length == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
             {
-                if (this.contrasenia.Length < 8)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "La longitud de la contraseña no puede ser menor a 8 caracteres", "Aceptar");
-                    return;
-                }
-                else
-                {
-                    RegistrarPerfil();
-                }
-
+                return false;
             }
-                //Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
-            #region comentario
-            /*
-             */
-            #endregion
         }
 
         public void ValidarContraseña(string contraseña)
         {
-            Random obj = new Random();
-            //Generamos 3 arrays con los distintos caracteres
-            string carNormales = "abcdefghijklmnoupqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            string carNum = "0123456789";
-            string carEsp = "%$#?¿@";
-            string pass = contraseña; //Aquí vamos a guardar el pass;
-            int norm = 0;  //Contador de caracteres normales
-            int esp = 0;   //Contador de car especiales
-            int num = 0;   //Contador de car mayusculas
-
-            for (int i = 0; i < pass.Length; i++) //Ponemos hasta 10 porque es la longitud del pass
+            try
             {
-                int arr = obj.Next(0, 3); //Generamos un valor aleatorio para ver en que array vamos a mirar
+                Random obj = new Random();
+                //Generamos 3 arrays con los distintos caracteres
+                string carNormales = "abcdefghijklmnoupqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                string carNum = "0123456789";
+                string carEsp = "%$#?¿@";
+                string pass = contraseña; //Aquí vamos a guardar el pass;
+                int norm = 0;  //Contador de caracteres normales
+                int esp = 0;   //Contador de car especiales
+                int num = 0;   //Contador de car mayusculas
 
-                if (arr == 0)
+                for (int i = 0; i < pass.Length; i++) //Ponemos hasta 10 porque es la longitud del pass
                 {
-                    if (norm < 4)
+                    int arr = obj.Next(0, 3); //Generamos un valor aleatorio para ver en que array vamos a mirar
+
+                    if (arr == 0)
                     {
-                        pass = pass + carNormales[obj.Next(0, 53)].ToString(); //Seleccionamos un caracter de este array
-                        norm = norm + 1;
+                        if (norm < 4)
+                        {
+                            pass = pass + carNormales[obj.Next(0, 53)].ToString(); //Seleccionamos un caracter de este array
+                            norm = norm + 1;
+                        }
+                        else
+                        {
+                            Application.Current.MainPage.DisplayAlert("Error", "La contraseña no cumple con la estructura solicitada", "Aceptar");
+                            return;
+                        }
                     }
-                }
-                else if (arr == 1)
-                {
-                    if (num < 4)
+                    else if (arr == 1)
                     {
-                        pass = pass + carNum[obj.Next(0, 10)].ToString(); //Seleccionamos un caracter de este array
-                        num = num + 1;
+                        if (num < 1)
+                        {
+                            pass = pass + carNum[obj.Next(0, 10)].ToString(); //Seleccionamos un caracter de este array
+                            num = num + 1;
+                        }
+                        else
+                        {
+                            Application.Current.MainPage.DisplayAlert("Error", "La contraseña no cumple con la estructura solicitada", "Aceptar");
+                            return;
+                        }
                     }
-                }
-                else
-                {
-                    if (esp < 2)
+                    else
                     {
-                        pass = pass + carEsp[obj.Next(0, 5)].ToString(); //Seleccionamos un caracter de este array
-                        esp = esp + 1;
+                        if (esp < 1)
+                        {
+                            pass = pass + carEsp[obj.Next(0, 5)].ToString(); //Seleccionamos un caracter de este array
+                            esp = esp + 1;
+                        }
+                        else
+                        {
+                            Application.Current.MainPage.DisplayAlert("Error", "La contraseña no cumple con la estructura solicitada", "Aceptar");
+                            return;
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+            }
+           
         }
 
         private async Task<bool> BuscarAlumno()
         {
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-
-            url = conexion.URL + "" + conexion.BuscarAlumnoCurp + "" + this.usuario;
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                idAlumno = JsonConvert.DeserializeObject<int>(content);
-                if (idAlumno != 0)
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+
+                url = conexion.URL + "" + conexion.BuscarAlumnoCurp + "" + this.usuario;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Aviso", "La curp coincide con una curp existente, inicie sesión de manera normal con una contraseña", "Aceptar");
-                    Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
-                    return true;
-                }
-                await Application.Current.MainPage.DisplayAlert("Error", "La curp no coincide con ningun registro existente ", "Aceptar");
-                Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
-                Xamarin.Forms.Application.Current.Properties["contrasena"] = this.contrasenia;
-               // MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
-                await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
-                return false;
+                    var content = await response.Content.ReadAsStringAsync();
+                    idAlumno = JsonConvert.DeserializeObject<int>(content);
+                    if (idAlumno != 0)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Aviso", "La curp coincide con una curp existente, inicie sesión de manera normal con una contraseña", "Aceptar");
+                        Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
+                        return true;
+                    }
+                    await Application.Current.MainPage.DisplayAlert("Error", "La curp no coincide con ningun registro existente ", "Aceptar");
+                    Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                    Xamarin.Forms.Application.Current.Properties["contrasena"] = this.contrasenia;
+                    // MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
+                    await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+                    return false;
 
+                }
+                else
+                {
+                    //await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
+                    Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                //await Application.Current.MainPage.DisplayAlert("Error", "usuario incorrecto", "Accept");
-                Xamarin.Forms.Application.Current.Properties["alumnoEncontrado"] = false;
                 return false;
             }
+            
         }
 
         public async Task<bool> VerificarRegistroAlumno()
@@ -238,22 +299,30 @@ namespace Appli_KT2.ViewModel
 
         public async void RegistrarAlumno()
         {
-            var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
-            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + id + "/" + "2";
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<bool>(content);
-                if (result)
+                var id = Xamarin.Forms.Application.Current.Properties["idAlumno"];
+                url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + id + "/" + "2";
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
-                    Xamarin.Forms.Application.Current.Properties["contrasena"] = this.contrasenia;
-                   // MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
-                    await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
-                
-                    //Application.Current.MainPage = new NavigationPage(new MainPage());
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<bool>(content);
+                    if (result)
+                    {
+                        Xamarin.Forms.Application.Current.Properties["usuario"] = this.usuario;
+                        Xamarin.Forms.Application.Current.Properties["contrasena"] = this.contrasenia;
+                        // MainViewModel.GetInstance().RegistrarA = new PerfilAlumnoViewModel();
+                        await Application.Current.MainPage.Navigation.PushAsync(new RegisterPage());
+
+                        //Application.Current.MainPage = new NavigationPage(new MainPage());
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Accept");
+                        return;
+                    }
                 }
                 else
                 {
@@ -261,31 +330,38 @@ namespace Appli_KT2.ViewModel
                     return;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Accept");
-                return;
             }
+
         }
 
         public async void RegistrarPerfil()
         {
-            _client = new HttpClient();
-            conexion = new ConexionWS();
-            url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + "0" + "/" + "1";
-            var uri = new Uri(string.Format(@"" + url, string.Empty));
-            var response = await _client.GetAsync(uri);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<bool>(content);
-                if (result)
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                url = conexion.URL + "" + conexion.CrearCuenta + "" + this.usuario + "/" + this.contrasenia + "/" + "0" + "/" + "1";
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                var response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
                 {
-                    App.Current.Properties["tipo_usuario"] = 1;
-                    App.Current.Properties["usuario"] = this.usuario;
-                    App.Current.Properties["contrasena"] = this.contrasenia;
-                    await Application.Current.MainPage.DisplayAlert("Exito", "El usuario se guardo de manera exitosa", "Aceptar");
-                    Application.Current.MainPage = new NavigationPage(new MainPage());
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<bool>(content);
+                    if (result)
+                    {
+                        App.Current.Properties["tipo_usuario"] = 1;
+                        App.Current.Properties["usuario"] = this.usuario;
+                        App.Current.Properties["contrasena"] = this.contrasenia;
+                        await Application.Current.MainPage.DisplayAlert("Exito", "El usuario se guardó de manera exitosa", "Aceptar");
+                        Application.Current.MainPage = new NavigationPage(new MainPage());
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Aceptar");
+                        return;
+                    }
                 }
                 else
                 {
@@ -293,11 +369,10 @@ namespace Appli_KT2.ViewModel
                     return;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "El usuario no se pudo guardar de manera correcta en la tabla", "Aceptar");
-                return;
             }
+            
         }
 
         public bool ValidarCurp(string curp)
@@ -322,42 +397,47 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
                 return false;
-                throw;
             }
         }
 
         private void VerificarInternet()
         {
-            var status = 1;
-            ConexionInternet conexionInternet = new ConexionInternet();
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            try
             {
-                try
+                var status = 1;
+                ConexionInternet conexionInternet = new ConexionInternet();
+                Device.StartTimer(TimeSpan.FromSeconds(5), () =>
                 {
-
-                    if (conexionInternet.VerificarInternet())
+                    try
                     {
-                        if (status == 1)
+
+                        if (conexionInternet.VerificarInternet())
                         {
-                            CrearCuenta();
-                            status = 0;
+                            if (status == 1)
+                            {
+                                CrearCuenta();
+                                status = 0;
+                            }
+                            return true;
+                        }
+                        else
+                        {
+                            status = 1;
+                            Application.Current.MainPage.DisplayAlert("Notificación", "La creación de la cuenta fallara debido a la falta de conexión a internet", "Aceptar");
                         }
                         return true;
                     }
-                    else
+                    catch (NullReferenceException ex)
                     {
-                        status = 1;
-                        Application.Current.MainPage.DisplayAlert("Notificación", "La creación de la cuenta fallara debido a la falta de conexión a internet", "Aceptar");
+                        return true;
                     }
-                    return true;
-                }
-                catch (NullReferenceException ex)
-                {
-                    return true;
-                }
-            });
+                });
+            }
+            catch (Exception ex)
+            {
+            }
+            
         }
         #endregion
     }

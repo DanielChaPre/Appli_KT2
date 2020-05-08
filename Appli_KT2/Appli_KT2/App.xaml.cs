@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
+using Badge.Plugin;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Appli_KT2
@@ -19,7 +20,9 @@ namespace Appli_KT2
         {
             InitializeComponent();
             // pruebaShared();
-           
+          //  RecibirNotificaciones();
+
+
         }
         protected override void OnStart()
         {
@@ -38,29 +41,29 @@ namespace Appli_KT2
 
         public async void RecibirNotificaciones()
         {
-          
-            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
-            {
-                while (notificacionesViewModel.Lst_Notificaciones != null || notificacionesViewModel.Lst_Notificaciones.Count != 0)
-                {
+            CrossBadge.Current.SetBadge(5, "Notificaciones");
+            //Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            //{
+            //    while (notificacionesViewModel.Lst_Notificaciones != null || notificacionesViewModel.Lst_Notificaciones.Count != 0)
+            //    {
 
-                    if (notificacionesViewModel.Lst_Notificaciones.Count == 0)
-                    {
-                        //await Application.Current.MainPage.DisplayAlert("Aviso", "No se encuentran notificaciones existentes para el usuario", "Aceptar")
-                        return true;
-                    }
+            //        if (notificacionesViewModel.Lst_Notificaciones.Count == 0)
+            //        {
+            //            //await Application.Current.MainPage.DisplayAlert("Aviso", "No se encuentran notificaciones existentes para el usuario", "Aceptar")
+            //            return true;
+            //        }
 
-                    //for (int i = 0; i < notificacionesViewModel.Lst_Notificaciones.Count; i++)
-                    //{
-                    //    if (notificacionesViewModel.Lst_Notificaciones[i].Estatus == 0)
-                    //    {
-                    //        CrossLocalNotifications.Current.Show(notificacionesViewModel.Lst_Notificaciones[i].Titulo, notificacionesViewModel.Lst_Notificaciones[i].Texto);
-                    //    }
-                    //}
-                    return true;
-                }
-                return true; // True = Repeat again, False = Stop the timer
-            });
+            //        //for (int i = 0; i < notificacionesViewModel.Lst_Notificaciones.Count; i++)
+            //        //{
+            //        //    if (notificacionesViewModel.Lst_Notificaciones[i].Estatus == 0)
+            //        //    {
+            //        //        CrossLocalNotifications.Current.Show(notificacionesViewModel.Lst_Notificaciones[i].Titulo, notificacionesViewModel.Lst_Notificaciones[i].Texto);
+            //        //    }
+            //        //}
+            //        return true;
+            //    }
+            //    return true; // True = Repeat again, False = Stop the timer
+            //});
         }
     }
 }

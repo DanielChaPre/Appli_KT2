@@ -46,14 +46,12 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
                     return false;
                 }
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
 
@@ -88,14 +86,12 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
                     return false;
                 }
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
 
@@ -130,14 +126,13 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
                     return false;
                 }
             }
             catch (Exception)
             {
 
-                throw;
+                return false;
             }
         }
 
@@ -172,14 +167,13 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Error" + response.StatusCode, "Accept");
+                 
                     return false;
                 }
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
     }

@@ -131,10 +131,10 @@
                                 <Label 
                                     FontSize="Subtitle"
                                     TextColor="Gray"
-                                    Text="* Número Telefono"/>
+                                    Text="* Número Teléfono"/>
 
                                 <Entry
-                                    Placeholder="Ingrese su número de telefono"
+                                    Placeholder="Ingrese su número de teléfono"
                                     Text="{Binding Telefono1, Mode=TwoWay}"
                                     FontSize="Small"/>
 
@@ -313,10 +313,10 @@
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="* Número Telefono"/>
+                            Text="* Número Teléfono"/>
 
                                 <Entry
-                                Placeholder="Ingrese su número de telefono"
+                                Placeholder="Ingrese su número de teléfono"
                                 Text="{Binding Persona.Numero_Telefono, Mode=TwoWay}"
                                 FontSize="Small"
                                      x:Name="txtNumTelPadre"/>
@@ -384,7 +384,7 @@
                                     Text="* Celular"/>
 
                                 <Entry
-                                  Placeholder="Ingrese su número de telefono" 
+                                  Placeholder="Ingrese su número de teléfono" 
                                  Text="{Binding Numero_Telefono,Mode=TwoWay}"
                                  FontSize="Small"
                                     x:Name="entNumTelEmpleado"/>
@@ -450,7 +450,7 @@
                                     Text="* Celular"/>
 
                                 <Entry
-                                  Placeholder="Ingrese su número de telefono" 
+                                  Placeholder="Ingrese su número de teléfono" 
                                  Text="{Binding Numero_Telefono,Mode=TwoWay}"
                                  FontSize="Small"
                                     x:Name="entNumTel"/>
@@ -501,10 +501,10 @@
                                 <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
-                            Text="* Número Telefono"/>
+                            Text="* Número Teléfono"/>
 
                                 <Entry
-                                Placeholder="Ingrese su número de telefono"
+                                Placeholder="Ingrese su número de teléfono"
                                 Text="{Binding Numero_Telefono, Mode=TwoWay}"
                                 FontSize="Small"/>
                             </StackLayout>
@@ -525,7 +525,18 @@
                                     Title="Estado"
                                     x:Name="pEstados"
                                 />
-
+                            
+                            <Label 
+                            FontSize="Subtitle"
+                            TextColor="Gray"
+                            Text="Codigo Postal"/>
+                            
+                            
+                            <Entry
+                                Placeholder="Ingrese su codigo postal"
+                                FontSize="Small"
+                                x:Name="txtCodigoPostal"/>
+                            
                             <Label 
                             FontSize="Subtitle"
                             TextColor="Gray"
@@ -536,16 +547,8 @@
                                 Title="Municipio"
                                 x:Name="pMunicipio"
                                 />
-                            
-                            <Label 
-                            FontSize="Subtitle"
-                            TextColor="Gray"
-                            Text="Codigo Postal"/>
 
-                            <Entry
-                                Placeholder="Ingrese su codigo postal"
-                                FontSize="Small"
-                                x:Name="txtCodigoPostal"/>
+                           
 
                             <Label 
                             FontSize="Subtitle"

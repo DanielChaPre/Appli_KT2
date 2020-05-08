@@ -1,5 +1,6 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
+using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using System;
@@ -177,7 +178,7 @@ namespace Appli_KT2.ViewModel
             LlenarDatos();
             string json = JsonConvert.SerializeObject(rootObject);
             dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.CrearEmpleadoPlantel, json);
-            await Application.Current.MainPage.DisplayAlert("Exito", "Se a guadado la información de manera correcta", "Aceptar");
+            await Application.Current.MainPage.DisplayAlert("Éxito", "Se a guadado la información de manera correcta", "Aceptar");
             await ConsultarEmpleadoPlantel();
             return;
         }
@@ -193,13 +194,12 @@ namespace Appli_KT2.ViewModel
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.Delete(conexion.URL + conexion.EliminarEmpleadoPlantel, json);
-                await Application.Current.MainPage.DisplayAlert("Exito", "Se a eliminado la información de manera correcta", "Aceptar");
+                await Application.Current.MainPage.DisplayAlert("Éxito", "Se a eliminado la información de manera correcta", "Aceptar");
                 await ConsultarEmpleadoPlantel();
                 return;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -220,13 +220,13 @@ namespace Appli_KT2.ViewModel
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarEmpleadoPlantel, json, nuevo_registro);
-                await Application.Current.MainPage.DisplayAlert("Exito", "Se a actualizado la información de manera correcta", "Aceptar");
+                await Application.Current.MainPage.DisplayAlert("Éxito", "Se a actualizado la información de manera correcta", "Aceptar");
                 await ConsultarEmpleadoPlantel();
+                Application.Current.MainPage = new NavigationPage(new MainPage());
                 return;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -252,11 +252,11 @@ namespace Appli_KT2.ViewModel
                             RFC = "N/A",
                             CURP = "N/A",
                             Sexo = "Sin especificar",
-                            Fecha_Nacimiento = "01/01/0001",
+                            Fecha_Nacimiento = "0001/01/01",
                             Numero_Telefono = Persona.Numero_Telefono,
                             Estado_Civil = 0,
                             Nacionalidad = "N/A",
-                            Municipio = "N/A",
+                            Municipio = 0,
                             IdColonia = 0,
                             Usuario = new Usuario()
                             {
@@ -276,8 +276,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-
-                throw;
             }
         }
 
@@ -319,7 +317,7 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
+                    //await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                     App.Current.Properties["cveUsuario"] = 0;
                     App.Current.Properties["cvePersona"] = 0;
                     App.Current.Properties["cveEmpleadoPersona"] = 0;
@@ -333,7 +331,6 @@ namespace Appli_KT2.ViewModel
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
                 App.Current.Properties["cveUsuario"] = 0;
                 App.Current.Properties["cvePersona"] = 0;
                 App.Current.Properties["cveEmpleadoPersona"] = 0;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Appli_KT2.ViewModel
 {
@@ -14,8 +15,15 @@ namespace Appli_KT2.ViewModel
         private List<Colonias> lstColonias = new List<Colonias>();
         public ColoniaViewModel(string cp)
         {
-            this.cp = cp;
-            ObtenerColonias();
+            try
+            {
+                this.cp = cp;
+                //ObtenerColonias();
+            }
+            catch (Exception ex)
+            {
+            }
+           
         }
 
         public List<Colonias> ListColonias
@@ -24,7 +32,7 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        private async void ObtenerColonias()
+        public async Task<bool> ObtenerColonias()
         {
             try
             {
@@ -50,11 +58,14 @@ namespace Appli_KT2.ViewModel
                     }
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListColonias = this.lstColonias;
+                    return true;
                 }
+                else
+                    return false;
             }
             catch (Exception ex)
             {
-                throw;
+                return false;
             }
         }
     }

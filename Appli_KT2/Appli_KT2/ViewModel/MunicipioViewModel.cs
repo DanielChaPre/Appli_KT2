@@ -21,7 +21,6 @@ namespace Appli_KT2.ViewModel
         private MunicipioDataBase municipioDataBase = new MunicipioDataBase();
         public MunicipioViewModel()
         {
-            ObtenerTodosMunicipios();
         }
 
         public List<Municipios> ListMunicipios
@@ -30,7 +29,7 @@ namespace Appli_KT2.ViewModel
             set;
         }
 
-        public async Task ObtenerTodosMunicipios()
+        public async Task<bool> ObtenerTodosMunicipios()
         {
             try
             {
@@ -55,15 +54,15 @@ namespace Appli_KT2.ViewModel
                     }
                     //this.ListEstados = JsonConvert.DeserializeObject<List<Estados>>(content);
                     this.ListMunicipios = this.lstMunicipios;
-                    return ;
+                    return true;
                 }
 
-                return ;
+                return false;
             }
             catch (HttpRequestException ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
-                return ;
+             //   await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
+                return false;
             }
         }
 
@@ -105,7 +104,7 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                throw;
+
             }
         }
 
@@ -124,6 +123,7 @@ namespace Appli_KT2.ViewModel
                 {
                     conn.InsertOrReplace(listaMunicipios[i]);
                 }
+                conn.Close();
             }
             else
             {

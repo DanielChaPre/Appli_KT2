@@ -40,13 +40,71 @@ namespace Appli_KT2.ViewModel
 
         public HistorialViewModel()
         {
-            ConsultarHistorial();
+            var idAlumno = App.Current.Properties["idAlumno"].ToString();
+            if (idAlumno.Equals("0"))
+            {
+                ConsultarHistorial();
+            }
+            else
+            {
+                ConsultarHistorialAlumno(idAlumno);
+            }
+          
         }
 
         public List<Historial> LstHistorial
         {
             get;
             set;
+        }
+
+        public async void ConsultarHistorialAlumno(string idAlumno)
+        {
+            try
+            {
+                IsRun = true;
+                IsVisible = false;
+                _client = new HttpClient();
+                conexion = new ConexionWS();
+                var url = conexion.URL + "" + conexion.ObtenerHistorialAlumno + idAlumno;
+                var uri = new Uri(string.Format(@"" + url, string.Empty));
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var lstHistorial = JsonConvert.DeserializeObject<List<Historial>>(content);
+                    for (int i = 0; i < lstHistorial.Count; i++)
+                    {
+                        var entHistorial = new Historial()
+                        {
+                            Cve_categoria = lstHistorial[i].Cve_categoria,
+                            Cve_usuario = lstHistorial[i].Cve_usuario,
+                            Cve_historial = lstHistorial[i].Cve_historial,
+                            Url = lstHistorial[i].Url,
+                            Descripcion = lstHistorial[i].Descripcion,
+                            Fecha_registro = lstHistorial[i].Fecha_registro,
+                            Titulo = lstHistorial[i].Titulo
+                        };
+                        lsthistorialUsuario.Add(entHistorial);
+                    }
+                    this.LstHistorial = this.lsthistorialUsuario;
+                    IsRun = false;
+                    IsVisible = true;
+                    return;
+                }
+                else
+                {
+                    IsRun = false;
+                    IsVisible = true;
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                IsRun = false;
+                IsVisible = true;
+                return;
+            }
         }
 
         public async void ConsultarHistorial()
@@ -74,6 +132,8 @@ namespace Appli_KT2.ViewModel
                             Cve_historial = lstHistorial[i].Cve_historial,
                             Url = lstHistorial[i].Url,
                             Descripcion = lstHistorial[i].Descripcion,
+                            Fecha_registro = lstHistorial[i].Fecha_registro,
+                            Titulo = lstHistorial[i].Titulo
                         };
                         lsthistorialUsuario.Add(entHistorial);
                     }
@@ -84,7 +144,6 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
                     IsRun = false;
                     IsVisible = true;
                     return;

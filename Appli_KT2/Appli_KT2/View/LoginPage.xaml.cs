@@ -14,9 +14,16 @@ namespace Appli_KT2.View
 	{
 		public LoginPage ()
 		{
-			InitializeComponent ();
-           // btnCrearCuenta.Clicked += onclick;
-            //btnLogin.Clicked += LogIn;
+            try
+            {
+                InitializeComponent();
+                // btnCrearCuenta.Clicked += onclick;
+                //btnLogin.Clicked += LogIn;
+            }
+            catch (Exception ex)
+            {
+            }
+          
 		}
     }
 }

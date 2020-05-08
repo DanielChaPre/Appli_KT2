@@ -14,33 +14,64 @@ namespace Appli_KT2.View
 	{
         public CreateAccountPage()
         {
-            InitializeComponent();
-            // lblUsuario.TranslateTo(0, 5, 0);
-            //txtUsuario.Focused += animacionUsu;
-            //txtContraseña.Focused += animacionPass;
+            try
+            {
+                InitializeComponent();
+                // lblUsuario.TranslateTo(0, 5, 0);
+                //txtUsuario.Focused += animacionUsu;
+                //txtContraseña.Focused += animacionPass;
+            }
+            catch (Exception ex)
+            {
+            }
+
         }
 
         private void animacionPass(object sender, FocusEventArgs e)
         {
-            if (txtContraseña.IsFocused)
+            try
             {
-                lblContraseña.TranslateTo(0, 3, 100);
-                lblUsuario.TranslateTo(0, 40, 100);
+                if (txtContraseña.IsFocused)
+                {
+                    lblContraseña.TranslateTo(0, 3, 100);
+                    lblUsuario.TranslateTo(0, 40, 100);
+                }
             }
+            catch (Exception ex)
+            {
+               // App.Current.MainPage.DisplayAlert("Información", "Ha ocurrido un error,  por favor pongase en contacto con el desarrollador.", "Aceptar");
+            }
+
         }
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-           // txtUsuario.Focus();
+            try
+            {
+                base.OnAppearing();
+                // txtUsuario.Focus();
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Información", "Ha ocurrido un error,  por favor pongase en contacto con el desarrollador.", "Aceptar");
+            }
+
         }
         public void animacionUsu(object sender, FocusEventArgs e)
         {
-            if (txtUsuario.IsFocused)
+            try
             {
-                lblUsuario.TranslateTo(0, 3, 100);
-                lblContraseña.TranslateTo(0, 40, 100);
+                if (txtUsuario.IsFocused)
+                {
+                    lblUsuario.TranslateTo(0, 3, 100);
+                    lblContraseña.TranslateTo(0, 40, 100);
+                }
             }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Información", "Ha ocurrido un error,  por favor pongase en contacto con el desarrollador.", "Aceptar");
+            }
+
             
         }
     }

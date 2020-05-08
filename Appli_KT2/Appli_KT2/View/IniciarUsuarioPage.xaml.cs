@@ -14,13 +14,27 @@ namespace Appli_KT2.View
 	{
 		public IniciarUsuarioPage ()
 		{
-			InitializeComponent ();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+            }
+           
 		}
 
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-            txtUsuario.Focus();
+            try
+            {
+                base.OnAppearing();
+                txtUsuario.Focus();
+            }
+            catch (Exception ex)
+            {
+            }
+           
         }
     }
 }

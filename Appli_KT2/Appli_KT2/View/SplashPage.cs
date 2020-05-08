@@ -15,57 +15,65 @@ namespace Appli_KT2.View
         Label lblCarga;
 		public SplashPage ()
 		{
-            NavigationPage.SetHasNavigationBar(this, false);
-
-            var sub = new AbsoluteLayout();
-            splashImage = new Image
+            try
             {
-                //Source = "ic_sices.png",
-                Source = "appli_kt_logo_som.png",
-                WidthRequest = 300,
-                HeightRequest = 300
-            };
-            secondImage = new Image
+                NavigationPage.SetHasNavigationBar(this, false);
+
+                var sub = new AbsoluteLayout();
+                splashImage = new Image
+                {
+                    //Source = "ic_sices.png",
+                    Source = "appli_kt_logo_som.png",
+                    WidthRequest = 300,
+                    HeightRequest = 300
+                };
+                secondImage = new Image
+                {
+                    Source = "sices.png",
+                    WidthRequest = 200,
+                    HeightRequest = 200
+                };
+
+                activityIndicator = new ActivityIndicator
+                {
+                    Color = Color.Orange
+                };
+
+                lblCarga = new Label
+                {
+                    TextColor = Color.White,
+                    FontSize = 25,
+                    Text = "Cargando...",
+                    IsVisible = false
+
+                };
+
+                AbsoluteLayout.SetLayoutFlags(splashImage, AbsoluteLayoutFlags.PositionProportional);
+                AbsoluteLayout.SetLayoutBounds(splashImage, new Rectangle(0.5, 0.3, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+                AbsoluteLayout.SetLayoutFlags(secondImage, AbsoluteLayoutFlags.PositionProportional);
+                AbsoluteLayout.SetLayoutBounds(secondImage, new Rectangle(0.5, 0.5, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+                AbsoluteLayout.SetLayoutFlags(lblCarga, AbsoluteLayoutFlags.PositionProportional);
+                AbsoluteLayout.SetLayoutBounds(lblCarga, new Rectangle(0.5, 0.7, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+                AbsoluteLayout.SetLayoutFlags(activityIndicator, AbsoluteLayoutFlags.PositionProportional);
+                AbsoluteLayout.SetLayoutBounds(activityIndicator, new Rectangle(0.5, 0.8, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+
+                sub.Children.Add(splashImage);
+                sub.Children.Add(secondImage);
+                //  sub.Children.Add(progressBar);
+                sub.Children.Add(activityIndicator);
+                sub.Children.Add(lblCarga);
+
+
+                this.BackgroundColor = Color.FromHex("#110791");
+                //  this.BackgroundColor = Color.White;
+
+                this.Content = sub;
+            }
+            catch (Exception ex)
             {
-                Source = "sices.png",
-                WidthRequest = 200,
-                HeightRequest = 200
-            };
+                App.Current.MainPage.DisplayAlert("Información", "Ha ocurrido un error,  por favor pongase en contacto con el desarrollador.", "Aceptar");
+            }
 
-            activityIndicator = new ActivityIndicator
-            {
-                Color = Color.Orange
-            };
-
-            lblCarga = new Label
-            {
-                TextColor = Color.White,
-                FontSize = 25,
-                Text = "Cargando...",
-                IsVisible = false
-                
-            };
-
-            AbsoluteLayout.SetLayoutFlags(splashImage, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(splashImage, new Rectangle(0.5, 0.3, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
-            AbsoluteLayout.SetLayoutFlags(secondImage, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(secondImage, new Rectangle(0.5, 0.5, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
-            AbsoluteLayout.SetLayoutFlags(lblCarga, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(lblCarga, new Rectangle(0.5, 0.7, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
-            AbsoluteLayout.SetLayoutFlags(activityIndicator, AbsoluteLayoutFlags.PositionProportional);
-            AbsoluteLayout.SetLayoutBounds(activityIndicator, new Rectangle(0.5, 0.8, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
-
-            sub.Children.Add(splashImage);
-            sub.Children.Add(secondImage);
-          //  sub.Children.Add(progressBar);
-            sub.Children.Add(activityIndicator);
-            sub.Children.Add(lblCarga);
-
-
-             this.BackgroundColor = Color.FromHex("#110791");
-          //  this.BackgroundColor = Color.White;
-
-            this.Content = sub;
 		}
         
         /*Nota...
@@ -99,39 +107,54 @@ namespace Appli_KT2.View
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+
             }
         }
 
         public void SesionPrueba()
         {
-            
-            //Alumno
-            App.Current.Properties["usuario"] = "danchavez197@gmail.com";
-            App.Current.Properties["contrasena"] = "D@niel194";
-            App.Current.Properties["idAlumno"] = "0";
-            App.Current.Properties["tipo_usuario"] = 7;
-            App.Current.Properties["nombreUsuario"] = "Martin Chavez";
-            return; 
-            /**
-            directivo
-            //App.Current.Properties["usuario"] = "danchavez197@gmail.com";
-            //App.Current.Properties["contrasena"] = "D@niel192";
-            //App.Current.Properties["idAlumno"] = "0";
-            //App.Current.Properties["tipo_usuario"] = 5;
-            //App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
-            //return;*/
+            try
+            {
+                //Alumno
+                App.Current.Properties["usuario"] = "danchavez197@gmail.com";
+                App.Current.Properties["contrasena"] = "D@niel194";
+                App.Current.Properties["idAlumno"] = "0";
+                App.Current.Properties["tipo_usuario"] = 7;
+                App.Current.Properties["nombreUsuario"] = "Martin Chavez";
+                return;
+                /**
+                directivo
+                //App.Current.Properties["usuario"] = "danchavez197@gmail.com";
+                //App.Current.Properties["contrasena"] = "D@niel192";
+                //App.Current.Properties["idAlumno"] = "0";
+                //App.Current.Properties["tipo_usuario"] = 5;
+                //App.Current.Properties["nombreUsuario"] = "Daniel Chavez";
+                //return;*/
+            }
+            catch (Exception ex)
+            {
+            }
+           
         }
 
         public void VaciarSesion()
         {
-            App.Current.Properties["usuario"] = "";
-            App.Current.Properties["contrasena"] = "";
-            App.Current.Properties["idAlumno"] = 0;
-            App.Current.Properties["tipo_usuario"] = 0;
-            App.Current.Properties["nombreUsuario"] = "Nombre Usuario";
-            App.Current.Properties["cveUsuario"] = 0;
-            return;
+            try
+            {
+                App.Current.Properties["usuario"] = "";
+                App.Current.Properties["contrasena"] = "";
+                App.Current.Properties["idAlumno"] = 0;
+                App.Current.Properties["tipo_usuario"] = 0;
+                App.Current.Properties["nombreUsuario"] = "Nombre Usuario";
+                App.Current.Properties["rolUsuario"] = "";
+                App.Current.Properties["cveUsuario"] = 0;
+                App.Current.Properties["padreFamilia"] = 1;
+                return;
+            }
+            catch (Exception ex)
+            {
+            }
+            
         }
 
         public void VerificarLogin()
@@ -164,7 +187,13 @@ namespace Appli_KT2.View
 
         public void VerificarConfiguracionTema()
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
     }

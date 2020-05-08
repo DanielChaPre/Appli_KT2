@@ -36,24 +36,39 @@
                 </Frame>
 
                 <!--Perfil de egreso e ingreso-->
-                <Label 
-                    Margin="0,5,0,0"
-                    Text="Perfil de ingreso y egreso" HorizontalTextAlignment="Center"
-                    TextColor="White"/>
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Perfil ingreso" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btningreso"
+                        BackgroundColor="White"
+                        />
+                </Grid>
                 <Frame
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
-                    VerticalOptions="Center">
+                    Margin="0,5"
+                    VerticalOptions="Center"
+                    x:Name="frameingreso">
                     <StackLayout>
-                        <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Perfil de Ingreso"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                                
-                            />
                         <Label
                                 FontSize="Body"
                                 HorizontalOptions="CenterAndExpand"
@@ -62,37 +77,90 @@
                                 VerticalOptions="EndAndExpand"
                                 x:Name="txtPerfilIngreso"
                             />
-                        <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Perfil de egreso"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                                
-                            />
+                    </StackLayout>
+                </Frame>
+
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Perfil egreso" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnegreso"
+                        BackgroundColor="White"
+                        />
+                </Grid>
+                <Frame
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    Margin="0,5"
+                    VerticalOptions="Center"
+                     x:Name="frameegreso">
+                    <StackLayout>
                         <Label
                                 FontSize="Body"
                                 HorizontalOptions="CenterAndExpand"
                                 Text="Perfil de Egreso"
                                 TextColor="Black"
+                                HorizontalTextAlignment="Start"
                                 VerticalOptions="EndAndExpand"
                                 x:Name="txtPerfilEgreso"
                             />
 
                     </StackLayout>
                 </Frame>
-
                 <!--Sector Productivo-->
-                <Label Text="Sector Productivo" HorizontalTextAlignment="Center"
-                       TextColor="White"/>
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Sector productivo" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnproductivo"
+                        BackgroundColor="White"
+                        />
+                </Grid>
                 <Frame
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
-                    VerticalOptions="Center">
+                    Margin="0,5"
+                    VerticalOptions="Center"
+                     x:Name="frameproductivo">
                     <StackLayout
                         >
-
+                      
                         <Label
                                 FontSize="Body"
                                 HorizontalOptions="CenterAndExpand"
@@ -104,23 +172,42 @@
                 </Frame>
 
                 <!--Costos-->
-                <Label Text="Costos, Modalidad y duración" HorizontalTextAlignment="Center"
-                       TextColor="White"/>
+
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Costos" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btncostos"
+                        BackgroundColor="White"
+                        />
+                </Grid>
                 <Frame
                     
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
-                    VerticalOptions="Center">
+                    Margin="0,5"
+                    VerticalOptions="Center"
+                     x:Name="framecostos">
                     <StackLayout
                         >
-                        <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Costos"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                            />
                         <Label
                                 FontSize="Body"
                                 HorizontalOptions="CenterAndExpand"
@@ -129,14 +216,44 @@
                                 VerticalOptions="EndAndExpand"
                                 x:Name="txtCostos"
                             />
+                    </StackLayout>
+                </Frame>
+                
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
 
-                        <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Modalidad"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                            />
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Modalidad" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnmodalidad"
+                        BackgroundColor="White"
+                        />
+                </Grid>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    Margin="0,5"
+                    VerticalOptions="Center"
+                     x:Name="framemodalidad">
+                    <StackLayout
+                        >
                         <Label
                                 FontSize="Body"
                                 HorizontalOptions="CenterAndExpand"
@@ -145,13 +262,44 @@
                                 VerticalOptions="EndAndExpand"
                                 x:Name="txtModalidad"
                             />
-                        <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Duración"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                            />
+                    </StackLayout>
+                </Frame>
+                
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Duración" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnduracion"
+                        BackgroundColor="White"
+                        />
+                </Grid>
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    Margin="0,5"
+                    VerticalOptions="Center"
+                     x:Name="frameduracion">
+                    <StackLayout
+                        >
                         <Label
                                 FontSize="Body"
                                 HorizontalOptions="CenterAndExpand"
@@ -164,42 +312,250 @@
                 </Frame>
 
                 <!--Requisistos-->
-                <Label Text="Requisitos" HorizontalTextAlignment="Center"
-                       TextColor="White"/>
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Requisitos" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnrequisitos"
+                        BackgroundColor="White"
+                        />
+                </Grid>
                 <Frame
                     
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
+                    Margin="0,5"
+                    VerticalOptions="Center"
+                     x:Name="framerequisitos">
+                    <StackLayout
+                        >
+                        <ListView 
+                            x:Name="listViewRequisitos" 
+                            CachingStrategy="RecycleElement"
+                            HasUnevenRows="True"
+                                 >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell >
+                                        <Frame
+                                     Margin="0,3"
+                                     Padding="0"
+                                        x:Name="framePrueba">
+
+                                            <Grid 
+                                                Padding="0,10"
+                                                HorizontalOptions="Start">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions >
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Image
+                                                    Source="ic_selected_circle.png"
+                                                     VerticalOptions="StartAndExpand"
+                                                    />
+                                                <Label 
+                                                    FontSize="Body"
+                                                    x:Name="lblOpcion" 
+                                                    Grid.Column="1"
+                                                    Grid.Row="0"
+                                                    Text="{Binding requisito}" 
+                                                    TextColor="Black" 
+                                                    Margin="1"
+                                                    VerticalOptions="StartAndExpand"/>
+                                            </Grid>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackLayout>
+                </Frame>
+
+                <!--Actividades extracurriculares
+
+                <Frame
+                    
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    Margin="0,5"
                     VerticalOptions="Center">
                     <StackLayout
                         >
+                        <Label
+                                FontSize="Title"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="Actividades extracurriculares"
+                                TextColor="Blue"
+                                VerticalOptions="EndAndExpand"
+                            />
                         <Label
                                 FontSize="Body"
                                 HorizontalOptions="CenterAndExpand"
                                 Text=""
                                 TextColor="Black"
-                                x:Name="txtRequisitos"/>
-
+                                x:Name="txtActividades"
+                          />
                     </StackLayout>
-                </Frame>
+                </Frame>-->
 
-                <!--Contacto-->
-                <Label Text="Contacto" HorizontalTextAlignment="Center"
-                       TextColor="White"/>
+                <!--Fechas-->
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Fecha de expedición" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnexpedi"
+                        BackgroundColor="White"
+                        />
+                </Grid>
                 <Frame
-                    
+                     x:Name="frameexpedicion"
                     BackgroundColor="White"
                     HasShadow="true" 
                     BorderColor="Silver"
+                    Margin="0,5"
                     VerticalOptions="Center">
                     <StackLayout
                         >
+                       
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtFechaExp"
+                          />
+                       
+                    </StackLayout>
+                </Frame>
+                
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Fecha de inscripción" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btninscrip"
+                        BackgroundColor="White"
+                        />
+                </Grid>
+                <Frame
+                     x:Name="frameinscripcion"
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    Margin="0,5"
+                    VerticalOptions="Center">
+                        <StackLayout
+                        >
+
+                        <Label
+                                FontSize="Body"
+                                HorizontalOptions="CenterAndExpand"
+                                Text=""
+                                TextColor="Black"
+                                VerticalOptions="EndAndExpand"
+                                x:Name="txtFechaIns"
+                          />
+                    </StackLayout>
+                    </Frame>
+
+                <!--Contacto-->
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Contacto" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnContacto"
+                        BackgroundColor="White"
+                        />
+                </Grid>
+                <Frame
+                     x:Name="framecontacto"
+                    BackgroundColor="White"
+                    HasShadow="true" 
+                    BorderColor="Silver"
+                    Margin="0,5"
+                    VerticalOptions="Center">
+                    <StackLayout
+                        >
+                       
                         <Label
                                 FontSize="Subtitle"
                                 HorizontalOptions="CenterAndExpand"
                                 Text="Nombre:"
-                                TextColor="Black"
+                                TextColor="Blue"
                             />
                         <Label
                                 FontSize="Body"
@@ -212,7 +568,7 @@
                                 FontSize="Subtitle"
                                 HorizontalOptions="CenterAndExpand"
                                 Text="Correo contacto"
-                                TextColor="Black"
+                                TextColor="Blue"
                             />
                         <Label
                                 FontSize="Body"
@@ -225,86 +581,6 @@
                         
                     </StackLayout>
                 </Frame>
-
-                <!--Actividades extracurriculares-->
-                <Label Text="Actividades extracurriculares" HorizontalTextAlignment="Center"
-                       TextColor="White"/>
-                <Frame
-                    
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    BorderColor="Silver"
-                    VerticalOptions="Center">
-                    <StackLayout
-                        >
-                        <Label
-                                FontSize="Body"
-                                HorizontalOptions="CenterAndExpand"
-                                Text=""
-                                TextColor="Black"
-                                x:Name="txtActividades"
-                          />
-                    </StackLayout>
-                </Frame>
-
-                <!--Fechas-->
-                <Label Text="Fechas" HorizontalTextAlignment="Center"
-                       TextColor="White"/>
-                <Frame
-                    
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    BorderColor="Silver"
-                    VerticalOptions="Center">
-                        <StackLayout
-                        >
-                            <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Fecha de Expedicion"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                          />
-                        <Label
-                                FontSize="Body"
-                                HorizontalOptions="CenterAndExpand"
-                                Text=""
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                                x:Name="txtFechaExp"
-                          />
-                        <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Fecha de Inscripción"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                          />
-                        <Label
-                                FontSize="Body"
-                                HorizontalOptions="CenterAndExpand"
-                                Text=""
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                                x:Name="txtFechaIns"
-                          />
-                        <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Fecha de inicio"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                          />
-                        <Label
-                                FontSize="Body"
-                                HorizontalOptions="CenterAndExpand"
-                                Text=""
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                                x:Name="txtFechaInicio"
-                          />
-                    </StackLayout>
-                    </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

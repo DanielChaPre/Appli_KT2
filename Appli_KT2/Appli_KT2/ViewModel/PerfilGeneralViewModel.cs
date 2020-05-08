@@ -1,5 +1,6 @@
 ﻿using Appli_KT2.Model;
 using Appli_KT2.Utils;
+using Appli_KT2.View;
 using GalaSoft.MvvmLight.Command;
 using Newtonsoft.Json;
 using RestSharp;
@@ -201,7 +202,6 @@ namespace Appli_KT2.ViewModel
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -220,12 +220,12 @@ namespace Appli_KT2.ViewModel
                 LlenarDatos();
                 string json = JsonConvert.SerializeObject(rootObject);
                 dynamic respuesta = metodosHTTP.ActualizarDatos(conexion.URL + conexion.ModificarPerfil, json, nuevo_registro);
-                await ConsultarUsuarioGeneral();
+               if( await ConsultarUsuarioGeneral())
+                Application.Current.MainPage = new NavigationPage(new MainPage());
                 return;
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", @"\t Error: " + ex.Message, "Aceptar");
                 return;
             }
         }
@@ -245,11 +245,11 @@ namespace Appli_KT2.ViewModel
                         RFC = "N/A",
                         CURP = "N/A",
                         Sexo = "Sin especificar",
-                        Fecha_Nacimiento = "01-01-0001",
+                        Fecha_Nacimiento = "0001/01/01",
                         Numero_Telefono = Numero_Telefono,
                         Estado_Civil = 0,
                         Nacionalidad = "N/A",
-                        Municipio = "1",
+                        Municipio = 0,
                         IdColonia = 0,
                         Usuario = new Usuario()
                         {
@@ -259,7 +259,7 @@ namespace Appli_KT2.ViewModel
                             Contrasena = App.Current.Properties["contrasena"].ToString(),
                             Estatus = "Activo",
                             Alias_Red = "N/A",
-                            Fecha_Registro = "01/01/0001",
+                            Fecha_Registro = "08/01/2020 01:55:07 p. m.",
                             Tipo_Usuario = Convert.ToInt32(App.Current.Properties["tipo_usuario"].ToString()),
                             Ruta_Imagen = "N/A"
                         }
@@ -269,7 +269,6 @@ namespace Appli_KT2.ViewModel
             catch (Exception ex)
             {
 
-                throw;
             }
         }
 
@@ -305,7 +304,7 @@ namespace Appli_KT2.ViewModel
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
+                       // await Application.Current.MainPage.DisplayAlert("Error", "El usuario no cuenta con información, actualice su información", "Aceptar");
                         App.Current.Properties["cveUsuario"] = 0;
                         App.Current.Properties["cvePersona"] = 0;
                         nuevo_registro = true;
@@ -315,13 +314,11 @@ namespace Appli_KT2.ViewModel
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", response.StatusCode.ToString(), "Aceptar");
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Aceptar");
                 return false;
             }
 
@@ -343,7 +340,7 @@ namespace Appli_KT2.ViewModel
         public string Numero_Telefono { get; set; }
         public int Estado_Civil { get; set; }
         public string Nacionalidad { get; set; }
-        public string Municipio { get; set; }
+        public int Municipio { get; set; }
         public int IdColonia { get; set; }
         public Usuario Usuario { get; set; }
     }

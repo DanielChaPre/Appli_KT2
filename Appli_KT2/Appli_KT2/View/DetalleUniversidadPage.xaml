@@ -1,44 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:local="clr-namespace:Appli_KT2.ViewModel"
-             x:Class="Appli_KT2.View.DetalleUniversidadPage"
-             xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
-             xmlns:behaviors="clr-namespace:Appli_KT2.Utils;assembly=Appli_KT2"
-             xmlns:viewmodels="clr-namespace:Appli_KT2.ViewModel;assembly=Appli_KT2"
-             BackgroundImageSource="pleca_textura.jpg"
-             Padding="5,2">
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			  xmlns:local="clr-namespace:Appli_KT2.ViewModel"
+			 x:Class="Appli_KT2.View.DetalleUniversidadPage"
+			 xmlns:control="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+			 xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+			 xmlns:behaviors="clr-namespace:Appli_KT2.Utils;assembly=Appli_KT2"
+			 xmlns:viewmodels="clr-namespace:Appli_KT2.ViewModel;assembly=Appli_KT2"
+			 BackgroundImageSource="pleca_textura.jpg"
+			 Padding="5,2">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-            Text="New"  
-            Icon="share.png"  
-            Priority="0"  
-            Order="Primary" 
-            x:Name="icShare"/>
+			Text="New"  
+			Icon="share.png"  
+			Priority="0"  
+			Order="Primary" 
+			x:Name="icShare"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <ScrollView>
             <StackLayout 
-                >
+				>
                 <!--Aqui ira las imagenes y el nombre de la universidad-->
                 <Frame
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    HeightRequest="250"
-                    BorderColor="Silver"
-                    VerticalOptions="Center"
-                    >
+					BackgroundColor="White"
+					HasShadow="true" 
+					HeightRequest="250"
+					BorderColor="Silver"
+					VerticalOptions="Center"
+					>
                     <AbsoluteLayout>
                         <StackLayout
-                            AbsoluteLayout.LayoutBounds="0,0,1,0.9"
-                            AbsoluteLayout.LayoutFlags="All"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"
-                            x:Name="logoLayout">
+							AbsoluteLayout.LayoutBounds="0,0,1,0.9"
+							AbsoluteLayout.LayoutFlags="All"
+							HorizontalOptions="FillAndExpand"
+							VerticalOptions="FillAndExpand"
+							x:Name="logoLayout">
+                            <Label
+								FontSize="Subtitle"
+								HorizontalOptions="CenterAndExpand"
+								Text="Universidad Tecnológica de León"
+								TextColor="Black"
+								VerticalOptions="EndAndExpand"
+								x:Name="txtNombreEscuela"
+							/>
+
+                            <Button
+											BackgroundColor="Transparent"
+											FontSize="15"
+											x:Name="btnEnlace" 
+											Grid.Column="0"
+											Grid.Row="1"
+											TextColor="Blue"
+											VerticalOptions="End"
+											Clicked="BtnEnlace_Clicked"
+											/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -47,128 +66,208 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Image
-                                   Grid.Column="0"
-                                   HorizontalOptions="FillAndExpand"
-                                   Source="ic_arrow_back.png"
-                                   VerticalOptions="CenterAndExpand"/>
+								   Grid.Column="0"
+								   HorizontalOptions="FillAndExpand"
+								   Source="ic_arrow_back.png"
+								   VerticalOptions="CenterAndExpand"/>
                                 <control:CarouselView
-                                    BackgroundColor="Aqua"
-                                    Grid.Column="1"
-                                    HeightRequest="250"
-                                    ItemsSource="{Binding MyDataSource}" 
-                                    AbsoluteLayout.LayoutBounds="0, 0.7, 1, 0.1" 
-                                    AbsoluteLayout.LayoutFlags="All"
-                                    Position="{Binding Position, Mode=TwoWay}"
-                                    VerticalOptions="FillAndExpand">
+									Grid.Column="1"
+									HeightRequest="250"
+									ItemsSource="{Binding MyDataSource}" 
+									AbsoluteLayout.LayoutBounds="0, 0.7, 1, 0.1" 
+									AbsoluteLayout.LayoutFlags="All"
+									Position="{Binding Position, Mode=TwoWay}"
+									VerticalOptions="FillAndExpand">
                                     <control:CarouselView.ItemTemplate>
                                         <DataTemplate>
                                             <StackLayout  
-                                            HeightRequest="250"
-                                            HorizontalOptions="CenterAndExpand"
-                                            VerticalOptions="CenterAndExpand">
+											HeightRequest="250"
+											HorizontalOptions="CenterAndExpand"
+											VerticalOptions="CenterAndExpand">
 
                                                 <Image 
-                                                    Grid.Column="1"
-                                                    Source="{Binding imagen}" 
-                                                    VerticalOptions="CenterAndExpand"
-                                                    ScaleY="1.75"
-                                                    x:Name="imgCarruselPlantel"/>
+													Grid.Column="1"
+													VerticalOptions="Start"
+													Source="{Binding ImagenDecodificada}" 
+													x:Name="imgCarruselPlantel">
+
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer
+															Tapped="TapGestureRecognizer_Tapped"
+															NumberOfTapsRequired="1" />
+                                                    </Image.GestureRecognizers>
+                                                </Image>
 
                                             </StackLayout>
                                         </DataTemplate>
                                     </control:CarouselView.ItemTemplate>
                                 </control:CarouselView>
                                 <Image
-                                   Grid.Column="2"
-                                    HorizontalOptions="FillAndExpand"
-                                   Source="ic_arrow_forward.png"
-                                   VerticalOptions="CenterAndExpand"/>
+								   Grid.Column="2"
+									HorizontalOptions="FillAndExpand"
+								   Source="ic_arrow_forward.png"
+								   VerticalOptions="CenterAndExpand"/>
                             </Grid>
 
                             <local:Carouselndicator
-                                IndicatorHeight="12" IndicatorWidth="12" 
-                                UnselectedIndicator="ic_unselected_circle.png" 
-                                SelectedIndicator="ic_selected_circle.png" 
-                                Position="{Binding Position}" 
-                                ItemsSource="{Binding MyDataSource}"
-			                    AbsoluteLayout.LayoutBounds="0, 0.9, 1, 0.1" 
-                                AbsoluteLayout.LayoutFlags="All"/>
+								IndicatorHeight="12" IndicatorWidth="12" 
+								UnselectedIndicator="ic_unselected_circle.png" 
+								SelectedIndicator="ic_selected_circle.png" 
+								Position="{Binding Position}" 
+								ItemsSource="{Binding MyDataSource}"
+								AbsoluteLayout.LayoutBounds="0, 0.9, 1, 0.1" 
+								AbsoluteLayout.LayoutFlags="All"/>
                             <!--Agregar el carrusel-->
 
-                            <Label
-                                FontSize="Subtitle"
-                                HorizontalOptions="CenterAndExpand"
-                                Text="Universidad Tecnológica de León"
-                                TextColor="Black"
-                                VerticalOptions="EndAndExpand"
-                                x:Name="txtNombreEscuela"
-                            />
+
                         </StackLayout>
                     </AbsoluteLayout>
                 </Frame>
 
                 <!--Dirección-->
-                <Label 
-                    Margin="0,5,0,0"
-                    Text="Dirección" HorizontalTextAlignment="Center"
-                    TextColor="White"/>
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Dirección" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btndireccion"
+                        BackgroundColor="White"
+                        />
+                </Grid>
+               
                 <Frame
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    BorderColor="Silver"
-                    VerticalOptions="Center">
+					BackgroundColor="White"
+					HasShadow="true" 
+					BorderColor="Silver"
+					VerticalOptions="Center"
+                    x:Name="framedireccion">
                     <StackLayout>
                         <Label 
-                            
-                            TextColor="Gray"
-                            x:Name="lblDireccionPlantel"
-                            />
+							TextColor="Gray"
+							x:Name="lblDireccionPlantel"
+							/>
                         <maps:Map 
-                            x:Name="MapView" 
-                            HeightRequest="200"
-                            HorizontalOptions="FillAndExpand" 
-                            VerticalOptions="FillAndExpand">
+							x:Name="MapView" 
+							HeightRequest="200"
+							HorizontalOptions="FillAndExpand" 
+							VerticalOptions="FillAndExpand">
                         </maps:Map>
                     </StackLayout>
                 </Frame>
-             
-                <!--Carreras de la universidad-->
-                <Label Text="Carreras" HorizontalTextAlignment="Center"
-                       TextColor="White"/>
+
+                <!--    <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Reseña" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btnresenia"
+                        BackgroundColor="White"
+                        />
+                </Grid>
                 <Frame
-                    
-                    BackgroundColor="White"
-                    HasShadow="true" 
-                    HeightRequest="250"
-                    BorderColor="Silver"
-                    VerticalOptions="Center">
+                    x:Name="frameresenia">
+                    <StackLayout>
+                        <StackLayout>
+
+                            <Label
+						x:Name="lblReseña"
+						>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame> -->
+                <!--Carreras de la universidad-->
+                <Grid
+                    Padding="3,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="280" />
+                        <ColumnDefinition Width="65"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        FontSize="Title"
+                        BackgroundColor="White"
+                        Grid.Column="0"
+					    Text="Carreras disponibles" 
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="End"
+					    TextColor="Blue"
+                        WidthRequest="280"/>
+                    <ImageButton
+                        Grid.Column="1"
+                        x:Name="btncarreras"
+                        BackgroundColor="White"
+                        />
+                </Grid>
+                <Frame
+					x:Name="framecarreras"
+					BackgroundColor="White"
+					HasShadow="true" 
+					HeightRequest="250"
+					BorderColor="Silver"
+					VerticalOptions="Center">
                     <StackLayout
-                        x:Name="lytCarreras"
-                        >
+						x:Name="lytCarreras"
+						>
                         <ListView 
-                            x:Name="listViewCarreras" 
-                            CachingStrategy="RecycleElement"
-                            HasUnevenRows="True"
-                            
-                              >
+							x:Name="listViewCarreras" 
+							CachingStrategy="RecycleElement"
+							HasUnevenRows="True"
+							
+							  >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell 
-                                      Height="80" >
+									  Height="80" >
                                         <Frame
-                                            BackgroundColor="Gray"
-                                             Margin="0,3"
-                                             HasShadow="true" 
-                                             BorderColor="Silver"
-                                             Padding="0"
-                                                x:Name="framePrueba">
+											BackgroundColor="Navy"
+											 Margin="0,3"
+											 HasShadow="true" 
+											 BorderColor="Silver"
+											 Padding="0"
+												x:Name="framePrueba">
                                             <Label
-                                                Text="{Binding NombreCarreraES}"
-                                                x:Name="lblCarrera"
-                                                TextColor="Black"
-                                                VerticalTextAlignment="Center"
-                                                HorizontalTextAlignment="Center"
-                                                />
+												Text="{Binding NombreCarreraES}"
+												x:Name="lblCarrera"
+												TextColor="White"
+												VerticalTextAlignment="Center"
+												HorizontalTextAlignment="Center"
+												/>
                                         </Frame>
                                     </ViewCell>
                                 </DataTemplate>
@@ -176,8 +275,8 @@
                         </ListView>
                     </StackLayout>
                 </Frame>
-               
-                
+
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
